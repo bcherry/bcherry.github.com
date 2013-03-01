@@ -1,4 +1,10 @@
-# Objective-C for JavaScript Programmers
+---
+title: Objective-C for JavaScript Programmers
+layout: post
+permalink: /Objective-C-for-JavaScript-Programmers
+published: false
+tags: [objective-c]
+---
 
 /* intro here */
 

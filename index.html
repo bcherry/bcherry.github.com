@@ -6,7 +6,7 @@ title: Adequately Good - By Ben Cherry
 {% for post in paginator.posts %}
   <article class="span-17 last">
     <header class="span-17 last">
-        <time class="alt" datetime="{{ post.date }}" pubdate>{{ post.date }}</time>
+        <time class="alt" datetime="{{ post.date | date: '%Y-%m-%d' }}" pubdate>{{ post.date | date: '%Y-%m-%d' }}</time>
       <h1><a href="{{ post.url }}">{{ post.title }}</a></h1>
     </header>
     <div class="span-17 last entry">

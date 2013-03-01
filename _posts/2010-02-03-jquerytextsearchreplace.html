@@ -1,9 +1,16 @@
+---
+title: Search/Replace in the DOM with jQuery
+layout: post
+permalink: /2010/2/SearchReplace-in-the-DOM-with-jQuery
+tags: [javascript, jquery]
+---
+
 <p>Ever had a need to to a text search/replace through the DOM?  For articles in drafting on this blog I often use the form (TODO: something) as notes for myself to do some more research.  I don't want them sticking around in the text I publish, so I highlighted them red (only for myself).  Here's the script I used to accomplish that:</p>
 <pre class="js inline">jQuery(function () {
 	jQuery(":contains(TODO)").not(":has(:contains(TODO))").each(function () {
 		var that = $(this),
 			html = that.html();
-		
+
 		html = html.replace(/(\(TODO:.*?\))/g, "&lt;span class=\"todo\"&gt;$1&lt;/span&gt;");
 		that.html(html);
 	});

@@ -1,3 +1,10 @@
+---
+title: Spying Constructors in JavaScript
+layout: post
+permalink: /2010/5/Spying-Constructors-in-JavaScript
+tags: [javascript, testing]
+---
+
 When writing unit-tests for code, a common technique is __spying__, where you set expectations on a method's invocation, run some code, and verify that the method was invoked as expected.  This is pretty straightforward.  Here's a simple example using [JsMockito](http://jsmockito.org/):
 
 	

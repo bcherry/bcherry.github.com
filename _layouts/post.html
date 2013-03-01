@@ -1,7 +1,7 @@
 {% include before_content.html %}
 <article class="span-17 last">
   <header class="span-17 last">
-    <time class="alt" datetime="{{ page.date }}" pubdate>{{ page.date }}</time>
+    <time class="alt" datetime="{{ page.date | date: '%Y-%m-%d' }}" pubdate>{{ page.date | date: '%Y-%m-%d' }}</time>
     <h1><a href="{{ page.url }}">{{ page.title }}</a></h1>
   </header>
   <div id="blogbody" class="span-17 last entry">

@@ -1,3 +1,10 @@
+---
+title: Object-to-Primitive Conversions in JavaScript
+layout: post
+permalink: /2010/3/Object-to-Primitive-Conversions-in-JavaScript
+tags: [javascript]
+---
+
 Like most object-oriented programming languages, JavaScript provides built-in ways to convert between objects and primitive values, by way of the special `toString` and `valueOf` methods.  This article will cover the basics of these methods, but then dive into the details of how this stuff really works, bad stuff, performance, and browser support.
 
 ### Types and Primitives

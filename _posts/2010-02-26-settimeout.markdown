@@ -1,3 +1,10 @@
+---
+title: Minimum Timer Intervals in JavaScript
+layout: post
+permalink: /2010/2/Minimum-Timer-Intervals-in-JavaScript
+tags: [javascript, timers, performance]
+---
+
 I was talking with a co-worker today about the behavior of `setTimeout` and `setInterval` when given a small interval, like `0` or `1`.  The _expectation_ would be that the timer will fire in 0ms, or 1ms.  However, as with <a href="http://wtfjs.com" target="_blank">other things</a> in JavaScript, the _reality_ is a bit different.  It turns out that browsers actually have a __minimum timer interval__ which they can't work any faster than.  John Resig wrote about <a href="http://ejohn.org/blog/analyzing-timer-performance/" target="_blank">timer performance</a> a few years back, and found this behavior.  He's also covering it in more detail in his new book.
 
 But, I wasn't happy with data a few years old, so I decided to just go and write my own simple test suite, <a href="http://www.bcherry.net/playground/settimeout" target="_blank">How Fast is setTimeout in Your Browser?</a>.  This page simply runs `setTimeout` with an interval of 0, 1000 times, and averages the _real_ timeout experienced in each.  Go ahead and check it out in your browser of choice.

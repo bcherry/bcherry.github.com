@@ -1,3 +1,10 @@
+---
+title: Replacing `setTimeout` Globally
+layout: post
+permalink: /2011/4/Replacing-setTimeout-Globally
+tags: [javascript, timers]
+---
+
 Sometimes, you might want to overwrite built-in global methods like `setTimeout` and `setInterval`.  If you try, you might find that it's much harder than you think to accomplish this in every browser, particularly if you ever want to find the originals again.  After a lot of painful experimentation, I think I have a definitive solution that works in all browsers with minimal side-effects.
 
 ## Failed Approaches
@@ -40,7 +47,6 @@ At this point, I declared searching for the original copies of `setTimeout` outs
 
 At this point, I figured the best solution would be to circumvent JavaScript's hoisting rules.  As we know, hoisting occurs immediately after entering an execution context.  So, to dodge it, we'd have to introduce a second execution context.  You could do this easily in HTML:
 
-    @@@html
     <script>
       var temp = setTimeout;
     </script>

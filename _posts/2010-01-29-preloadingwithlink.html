@@ -1,3 +1,10 @@
+---
+title: Preloading JS and CSS as Print Stylesheets
+layout: post
+permalink: /2010/1/Preloading-JS-and-CSS-as-Print-Stylesheets
+tags: [javascript, performance]
+---
+
 <p><em><strong>UPDATE: This technique has turned out to be dangerous in Chrome.  It seems that Chrome will load the JS files into the cache, but  then set an implied type="text/css" on them.  This means that it will refuse to re-use them as JavaScript on future pages, until they have left the cache.  I can no longer recommend this technique, but hope that it was at least interesting.  I'll be working on a follow-up post about alternatives.</strong></em></p>
 <p>One of Yahoo's <a href="http://developer.yahoo.com/performance/rules.html" target="_blank">Best Practices for Speeding Up Your Web Site</a> is "Preload Components".  Most people are already familiar with doing this for images.  Code for that usually looks like this:</p>
 <p><pre class="js">var img = Image();
@@ -12,7 +19,7 @@ img.src = "/path/to/something.jpg";</pre></p>
 		attr = "href",
 		extra = " rel=\"stylesheet\" media=\"print\" ",
 		target = "head";
-	
+
 	elem = jQuery(["&lt;", tag, extra, attr, "=\"", file, "\"&lt;&gt;/", tag, "&gt;"].join(''));
 	elem.load(function () {
 		elem.remove();

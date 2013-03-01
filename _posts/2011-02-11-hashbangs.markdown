@@ -1,9 +1,15 @@
+---
+title: Thoughts on the Hashbang
+layout: post
+permalink: /2011/2/Thoughts-on-the-Hashbang
+tags: [hashbang, html5]
+---
 
 There's [been][Breaking the Web with hash-bangs] [a][Going Postel] [lot][hashbanghell] [of][Tim Bray] [discussion][JsMentors Thread] this week about the "hashbang", that ugly little bit you find in the middle of URLs like this one: [http://twitter.com/#!/ded/status/18308450276](http://twitter.com/#!/ded/status/18308450276). I wanted to provide a rebuttal to the arguments that the hashbang is bad for the Web, based on a lot of discussions we've been having inside Twitter since the #newtwitter project began last summer, and have continued right up until today.
 
 ## It's Not About the Hashbang
 
-The hashbang is in the unfortunate position of being the messenger of a big change that's been slowly occurring on the Web in the past few years, and will only continue to pick up steam: many Web domains are now serving [desktop-class applications][SPI Manifesto] via HTTP, instead of traditional Web sites.  For instance, twitter.com is no longer a collection of Web pages that represent a Web site, but is simply an application that you happen to launch by pointing a browser at [http://twitter.com](http://twitter.com)*.  This has many wide-reaching implications, and the hashbang is merely a side-effect.  In this way, the hashbang is an easy-to-hate straw-man, whereas the real debate to be had is about this shift towards applications.
+The hashbang is in the unfortunate position of being the messenger of a big change that's been slowly occurring on the Web in the past few years, and will only continue to pick up steam: many Web domains are now serving [desktop-class applications][SPI Manifesto] via HTTP, instead of traditional Web sites.  For instance, twitter.com is no longer a collection of Web pages that represent a Web site, but is simply an application that you happen to launch by pointing a browser at [http://twitter.com](http://twitter.com)\*.  This has many wide-reaching implications, and the hashbang is merely a side-effect.  In this way, the hashbang is an easy-to-hate straw-man, whereas the real debate to be had is about this shift towards applications.
 
 ## Why Applications on the Web?
 
@@ -21,7 +27,7 @@ There is hope on the horizon, in the form of the HTML5 History API.  This new br
 
 It's not perfect.  It's not pretty (despite what Google says).  But the hashbang is useful.  Users benefit from the trend towards full-fledged applications, with increased speed and functionality.  URLs are not necessary in this context, but we provide them (via the hash) because they bring tangible benefits for applications.  The hashbang also brings a tangible benefit.  Someday, we will hopefully be rid of the thing, when HTML5 History (or [something like it][Saner HTML5 History Management]) is standard in all browsers.  The Web application is not going anywhere, and the hash is a fact of life.
 
-<span class="note"><em>* Technically, twitter.com does still host a Web site.  For instance, [twitter.com/jobs](http://twitter.com/jobs) is a normal Web page, as is [twitter.com/bcherry](http://twitter.com/bcherry), when viewed logged-out.  We have, however, begun serving an application to logged-in visitors.</em></span>
+<span class="note"><em>\* Technically, twitter.com does still host a Web site.  For instance, [twitter.com/jobs](http://twitter.com/jobs) is a normal Web page, as is [twitter.com/bcherry](http://twitter.com/bcherry), when viewed logged-out.  We have, however, begun serving an application to logged-in visitors.</em></span>
 
 
 [WSJ on Gawker Outage]: http://blogs.wsj.com/digits/2011/02/07/gawker-outage-causing-twitter-stir

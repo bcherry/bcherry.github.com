@@ -1,3 +1,10 @@
+---
+title: JavaScript Scoping and Hoisting
+layout: post
+permalink: /2010/2/JavaScript-Scoping-and-Hoisting
+tags: [javascript]
+---
+
 Do you know what value will be alerted if the following is executed as a JavaScript program?
 
 	
@@ -28,7 +35,6 @@ Here, of course, the browser will alert "1".  So what's going on here?  While it
 
 One of the sources of most confusion for JavaScript beginners is scoping.  Actually, it's not just beginners.  I've met a lot of experienced JavaScript programmers who don't fully understand scoping.  The reason scoping is so confusing in JavaScript is because it looks like a C-family language.  Consider the following C program:
 
-	@@@cplusplus
 	#include <stdio.h>
 	int main() {
 		int x = 1;
@@ -40,7 +46,7 @@ One of the sources of most confusion for JavaScript beginners is scoping.  Actua
 		printf("%d\n", x); // 1
 	}
 
-The output from this program will be `{@class=cplusplus}1, 2, 1`.  This is because C, and the rest of the C family, has __block-level scope__.  When control enters a block, such as the `{@class=cplusplus}if` statement, new variables can be declared within that scope, without affecting the outer scope.  This is not the case in JavaScript.  Try the following in Firebug:
+The output from this program will be `1, 2, 1`.  This is because C, and the rest of the C family, has __block-level scope__.  When control enters a block, such as the `if` statement, new variables can be declared within that scope, without affecting the outer scope.  This is not the case in JavaScript.  Try the following in Firebug:
 
 	
 	var x = 1;

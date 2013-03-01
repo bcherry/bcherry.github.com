@@ -1,3 +1,10 @@
+---
+title: Javascript Pseudo-threading
+layout: post
+permalink: /2009/11/Javascript-Pseudo-threading
+tags: [javascript]
+---
+
 ___This post has been migrated from my old, defunct blog at bcherry.net.  The links may not work, and the formatting may be wonky.___
 
 I've been playing around with asynchronous Javascript for repeated large-set actions, in the hopes of generating some useful techniques for real applications.  I've narrowed down a successful technique that I call "simplethreading".  Check out a demo [here](http://bcherry.net/simplethreading_old) or the resulting source code [here](http://github.com/bcherry/simplethreading).  The demo lets you play with the size of the data set, and also the operation queue size.  I found that queuing operations in batches was quite a bit faster than queuing them individually, so that each fired event will process a few data objects instead of just 1.  I'd guess the reason for this is that Javascript only supports timeouts at the millisecond level, when most operations are shorter than that.  By grouping operations into larger chunks, we can make much better use of the time we're given.
