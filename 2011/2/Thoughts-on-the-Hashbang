@@ -254,7 +254,7 @@
 <h2 id='the_hashbang_is_a_good_thing'>The Hashbang is a Good Thing</h2>
 
 <p>It&#8217;s not perfect. It&#8217;s not pretty (despite what Google says). But the hashbang is useful. Users benefit from the trend towards full-fledged applications, with increased speed and functionality. URLs are not necessary in this context, but we provide them (via the hash) because they bring tangible benefits for applications. The hashbang also brings a tangible benefit. Someday, we will hopefully be rid of the thing, when HTML5 History (or <a href='http://www.adequatelygood.com/2010/7/Saner-HTML5-History-Management'>something like it</a>) is standard in all browsers. The Web application is not going anywhere, and the hash is a fact of life.</p>
-<span class='note'><em>\* Technically, twitter.com does still host a Web site.  For instance, [twitter.com/jobs](http://twitter.com/jobs) is a normal Web page, as is [twitter.com/bcherry](http://twitter.com/bcherry), when viewed logged-out.  We have, however, begun serving an application to logged-in visitors.</em></span>
+<span class='note'><em>* Technically, twitter.com does still host a Web site.  For instance, <a href='http://twitter.com/jobs'>twitter.com/jobs</a> is a normal Web page, as is <a href='http://twitter.com/bcherry'>twitter.com/bcherry</a> when viewed logged-out.  We have, however, begun serving an application to logged-in visitors.</em></span>
   </div>
 </article>
 

@@ -243,9 +243,9 @@
     <article class="span-17 last">
   <header class="span-17 last">
   
-    <time class="alt" datetime="" pubdate>2010-04-13</time>
+    <time class="alt" datetime="2010-04-13" pubdate>2010-04-13</time>
   
-  <h1><a href="tag/debugging">Debugging Closures and Modules</a></h1>
+  <h1><a href="/2010/4/Debugging-Closures-and-Modules">Debugging Closures and Modules</a></h1>
 </header>
   <div class="span-17 last entry">
     <p>The most common complaint with using closures to keep private variables in JavaScript is that it makes debugging harder. This complaint definitely holds water, and the loss of easy debugging and inspection using the <a href='http://www.adequatelygood.com/2010/3/JavaScript-Module-Pattern-In-Depth'>Module Pattern</a> is a serious concern. This is where one of JavaScript&#8217;s non-standard but well-supported features comes in: the <strong>debugger statement</strong>. In this article, I&#8217;ll introduce this statement, and show how I use it to solve this deficiency in closure-based code.</p>
