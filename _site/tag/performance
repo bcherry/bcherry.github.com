@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <title>Adequately Good - By Ben Cherry</title>
+    <title>Adequately Good - Posts tagged “performance”</title>
 
     <!-- CSS, including Blueprint, jQuery w/Smoothness, and AG CSS -->
     <link rel="stylesheet" href="/css/blueprint/blueprint.min.css" media="screen, projection" />
@@ -224,203 +224,132 @@
         <!-- Main content: Posts, etc. -->
         <div id="content" class="span-17 colborder">
           <a name="main"></a>
-          
-  <article class="span-17 last">
+          <div class="smallalts listing">
+  <span class="alt">all posts filed under</span>
+  <a class="tight" href="/tags/performance">performance</a>
+</div>
+
+  
+
+  
+
+  
+    <article class="span-17 last">
   <header class="span-17 last">
   
-    <time class="alt" datetime="" pubdate>2010-03-12</time>
+    <time class="alt" datetime="" pubdate>2010-07-25</time>
   
-  <h1><a href="/page4/index.html">JavaScript Module Pattern: In-Depth</a></h1>
+  <h1><a href="tag/performance">Saner HTML5 History Management</a></h1>
 </header>
   <div class="span-17 last entry">
-    <p>The module pattern is a common JavaScript coding pattern. It&#8217;s generally well understood, but there are a number of advanced uses that have not gotten a lot of attention. In this article, I&#8217;ll review the basics and cover some truly remarkable advanced topics, including one which I think is original.</p>
+    <h2 id='hashchange'>Hashchange</h2>
 
-<h2 id='the_basics'>The Basics</h2>
+<p>This event is quite simple. Whenever the <code>window.location.hash</code> property changes, by following a link, setting the property, editing the URL bar, or using back/forward to move through browser history, the &#8220;hashchange&#8221; event is fired from the window. Using it is really easy:</p>
 
-<p>We&#8217;ll start out with a simple overview of the module pattern, which has been well-known since Eric Miraglia (of YUI) first <a href='http://yuiblog.com/blog/2007/06/12/module-pattern/'>blogged about it</a> three years ago. If you&#8217;re already familiar with the module pattern, feel free to skip ahead to &#8220;Advanced Patterns&#8221;.</p>
+<pre><code>window.onhashchange = function() {
+	alert(&quot;hash changed!&quot;);
+};
+window.location.hash = Math.random(); // alerts &quot;hash changed!&quot;</code></pre>
 
-<h3 id='anonymous_closures'>Anonymous Closures</h3>
+<p>This feature is implemented in recent versions of all major browsers. In older browsers like Internet Explorer 6 and 7, you can easily provide it by polling the hash property on an interval, and manually firing an event when it changes. This is easy to build into a jQuery plugin, which <a href='http://benalman.com/'>Ben Alman</a> did in the robust <a href='http://benalman.com/projects/jquery-hashchange-plugin/'>jquery.hashchange.js plugin</a>.</p>
 
-<p>This is the fundamental construct that makes it all possible, and really is the single <strong>best feature of JavaScript</strong>. We&#8217;ll simply create an anonymous function, and execute it immediately. All of the code that runs inside the function lives in a <strong>closure</strong>, which provides <strong>privacy</strong> and <strong>state</strong> throughout the lifetime of our application.</p>
+<h2 id='history_management'>History Management</h2>
 
-<pre><code>(function () {
-	// ... all vars and functions are in this scope only
-	// still maintains access to all globals
-}());</code></pre>
+<p>This feature is a bit more complex. Browsers that support it add a <code>window.history</code> object, with the following properties:</p>
 
-<p>Notice the <code>{@class=js inline}()</code> around the anonymous function. This is required by the language, since statements that begin with the token <code>{@class=js inline}function</code> are always considered to be <strong>function declarations</strong>. Including <code>{@class=js inline}()</code> creates a <strong>function expression</strong> instead.</p>
+<ul>
+<li><code>window.history.back()</code> and <code>window.history.forward()</code>, which provide programmatic interfaces to browser back and forward functions.</li>
 
-<h3 id='global_import'>Global Import</h3>
+<li><code>window.history.pushState(stateObj, title, url)</code>. This method pushes a new entry into the browser history, which then becomes the browser&#8217;s current state. You can provide any JSON-stringifiable object to send with it, and the browser will provide that object again when you navigate to that point (more on that in a bit). More importantly, if you provide a URL, the browser will change the URL displayed in the address bar, without reloading the page. The new URL must be on the same domain, but you can change the rest of it, which is the <code>window.location.pathname</code> and <code>window.location.hash</code>. Changing the URL in this way will not trigger a &#8220;hashchange&#8221; event, though.</li>
 
-<p>JavaScript has a feature known as <strong>implied globals</strong>. Whenever a name is used, the interpreter walks the scope chain backwards looking for a <code>{@class=js inline}var</code> statement for that name. If none is found, that variable is assumed to be global. If it&#8217;s used in an assignment, the global is created if it doesn&#8217;t already exist. This means that using or creating global variables in an anonymous closure is easy. Unfortunately, this leads to hard-to-manage code, as it&#8217;s not obvious (to humans) which variables are global in a given file.</p>
+<li><code>window.history.replaceState(stateObj, title, url)</code>. This is just like <code>window.history.pushState</code>, except that the current browser state is removed from the history, so you cannot hit &#8220;back&#8221; to return to it.</li>
 
-<p>Luckily, our anonymous function provides an easy alternative. By passing globals as parameters to our anonymous function, we <strong>import</strong> them into our code, which is both <strong>clearer</strong> and <strong>faster</strong> than implied globals. Here&#8217;s an example:</p>
+<li><code>window.onpopstate</code>. This event is fired whenever a state object is removed from the browser history, which occurs on browser &#8220;back&#8221; or &#8220;forward&#8221;. State objects are persisted on the user&#8217;s hard disk between sessions, which is a nice feature. The object passed into a call to <code>pushState</code> or <code>replaceState</code> is provided as the <code>state</code> property on the event object in the &#8220;popstate&#8221; event.</li>
+</ul>
 
-<pre><code>(function ($, YAHOO) {
-	// now have access to globals jQuery (as $) and YAHOO in this code
-}(jQuery, YAHOO));</code></pre>
+<p>This feature is implemented in the latest versions of WebKit, which includes Safari and Chrome. Additionally, the Firefox 4 betas include support for this.</p>
 
-<h3 id='module_export'>Module Export</h3>
+<h2 id='whats_the_use_case'>What&#8217;s the Use Case?</h2>
 
-<p>Sometimes you don&#8217;t just want to <em>use</em> globals, but you want to <em>declare</em> them. We can easily do this by exporting them, using the anonymous function&#8217;s <strong>return value</strong>. Doing so will complete the basic module pattern, so here&#8217;s a complete example:</p>
+<p>The new history management stuff is very promising, because it allows a web application to live across many physical URLs, but be run in a single instance. This is important for certain kinds of applications, where using hashes is not universally suitable.</p>
 
-<pre><code>var MODULE = (function () {
-	var my = {},
-		privateVariable = 1;
+<p>For instance, at Twitter, we currently update your URL hash as you navigate around the application, to make bookmarkable pages like <a href='http://twitter.com/#replies'>http://twitter.com/#replies</a>. However, we force a full page load for certain pages, most notably profile pages (e.g. <a href='http://twitter.com/bcherry'>http://twitter.com/bcherry</a>) and permalink pages (e.g. <a href='http://twitter.com/bcherry/status/18966802499'>http://twitter.com/bcherry/status/18966802499</a>). This is so that those URLs can be copied from the address bar and posted on the web.</p>
 
-	function privateMethod() {
-		// ...
-	}
+<p>We want to make sure that users without JavaScript and search engine bots crawling links to our site will get the correct page from the server (since the browser does not send a hash along to the server). This would not be possible if those URLs used hashes. Unfortunately, this means the application is slower, because a full page load is needed going into and out of those locations.</p>
 
-	my.moduleProperty = 1;
-	my.moduleMethod = function () {
-		// ...
-	};
+<p>This is where HTML5 History Management could be useful.</p>
 
-	return my;
-}());</code></pre>
+<h2 id='so_whats_the_problem'>So What&#8217;s the Problem?</h2>
 
-<p>Notice that we&#8217;ve declared a global module named <code>{@class=js inline}MODULE</code>, with two public properties: a method named <code>{@class=js inline}MODULE.moduleMethod</code> and a variable named <code>{@class=js inline}MODULE.moduleProperty</code>. In addition, it maintains <strong>private internal state</strong> using the closure of the anonymous function. Also, we can easily import needed globals, using the pattern we learned above.</p>
+<p>Unfortunately, the existing implementation of history management is not useful, and not in the spirit of the web.</p>
 
-<h2 id='advanced_patterns'>Advanced Patterns</h2>
+<p>Our web applications should be built to respond to a URL. Both the client and server versions of an application should understand a shared URL structure, and know how to present the same page to the browser that reflects that URL.</p>
 
-<p>While the above is enough for many uses, we can take this pattern farther and create some very powerful, extensible constructs. Lets work through them one-by-one, continuing with our module named <code>{@class=js inline}MODULE</code>.</p>
+<p>Allowing developers to store extra state information in the browser history is missing the point. The only thing stored in history should be a URL, and the browser can associate a title with it if it chooses.</p>
 
-<h3 id='augmentation'>Augmentation</h3>
+<p>This is RESTful design, mirrored on client and server. Modern browsers can support changing the URL without reloading the page from the server, and older ones can continue to hit the server every time.</p>
 
-<p>One limitation of the module pattern so far is that the entire module must be in one file. Anyone who has worked in a large code-base understands the value of splitting among multiple files. Luckily, we have a nice solution to <strong>augment modules</strong>. First, we import the module, then we add properties, then we export it. Here&#8217;s an example, augmenting our <code>{@class=js inline}MODULE</code> from above:</p>
+<p>In this way, we can build applications that degrade correctly in older browsers, and when viewed by bots, while providing a faster experience for users with modern browsers.</p>
 
-<pre><code>var MODULE = (function (my) {
-	my.anotherMethod = function () {
-		// added method...
-	};
+<h2 id='enter_pathchange'>Enter &#8220;pathchange&#8221;</h2>
 
-	return my;
-}(MODULE));</code></pre>
+<p>Both &#8220;hashchange&#8221; and <code>pushState</code>/&#8221;popstate&#8221; should be replaced with &#8220;pathchange&#8221;, which is an event that fires when the URL changes in any way. This event does not provide any information, the application should inspect the current URL to discover the state it should enter. Relative links within a page should not force page reloads, they should instead just trigger the &#8220;pathchange&#8221; event.</p>
 
-<p>We use the <code>{@class=js inline}var</code> keyword again for consistency, even though it&#8217;s not necessary. After this code has run, our module will have gained a new public method named <code>{@class=js inline}MODULE.anotherMethod</code>. This augmentation file will also maintain its own private internal state and imports.</p>
+<p>It turns out that it&#8217;s possible to implement this event in modern browsers now, based on the features they already have. Here&#8217;s how:</p>
 
-<h3 id='loose_augmentation'>Loose Augmentation</h3>
+<ol>
+<li>Listen to &#8220;hashchange&#8221;, and trigger &#8220;pathchange&#8221; when it occurs</li>
 
-<p>While our example above requires our initial module creation to be first, and the augmentation to happen second, that isn&#8217;t always necessary. One of the best things a JavaScript application can do for performance is to load scripts asynchronously. We can create flexible multi-part modules that can load themselves in any order with <strong>loose augmentation</strong>. Each file should have the following structure:</p>
+<li>Poll the hash in browsers without &#8220;hashchange&#8221; support, and trigger &#8220;hashchange&#8221;, which triggers &#8220;pathchange&#8221;</li>
 
-<pre><code>var MODULE = (function (my) {
-	// add capabilities...
+<li>With history support, listen to &#8220;popstate&#8221;, and trigger &#8220;pathchange&#8221; when it occurs</li>
 
-	return my;
-}(MODULE || {}));</code></pre>
+<li>With history support, intercept all relative links when they are clicked, and prevent normal navigation. Call <code>window.history.pushState(null, null, href)</code> instead, and trigger a &#8220;pathchange&#8221;.</li>
 
-<p>In this pattern, the <code>{@class=js inline}var</code> statement is always necessary. Note that the import will create the module if it does not already exist. This means you can use a tool like <a href='http://labjs.com/'>LABjs</a> and load all of your module files in parallel, without needing to block.</p>
+<li>Provide a helper function to make navigation to new URLs using <code>window.history.pushState</code>, when supported, easy.</li>
+</ol>
 
-<h3 id='tight_augmentation'>Tight Augmentation</h3>
+<p>I&#8217;ve implemented all of this as a <a href='http://www.bcherry.net/static/lib/js/jquery.pathchange.js'>jQuery plugin</a> that is quite easy to use:</p>
 
-<p>While loose augmentation is great, it does place some limitations on your module. Most importantly, you cannot override module properties safely. You also cannot use module properties from other files during initialization (but you can at run-time after intialization). <strong>Tight augmentation</strong> implies a set loading order, but allows <strong>overrides</strong>. Here is a simple example (augmenting our original <code>{@class=js inline}MODULE</code>):</p>
+<pre><code>$(function() {
+	$.pathchange.init(); // setup event listeners, etc.
+	$(window).pathchange(function() {
+		respondToUrl();
+	}).trigger(&quot;pathchange&quot;);
 
-<pre><code>var MODULE = (function (my) {
-	var old_moduleMethod = my.moduleMethod;
+	$.pathchange.changeTo(&quot;/foo&quot;);
+});</code></pre>
 
-	my.moduleMethod = function () {
-		// method override, has access to old through old_moduleMethod...
-	};
+<p>I&#8217;ve also created a demo page that presents <a href='http://www.bcherry.net/playground/sanerhtml5history'>A Saner HTML5 History App</a> that uses <a href='http://www.bcherry.net/static/lib/js/jquery.pathchange.js'>jquery.pathchange.js</a> under the hood. Check it out in various browsers to see the HTML5 magic at work, and be sure to use your browser &#8220;back&#8221; and &#8220;forward&#8221; buttons, and reload the page a few times.</p>
 
-	return my;
-}(MODULE));</code></pre>
-
-<p>Here we&#8217;ve overridden <code>{@class=js inline}MODULE.moduleMethod</code>, but maintain a reference to the original method, if needed.</p>
-
-<h3 id='cloning_and_inheritance'>Cloning and Inheritance</h3>
-
-<pre><code>var MODULE_TWO = (function (old) {
-	var my = {},
-		key;
-
-	for (key in old) {
-		if (old.hasOwnProperty(key)) {
-			my[key] = old[key];
-		}
-	}
-
-	var super_moduleMethod = old.moduleMethod;
-	my.moduleMethod = function () {
-		// override method on the clone, access to super through super_moduleMethod
-	};
-
-	return my;
-}(MODULE));</code></pre>
-
-<p>This pattern is perhaps the <strong>least flexible</strong> option. It does allow some neat compositions, but that comes at the expense of flexibility. As I&#8217;ve written it, properties which are objects or functions will <em>not</em> be duplicated, they will exist as one object with two references. Changing one will change the other. This could be fixed for objects with a recursive cloning process, but probably cannot be fixed for functions, except perhaps with <code>{@class=js inline}eval</code>. Nevertheless, I&#8217;ve included it for completeness.</p>
-
-<h3 id='crossfile_private_state'>Cross-File Private State</h3>
-
-<p>One severe limitation of splitting a module across multiple files is that each file maintains its own private state, and does not get access to the private state of the other files. This can be fixed. Here is an example of a loosely augmented module that will <strong>maintain private state</strong> across all augmentations:</p>
-
-<pre><code>var MODULE = (function (my) {
-	var _private = my._private = my._private || {},
-		_seal = my._seal = my._seal || function () {
-			delete my._private;
-			delete my._seal;
-			delete my._unseal;
-		},
-		_unseal = my._unseal = my._unseal || function () {
-			my._private = _private;
-			my._seal = _seal;
-			my._unseal = _unseal;
-		};
-
-	// permanent access to _private, _seal, and _unseal
-
-	return my;
-}(MODULE || {}));</code></pre>
-
-<p>Any file can set properties on their local variable <code>{@class=js inline}_private</code>, and it will be immediately available to the others. Once this module has loaded completely, the application should call <code>{@class=js inline}MODULE._seal()</code>, which will prevent external access to the internal <code>{@class=js inline}_private</code>. If this module were to be augmented again, further in the application&#8217;s lifetime, one of the internal methods, in any file, can call <code>{@class=js inline}_unseal()</code> before loading the new file, and call <code>{@class=js inline}_seal()</code> again after it has been executed. This pattern occurred to me today while I was at work, I have not seen this elsewhere. I think this is a very useful pattern, and would have been worth writing about all on its own.</p>
-
-<h3 id='submodules'>Sub-modules</h3>
-
-<p>Our final advanced pattern is actually the simplest. There are many good cases for creating sub-modules. It is just like creating regular modules:</p>
-
-<pre><code>MODULE.sub = (function () {
-	var my = {};
-	// ...
-
-	return my;
-}());</code></pre>
-
-<p>While this may have been obvious, I thought it worth including. Sub-modules have all the advanced capabilities of normal modules, including augmentation and private state.</p>
-
-<h2 id='conclusions'>Conclusions</h2>
-
-<p>Most of the advanced patterns can be combined with each other to create more useful patterns. If I had to advocate a route to take in designing a complex application, I&#8217;d combine <strong>loose augmentation</strong>, <strong>private state</strong>, and <strong>sub-modules</strong>.</p>
-
-<p>I haven&#8217;t touched on performance here at all, but I&#8217;d like to put in one quick note: The module pattern is <strong>good for performance</strong>. It minifies really well, which makes downloading the code faster. Using <strong>loose augmentation</strong> allows easy non-blocking parallel downloads, which also speeds up download speeds. Initialization time is probably a bit slower than other methods, but worth the trade-off. Run-time performance should suffer no penalties so long as globals are imported correctly, and will probably gain speed in sub-modules by shortening the reference chain with local variables.</p>
-
-<p>To close, here&#8217;s an example of a sub-module that loads itself dynamically to its parent (creating it if it does not exist). I&#8217;ve left out private state for brevity, but including it would be simple. This code pattern allows an entire complex heirarchical code-base to be loaded completely in parallel with itself, sub-modules and all.</p>
-
-<pre><code>var UTIL = (function (parent, $) {
-	var my = parent.ajax = parent.ajax || {};
-
-	my.get = function (url, params, callback) {
-		// ok, so I&#39;m cheating a bit :)
-		return $.getJSON(url, params, callback);
-	};
-
-	// etc...
-
-	return parent;
-}(UTIL || {}, jQuery));</code></pre>
-
-<p>I hope this has been useful, and please leave a comment to share your thoughts. Now, go forth and write better, more modular JavaScript!</p>
-
-<p><strong><em>This post was <a href='http://ajaxian.com/archives/a-deep-dive-and-analysis-of-the-javascript-module-pattern'>featured on Ajaxian.com</a>, and there is a little bit more discussion going on there as well, which is worth reading in addition to the comments below.</em></strong></p>
+<p>That&#8217;s my take on the HTML5 history features. It&#8217;s unfortunate that what the browsers are implementing is not what we really need, but it&#8217;s encouraging that they do provide enough to implement what we do really need. Let me know in the comments if you agree, disagree, or have questions about my approach.</p>
+<span class='note'>___Note Number One: It's also worth pointing out that I discovered a [serious bug](https://bugs.webkit.org/show_bug.cgi?id=42940) in WebKit's implementation of history management while working on this today.  In short, the "popstate" event is often lost when the network is occupied, which makes little sense.  [Here's a demo page with a reproducible case](http://www.bcherry.net/playground/pushstate) that I threw together.  It fires off a request to download an image which takes 1s on every "popstate", which means hitting "back" more than once every second leads to lost history entries and an application that gets out of sync with the URL.  You could work around this by polling the URL in addition to listening to "popstate", but it's not a good workaround.  Until this is fixed, you'll have to be wary of this if you ship this feature to your users, and it probably is not suitable for very complex AJAX apps.  Firefox 4 does not have the same problem.___</span><span class='note'>___Note Number 2: This article was originally published around 4am PST on July 26th.  The author published a revision around 8pm PST the following day, to make it a little less incohorent and a little more useful.  Luckily, the author uses Git to prepare Markdown-formatted articles, so you can [view the diff](http://github.com/bcherry/adequatelygood/commit/eb688c7809e8d5f61f9ed12442d3a578d46fab97) if you'd like to find out what changed.___</span>
   </div>
 </article>
 
+  
 
-  <article class="span-17 last">
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    <article class="span-17 last">
   <header class="span-17 last">
   
     <time class="alt" datetime="" pubdate>2010-03-08</time>
   
-  <h1><a href="/page4/index.html">Performance of === vs. ==</a></h1>
+  <h1><a href="tag/performance">Performance of === vs. ==</a></h1>
 </header>
   <div class="span-17 last entry">
     <p>One particular weirdness and unpleasantry in JavaScript is the set of equality operators. Like virtually every language, JavaScript has the standard <code>==</code>, <code>!=</code>, <code>&lt;</code>, <code>&gt;</code>, <code>&lt;=</code>, and <code>&gt;=</code> operators. However, <code>==</code> and <code>!=</code> are NOT the operators most would think they are. These operators do <strong>type coercion</strong>, which is why <code>[0] == 0</code> and <code>&quot;\n0\t &quot; == 0</code> both evaluate to <code>true</code>. This is considered, by sane people, to be a <strong>bad thing</strong>. Luckily, JavaScript does provide a normal set of equality operators, which do what you expect: <code>===</code> and <code>!==</code>. It sucks that we need these at all, and <code>===</code> is a pain to type, but at least <code>[0] !== 0</code>.</p>
@@ -473,13 +402,15 @@
   </div>
 </article>
 
+  
 
-  <article class="span-17 last">
+  
+    <article class="span-17 last">
   <header class="span-17 last">
   
     <time class="alt" datetime="" pubdate>2010-02-26</time>
   
-  <h1><a href="/page4/index.html">Minimum Timer Intervals in JavaScript</a></h1>
+  <h1><a href="tag/performance">Minimum Timer Intervals in JavaScript</a></h1>
 </header>
   <div class="span-17 last entry">
     <p>I was talking with a co-worker today about the behavior of <code>setTimeout</code> and <code>setInterval</code> when given a small interval, like <code>0</code> or <code>1</code>. The <em>expectation</em> would be that the timer will fire in 0ms, or 1ms. However, as with <a href='http://wtfjs.com' target='_blank'>other things</a> in JavaScript, the <em>reality</em> is a bit different. It turns out that browsers actually have a <strong>minimum timer interval</strong> which they can&#8217;t work any faster than. John Resig wrote about <a href='http://ejohn.org/blog/analyzing-timer-performance/' target='_blank'>timer performance</a> a few years back, and found this behavior. He&#8217;s also covering it in more detail in his new book.</p>
@@ -531,25 +462,64 @@ go();</code></pre>
   </div>
 </article>
 
+  
 
+  
 
+  
 
-<div id="more_reading">
-  <p class="smallalts pager">
-    <span class="alt">go</span>
-    
-      
-        <a class="tight" href="/page3">previous</a>
-      
-    
-    
-      <span class="alt">or</span>
-    
-    
-        <a class="tight" href="/page5">next</a>
-    
-  </p>
-</div>
+  
+
+  
+
+  
+
+  
+    <article class="span-17 last">
+  <header class="span-17 last">
+  
+    <time class="alt" datetime="" pubdate>2010-01-29</time>
+  
+  <h1><a href="tag/performance">Preloading JS and CSS as Print Stylesheets</a></h1>
+</header>
+  <div class="span-17 last entry">
+    <p><em><strong>UPDATE: This technique has turned out to be dangerous in Chrome.  It seems that Chrome will load the JS files into the cache, but  then set an implied type="text/css" on them.  This means that it will refuse to re-use them as JavaScript on future pages, until they have left the cache.  I can no longer recommend this technique, but hope that it was at least interesting.  I'll be working on a follow-up post about alternatives.</strong></em></p>
+<p>One of Yahoo's <a href="http://developer.yahoo.com/performance/rules.html" target="_blank">Best Practices for Speeding Up Your Web Site</a> is "Preload Components".  Most people are already familiar with doing this for images.  Code for that usually looks like this:</p>
+<p><pre class="js">var img = Image();
+img.src = "/path/to/something.jpg";</pre></p>
+<p>This code works in all browsers, and causes that image to be downloaded and placed in the browser's cache.</p>
+<p>But what if we want to go further?  For a lot of today's big applications, images are no longer the only bandwidth hog.  An application I work on has more than 2MB worth of JavaScript, CSS, and data (stored in JavaScript files).  We found that users on slow connections could take up to <em>60 seconds</em> to load our application for the first time!  Obviously, we could benefit from intelligently pre-loading this data in the background, on an earlier page where they don't need it yet.  But how?</p>
+<p>My first attempt was just to use the <code class="js inline">Image()</code> method above, but point at our text files instead.  This didn't work in Firefox.  I'm not sure why, but those files never appeared in the cache with that method.  So our next idea was to use <code class="html inline">&lt;iframe&gt;</code> tags.  This worked great, until we tried it in Internet Explorer.  IE chose to warn the user that our page was trying to download data they didn't ask for, and blocked the downloads until they approved them.  Obviously, this wouldn't work either.</p>
+<p>This left us scratching our heads, but we eventually had a breakthrough.  There is one other tag that is used to include text files in a web page.  That's the <code class="html inline">&lt;link rel="stylesheet"&gt;</code> tag.  But this couldn't possibly work with JavaScript, could it?  It turns out it could!</p>
+<pre class="js">var preload = function (file) {
+	var elem,
+		tag = "link",
+		attr = "href",
+		extra = " rel=\"stylesheet\" media=\"print\" ",
+		target = "head";
+
+	elem = jQuery(["&lt;", tag, extra, attr, "=\"", file, "\"&lt;&gt;/", tag, "&gt;"].join(''));
+	elem.load(function () {
+		elem.remove();
+	});
+	jQuery(target).append(elem);
+
+	return elem;
+};</pre>
+<p>This function creates a temporary <code class="html inline">&lt;link&gt;</code> tag in the <code class="html inline">&lt;head&gt;</code> of your page, pointing at the requested file.  To work across all browsers, we needed to give it the rel="stylesheet" attribute.  To not cause preloaded CSS files to try and apply themselves to the current page, or trigger a re-flow, we added media="print".  Once the element has loaded, it removes itself from the DOM, but the file remains in the browser's cache.  While this example relies on the jQuery library, there is no reason it could not be easily re-written without such a dependency, or written as a jQuery plugin (providing <code class="js inline">jQuery.preload()</code>).</p>
+<p>This technique cut our aforementioned page load from 60s to 20s, over a slow connection.  I think this is a complete solution, and seems to work in all major browsers.  What do you think?</p>
+  </div>
+</article>
+
+  
+
+  
+
+  
+
+  
+
+  
 
 
         </div>

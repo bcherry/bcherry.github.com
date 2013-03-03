@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <title>JavaScript: Better and Faster</title>
+    <title>Adequately Good - Posts tagged “python”</title>
 
     <!-- CSS, including Blueprint, jQuery w/Smoothness, and AG CSS -->
     <link rel="stylesheet" href="/css/blueprint/blueprint.min.css" media="screen, projection" />
@@ -224,41 +224,163 @@
         <!-- Main content: Posts, etc. -->
         <div id="content" class="span-17 colborder">
           <a name="main"></a>
-          
-<article class="span-17 last">
+          <div class="smallalts listing">
+  <span class="alt">all posts filed under</span>
+  <a class="tight" href="/tags/python">python</a>
+</div>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    <article class="span-17 last">
   <header class="span-17 last">
   
-    <time class="alt" datetime="2010-03-21" pubdate>2010-03-21</time>
+    <time class="alt" datetime="" pubdate>2010-03-26</time>
   
-  <h1><a href="/2010/3/JavaScript-Better-and-Faster">JavaScript: Better and Faster</a></h1>
+  <h1><a href="tag/python">JavaScript-Style Objects in Python</a></h1>
 </header>
-  <div id="blogbody" class="span-17 last entry">
-    <p>&#8220;JavaScript: Better and Faster&#8221; is the name of a presentation I gave at <a href='http://www.slide.com'>Slide</a> last week. It was generally well-received by the Slide crew so I decided to put a (slightly edited) copy of the <a href='http://www.bcherry.net/talks/js-better-faster'>accompanying slideshow online</a> (runs in your browser). It&#8217;s not particularly dense, and doesn&#8217;t get into too much depth on any one topic, but I think it gives a great practical overview of the JavaScript landscape, including what things to look out for and neat techniques to write better code. The original intent was to cover the ins and outs of writing good, efficient JavaScript, targeted at people who write JavaScript every day, but have a strong background in Python.</p>
+  <div class="span-17 last entry">
+    <p>One of JavaScript&#8217;s most convenient features is the object syntax. Objects are so easy to work with. You&#8217;ve got a lot of ways to make them, although the object literal syntax in particular kicks ass. You can access and assign them with either the dot operator or dictionary syntax. Missing properties just return <code>undefined</code>. This is just a really fantastic object model.</p>
 
-<p>I&#8217;d like to give a huge thanks to <a href='http://scottchacon.com/'>Scott Chacon</a>, whose <a href='http://github.com/schacon/showoff'>Showoff</a> software made compiling this slideshow the most enjoyable thing imaginable. It took a little work to port the resultant slideshow to Google AppEngine, but I got it up and running. I&#8217;ll probably work on a more generalized Python/AppEngine adaptation of Showoff for my future use, since that&#8217;s my web platform and I want to keep using Showoff in the future. This experience also got me really turned on to <a href='http://daringfireball.net/projects/markdown/'>Markdown</a>, which I wasted no time in integrating into this blog.</p>
+<p>So, today, I sat down to write my first serious Python code in a while, and found myself trying use a dictionary like a JavaScript object. This was a total failure, obviously. Python simply does not have that. Luckily, it&#8217;s an incredibly malleable language, if you&#8217;re willing to do the legwork. So, in about 30 min, I implemented JavaScript-style objects.</p>
 
-<p>This is the first presentation I&#8217;ve given in my professional career, and would much appreciate feedback on the slides.</p>
+<p>To make a JavaScript-style object, you use <code>js.JsObject()</code>.</p>
+
+<pre><code>import js
+foo = js.JsObject()</code></pre>
+
+<p>You can assign properties with either dictionary syntax or the dot operator.</p>
+
+<pre><code>foo.bar = 1
+foo[&#39;baz&#39;] = 2</code></pre>
+
+<p>Reading properties works the same, and properties that don&#8217;t exist simply return <code>None</code>.</p>
+
+<pre><code>foo[&#39;bar&#39;] # 1
+foo.baz # 2
+foo.spam # None
+foo[&#39;spam&#39;] # None</code></pre>
+
+<p>It just prints out as a dictionary when you convert it to a string, as is done by the <code>print</code> operator. It also does the same when viewed in the interpreter.</p>
+
+<pre><code>print foo # {&#39;baz&#39;: 2, &#39;bar&#39;: 1}</code></pre>
+
+<p>The properties are iterable just as in JavaScript. This is different than normal Python dictionaries, where you iterate on a tuple of <code>(key, value)</code>. Here we just get the keys.</p>
+
+<pre><code>for prop in foo:
+	print prop, foo[prop] # bar 1, baz 2</code></pre>
+
+<p>You can also delete properties, using either the dot operator or dictionary syntax. It won&#8217;t <code>raise</code> if the property doesn&#8217;t exist, either.</p>
+
+<pre><code>del foo.bar
+del foo[&#39;spam&#39;]</code></pre>
+
+<p>You can also easily check if properties exist using the <code>in</code> operator.</p>
+
+<pre><code>&#39;baz&#39; in foo # True
+&#39;bar&#39; in foo # False</code></pre>
+
+<p>And object comparison works as in JavaScript. Two will never be the same, even if they have the same properties and values.</p>
+
+<pre><code>js.JsObject() == js.JsObject() # False
+js.JsObject() is js.JsObject() # False</code></pre>
+
+<p>And, finally, the constructor function is more flexible than I let on initially. You can pass in keyword arguments, which will end up as properties. You can also pass a dictionary to initialize it with. Or, you can pass both!</p>
+
+<pre><code>foo = js.JsObject(a=1, b=2)
+print foo # {&#39;a&#39;: 1, &#39;b&#39;: 2}
+
+foo = js.JsObject({&#39;a&#39;: 1, &#39;b&#39;: 2})
+print foo # {&#39;a&#39;: 1, &#39;b&#39;: 2}
+
+foo = js.JsObject({&#39;a&#39;: 1}, b=2)
+print foo # {&#39;a&#39;: 1, &#39;b&#39;: 2}</code></pre>
+
+<p>So yeah, that&#8217;s pretty awesome. I thought about handling prototypal inheritance too, but I just don&#8217;t see the need. I almost never use prototypes in JavaScript, I&#8217;m positive I would never use them in Python. I&#8217;m also not crazy about the creation syntax, but I couldn&#8217;t find a way to re-purpose the dictionary literal <code>{}</code>, and didn&#8217;t want to override built-in names like <code>dict</code> or <code>object</code>. I also wanted to keep with Python conventions and UpperCamelCase the class name, so <code>js.JsObject()</code> is what I settled on.</p>
+
+<p>You&#8217;re probably curious about the implementation, so here&#8217;s the full source code. I&#8217;m probably missing some useful things, but this is what I have so far. It&#8217;s quite simple; for the most part it just overrides everything to some form of dictionary method on <code>self.___dict__</code>. You can also find <a href='http://github.com/bcherry/js-py/blob/master/js.py'>js.py on GitHub</a>.</p>
+
+<pre><code>class JsObject(object):
+	def __init__(self, *args, **kwargs):
+		for arg in args:
+			self.__dict__.update(arg)
+
+		self.__dict__.update(kwargs)
+
+	def __getitem__(self, name):
+		return self.__dict__.get(name, None)
+
+	def __setitem__(self, name, val):
+		return self.__dict__.__setitem__(name, val)
+
+	def __delitem__(self, name):
+		if self.__dict__.has_key(name):
+			del self.__dict__[name]
+
+	def __getattr__(self, name):
+		return self.__getitem__(name)
+
+	def __setattr__(self, name, val):
+		return self.__setitem__(name, val)
+
+	def __delattr__(self, name):
+		return self.__delitem__(name)
+
+	def __iter__(self):
+		return self.__dict__.__iter__()
+
+	def __repr__(self):
+		return self.__dict__.__repr__()
+
+	def __str__(self):
+		return self.__dict__.__str__()</code></pre>
+
+<p>So, there you go. I&#8217;d love to hear what you think, leave a comment!</p>
   </div>
 </article>
 
-<div id="more_reading" class="span-17 last">
-  <p class="smallalts tags">
-    <span class="alt">filed under</span> <a class="tight" href="/tag/javascript">javascript</a><span class="alt">,</span> <a class="tight" href="/tag/talks">talks</a><span class="alt">, and</span> <a class="tight" href="/tag/slide">slide</a>
-  </p>
-</div>
+  
 
-<div id="comments_wrapper" class="span-17 last">
-  <div id="disqus_thread"></div>
-  <script type="text/javascript">
-    // Disqus Comments variables
-    var disqus_developer = false;
-    var disqus_container_id = "comments_wrapper";
-  </script>
-  <script type="text/javascript" src="http://disqus.com/forums/adequatelygood/embed.js"></script>
-  <noscript>
-    <a href="http://disqus.com/forums/adequatelygood/?url=ref">View the discussion thread.</a>
-  </noscript>
-</div>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
 
         </div>
 

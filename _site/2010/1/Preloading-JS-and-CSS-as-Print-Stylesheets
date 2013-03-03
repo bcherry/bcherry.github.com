@@ -224,14 +224,14 @@
         <!-- Main content: Posts, etc. -->
         <div id="content" class="span-17 colborder">
           <a name="main"></a>
-
+          
 <article class="span-17 last">
   <header class="span-17 last">
-    
-      <time class="alt" datetime="2010-01-29" pubdate>2010-01-29</time>
-    
-    <h1><a href="/2010/1/Preloading-JS-and-CSS-as-Print-Stylesheets">Preloading JS and CSS as Print Stylesheets</a></h1>
-  </header>
+  
+    <time class="alt" datetime="2010-01-29" pubdate>2010-01-29</time>
+  
+  <h1><a href="/2010/1/Preloading-JS-and-CSS-as-Print-Stylesheets">Preloading JS and CSS as Print Stylesheets</a></h1>
+</header>
   <div id="blogbody" class="span-17 last entry">
     <p><em><strong>UPDATE: This technique has turned out to be dangerous in Chrome.  It seems that Chrome will load the JS files into the cache, but  then set an implied type="text/css" on them.  This means that it will refuse to re-use them as JavaScript on future pages, until they have left the cache.  I can no longer recommend this technique, but hope that it was at least interesting.  I'll be working on a follow-up post about alternatives.</strong></em></p>
 <p>One of Yahoo's <a href="http://developer.yahoo.com/performance/rules.html" target="_blank">Best Practices for Speeding Up Your Web Site</a> is "Preload Components".  Most people are already familiar with doing this for images.  Code for that usually looks like this:</p>
@@ -279,6 +279,7 @@ img.src = "/path/to/something.jpg";</pre></p>
     <a href="http://disqus.com/forums/adequatelygood/?url=ref">View the discussion thread.</a>
   </noscript>
 </div>
+
         </div>
 
         <!-- Sidebar: Search, links, etc. -->
@@ -314,7 +315,7 @@ img.src = "/path/to/something.jpg";</pre></p>
               </li>
             
               <li>
-                <a href="/tag/social+gaming">social gaming</a>
+                <a href="/tag/social%20gaming">social gaming</a>
                 (1)
               </li>
             
@@ -349,7 +350,7 @@ img.src = "/path/to/something.jpg";</pre></p>
               </li>
             
               <li>
-                <a href="/tag/module+pattern">module pattern</a>
+                <a href="/tag/module%20pattern">module pattern</a>
                 (3)
               </li>
             
@@ -426,4 +427,3 @@ img.src = "/path/to/something.jpg";</pre></p>
     <script type="text/javascript">var _gaq =_gaq||[]; _gaq.push(['_setAccount','UA-251077-4']);_gaq.push(['_trackPageview']);(function(){var ga=document.createElement('script');ga.type='text/javascript';ga.async=true;ga.src=('https:'==document.location.protocol?'https://ssl':'http://www')+'.google-analytics.com/ga.js';(document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(ga);})();</script>
   </body>
 </html>
-

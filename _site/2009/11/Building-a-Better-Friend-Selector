@@ -224,14 +224,14 @@
         <!-- Main content: Posts, etc. -->
         <div id="content" class="span-17 colborder">
           <a name="main"></a>
-
+          
 <article class="span-17 last">
   <header class="span-17 last">
-    
-      <time class="alt" datetime="2009-11-05" pubdate>2009-11-05</time>
-    
-    <h1><a href="/2009/11/Building-a-Better-Friend-Selector">Building a Better Friend Selector</a></h1>
-  </header>
+  
+    <time class="alt" datetime="2009-11-05" pubdate>2009-11-05</time>
+  
+  <h1><a href="/2009/11/Building-a-Better-Friend-Selector">Building a Better Friend Selector</a></h1>
+</header>
   <div id="blogbody" class="span-17 last entry">
     <p><strong><em>This post has been migrated from my old, defunct blog at bcherry.net. The links may not work, and the formatting may be wonky.</em></strong></p>
 
@@ -341,6 +341,7 @@ do_filter();
     <a href="http://disqus.com/forums/adequatelygood/?url=ref">View the discussion thread.</a>
   </noscript>
 </div>
+
         </div>
 
         <!-- Sidebar: Search, links, etc. -->
@@ -376,7 +377,7 @@ do_filter();
               </li>
             
               <li>
-                <a href="/tag/social+gaming">social gaming</a>
+                <a href="/tag/social%20gaming">social gaming</a>
                 (1)
               </li>
             
@@ -411,7 +412,7 @@ do_filter();
               </li>
             
               <li>
-                <a href="/tag/module+pattern">module pattern</a>
+                <a href="/tag/module%20pattern">module pattern</a>
                 (3)
               </li>
             
@@ -488,4 +489,3 @@ do_filter();
     <script type="text/javascript">var _gaq =_gaq||[]; _gaq.push(['_setAccount','UA-251077-4']);_gaq.push(['_trackPageview']);(function(){var ga=document.createElement('script');ga.type='text/javascript';ga.async=true;ga.src=('https:'==document.location.protocol?'https://ssl':'http://www')+'.google-analytics.com/ga.js';(document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(ga);})();</script>
   </body>
 </html>
-

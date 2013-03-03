@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <title>JavaScript: Better and Faster</title>
+    <title>Adequately Good - Posts tagged “adequatelygood”</title>
 
     <!-- CSS, including Blueprint, jQuery w/Smoothness, and AG CSS -->
     <link rel="stylesheet" href="/css/blueprint/blueprint.min.css" media="screen, projection" />
@@ -224,41 +224,97 @@
         <!-- Main content: Posts, etc. -->
         <div id="content" class="span-17 colborder">
           <a name="main"></a>
-          
-<article class="span-17 last">
+          <div class="smallalts listing">
+  <span class="alt">all posts filed under</span>
+  <a class="tight" href="/tags/adequatelygood">adequatelygood</a>
+</div>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    <article class="span-17 last">
   <header class="span-17 last">
   
-    <time class="alt" datetime="2010-03-21" pubdate>2010-03-21</time>
+    <time class="alt" datetime="" pubdate>2010-02-19</time>
   
-  <h1><a href="/2010/3/JavaScript-Better-and-Faster">JavaScript: Better and Faster</a></h1>
+  <h1><a href="tag/adequatelygood">This Blog - Now With HTML5</a></h1>
 </header>
-  <div id="blogbody" class="span-17 last entry">
-    <p>&#8220;JavaScript: Better and Faster&#8221; is the name of a presentation I gave at <a href='http://www.slide.com'>Slide</a> last week. It was generally well-received by the Slide crew so I decided to put a (slightly edited) copy of the <a href='http://www.bcherry.net/talks/js-better-faster'>accompanying slideshow online</a> (runs in your browser). It&#8217;s not particularly dense, and doesn&#8217;t get into too much depth on any one topic, but I think it gives a great practical overview of the JavaScript landscape, including what things to look out for and neat techniques to write better code. The original intent was to cover the ins and outs of writing good, efficient JavaScript, targeted at people who write JavaScript every day, but have a strong background in Python.</p>
+  <div class="span-17 last entry">
+    <p>Take a look at this web site. Notice anything out of the ordinary. Hopefully you don&#8217;t, none of the layout or styling has changed noticeably recently. However, try a &#8220;View Source&#8221;. Now do you see something different? This page is now rendered with the following doctype:</p>
 
-<p>I&#8217;d like to give a huge thanks to <a href='http://scottchacon.com/'>Scott Chacon</a>, whose <a href='http://github.com/schacon/showoff'>Showoff</a> software made compiling this slideshow the most enjoyable thing imaginable. It took a little work to port the resultant slideshow to Google AppEngine, but I got it up and running. I&#8217;ll probably work on a more generalized Python/AppEngine adaptation of Showoff for my future use, since that&#8217;s my web platform and I want to keep using Showoff in the future. This experience also got me really turned on to <a href='http://daringfireball.net/projects/markdown/'>Markdown</a>, which I wasted no time in integrating into this blog.</p>
+<pre><code>&lt;!DOCTYPE html&gt;</code></pre>
 
-<p>This is the first presentation I&#8217;ve given in my professional career, and would much appreciate feedback on the slides.</p>
+<p>That&#8217;s right, this web site is now HTML5! In fact it even <a href='http://validator.w3.org/check?uri=http%3A%2F%2Fwww.adequatelygood.com'>validates as HTML5</a> successfully! If you dig past the doctype, you&#8217;ll find all sorts of HTML5 semantic elements, including <code>&lt;nav&gt;</code>, <code>&lt;article&gt;</code>, and <code>&lt;time&gt;</code>, among others. Making the transition was reasonably painless with the help of Mark Pilgrim&#8217;s <a href='http://diveintohtml5.org/semantics.html'>excellent article on making the switch</a>. For the most part, I just had to change a few elements and rewrite my CSS. There were a few headaches because <a href='http://blueprintcss.org'>Blueprint CSS</a> expects your grid elements to be <code>&lt;div&gt;</code>s, but the following CSS added the right capabilities to my semantic elements to be compatible with Blueprint:</p>
+
+<pre><code>header, footer, nav, article {
+	float: left;
+	margin-right: 10px;
+}</code></pre>
+
+<p>Of course, IE doesn&#8217;t understand the new HTML5 elements. Luckily, there&#8217;s an easy solution. I chose to write it myself, since it&#8217;s so simple, but there&#8217;s a <a href='http://html5shiv.googlecode.com/svn/trunk/html5.js'>publicly available complete solution</a> you can use as well. Here&#8217;s mine, for reference (in the <code>&lt;head&gt;</code>):</p>
+
+<pre><code>&lt;!-- IE HTML5 Compatibility --&gt;
+&lt;!--[if IE]&gt;
+	&lt;script type=&quot;text/javascript&quot;&gt;
+		(function () {
+			var tags = &quot;header hgroup nav article time footer&quot;.split(&quot; &quot;),
+				i = 0,
+				l = tags.length;
+			for (; i &lt; l; i += 1) {
+				document.createElement(tags[i]);
+			}
+		}());
+	&lt;/script&gt;
+&lt;![endif]--&gt;</code></pre>
+
+<p>And that&#8217;s all there was to it! It&#8217;s great that you can start using basic HTML5 <em>right now</em> without any difficulties, and it will work in all browsers, even IE6! Of course, you can&#8217;t just start using the more advanced features like <code>&lt;video&gt;</code> or Web Workers, but basic markup is a great start.</p>
+
+<p>So what do you think? You ready to upgrade your own personal site?</p>
   </div>
 </article>
 
-<div id="more_reading" class="span-17 last">
-  <p class="smallalts tags">
-    <span class="alt">filed under</span> <a class="tight" href="/tag/javascript">javascript</a><span class="alt">,</span> <a class="tight" href="/tag/talks">talks</a><span class="alt">, and</span> <a class="tight" href="/tag/slide">slide</a>
-  </p>
-</div>
+  
 
-<div id="comments_wrapper" class="span-17 last">
-  <div id="disqus_thread"></div>
-  <script type="text/javascript">
-    // Disqus Comments variables
-    var disqus_developer = false;
-    var disqus_container_id = "comments_wrapper";
-  </script>
-  <script type="text/javascript" src="http://disqus.com/forums/adequatelygood/embed.js"></script>
-  <noscript>
-    <a href="http://disqus.com/forums/adequatelygood/?url=ref">View the discussion thread.</a>
-  </noscript>
-</div>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
 
         </div>
 

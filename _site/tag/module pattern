@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <title>Adequately Good - By Ben Cherry</title>
+    <title>Adequately Good - Posts tagged “module pattern”</title>
 
     <!-- CSS, including Blueprint, jQuery w/Smoothness, and AG CSS -->
     <link rel="stylesheet" href="/css/blueprint/blueprint.min.css" media="screen, projection" />
@@ -224,13 +224,372 @@
         <!-- Main content: Posts, etc. -->
         <div id="content" class="span-17 colborder">
           <a name="main"></a>
-          
-  <article class="span-17 last">
+          <div class="smallalts listing">
+  <span class="alt">all posts filed under</span>
+  <a class="tight" href="/tags/module%20pattern">module pattern</a>
+</div>
+
+  
+
+  
+
+  
+
+  
+    <article class="span-17 last">
+  <header class="span-17 last">
+  
+    <time class="alt" datetime="" pubdate>2010-07-08</time>
+  
+  <h1><a href="tag/module pattern">Writing Testable JavaScript</a></h1>
+</header>
+  <div class="span-17 last entry">
+    <p>The engineering culture at Twitter requires tests. Lots of tests. I haven&#8217;t had formal experience with JavaScript testing before Twitter, so I&#8217;ve been learning a lot as I go. In particular, a number of patterns I used to use, write about, and encourage have turned out to be bad for writing testable code. So I thought it would be worthwhile to share a few of the most important principles I&#8217;ve developed for writing testable JavaScript. The examples I provide are based on <a href='http://docs.jquery.com/QUnit'>QUnit</a>, but should be just as applicable to any JavaScript testing framework.</p>
+
+<h2 id='avoid_singletons'>Avoid Singletons</h2>
+
+<p>One of my most popular posts was about using <a href='http://www.adequatelygood.com/2010/3/JavaScript-Module-Pattern-In-Depth'>JavaScript Module Pattern</a> to create powerful <strong>singletons</strong> in your application. This approach can be simple and useful, but it creates problems for testing, for one simple reason: <strong><em>singletons suffer state pollution between tests</em></strong>. Rather than creating your singletons as modules, you should compose them as constructable objects, and assign a single, default instance at the global level in your application init.</p>
+
+<p>For example, consider the following singleton module (contrived example, of course):</p>
+
+<pre><code>var dataStore = (function() {
+	var data = [];
+	return {
+		push: function (item) {
+			data.push(item);
+		},
+		pop: function() {
+			return data.pop();
+		},
+		length: function() {
+			return data.length;
+		}
+	};
+}());</code></pre>
+
+<p>With this module, we may wish to test the <code>foo.bar</code> method. Here&#8217;s a simple QUnit test suite:</p>
+
+<pre><code>module(&quot;dataStore&quot;);
+test(&quot;pop&quot;, function() {
+	dataStore.push(&quot;foo&quot;);
+	dataStore.push(&quot;bar&quot;)
+	equal(dataStore.pop(), &quot;bar&quot;, &quot;popping returns the most-recently pushed item&quot;);
+});
+
+test(&quot;length&quot;, function() {
+	dataStore.push(&quot;foo&quot;);
+	equal(dataStore.length(), 1, &quot;adding 1 item makes the length 1&quot;);
+});</code></pre>
+
+<p>When running this test suite, the assertion in the <code>length</code> test will fail, but it&#8217;s not clear from looking at it why it should. The problem is that state has been left in <code>dataStore</code> from the previous test. Merely re-ordering these tests will cause the <code>length</code> test to pass, which is a clear red flag that something is wrong. We could fix this with setup or teardown that reverts the state of <code>dataStore</code>, but that means that we need to constantly maintain our test boilerplate as we make implementation changes in the <code>dataStore</code> module. A better approach is the following:</p>
+
+<pre><code>function newDataStore() {
+	var data = [];
+	return {
+		push: function (item) {
+			data.push(item);
+		},
+		pop: function() {
+			return data.pop();
+		},
+		length: function() {
+			return data.length;
+		}
+	};
+}
+
+var dataStore = newDataStore();</code></pre>
+
+<p>Now, your test suite will look like this:</p>
+
+<pre><code>module(&quot;dataStore&quot;);
+test(&quot;pop&quot;, function() {
+	var dataStore = newDataStore();
+	dataStore.push(&quot;foo&quot;);
+	dataStore.push(&quot;bar&quot;)
+	equal(dataStore.pop(), &quot;bar&quot;, &quot;popping returns the most-recently pushed item&quot;);
+});
+
+test(&quot;length&quot;, function() {
+	var dataStore = newDataStore();
+	dataStore.push(&quot;foo&quot;);
+	equal(dataStore.length(), 1, &quot;adding 1 item makes the length 1&quot;);
+});</code></pre>
+
+<p>This allows our global <code>dataStore</code> to behave exactly as it did before, while allowing our tests to avoid polluting each other. Each test owns its own instance of a <code>DataStore</code> object, which will be garbage collected when the test completes.</p>
+
+<h2 id='avoid_closurebased_privacy'>Avoid Closure-based Privacy</h2>
+
+<p>Another pattern I used to promote is <a href='http://www.crockford.com/javascript/private.html'>real private members in JavaScript</a>. The advantage is that you can keep globally-accessible namespaces free of unnecessary references to private implementation details. However, overuse of this pattern can lead to untestable code. This is because <strong><em>your test suite cannot access, and thus cannot test, private functions hidden in closures</em></strong>. Consider the following:</p>
+
+<pre><code>function Templater() {
+	function supplant(str, params) {
+		for (var prop in params) {
+			str.split(&quot;{&quot; + prop +&quot;}&quot;).join(params[prop]);
+		}
+		return str;
+	}
+
+	var templates = {};
+
+	this.defineTemplate = function(name, template) {
+		templates[name] = template;
+	};
+
+	this.render = function(name, params) {
+		if (typeof templates[name] !== &quot;string&quot;) {
+			throw &quot;Template &quot; + name + &quot; not found!&quot;;
+		}
+
+		return supplant(templates[name], params);
+	};
+}</code></pre>
+
+<p>The crucial method for our <code>Templater</code> object is <code>supplant</code>, but we cannot access it from outside the closure of the constructor. Thus, a testing suite like QUnit cannot hope to verify that it works as intended. In addition, we cannot verify that our <code>defineTemplate</code> method does anything without trying a <code>.render()</code> call on the template and watching for an exception. We could simply add a <code>getTemplate()</code> method, but then we&#8217;d be adding methods to the public interface solely to allow testing, which is not a good approach. While the issues here are probably just fine in this simple example, building complex objects with important private methods will lead to relying on untestable code, which is a red flag. Here&#8217;s a testable version of the above:</p>
+
+<pre><code>function Templater() {
+	this._templates = {};
+}
+
+Templater.prototype = {
+	_supplant: function(str, params) {
+		for (var prop in params) {
+			str.split(&quot;{&quot; + prop +&quot;}&quot;).join(params[prop]);
+		}
+		return str;
+	},
+	render: function(name, params) {
+		if (typeof this._templates[name] !== &quot;string&quot;) {
+			throw &quot;Template &quot; + name + &quot; not found!&quot;;
+		}
+
+		return this._supplant(this._templates[name], params);
+	},
+	defineTemplate: function(name, template) {
+		this._templates[name] = template;
+	}
+};</code></pre>
+
+<p>And here&#8217;s a QUnit test suite for it:</p>
+
+<pre><code>module(&quot;Templater&quot;);
+test(&quot;_supplant&quot;, function() {
+	var templater = new Templater();
+	equal(templater._supplant(&quot;{foo}&quot;, {foo: &quot;bar&quot;}), &quot;bar&quot;))
+	equal(templater._supplant(&quot;foo {bar}&quot;, {bar: &quot;baz&quot;}), &quot;foo baz&quot;));
+});
+
+test(&quot;defineTemplate&quot;, function() {
+	var templater = new Templater();
+	templater.defineTemplate(&quot;foo&quot;, &quot;{foo}&quot;);
+	equal(template._templates.foo, &quot;{foo}&quot;);
+});
+
+test(&quot;render&quot;, function() {
+	var templater = new Templater();
+	templater.defineTemplate(&quot;hello&quot;, &quot;hello {world}!&quot;);
+	equal(templater.render(&quot;hello&quot;, {world: &quot;internet&quot;}), &quot;hello internet!&quot;);
+});</code></pre>
+
+<p>Notice that our test for <code>render</code> is really just a test that <code>defineTemplate</code> and <code>supplant</code> integrate correctly with each other. We&#8217;ve already tested those methods in isolation, which will allow us to easily discover which components are really breaking when tests of the <code>render</code> method fail.</p>
+
+<h2 id='write_tight_functions'>Write Tight Functions</h2>
+
+<p>Tight functions are important in any language, but JavaScript presents its own reasons to do so. Much of what you do with JavaScript is done against global singletons provided by the environment, and which your test suite relies on. For instance, testing a URL re-writer will be difficult if all of your methods try to assign <code>window.location</code>. Instead, you should <strong><em>break your system into its logical components that decide what to do, then write short functions that actually do it</em></strong>. You can test the logical functions with various inputs and outputs, and leave the final function that modifies <code>window.location</code> untested. Provided you&#8217;ve composed your system correctly, this should be safe.</p>
+
+<p>Here&#8217;s an example URL rewriter that is not testable:</p>
+
+<pre><code>function redirectTo(url) {
+	if (url.charAt(0) === &quot;#&quot;) {
+		window.location.hash = url;
+	} else if (url.charAt(0) === &quot;/&quot;) {
+		window.location.pathname = url;
+	} else {
+		window.location.href = url;
+	}
+}</code></pre>
+
+<p>The logic in this example is relatively simple, but we can imagine a more complex redirecter. As complexity grows, we will not be able to test this method without causing the window to redirect, thus leaving our test suite entirely.</p>
+
+<p>Here&#8217;s a testable version:</p>
+
+<pre><code>function _getRedirectPart(url) {
+	if (url.charAt(0) === &quot;#&quot;) {
+		return &quot;hash&quot;;
+	} else if (url.charAt(0) === &quot;/&quot;) {
+		return &quot;pathname&quot;;
+	} else {
+		return &quot;href&quot;;
+	}
+}
+
+function redirectTo(url) {
+	window.location[_getRedirectPart(url)] = url;
+}</code></pre>
+
+<p>And now we can write a simple test suite for <code>_getRedirectPart</code>:</p>
+
+<pre><code>test(&quot;_getRedirectPart&quot;, function() {
+	equal(_getRedirectPart(&quot;#foo&quot;), &quot;hash&quot;);
+	equal(_getRedirectPart(&quot;/foo&quot;), &quot;pathname&quot;);
+	equal(_getRedirectPart(&quot;http://foo.com&quot;), &quot;href&quot;);
+});</code></pre>
+
+<p>Now the meat of <code>redirectTo</code> has been tested, and we don&#8217;t have to worry about accidentally redirecting out of our test suite.</p>
+<span class='note'>__Note__: There is an alternative solution, which is to create a `performRedirect` function that does the location change, but stub that out in your test suite.	 This is a common practice for many, but I've been trying to avoid method stubbing.	 I find basic QUnit to work well in all situations I've found so far, and would prefer to not have to remember to stub out a method like that for my tests, but your case may differ.</span>
+<h2 id='write_lots_of_tests'>Write Lots of Tests</h2>
+
+<p>This is a no-brainer, but it&#8217;s important to remember. Many programmers write too few tests because writing tests is hard, or lots of work. I suffer from this problem all the time, so I threw together a little helper for QUnit that makes writing lots of tests a lot easier. It&#8217;s a function called <code>testCases</code> which you call within a <code>test</code> block, passing a function, calling context, and array of inputs/outputs to try and compare. You can quickly build up a robust suite for your input/output functions for rigorous testing.</p>
+
+<pre><code>function testCases(fn, context, tests) {
+	for (var i = 0; i &lt; tests.length; i++) {
+		same(fn.apply(context, tests[i][0]), tests[i][1],
+			tests[i][2] || JSON.stringify(tests[i]));
+	}
+}</code></pre>
+
+<p>And here&#8217;s a simple example use:</p>
+
+<pre><code>test(&quot;foo&quot;, function() {
+	testCases(foo, null, [
+		[[&quot;bar&quot;, &quot;baz&quot;], &quot;barbaz&quot;],
+		[[&quot;bar&quot;, &quot;bar&quot;], &quot;barbar&quot;, &quot;a passing test&quot;]
+	]);
+});</code></pre>
+
+<h2 id='conclusions'>Conclusions</h2>
+
+<p>There is plenty more to write about testable JavaScript, and I&#8217;m sure there are many good books, but I hope this was a good overview of practical cases I encounter on a daily basis. I&#8217;m by no means a testing expert, so please let me know if I&#8217;ve made mistakes or given bad advice.</p>
+  </div>
+</article>
+
+  
+
+  
+
+  
+    <article class="span-17 last">
+  <header class="span-17 last">
+  
+    <time class="alt" datetime="" pubdate>2010-04-13</time>
+  
+  <h1><a href="tag/module pattern">Debugging Closures and Modules</a></h1>
+</header>
+  <div class="span-17 last entry">
+    <p>The most common complaint with using closures to keep private variables in JavaScript is that it makes debugging harder. This complaint definitely holds water, and the loss of easy debugging and inspection using the <a href='http://www.adequatelygood.com/2010/3/JavaScript-Module-Pattern-In-Depth'>Module Pattern</a> is a serious concern. This is where one of JavaScript&#8217;s non-standard but well-supported features comes in: the <strong>debugger statement</strong>. In this article, I&#8217;ll introduce this statement, and show how I use it to solve this deficiency in closure-based code.</p>
+
+<h2 id='intro_to_'>Intro to <code>debugger</code></h2>
+
+<p>The <code>debugger</code> statement is not standardized, but <strong>is provided by all implementations</strong> of JavaScript. It essentially acts like a programmatic breakpoint. When popular JavaScript debuggers like Firebug or the IE Developer Tools execute a <code>debugger;</code> statement, execution stops and the script debugger opens up, just like any breakpoint. Here&#8217;s a simple example:</p>
+
+<pre><code>function foo() {
+	var a = 1;
+	debugger; // execution stops until manually resumed
+	a = 2;
+}
+foo();</code></pre>
+
+<p>In the above, we&#8217;ll be able to inspect the local variables when our debugger pauses execution, and we&#8217;ll see that <code>a</code> is still <code>1</code>. After resuming execution, the next line will execute and <code>a</code> will be assigned the value <code>2</code>.</p>
+
+<h2 id='debugging_modules'>Debugging Modules</h2>
+
+<p>The great thing is that execution stops at the <code>debugger</code> statement, complete with the local call stack from the point of execution. This provides a really nice ability to pair with the module pattern, or any other closure-based privacy pattern. Let&#8217;s take a simple module, but add extra capabilities to it by exposing a public <code>.debug()</code> method.</p>
+
+<pre><code>var foo = (function () {
+	var privateVar = 10;
+	return {
+		publicFunc: function () {/*...*/},
+		debug: function () {
+			debugger;
+		}
+	};
+}());</code></pre>
+
+<p>Now we can call <code>foo.debug()</code> from the Firebug console, and the closure of the anonymous constructor is opened up for inspection. By looking at the <strong>call stack</strong> in our debugger, we can inspect the <strong>scope chain</strong> for the private state, which will be in local variables. Checking the value of <code>privateVar</code> will be quite easy.</p>
+
+<p>Notice that it&#8217;s very important for the <code>.debug()</code> property to be created and assigned during the normal construction. Assigning it after-the-fact will not provide the same functionality, because the local call stack will not contain the anonymous constructor. This is an unfortunate limitation, but there isn&#8217;t a way around it.</p>
+
+<h2 id='safety_and_configuration'>Safety and Configuration</h2>
+
+<p>You might not want to make it so easy to stop program execution by triggering the <code>.debug()</code> function on one of your modules, or you might want to disable this functionality. One approach is to ship a version of your code without this property at all, but that&#8217;s difficult to accomplish in some applications. An easier method would be to do some extra checks in the <code>.debug()</code> method, before firing the <code>debugger</code> statement.</p>
+
+<pre><code>return {
+	debug: function () {
+		if (DEBUG_MODE) {
+			debugger;
+		}
+	}
+};</code></pre>
+
+<p>Or, perhaps check for a specific debugger first:</p>
+
+<pre><code>return {
+	debug: function () {
+		if (DEBUG_MODE &amp;&amp; &quot;firebug&quot; in console) {
+			debugger;
+		}
+	}
+};</code></pre>
+<span class='note'>___Note___: I'm assuming you've already configured a global flag named `DEBUG_MODE` in your application.</span>
+<p>Methods like this will allow you to provide finer-grained control over when and where your <code>debugger</code> statement runs. If you&#8217;re building in a lot of logic, it makes sense to write a global helper function for this, but you&#8217;ll have to be careful to preserve the right call stack:</p>
+
+<pre><code>function DEBUG() {
+	if (DEBUG_MODE &amp;&amp; &quot;firebug&quot; in console) {
+		debugger;
+	}
+}
+
+var foo = (function () {
+	return {
+		debug: function () {
+			DEBUG();
+		}
+	};
+}());</code></pre>
+
+<p>Here we&#8217;ll keep our callstack in tact, except the one we care about will be two deep instead of one deep.</p>
+
+<h3 id='problems_with_minifiers'>Problems With Minifiers</h3>
+
+<p>I tried running code with such a <code>.debug()</code> method through the YUI Compressor, and got a disappointing result:</p>
+
+<pre><code>[ERROR] 4:11:identifier is a reserved word</code></pre>
+
+<p>It seems that the YUI Compressor doesn&#8217;t know about the <code>debugger</code> statement, which is understandable since it&#8217;s non-standard. However, I didn&#8217;t want to let this defeat my attempts, so a co-worker and I came up with a workaround. Instead of using a raw <code>debugger</code> statement, we put it behind <code>eval</code>, like this:</p>
+
+<pre><code>function debug() {
+	eval(&#39;debugger;&#39;);
+}</code></pre>
+
+<p>Now YUI no longer complains, and the code works just great. However, there are a few caveats here:</p>
+
+<ol>
+<li>Using <code>eval</code> is generally considered <strong>dangerous</strong> and <strong>bad practice</strong>. Be sure you understand the implications, and are willing to use this workaround anyways. I think this is a reasonable decision to make, for the intended purpose, but ensure you&#8217;ve at least put some thought into it.</li>
+
+<li>JSLint will complain at you. This isn&#8217;t such a big deal since it would be complaining about the raw <code>debugger</code> statement anyways.</li>
+</ol>
+
+<h2 id='conclusions'>Conclusions</h2>
+
+<p>So that&#8217;s my technique for effectively debugging inside closures, especially when using the Module Pattern. I&#8217;m not saying this is a great technique for all uses or users, but it works well for me, and nicely solves the most common complaint developers have about the Module Pattern. I&#8217;d love to hear alternatives or reasons why my technique is dangerous and should be avoided, so leave a comment!</p>
+  </div>
+</article>
+
+  
+
+  
+
+  
+
+  
+
+  
+    <article class="span-17 last">
   <header class="span-17 last">
   
     <time class="alt" datetime="" pubdate>2010-03-12</time>
   
-  <h1><a href="/page4/index.html">JavaScript Module Pattern: In-Depth</a></h1>
+  <h1><a href="tag/module pattern">JavaScript Module Pattern: In-Depth</a></h1>
 </header>
   <div class="span-17 last entry">
     <p>The module pattern is a common JavaScript coding pattern. It&#8217;s generally well understood, but there are a number of advanced uses that have not gotten a lot of attention. In this article, I&#8217;ll review the basics and cover some truly remarkable advanced topics, including one which I think is original.</p>
@@ -414,142 +773,31 @@
   </div>
 </article>
 
-
-  <article class="span-17 last">
-  <header class="span-17 last">
   
-    <time class="alt" datetime="" pubdate>2010-03-08</time>
+
   
-  <h1><a href="/page4/index.html">Performance of === vs. ==</a></h1>
-</header>
-  <div class="span-17 last entry">
-    <p>One particular weirdness and unpleasantry in JavaScript is the set of equality operators. Like virtually every language, JavaScript has the standard <code>==</code>, <code>!=</code>, <code>&lt;</code>, <code>&gt;</code>, <code>&lt;=</code>, and <code>&gt;=</code> operators. However, <code>==</code> and <code>!=</code> are NOT the operators most would think they are. These operators do <strong>type coercion</strong>, which is why <code>[0] == 0</code> and <code>&quot;\n0\t &quot; == 0</code> both evaluate to <code>true</code>. This is considered, by sane people, to be a <strong>bad thing</strong>. Luckily, JavaScript does provide a normal set of equality operators, which do what you expect: <code>===</code> and <code>!==</code>. It sucks that we need these at all, and <code>===</code> is a pain to type, but at least <code>[0] !== 0</code>.</p>
 
-<p>So, that&#8217;s all well and good, but when making the decision to use <code>===</code> instead of <code>==</code> it&#8217;s important to understand if there are any performance implications. Reasonable people, like myself, would expect the strict equality operators to be faster than their type-coercing counterparts, because the type coercion must take time. But, being <a href='http://xkcd.com/242/'>a scientist</a>, I had to set up an experiment to test this hypothesis.</p>
-
-<h2 id='for_science'>For Science!</h2>
-
-<p><a href='http://www.bcherry.net/playground/comparisons'>My experiment</a> times the execution time of 24 different tests, in the browser you view it in. These tests represent every permutation of the following factors:</p>
-
-<ol>
-<li><strong>Use</strong>: Whether the result is computed and thrown away, or assigned into a local variable.</li>
-
-<li><strong>Comparison</strong>: Comparing integers vs. integers, strings vs. strings, and integers vs. strings.</li>
-
-<li><strong>Operands</strong>: Whether the operands are actually equal or unequal (with forced type coercion in the case of <code>===</code>).</li>
-
-<li><strong>Operator</strong>: Using either <code>==</code> or <code>===</code>.</li>
-</ol>
-
-<p>Note that I am specifically <strong>not</strong> testing the relative performance when comparing against values like <code>null</code>, <code>undefined</code>, or <code>false</code>. This is because those are falsy values which have even worse type coercion characteristics. Some integers and strings can, of course, also be falsy, such as <code>0</code> or <code>&quot;&quot;</code>, but these are normal values which occur during arithmetic or string comparison, so I&#8217;ve tested with them.</p>
-
-<p>The tests were run over two million iterations, except in Internet Explorer, where it produced a long-running script error, so I cut it to 500,000 iterations. Here are the browser configurations I tested:</p>
-
-<ol>
-<li>Mozilla Firefox 3.6 (Mac)</li>
-
-<li>Google Chrome 5 (Mac dev channel)</li>
-
-<li>Internet Explorer 8 (iterations reduced by 4x)</li>
-
-<li>Safari 4 (Mac)</li>
-
-<li>Opera 10.5 beta (Mac)</li>
-
-<li>Mozilla Firefox 3.6 (Mac) with Firebug open</li>
-</ol>
-
-<h2 id='results'>Results</h2>
-
-<p>My results are <a href='http://spreadsheets.google.com/pub?key=taW8f6kvj3kUVObtg4p9vqQ&amp;output=html'>available as a Google spreadsheet here</a>. It turns out that there is little practical performance difference between <code>==</code> and <code>===</code>. While the strict operator is marginally faster (roughly 10%) in most browsers when combined with explicit type conversion, such as <code>a === +b</code>, the only real performance gains will come from avoiding type conversion entirely. <strong>Converting a string to an integer for comparison with another integer is significantly slower (up to 10x) than simple comparing two integers</strong>. You should never allow integers to be stored as strings internally, as the type conversion will incur a performance penalty.</p>
-
-<p>While that was the basic takeaway from the numbers, I did find one interesting outlier when testing with Firefox. In Firefox, the comparison <code>a === +b</code> is about 20x slower than the equivalent <code>a == b</code> when <code>a</code> is an integer and <code>b</code> is a string integer. This result seems suspicious to me, and nothing similar occurred in any other browser. Oddly, when the Firebug script debugger is turned on, this result changes, and <code>a === +b</code> becomes about 10% faster than the other. I&#8217;m not sure what to make of this result, but it does serve as a reminder that integers should always be stored in numbers, not in strings.</p>
-
-<h2 id='conclusion'>Conclusion</h2>
-
-<p>Not much surprise in these results, other than the Firefox result. But, it did help me avoid a nagging worry that I&#8217;m silently slowing down my code whenever I use <code>===</code> instead of <code>==</code> in my JavaScript.</p>
-
-<p>Again, find the test <a href='http://www.bcherry.net/playground/comparisons'>here</a> and my results <a href='http://spreadsheets.google.com/pub?key=taW8f6kvj3kUVObtg4p9vqQ&amp;output=html'>here</a>. I hope you found this information interesting. Let me know in the comments if you see different results than I got.</p>
-  </div>
-</article>
-
-
-  <article class="span-17 last">
-  <header class="span-17 last">
   
-    <time class="alt" datetime="" pubdate>2010-02-26</time>
+
   
-  <h1><a href="/page4/index.html">Minimum Timer Intervals in JavaScript</a></h1>
-</header>
-  <div class="span-17 last entry">
-    <p>I was talking with a co-worker today about the behavior of <code>setTimeout</code> and <code>setInterval</code> when given a small interval, like <code>0</code> or <code>1</code>. The <em>expectation</em> would be that the timer will fire in 0ms, or 1ms. However, as with <a href='http://wtfjs.com' target='_blank'>other things</a> in JavaScript, the <em>reality</em> is a bit different. It turns out that browsers actually have a <strong>minimum timer interval</strong> which they can&#8217;t work any faster than. John Resig wrote about <a href='http://ejohn.org/blog/analyzing-timer-performance/' target='_blank'>timer performance</a> a few years back, and found this behavior. He&#8217;s also covering it in more detail in his new book.</p>
 
-<p>But, I wasn&#8217;t happy with data a few years old, so I decided to just go and write my own simple test suite, <a href='http://www.bcherry.net/playground/settimeout' target='_blank'>How Fast is setTimeout in Your Browser?</a>. This page simply runs <code>setTimeout</code> with an interval of 0, 1000 times, and averages the <em>real</em> timeout experienced in each. Go ahead and check it out in your browser of choice.</p>
+  
 
-<h2 id='the_results'>The Results</h2>
+  
 
-<p>Well, it turns out that things aren&#8217;t so bad. Most browsers are in the <strong>10-15ms</strong> range for their bottom limit, having improved in recent versions. Notable exceptions are Internet Explorer, which has the same bottom of around <strong>16ms</strong> in all versions since IE6, and Google Chrome, which, at least since version 4, has a bottom limit closer to <strong>5ms</strong> It&#8217;s important to keep this limitation in mind when using <code>setTimeout</code> or <code>setInterval</code>. In particular, if you&#8217;re looking for consistent timer intervals across browsers, you have to use something <strong>&gt;15ms</strong>. But, don&#8217;t forget that JavaScript is single-threaded, and the timer won&#8217;t execute while other code is executing. This means that in the following code sample, you can guarantee that the timer <strong>will not run</strong> until the loop has completed. You cannot, however, guarantee precisely when that will happen, nor that it will be the next piece of code to run following the loop.</p>
+  
 
-<pre><code>setTimeout(function () { alert(&quot;timer&quot;); }, 0);
-for (var i = 0; i &lt; 1000; i += 1) {
-	// something
-}</code></pre>
+  
 
-<p>So it should be safe to use timers with an interval of 0ms when your only expectation is that the timer will fire as soon as it can, but not until after the current code path has completed. Relying on timers to respect the interval you give them is foolish, since, as I&#8217;ve shown, they have a lower-bound, and since they wait even after firing, before executing, for other code to return.</p>
+  
 
-<h2 id='the_source_code'>The Source Code</h2>
+  
 
-<p>This test is really simple. Here&#8217;s the complete JavaScript source code:</p>
+  
 
-<pre><code>var target = document.getElementById(&quot;target&quot;),
-	results = 0,
-	iterations = 1000,
-	i = 0;
+  
 
-function go() {
-	var fn = function () {
-			results += new Date().getTime() - d;
-			i += 1;
-			if (i &lt; iterations) {
-				go();
-			} else {
-				finish();
-			}
-		},
-		d = new Date().getTime();
-	setTimeout(fn, 0);
-}
-
-function finish() {
-	target.innerHTML = &quot;Average timer delay was &lt;span class=\&quot;num\&quot;&gt;&quot; + results/iterations + 
-		&quot;&lt;/span&gt;ms, over &lt;span class=\&quot;num\&quot;&gt;&quot; + iterations + &quot;&lt;/span&gt; iterations.&quot;;
-}
-
-go();</code></pre>
-
-<p>And that&#8217;s all there is to it. I hope you found this useful or interesting. Timers are very fickle, but also incredibly useful, so it&#8217;s worth taking the time to understand what it is they do, and how they do it.</p>
-  </div>
-</article>
-
-
-
-
-<div id="more_reading">
-  <p class="smallalts pager">
-    <span class="alt">go</span>
-    
-      
-        <a class="tight" href="/page3">previous</a>
-      
-    
-    
-      <span class="alt">or</span>
-    
-    
-        <a class="tight" href="/page5">next</a>
-    
-  </p>
-</div>
+  
 
 
         </div>
