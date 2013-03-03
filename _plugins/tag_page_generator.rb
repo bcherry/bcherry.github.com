@@ -1,3 +1,4 @@
+# encoding: UTF-8
 module Jekyll
   class TagPage < Page
     def initialize(site, base, dir, tag)
@@ -9,7 +10,7 @@ module Jekyll
       self.process(@name)
       self.read_yaml(File.join(base, '_layouts'), 'tag.html')
       self.data['tag'] = tag
-      self.data['title'] = "Tag: #{tag}"
+      self.data['title'] = "Adequately Good - Posts tagged “#{tag}”"
     end
   end
 

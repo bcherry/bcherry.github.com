@@ -1,15 +1,8 @@
-{% include before_content.html %}
-<article class="span-17 last">
-  <header class="span-17 last">
-    {% unless page.no_date %}
-      <time class="alt" datetime="{{ page.date | date: '%Y-%m-%d' }}" pubdate>{{ page.date | date: '%Y-%m-%d' }}</time>
-    {% endunless %}
-    <h1><a href="{{ page.url }}">{{ page.title }}</a></h1>
-  </header>
-  <div id="blogbody" class="span-17 last entry">
-    {{ content }}
-  </div>
-</article>
+---
+layout: base
+---
+{% assign post = page %}
+{% include post.html %}
 {% if page.tags %}
 <div id="more_reading" class="span-17 last">
   <p class="smallalts tags">
@@ -29,4 +22,3 @@
     <a href="http://disqus.com/forums/adequatelygood/?url=ref">View the discussion thread.</a>
   </noscript>
 </div>
-{% include after_content.html %}

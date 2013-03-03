@@ -1,0 +1,6 @@
+<header class="span-17 last">
+  {% unless post.no_date %}
+    <time class="alt" datetime="{{ page.date | date: '%Y-%m-%d' }}" pubdate>{{ post.date | date: '%Y-%m-%d' }}</time>
+  {% endunless %}
+  <h1><a href="{{ page.url }}">{{ post.title }}</a></h1>
+</header>
