@@ -18,6 +18,7 @@ puts "Building with Jekyll..."
 `jekyll`
 
 puts "Pushing the build..."
+`touch _site/.jekyllignore`
 `git add .`
 `git commit -am "Build #{`date`}"`
 `git push origin build`
