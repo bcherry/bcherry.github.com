@@ -1,1 +1,0 @@
-# Adequately Good
