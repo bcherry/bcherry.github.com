@@ -5,7 +5,7 @@ if `git rev-parse --abbrev-ref HEAD`.strip != "source"
   exit(1)
 end
 
-if `git diff-index HEAD --`.strip
+unless `git diff-index HEAD --`.strip.size == 0
   puts "Commit changes before deploying!"
   exit(1)
 end
