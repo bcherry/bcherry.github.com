@@ -1,0 +1,14 @@
+---
+layout: base
+---
+<div class="smallalts listing">
+  <span class="alt">all posts from the year</span>
+  <a class="tight" href="/{{ page.year }}">{{ page.year }}</a>
+</div>
+
+{% for post in site.posts %}
+  {% capture year %}{{ post.date | date: '%Y' }}{% endcapture %}
+  {% if year == page.year %}
+    {% include post_summary.html %}
+  {% endif %}
+{% endfor %}
