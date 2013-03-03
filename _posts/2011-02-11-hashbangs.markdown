@@ -27,7 +27,7 @@ There is hope on the horizon, in the form of the HTML5 History API.  This new br
 
 It's not perfect.  It's not pretty (despite what Google says).  But the hashbang is useful.  Users benefit from the trend towards full-fledged applications, with increased speed and functionality.  URLs are not necessary in this context, but we provide them (via the hash) because they bring tangible benefits for applications.  The hashbang also brings a tangible benefit.  Someday, we will hopefully be rid of the thing, when HTML5 History (or [something like it][Saner HTML5 History Management]) is standard in all browsers.  The Web application is not going anywhere, and the hash is a fact of life.
 
-<span class="note"><em>\* Technically, twitter.com does still host a Web site.  For instance, [twitter.com/jobs](http://twitter.com/jobs) is a normal Web page, as is [twitter.com/bcherry](http://twitter.com/bcherry), when viewed logged-out.  We have, however, begun serving an application to logged-in visitors.</em></span>
+<span class="note"><em>* Technically, twitter.com does still host a Web site.  For instance, <a href="http://twitter.com/jobs">twitter.com/jobs</a> is a normal Web page, as is <a href="http://twitter.com/bcherry">twitter.com/bcherry</a> when viewed logged-out.  We have, however, begun serving an application to logged-in visitors.</em></span>
 
 
 [WSJ on Gawker Outage]: http://blogs.wsj.com/digits/2011/02/07/gawker-outage-causing-twitter-stir
