@@ -224,14 +224,14 @@
         <!-- Main content: Posts, etc. -->
         <div id="content" class="span-17 colborder">
           <a name="main"></a>
-
+          
 <article class="span-17 last">
   <header class="span-17 last">
-    
-      <time class="alt" datetime="2010-03-12" pubdate>2010-03-12</time>
-    
-    <h1><a href="/2010/3/JavaScript-Module-Pattern-In-Depth">JavaScript Module Pattern: In-Depth</a></h1>
-  </header>
+  
+    <time class="alt" datetime="2010-03-12" pubdate>2010-03-12</time>
+  
+  <h1><a href="/2010/3/JavaScript-Module-Pattern-In-Depth">JavaScript Module Pattern: In-Depth</a></h1>
+</header>
   <div id="blogbody" class="span-17 last entry">
     <p>The module pattern is a common JavaScript coding pattern. It&#8217;s generally well understood, but there are a number of advanced uses that have not gotten a lot of attention. In this article, I&#8217;ll review the basics and cover some truly remarkable advanced topics, including one which I think is original.</p>
 
@@ -432,6 +432,7 @@
     <a href="http://disqus.com/forums/adequatelygood/?url=ref">View the discussion thread.</a>
   </noscript>
 </div>
+
         </div>
 
         <!-- Sidebar: Search, links, etc. -->
@@ -467,7 +468,7 @@
               </li>
             
               <li>
-                <a href="/tag/social+gaming">social gaming</a>
+                <a href="/tag/social%20gaming">social gaming</a>
                 (1)
               </li>
             
@@ -502,7 +503,7 @@
               </li>
             
               <li>
-                <a href="/tag/module+pattern">module pattern</a>
+                <a href="/tag/module%20pattern">module pattern</a>
                 (3)
               </li>
             
@@ -579,4 +580,3 @@
     <script type="text/javascript">var _gaq =_gaq||[]; _gaq.push(['_setAccount','UA-251077-4']);_gaq.push(['_trackPageview']);(function(){var ga=document.createElement('script');ga.type='text/javascript';ga.async=true;ga.src=('https:'==document.location.protocol?'https://ssl':'http://www')+'.google-analytics.com/ga.js';(document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(ga);})();</script>
   </body>
 </html>
-

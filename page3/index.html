@@ -224,15 +224,16 @@
         <!-- Main content: Posts, etc. -->
         <div id="content" class="span-17 colborder">
           <a name="main"></a>
-
-  
+          
   <article class="span-17 last">
-    <header class="span-17 last">
-        <time class="alt" datetime="2010-03-30" pubdate>2010-03-30</time>
-      <h1><a href="/2010/3/Object-to-Primitive-Conversions-in-JavaScript">Object-to-Primitive Conversions in JavaScript</a></h1>
-    </header>
-    <div class="span-17 last entry">
-        <p>Like most object-oriented programming languages, JavaScript provides built-in ways to convert between objects and primitive values, by way of the special <code>toString</code> and <code>valueOf</code> methods. This article will cover the basics of these methods, but then dive into the details of how this stuff really works, bad stuff, performance, and browser support.</p>
+  <header class="span-17 last">
+  
+    <time class="alt" datetime="" pubdate>2010-03-30</time>
+  
+  <h1><a href="/page3/index.html">Object-to-Primitive Conversions in JavaScript</a></h1>
+</header>
+  <div class="span-17 last entry">
+    <p>Like most object-oriented programming languages, JavaScript provides built-in ways to convert between objects and primitive values, by way of the special <code>toString</code> and <code>valueOf</code> methods. This article will cover the basics of these methods, but then dive into the details of how this stuff really works, bad stuff, performance, and browser support.</p>
 
 <h3 id='types_and_primitives'>Types and Primitives</h3>
 
@@ -484,16 +485,19 @@ alert(+foo); // NaN (the worst!)</code></pre>
 <p>You can find the <a href='http://www.bcherry.net/playground/defaultvalues'>test suite used for this article here</a> if you&#8217;re interested in trying to replicate my results. Please let me know if you find contradictory results to what I posted here.</p>
 
 <p>Thanks for reading! If you have questions or feedback then leave a comment below or contact me directly.</p>
-    </div>
-  </article>
+  </div>
+</article>
+
 
   <article class="span-17 last">
-    <header class="span-17 last">
-        <time class="alt" datetime="2010-03-26" pubdate>2010-03-26</time>
-      <h1><a href="/2010/3/JavaScript-Style-Objects-in-Python">JavaScript-Style Objects in Python</a></h1>
-    </header>
-    <div class="span-17 last entry">
-        <p>One of JavaScript&#8217;s most convenient features is the object syntax. Objects are so easy to work with. You&#8217;ve got a lot of ways to make them, although the object literal syntax in particular kicks ass. You can access and assign them with either the dot operator or dictionary syntax. Missing properties just return <code>undefined</code>. This is just a really fantastic object model.</p>
+  <header class="span-17 last">
+  
+    <time class="alt" datetime="" pubdate>2010-03-26</time>
+  
+  <h1><a href="/page3/index.html">JavaScript-Style Objects in Python</a></h1>
+</header>
+  <div class="span-17 last entry">
+    <p>One of JavaScript&#8217;s most convenient features is the object syntax. Objects are so easy to work with. You&#8217;ve got a lot of ways to make them, although the object literal syntax in particular kicks ass. You can access and assign them with either the dot operator or dictionary syntax. Missing properties just return <code>undefined</code>. This is just a really fantastic object model.</p>
 
 <p>So, today, I sat down to write my first serious Python code in a while, and found myself trying use a dictionary like a JavaScript object. This was a total failure, obviously. Python simply does not have that. Luckily, it&#8217;s an incredibly malleable language, if you&#8217;re willing to do the legwork. So, in about 30 min, I implemented JavaScript-style objects.</p>
 
@@ -589,22 +593,26 @@ print foo # {&#39;a&#39;: 1, &#39;b&#39;: 2}</code></pre>
 		return self.__dict__.__str__()</code></pre>
 
 <p>So, there you go. I&#8217;d love to hear what you think, leave a comment!</p>
-    </div>
-  </article>
+  </div>
+</article>
+
 
   <article class="span-17 last">
-    <header class="span-17 last">
-        <time class="alt" datetime="2010-03-21" pubdate>2010-03-21</time>
-      <h1><a href="/2010/3/JavaScript-Better-and-Faster">JavaScript: Better and Faster</a></h1>
-    </header>
-    <div class="span-17 last entry">
-        <p>&#8220;JavaScript: Better and Faster&#8221; is the name of a presentation I gave at <a href='http://www.slide.com'>Slide</a> last week. It was generally well-received by the Slide crew so I decided to put a (slightly edited) copy of the <a href='http://www.bcherry.net/talks/js-better-faster'>accompanying slideshow online</a> (runs in your browser). It&#8217;s not particularly dense, and doesn&#8217;t get into too much depth on any one topic, but I think it gives a great practical overview of the JavaScript landscape, including what things to look out for and neat techniques to write better code. The original intent was to cover the ins and outs of writing good, efficient JavaScript, targeted at people who write JavaScript every day, but have a strong background in Python.</p>
+  <header class="span-17 last">
+  
+    <time class="alt" datetime="" pubdate>2010-03-21</time>
+  
+  <h1><a href="/page3/index.html">JavaScript: Better and Faster</a></h1>
+</header>
+  <div class="span-17 last entry">
+    <p>&#8220;JavaScript: Better and Faster&#8221; is the name of a presentation I gave at <a href='http://www.slide.com'>Slide</a> last week. It was generally well-received by the Slide crew so I decided to put a (slightly edited) copy of the <a href='http://www.bcherry.net/talks/js-better-faster'>accompanying slideshow online</a> (runs in your browser). It&#8217;s not particularly dense, and doesn&#8217;t get into too much depth on any one topic, but I think it gives a great practical overview of the JavaScript landscape, including what things to look out for and neat techniques to write better code. The original intent was to cover the ins and outs of writing good, efficient JavaScript, targeted at people who write JavaScript every day, but have a strong background in Python.</p>
 
 <p>I&#8217;d like to give a huge thanks to <a href='http://scottchacon.com/'>Scott Chacon</a>, whose <a href='http://github.com/schacon/showoff'>Showoff</a> software made compiling this slideshow the most enjoyable thing imaginable. It took a little work to port the resultant slideshow to Google AppEngine, but I got it up and running. I&#8217;ll probably work on a more generalized Python/AppEngine adaptation of Showoff for my future use, since that&#8217;s my web platform and I want to keep using Showoff in the future. This experience also got me really turned on to <a href='http://daringfireball.net/projects/markdown/'>Markdown</a>, which I wasted no time in integrating into this blog.</p>
 
 <p>This is the first presentation I&#8217;ve given in my professional career, and would much appreciate feedback on the slides.</p>
-    </div>
-  </article>
+  </div>
+</article>
+
 
 
 
@@ -661,7 +669,7 @@ print foo # {&#39;a&#39;: 1, &#39;b&#39;: 2}</code></pre>
               </li>
             
               <li>
-                <a href="/tag/social+gaming">social gaming</a>
+                <a href="/tag/social%20gaming">social gaming</a>
                 (1)
               </li>
             
@@ -696,7 +704,7 @@ print foo # {&#39;a&#39;: 1, &#39;b&#39;: 2}</code></pre>
               </li>
             
               <li>
-                <a href="/tag/module+pattern">module pattern</a>
+                <a href="/tag/module%20pattern">module pattern</a>
                 (3)
               </li>
             
@@ -773,4 +781,3 @@ print foo # {&#39;a&#39;: 1, &#39;b&#39;: 2}</code></pre>
     <script type="text/javascript">var _gaq =_gaq||[]; _gaq.push(['_setAccount','UA-251077-4']);_gaq.push(['_trackPageview']);(function(){var ga=document.createElement('script');ga.type='text/javascript';ga.async=true;ga.src=('https:'==document.location.protocol?'https://ssl':'http://www')+'.google-analytics.com/ga.js';(document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(ga);})();</script>
   </body>
 </html>
-

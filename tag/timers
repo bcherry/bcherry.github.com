@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <title>Adequately Good - By Ben Cherry</title>
+    <title>Adequately Good - Posts tagged “timers”</title>
 
     <!-- CSS, including Blueprint, jQuery w/Smoothness, and AG CSS -->
     <link rel="stylesheet" href="/css/blueprint/blueprint.min.css" media="screen, projection" />
@@ -224,13 +224,18 @@
         <!-- Main content: Posts, etc. -->
         <div id="content" class="span-17 colborder">
           <a name="main"></a>
-          
-  <article class="span-17 last">
+          <div class="smallalts listing">
+  <span class="alt">all posts filed under</span>
+  <a class="tight" href="/tags/timers">timers</a>
+</div>
+
+  
+    <article class="span-17 last">
   <header class="span-17 last">
   
     <time class="alt" datetime="" pubdate>2011-04-07</time>
   
-  <h1><a href="/index.html">Replacing `setTimeout` Globally</a></h1>
+  <h1><a href="tag/timers">Replacing `setTimeout` Globally</a></h1>
 </header>
   <div class="span-17 last entry">
     <p>Sometimes, you might want to overwrite built-in global methods like <code>setTimeout</code> and <code>setInterval</code>. If you try, you might find that it&#8217;s much harder than you think to accomplish this in every browser, particularly if you ever want to find the originals again. After a lot of painful experimentation, I think I have a definitive solution that works in all browsers with minimal side-effects.</p>
@@ -337,147 +342,107 @@ setTimeout = 1; // Error</code></pre>
   </div>
 </article>
 
+  
 
-  <article class="span-17 last">
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    <article class="span-17 last">
   <header class="span-17 last">
   
-    <time class="alt" datetime="" pubdate>2011-02-11</time>
+    <time class="alt" datetime="" pubdate>2010-02-26</time>
   
-  <h1><a href="/index.html">Thoughts on the Hashbang</a></h1>
+  <h1><a href="tag/timers">Minimum Timer Intervals in JavaScript</a></h1>
 </header>
   <div class="span-17 last entry">
-    <p>There&#8217;s <a href='http://isolani.co.uk/blog/javascript/BreakingTheWebWithHashBangs'>been</a> <a href='http://adactio.com/journal/4346/'>a</a> <a href='http://simonwillison.net/tags/hashbanghell/'>lot</a> <a href='http://www.tbray.org/ongoing/When/201x/2011/02/09/Hash-Blecch'>of</a> <a href='http://groups.google.com/group/jsmentors/browse_thread/thread/e493573c4de5d5f9?hl=en_US'>discussion</a> this week about the &#8220;hashbang&#8221;, that ugly little bit you find in the middle of URLs like this one: <a href='http://twitter.com/#!/ded/status/18308450276'>http://twitter.com/#!/ded/status/18308450276</a>. I wanted to provide a rebuttal to the arguments that the hashbang is bad for the Web, based on a lot of discussions we&#8217;ve been having inside Twitter since the #newtwitter project began last summer, and have continued right up until today.</p>
+    <p>I was talking with a co-worker today about the behavior of <code>setTimeout</code> and <code>setInterval</code> when given a small interval, like <code>0</code> or <code>1</code>. The <em>expectation</em> would be that the timer will fire in 0ms, or 1ms. However, as with <a href='http://wtfjs.com' target='_blank'>other things</a> in JavaScript, the <em>reality</em> is a bit different. It turns out that browsers actually have a <strong>minimum timer interval</strong> which they can&#8217;t work any faster than. John Resig wrote about <a href='http://ejohn.org/blog/analyzing-timer-performance/' target='_blank'>timer performance</a> a few years back, and found this behavior. He&#8217;s also covering it in more detail in his new book.</p>
 
-<h2 id='its_not_about_the_hashbang'>It&#8217;s Not About the Hashbang</h2>
+<p>But, I wasn&#8217;t happy with data a few years old, so I decided to just go and write my own simple test suite, <a href='http://www.bcherry.net/playground/settimeout' target='_blank'>How Fast is setTimeout in Your Browser?</a>. This page simply runs <code>setTimeout</code> with an interval of 0, 1000 times, and averages the <em>real</em> timeout experienced in each. Go ahead and check it out in your browser of choice.</p>
 
-<p>The hashbang is in the unfortunate position of being the messenger of a big change that&#8217;s been slowly occurring on the Web in the past few years, and will only continue to pick up steam: many Web domains are now serving <a href='http://itsnat.sourceforge.net/php/spim/spi_manifesto_en.php'>desktop-class applications</a> via HTTP, instead of traditional Web sites. For instance, twitter.com is no longer a collection of Web pages that represent a Web site, but is simply an application that you happen to launch by pointing a browser at <a href='http://twitter.com'>http://twitter.com</a>*. This has many wide-reaching implications, and the hashbang is merely a side-effect. In this way, the hashbang is an easy-to-hate straw-man, whereas the real debate to be had is about this shift towards applications.</p>
+<h2 id='the_results'>The Results</h2>
 
-<h2 id='why_applications_on_the_web'>Why Applications on the Web?</h2>
+<p>Well, it turns out that things aren&#8217;t so bad. Most browsers are in the <strong>10-15ms</strong> range for their bottom limit, having improved in recent versions. Notable exceptions are Internet Explorer, which has the same bottom of around <strong>16ms</strong> in all versions since IE6, and Google Chrome, which, at least since version 4, has a bottom limit closer to <strong>5ms</strong> It&#8217;s important to keep this limitation in mind when using <code>setTimeout</code> or <code>setInterval</code>. In particular, if you&#8217;re looking for consistent timer intervals across browsers, you have to use something <strong>&gt;15ms</strong>. But, don&#8217;t forget that JavaScript is single-threaded, and the timer won&#8217;t execute while other code is executing. This means that in the following code sample, you can guarantee that the timer <strong>will not run</strong> until the loop has completed. You cannot, however, guarantee precisely when that will happen, nor that it will be the next piece of code to run following the loop.</p>
 
-<p>Services such as Twitter, Flickr, Facebook, and others have every reason to build rich applications. An application allows an experience that is faster, more seamless, and much better for users than traditional Web sites. However, we do not have to choose to host our apps on the Web, and could easily use other options, such as building a native OS application, or using another cross-platform platform such as Adobe AIR. We all choose Web applications however, because the Web is ubiquitous, well-understood, and mostly superior to other application delivery options.</p>
+<pre><code>setTimeout(function () { alert(&quot;timer&quot;); }, 0);
+for (var i = 0; i &lt; 1000; i += 1) {
+	// something
+}</code></pre>
 
-<p>We get URLs in our Web applications as a legacy of Web sites, and this feature is unique to this class of applications. The power of URLs bring benefits like bookmarks, sharing of application states for free, and search engine indexing. Unfortunately, supporting a standard URL structure for this type of application is not possible in current browsers, without using the URL hash. So, we use the URL hash to take advantage of this sort of thing, but not because we believe our application to be a traditional Web site. We do lose indexability and some other benefits of HTTP we may otherwise have, but these are not losses to our application, since we did not have to use a URL at all. Google has <a href='http://googlewebmastercentral.blogspot.com/2009/10/proposal-for-making-ajax-crawlable.html'>thankfully provided</a> <a href='http://code.google.com/web/ajaxcrawling/docs/getting-started.html'>an implementation for crawling applications</a>, based on the hashbang, which brings search engine indexing to the URL hash, and is easy enough to implement.</p>
+<p>So it should be safe to use timers with an interval of 0ms when your only expectation is that the timer will fire as soon as it can, but not until after the current code path has completed. Relying on timers to respect the interval you give them is foolish, since, as I&#8217;ve shown, they have a lower-bound, and since they wait even after firing, before executing, for other code to return.</p>
 
-<h2 id='the_tradeoff'>The Tradeoff</h2>
+<h2 id='the_source_code'>The Source Code</h2>
 
-<p>We&#8217;ve made a tradeoff, however, in making twitter.com into an application using the hash, which is that it now cannot be both an app and a site at the same time. This capability might not sound compelling, but it is. For instance, browsers without JavaScript cannot access content that has been shared using the URL hash, since that is a marker to the JS app, not to a Web page. In a perfect world, we would have been able to use the original URL structure with the hashes for our application, and served both the site and the app simultaneously. This would be the absolute best thing for users of all kinds, and this debate would not be happening.</p>
+<p>This test is really simple. Here&#8217;s the complete JavaScript source code:</p>
 
-<p>There is hope on the horizon, in the form of the HTML5 History API. This new browser feature will allow developers to change the entire URL path and query string without incurring a page refresh. By using this, we could drop the hash, and get all the benefits of traditional Web sites with all the benefits of a desktop-class application. Support for this has been in Chrome and Safari for some time (albeit with <a href='https://bugs.webkit.org/show_bug.cgi?id=42940'>a bug we found</a> (now fixed)), and will arrive in Firefox 4. Internet Explorer currently has no plans to implement this in IE9, which is a shame. Had it not been for the bug we found, we would have shipped #newtwitter with HTML5 History on day one (and in fact, the integration is already built).</p>
+<pre><code>var target = document.getElementById(&quot;target&quot;),
+	results = 0,
+	iterations = 1000,
+	i = 0;
 
-<h2 id='the_hashbang_is_a_good_thing'>The Hashbang is a Good Thing</h2>
+function go() {
+	var fn = function () {
+			results += new Date().getTime() - d;
+			i += 1;
+			if (i &lt; iterations) {
+				go();
+			} else {
+				finish();
+			}
+		},
+		d = new Date().getTime();
+	setTimeout(fn, 0);
+}
 
-<p>It&#8217;s not perfect. It&#8217;s not pretty (despite what Google says). But the hashbang is useful. Users benefit from the trend towards full-fledged applications, with increased speed and functionality. URLs are not necessary in this context, but we provide them (via the hash) because they bring tangible benefits for applications. The hashbang also brings a tangible benefit. Someday, we will hopefully be rid of the thing, when HTML5 History (or <a href='http://www.adequatelygood.com/2010/7/Saner-HTML5-History-Management'>something like it</a>) is standard in all browsers. The Web application is not going anywhere, and the hash is a fact of life.</p>
-<span class='note'><em>\* Technically, twitter.com does still host a Web site.  For instance, [twitter.com/jobs](http://twitter.com/jobs) is a normal Web page, as is [twitter.com/bcherry](http://twitter.com/bcherry), when viewed logged-out.  We have, however, begun serving an application to logged-in visitors.</em></span>
+function finish() {
+	target.innerHTML = &quot;Average timer delay was &lt;span class=\&quot;num\&quot;&gt;&quot; + results/iterations + 
+		&quot;&lt;/span&gt;ms, over &lt;span class=\&quot;num\&quot;&gt;&quot; + iterations + &quot;&lt;/span&gt; iterations.&quot;;
+}
+
+go();</code></pre>
+
+<p>And that&#8217;s all there is to it. I hope you found this useful or interesting. Timers are very fickle, but also incredibly useful, so it&#8217;s worth taking the time to understand what it is they do, and how they do it.</p>
   </div>
 </article>
 
-
-  <article class="span-17 last">
-  <header class="span-17 last">
   
-    <time class="alt" datetime="" pubdate>2010-07-25</time>
+
   
-  <h1><a href="/index.html">Saner HTML5 History Management</a></h1>
-</header>
-  <div class="span-17 last entry">
-    <h2 id='hashchange'>Hashchange</h2>
 
-<p>This event is quite simple. Whenever the <code>window.location.hash</code> property changes, by following a link, setting the property, editing the URL bar, or using back/forward to move through browser history, the &#8220;hashchange&#8221; event is fired from the window. Using it is really easy:</p>
+  
 
-<pre><code>window.onhashchange = function() {
-	alert(&quot;hash changed!&quot;);
-};
-window.location.hash = Math.random(); // alerts &quot;hash changed!&quot;</code></pre>
+  
 
-<p>This feature is implemented in recent versions of all major browsers. In older browsers like Internet Explorer 6 and 7, you can easily provide it by polling the hash property on an interval, and manually firing an event when it changes. This is easy to build into a jQuery plugin, which <a href='http://benalman.com/'>Ben Alman</a> did in the robust <a href='http://benalman.com/projects/jquery-hashchange-plugin/'>jquery.hashchange.js plugin</a>.</p>
+  
 
-<h2 id='history_management'>History Management</h2>
+  
 
-<p>This feature is a bit more complex. Browsers that support it add a <code>window.history</code> object, with the following properties:</p>
+  
 
-<ul>
-<li><code>window.history.back()</code> and <code>window.history.forward()</code>, which provide programmatic interfaces to browser back and forward functions.</li>
+  
 
-<li><code>window.history.pushState(stateObj, title, url)</code>. This method pushes a new entry into the browser history, which then becomes the browser&#8217;s current state. You can provide any JSON-stringifiable object to send with it, and the browser will provide that object again when you navigate to that point (more on that in a bit). More importantly, if you provide a URL, the browser will change the URL displayed in the address bar, without reloading the page. The new URL must be on the same domain, but you can change the rest of it, which is the <code>window.location.pathname</code> and <code>window.location.hash</code>. Changing the URL in this way will not trigger a &#8220;hashchange&#8221; event, though.</li>
+  
 
-<li><code>window.history.replaceState(stateObj, title, url)</code>. This is just like <code>window.history.pushState</code>, except that the current browser state is removed from the history, so you cannot hit &#8220;back&#8221; to return to it.</li>
+  
 
-<li><code>window.onpopstate</code>. This event is fired whenever a state object is removed from the browser history, which occurs on browser &#8220;back&#8221; or &#8220;forward&#8221;. State objects are persisted on the user&#8217;s hard disk between sessions, which is a nice feature. The object passed into a call to <code>pushState</code> or <code>replaceState</code> is provided as the <code>state</code> property on the event object in the &#8220;popstate&#8221; event.</li>
-</ul>
-
-<p>This feature is implemented in the latest versions of WebKit, which includes Safari and Chrome. Additionally, the Firefox 4 betas include support for this.</p>
-
-<h2 id='whats_the_use_case'>What&#8217;s the Use Case?</h2>
-
-<p>The new history management stuff is very promising, because it allows a web application to live across many physical URLs, but be run in a single instance. This is important for certain kinds of applications, where using hashes is not universally suitable.</p>
-
-<p>For instance, at Twitter, we currently update your URL hash as you navigate around the application, to make bookmarkable pages like <a href='http://twitter.com/#replies'>http://twitter.com/#replies</a>. However, we force a full page load for certain pages, most notably profile pages (e.g. <a href='http://twitter.com/bcherry'>http://twitter.com/bcherry</a>) and permalink pages (e.g. <a href='http://twitter.com/bcherry/status/18966802499'>http://twitter.com/bcherry/status/18966802499</a>). This is so that those URLs can be copied from the address bar and posted on the web.</p>
-
-<p>We want to make sure that users without JavaScript and search engine bots crawling links to our site will get the correct page from the server (since the browser does not send a hash along to the server). This would not be possible if those URLs used hashes. Unfortunately, this means the application is slower, because a full page load is needed going into and out of those locations.</p>
-
-<p>This is where HTML5 History Management could be useful.</p>
-
-<h2 id='so_whats_the_problem'>So What&#8217;s the Problem?</h2>
-
-<p>Unfortunately, the existing implementation of history management is not useful, and not in the spirit of the web.</p>
-
-<p>Our web applications should be built to respond to a URL. Both the client and server versions of an application should understand a shared URL structure, and know how to present the same page to the browser that reflects that URL.</p>
-
-<p>Allowing developers to store extra state information in the browser history is missing the point. The only thing stored in history should be a URL, and the browser can associate a title with it if it chooses.</p>
-
-<p>This is RESTful design, mirrored on client and server. Modern browsers can support changing the URL without reloading the page from the server, and older ones can continue to hit the server every time.</p>
-
-<p>In this way, we can build applications that degrade correctly in older browsers, and when viewed by bots, while providing a faster experience for users with modern browsers.</p>
-
-<h2 id='enter_pathchange'>Enter &#8220;pathchange&#8221;</h2>
-
-<p>Both &#8220;hashchange&#8221; and <code>pushState</code>/&#8221;popstate&#8221; should be replaced with &#8220;pathchange&#8221;, which is an event that fires when the URL changes in any way. This event does not provide any information, the application should inspect the current URL to discover the state it should enter. Relative links within a page should not force page reloads, they should instead just trigger the &#8220;pathchange&#8221; event.</p>
-
-<p>It turns out that it&#8217;s possible to implement this event in modern browsers now, based on the features they already have. Here&#8217;s how:</p>
-
-<ol>
-<li>Listen to &#8220;hashchange&#8221;, and trigger &#8220;pathchange&#8221; when it occurs</li>
-
-<li>Poll the hash in browsers without &#8220;hashchange&#8221; support, and trigger &#8220;hashchange&#8221;, which triggers &#8220;pathchange&#8221;</li>
-
-<li>With history support, listen to &#8220;popstate&#8221;, and trigger &#8220;pathchange&#8221; when it occurs</li>
-
-<li>With history support, intercept all relative links when they are clicked, and prevent normal navigation. Call <code>window.history.pushState(null, null, href)</code> instead, and trigger a &#8220;pathchange&#8221;.</li>
-
-<li>Provide a helper function to make navigation to new URLs using <code>window.history.pushState</code>, when supported, easy.</li>
-</ol>
-
-<p>I&#8217;ve implemented all of this as a <a href='http://www.bcherry.net/static/lib/js/jquery.pathchange.js'>jQuery plugin</a> that is quite easy to use:</p>
-
-<pre><code>$(function() {
-	$.pathchange.init(); // setup event listeners, etc.
-	$(window).pathchange(function() {
-		respondToUrl();
-	}).trigger(&quot;pathchange&quot;);
-
-	$.pathchange.changeTo(&quot;/foo&quot;);
-});</code></pre>
-
-<p>I&#8217;ve also created a demo page that presents <a href='http://www.bcherry.net/playground/sanerhtml5history'>A Saner HTML5 History App</a> that uses <a href='http://www.bcherry.net/static/lib/js/jquery.pathchange.js'>jquery.pathchange.js</a> under the hood. Check it out in various browsers to see the HTML5 magic at work, and be sure to use your browser &#8220;back&#8221; and &#8220;forward&#8221; buttons, and reload the page a few times.</p>
-
-<p>That&#8217;s my take on the HTML5 history features. It&#8217;s unfortunate that what the browsers are implementing is not what we really need, but it&#8217;s encouraging that they do provide enough to implement what we do really need. Let me know in the comments if you agree, disagree, or have questions about my approach.</p>
-<span class='note'>___Note Number One: It's also worth pointing out that I discovered a [serious bug](https://bugs.webkit.org/show_bug.cgi?id=42940) in WebKit's implementation of history management while working on this today.  In short, the "popstate" event is often lost when the network is occupied, which makes little sense.  [Here's a demo page with a reproducible case](http://www.bcherry.net/playground/pushstate) that I threw together.  It fires off a request to download an image which takes 1s on every "popstate", which means hitting "back" more than once every second leads to lost history entries and an application that gets out of sync with the URL.  You could work around this by polling the URL in addition to listening to "popstate", but it's not a good workaround.  Until this is fixed, you'll have to be wary of this if you ship this feature to your users, and it probably is not suitable for very complex AJAX apps.  Firefox 4 does not have the same problem.___</span><span class='note'>___Note Number 2: This article was originally published around 4am PST on July 26th.  The author published a revision around 8pm PST the following day, to make it a little less incohorent and a little more useful.  Luckily, the author uses Git to prepare Markdown-formatted articles, so you can [view the diff](http://github.com/bcherry/adequatelygood/commit/eb688c7809e8d5f61f9ed12442d3a578d46fab97) if you'd like to find out what changed.___</span>
-  </div>
-</article>
-
-
-
-
-<div id="more_reading">
-  <p class="smallalts pager">
-    <span class="alt">go</span>
-    
-    
-    
-        <a class="tight" href="/page2">next</a>
-    
-  </p>
-</div>
+  
 
 
         </div>

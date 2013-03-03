@@ -224,14 +224,14 @@
         <!-- Main content: Posts, etc. -->
         <div id="content" class="span-17 colborder">
           <a name="main"></a>
-
+          
 <article class="span-17 last">
   <header class="span-17 last">
-    
-      <time class="alt" datetime="2010-02-08" pubdate>2010-02-08</time>
-    
-    <h1><a href="/2010/2/JavaScript-Scoping-and-Hoisting">JavaScript Scoping and Hoisting</a></h1>
-  </header>
+  
+    <time class="alt" datetime="2010-02-08" pubdate>2010-02-08</time>
+  
+  <h1><a href="/2010/2/JavaScript-Scoping-and-Hoisting">JavaScript Scoping and Hoisting</a></h1>
+</header>
   <div id="blogbody" class="span-17 last entry">
     <p>Do you know what value will be alerted if the following is executed as a JavaScript program?</p>
 
@@ -435,6 +435,7 @@ function foo(a, b, c) {
     <a href="http://disqus.com/forums/adequatelygood/?url=ref">View the discussion thread.</a>
   </noscript>
 </div>
+
         </div>
 
         <!-- Sidebar: Search, links, etc. -->
@@ -470,7 +471,7 @@ function foo(a, b, c) {
               </li>
             
               <li>
-                <a href="/tag/social+gaming">social gaming</a>
+                <a href="/tag/social%20gaming">social gaming</a>
                 (1)
               </li>
             
@@ -505,7 +506,7 @@ function foo(a, b, c) {
               </li>
             
               <li>
-                <a href="/tag/module+pattern">module pattern</a>
+                <a href="/tag/module%20pattern">module pattern</a>
                 (3)
               </li>
             
@@ -582,4 +583,3 @@ function foo(a, b, c) {
     <script type="text/javascript">var _gaq =_gaq||[]; _gaq.push(['_setAccount','UA-251077-4']);_gaq.push(['_trackPageview']);(function(){var ga=document.createElement('script');ga.type='text/javascript';ga.async=true;ga.src=('https:'==document.location.protocol?'https://ssl':'http://www')+'.google-analytics.com/ga.js';(document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(ga);})();</script>
   </body>
 </html>
-

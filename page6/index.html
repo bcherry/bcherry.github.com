@@ -224,15 +224,16 @@
         <!-- Main content: Posts, etc. -->
         <div id="content" class="span-17 colborder">
           <a name="main"></a>
-
-  
+          
   <article class="span-17 last">
-    <header class="span-17 last">
-        <time class="alt" datetime="2010-02-03" pubdate>2010-02-03</time>
-      <h1><a href="/2010/2/SearchReplace-in-the-DOM-with-jQuery">Search/Replace in the DOM with jQuery</a></h1>
-    </header>
-    <div class="span-17 last entry">
-        <p>Ever had a need to to a text search/replace through the DOM?  For articles in drafting on this blog I often use the form (TODO: something) as notes for myself to do some more research.  I don't want them sticking around in the text I publish, so I highlighted them red (only for myself).  Here's the script I used to accomplish that:</p>
+  <header class="span-17 last">
+  
+    <time class="alt" datetime="" pubdate>2010-02-03</time>
+  
+  <h1><a href="/page6/index.html">Search/Replace in the DOM with jQuery</a></h1>
+</header>
+  <div class="span-17 last entry">
+    <p>Ever had a need to to a text search/replace through the DOM?  For articles in drafting on this blog I often use the form (TODO: something) as notes for myself to do some more research.  I don't want them sticking around in the text I publish, so I highlighted them red (only for myself).  Here's the script I used to accomplish that:</p>
 <pre class="js inline">jQuery(function () {
 	jQuery(":contains(TODO)").not(":has(:contains(TODO))").each(function () {
 		var that = $(this),
@@ -243,16 +244,19 @@
 	});
 });</pre>
 <p>The trick is to find only the nodes that contain the actual text, not ancestors of such nodes, which is what you would get with just <code class="js inline">jQuery(":contains(TOOD)")</code>.  Filtering with <code class="js inline">.not(":has(:contains(TODO))")</code> ensures you've got the bottom most ones.  I tried doing this with the <code class="js inline">":not()"</code> filter, but it didn't work.  I guess that might be a jQuery bug, but the <code class="js inline">.not()</code> method is a fine alternative.</p>
-    </div>
-  </article>
+  </div>
+</article>
+
 
   <article class="span-17 last">
-    <header class="span-17 last">
-        <time class="alt" datetime="2010-02-01" pubdate>2010-02-01</time>
-      <h1><a href="/2010/2/Why-JavaScripts-new-Keyword-Sucks">Why JavaScript's "new" Keyword Sucks</a></h1>
-    </header>
-    <div class="span-17 last entry">
-        <pre><code>&gt;&gt;&gt; function F() { return function inner() { return &quot;inner invoked&quot;; }; }
+  <header class="span-17 last">
+  
+    <time class="alt" datetime="" pubdate>2010-02-01</time>
+  
+  <h1><a href="/page6/index.html">Why JavaScript's "new" Keyword Sucks</a></h1>
+</header>
+  <div class="span-17 last entry">
+    <pre><code>&gt;&gt;&gt; function F() { return function inner() { return &quot;inner invoked&quot;; }; }
 &gt;&gt;&gt; F()
 inner()
 &gt;&gt;&gt; F()()
@@ -271,16 +275,19 @@ inner()
 { }
 &gt;&gt;&gt; (new F())()
 &quot;inner invoked&quot;</code></pre>
-    </div>
-  </article>
+  </div>
+</article>
+
 
   <article class="span-17 last">
-    <header class="span-17 last">
-        <time class="alt" datetime="2010-01-29" pubdate>2010-01-29</time>
-      <h1><a href="/2010/1/Preloading-JS-and-CSS-as-Print-Stylesheets">Preloading JS and CSS as Print Stylesheets</a></h1>
-    </header>
-    <div class="span-17 last entry">
-        <p><em><strong>UPDATE: This technique has turned out to be dangerous in Chrome.  It seems that Chrome will load the JS files into the cache, but  then set an implied type="text/css" on them.  This means that it will refuse to re-use them as JavaScript on future pages, until they have left the cache.  I can no longer recommend this technique, but hope that it was at least interesting.  I'll be working on a follow-up post about alternatives.</strong></em></p>
+  <header class="span-17 last">
+  
+    <time class="alt" datetime="" pubdate>2010-01-29</time>
+  
+  <h1><a href="/page6/index.html">Preloading JS and CSS as Print Stylesheets</a></h1>
+</header>
+  <div class="span-17 last entry">
+    <p><em><strong>UPDATE: This technique has turned out to be dangerous in Chrome.  It seems that Chrome will load the JS files into the cache, but  then set an implied type="text/css" on them.  This means that it will refuse to re-use them as JavaScript on future pages, until they have left the cache.  I can no longer recommend this technique, but hope that it was at least interesting.  I'll be working on a follow-up post about alternatives.</strong></em></p>
 <p>One of Yahoo's <a href="http://developer.yahoo.com/performance/rules.html" target="_blank">Best Practices for Speeding Up Your Web Site</a> is "Preload Components".  Most people are already familiar with doing this for images.  Code for that usually looks like this:</p>
 <p><pre class="js">var img = Image();
 img.src = "/path/to/something.jpg";</pre></p>
@@ -305,8 +312,9 @@ img.src = "/path/to/something.jpg";</pre></p>
 };</pre>
 <p>This function creates a temporary <code class="html inline">&lt;link&gt;</code> tag in the <code class="html inline">&lt;head&gt;</code> of your page, pointing at the requested file.  To work across all browsers, we needed to give it the rel="stylesheet" attribute.  To not cause preloaded CSS files to try and apply themselves to the current page, or trigger a re-flow, we added media="print".  Once the element has loaded, it removes itself from the DOM, but the file remains in the browser's cache.  While this example relies on the jQuery library, there is no reason it could not be easily re-written without such a dependency, or written as a jQuery plugin (providing <code class="js inline">jQuery.preload()</code>).</p>
 <p>This technique cut our aforementioned page load from 60s to 20s, over a slow connection.  I think this is a complete solution, and seems to work in all major browsers.  What do you think?</p>
-    </div>
-  </article>
+  </div>
+</article>
+
 
 
 
@@ -363,7 +371,7 @@ img.src = "/path/to/something.jpg";</pre></p>
               </li>
             
               <li>
-                <a href="/tag/social+gaming">social gaming</a>
+                <a href="/tag/social%20gaming">social gaming</a>
                 (1)
               </li>
             
@@ -398,7 +406,7 @@ img.src = "/path/to/something.jpg";</pre></p>
               </li>
             
               <li>
-                <a href="/tag/module+pattern">module pattern</a>
+                <a href="/tag/module%20pattern">module pattern</a>
                 (3)
               </li>
             
@@ -475,4 +483,3 @@ img.src = "/path/to/something.jpg";</pre></p>
     <script type="text/javascript">var _gaq =_gaq||[]; _gaq.push(['_setAccount','UA-251077-4']);_gaq.push(['_trackPageview']);(function(){var ga=document.createElement('script');ga.type='text/javascript';ga.async=true;ga.src=('https:'==document.location.protocol?'https://ssl':'http://www')+'.google-analytics.com/ga.js';(document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(ga);})();</script>
   </body>
 </html>
-

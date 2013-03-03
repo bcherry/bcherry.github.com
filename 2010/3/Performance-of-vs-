@@ -224,8 +224,7 @@
         <!-- Main content: Posts, etc. -->
         <div id="content" class="span-17 colborder">
           <a name="main"></a>
-
-  <p>One particular weirdness and unpleasantry in JavaScript is the set of equality operators. Like virtually every language, JavaScript has the standard <code>==</code>, <code>!=</code>, <code>&lt;</code>, <code>&gt;</code>, <code>&lt;=</code>, and <code>&gt;=</code> operators. However, <code>==</code> and <code>!=</code> are NOT the operators most would think they are. These operators do <strong>type coercion</strong>, which is why <code>[0] == 0</code> and <code>&quot;\n0\t &quot; == 0</code> both evaluate to <code>true</code>. This is considered, by sane people, to be a <strong>bad thing</strong>. Luckily, JavaScript does provide a normal set of equality operators, which do what you expect: <code>===</code> and <code>!==</code>. It sucks that we need these at all, and <code>===</code> is a pain to type, but at least <code>[0] !== 0</code>.</p>
+          <p>One particular weirdness and unpleasantry in JavaScript is the set of equality operators. Like virtually every language, JavaScript has the standard <code>==</code>, <code>!=</code>, <code>&lt;</code>, <code>&gt;</code>, <code>&lt;=</code>, and <code>&gt;=</code> operators. However, <code>==</code> and <code>!=</code> are NOT the operators most would think they are. These operators do <strong>type coercion</strong>, which is why <code>[0] == 0</code> and <code>&quot;\n0\t &quot; == 0</code> both evaluate to <code>true</code>. This is considered, by sane people, to be a <strong>bad thing</strong>. Luckily, JavaScript does provide a normal set of equality operators, which do what you expect: <code>===</code> and <code>!==</code>. It sucks that we need these at all, and <code>===</code> is a pain to type, but at least <code>[0] !== 0</code>.</p>
 
 <p>So, that&#8217;s all well and good, but when making the decision to use <code>===</code> instead of <code>==</code> it&#8217;s important to understand if there are any performance implications. Reasonable people, like myself, would expect the strict equality operators to be faster than their type-coercing counterparts, because the type coercion must take time. But, being <a href='http://xkcd.com/242/'>a scientist</a>, I had to set up an experiment to test this hypothesis.</p>
 
@@ -307,7 +306,7 @@
               </li>
             
               <li>
-                <a href="/tag/social+gaming">social gaming</a>
+                <a href="/tag/social%20gaming">social gaming</a>
                 (1)
               </li>
             
@@ -342,7 +341,7 @@
               </li>
             
               <li>
-                <a href="/tag/module+pattern">module pattern</a>
+                <a href="/tag/module%20pattern">module pattern</a>
                 (3)
               </li>
             
@@ -419,4 +418,3 @@
     <script type="text/javascript">var _gaq =_gaq||[]; _gaq.push(['_setAccount','UA-251077-4']);_gaq.push(['_trackPageview']);(function(){var ga=document.createElement('script');ga.type='text/javascript';ga.async=true;ga.src=('https:'==document.location.protocol?'https://ssl':'http://www')+'.google-analytics.com/ga.js';(document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(ga);})();</script>
   </body>
 </html>
-
