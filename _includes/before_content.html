@@ -60,19 +60,16 @@
 
         <!-- Navigation Bar -->
         <nav class="prepend-2 span-20 append-2 last append-bottom">
-          <div class="span-4">
+          <div class="span-5">
             <a href="/">home</a>
           </div>
-          <div class="span-4">
+          <div class="span-5">
             <a href="#" id="archiveLink">archives</a>
           </div>
-          <div class="span-4">
+          <div class="span-5">
             <a href="/About-Ben">about</a>
           </div>
-          <div class="span-4">
-            <a href="/contact">contact</a>
-          </div>
-          <div class="span-4 last">
+          <div class="span-5 last">
             <a href="{{ blog.feedburner_url }}">feed</a>
           </div>
         </nav>
@@ -82,8 +79,16 @@
           <hr />
           <div class="archivelinks">
             <span class="alt">posts by year</span>
-            {% for year in archive_years %}
-              <a class="tight" href="/{{ year }}">{{ year }}</a>
+            {% for post in site.posts reversed %}
+              {% unless post.no_date %}
+                {% capture year %}{{ post.date | date: '%Y' }}{% endcapture %}
+
+                  {% capture next_post_year %}{{ post.next.date | date: '%Y' }}{% endcapture %}
+
+                {% if year != next_post_year %}
+                  <a class="tight" href="/{{ year }}">{{ year }}</a>
+                {% endif %}
+              {% endunless %}
             {% endfor %}
           </div>
         </div>
