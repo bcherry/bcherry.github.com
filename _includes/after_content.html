@@ -28,8 +28,8 @@
             <ul>
             {% for tag in site.tags %}
               <li>
-                <a href="/tag/{{ tag.name|urlencode }}">{{ tag.name|downcase }}</a>
-                ({{ tag.count }})
+                <a href="/tag/{{ tag[0]|urlencode }}">{{ tag[0]|downcase }}</a>
+                ({{ tag[1] | size }})
               </li>
             {% endfor %}
             </ul>
