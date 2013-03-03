@@ -82,9 +82,7 @@
             {% for post in site.posts reversed %}
               {% unless post.no_date %}
                 {% capture year %}{{ post.date | date: '%Y' }}{% endcapture %}
-
-                  {% capture next_post_year %}{{ post.next.date | date: '%Y' }}{% endcapture %}
-
+                {% capture next_post_year %}{{ post.next.date | date: '%Y' }}{% endcapture %}
                 {% if year != next_post_year %}
                   <a class="tight" href="/{{ year }}">{{ year }}</a>
                 {% endif %}

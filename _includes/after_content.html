@@ -23,25 +23,17 @@
 
           <hr />
 
-          {% comment %}
           <div id="tags">
             <h3>categories</h3>
-            {% if blog_tags %}
-              <ul>
-              {% for tag in blog_tags %}
-                {% if tag.count != 0 %}
-                <li>
-                  <a href="/tag/{{ tag.name|urlencode }}">{{ tag.name|downcase }}</a>
-                  ({{ tag.count }})
-                </li>
-                {% endif %}
-              {% endfor %}
-              </ul>
-            {% else %}
-              No posts have been tagged yet.
-            {% endif %}
+            <ul>
+            {% for tag in site.tags %}
+              <li>
+                <a href="/tag/{{ tag.name|urlencode }}">{{ tag.name|downcase }}</a>
+                ({{ tag.count }})
+              </li>
+            {% endfor %}
+            </ul>
           </div>
-          {% endcomment %}
 
           <hr />
 
