@@ -10,22 +10,22 @@ unless `git diff-index HEAD --`.strip.size == 0
   exit(1)
 end
 
-# echo "Changing to the 'build' branch..."
-# git checkout build
-# git merge source
+puts "Changing to the 'build' branch..."
+`git checkout build`
+`git merge source`
 
-# echo "Building with Jekyll..."
-# jekyll
+puts "Building with Jekyll..."
+`jekyll`
 
-# echo "Pushing the build..."
-# git commit -am "Build `date`"
-# git push origin build
+puts "Pushing the build..."
+`git commit -am "Build #{`date`}"`
+`git push origin build`
 
-# echo "Merging the build to master and pushing to GitHub..."
-# git update-ref refs/heads/master $(echo 'Deploy `date`' | git commit-tree build^{tree}:_site -p $(cat .git/refs/heads/master))
-# git push -f origin master
+puts "Merging the build to master and pushing to GitHub..."
+`git update-ref refs/heads/master $(echo 'Deploy #{`date`}' | git commit-tree build^{tree}:_site -p $(cat .git/refs/heads/master))`
+`git push -f origin master`
 
-# echo "Returning to the source branch..."
-# git checkout source
+puts "Returning to the source branch..."
+`git checkout source`
 
-# echo "Done!"
+puts "Done!"
