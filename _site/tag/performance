@@ -237,9 +237,9 @@
     <article class="span-17 last">
   <header class="span-17 last">
   
-    <time class="alt" datetime="" pubdate>2010-07-25</time>
+    <time class="alt" datetime="2010-07-25" pubdate>2010-07-25</time>
   
-  <h1><a href="tag/performance">Saner HTML5 History Management</a></h1>
+  <h1><a href="/2010/7/Saner-HTML5-History-Management">Saner HTML5 History Management</a></h1>
 </header>
   <div class="span-17 last entry">
     <h2 id='hashchange'>Hashchange</h2>
@@ -347,9 +347,9 @@ window.location.hash = Math.random(); // alerts &quot;hash changed!&quot;</code>
     <article class="span-17 last">
   <header class="span-17 last">
   
-    <time class="alt" datetime="" pubdate>2010-03-08</time>
+    <time class="alt" datetime="2010-03-08" pubdate>2010-03-08</time>
   
-  <h1><a href="tag/performance">Performance of === vs. ==</a></h1>
+  <h1><a href="2010/3/Performance-of-vs-">Performance of === vs. ==</a></h1>
 </header>
   <div class="span-17 last entry">
     <p>One particular weirdness and unpleasantry in JavaScript is the set of equality operators. Like virtually every language, JavaScript has the standard <code>==</code>, <code>!=</code>, <code>&lt;</code>, <code>&gt;</code>, <code>&lt;=</code>, and <code>&gt;=</code> operators. However, <code>==</code> and <code>!=</code> are NOT the operators most would think they are. These operators do <strong>type coercion</strong>, which is why <code>[0] == 0</code> and <code>&quot;\n0\t &quot; == 0</code> both evaluate to <code>true</code>. This is considered, by sane people, to be a <strong>bad thing</strong>. Luckily, JavaScript does provide a normal set of equality operators, which do what you expect: <code>===</code> and <code>!==</code>. It sucks that we need these at all, and <code>===</code> is a pain to type, but at least <code>[0] !== 0</code>.</p>
@@ -408,9 +408,9 @@ window.location.hash = Math.random(); // alerts &quot;hash changed!&quot;</code>
     <article class="span-17 last">
   <header class="span-17 last">
   
-    <time class="alt" datetime="" pubdate>2010-02-26</time>
+    <time class="alt" datetime="2010-02-26" pubdate>2010-02-26</time>
   
-  <h1><a href="tag/performance">Minimum Timer Intervals in JavaScript</a></h1>
+  <h1><a href="/2010/2/Minimum-Timer-Intervals-in-JavaScript">Minimum Timer Intervals in JavaScript</a></h1>
 </header>
   <div class="span-17 last entry">
     <p>I was talking with a co-worker today about the behavior of <code>setTimeout</code> and <code>setInterval</code> when given a small interval, like <code>0</code> or <code>1</code>. The <em>expectation</em> would be that the timer will fire in 0ms, or 1ms. However, as with <a href='http://wtfjs.com' target='_blank'>other things</a> in JavaScript, the <em>reality</em> is a bit different. It turns out that browsers actually have a <strong>minimum timer interval</strong> which they can&#8217;t work any faster than. John Resig wrote about <a href='http://ejohn.org/blog/analyzing-timer-performance/' target='_blank'>timer performance</a> a few years back, and found this behavior. He&#8217;s also covering it in more detail in his new book.</p>
@@ -478,9 +478,9 @@ go();</code></pre>
     <article class="span-17 last">
   <header class="span-17 last">
   
-    <time class="alt" datetime="" pubdate>2010-01-29</time>
+    <time class="alt" datetime="2010-01-29" pubdate>2010-01-29</time>
   
-  <h1><a href="tag/performance">Preloading JS and CSS as Print Stylesheets</a></h1>
+  <h1><a href="/2010/1/Preloading-JS-and-CSS-as-Print-Stylesheets">Preloading JS and CSS as Print Stylesheets</a></h1>
 </header>
   <div class="span-17 last entry">
     <p><em><strong>UPDATE: This technique has turned out to be dangerous in Chrome.  It seems that Chrome will load the JS files into the cache, but  then set an implied type="text/css" on them.  This means that it will refuse to re-use them as JavaScript on future pages, until they have left the cache.  I can no longer recommend this technique, but hope that it was at least interesting.  I'll be working on a follow-up post about alternatives.</strong></em></p>

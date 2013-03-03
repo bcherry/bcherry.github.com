@@ -247,9 +247,9 @@
     <article class="span-17 last">
   <header class="span-17 last">
   
-    <time class="alt" datetime="" pubdate>2010-03-26</time>
+    <time class="alt" datetime="2010-03-26" pubdate>2010-03-26</time>
   
-  <h1><a href="tag/python">JavaScript-Style Objects in Python</a></h1>
+  <h1><a href="/2010/3/JavaScript-Style-Objects-in-Python">JavaScript-Style Objects in Python</a></h1>
 </header>
   <div class="span-17 last entry">
     <p>One of JavaScript&#8217;s most convenient features is the object syntax. Objects are so easy to work with. You&#8217;ve got a lot of ways to make them, although the object literal syntax in particular kicks ass. You can access and assign them with either the dot operator or dictionary syntax. Missing properties just return <code>undefined</code>. This is just a really fantastic object model.</p>

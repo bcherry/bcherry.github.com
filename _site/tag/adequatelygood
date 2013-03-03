@@ -257,9 +257,9 @@
     <article class="span-17 last">
   <header class="span-17 last">
   
-    <time class="alt" datetime="" pubdate>2010-02-19</time>
+    <time class="alt" datetime="2010-02-19" pubdate>2010-02-19</time>
   
-  <h1><a href="tag/adequatelygood">This Blog - Now With HTML5</a></h1>
+  <h1><a href="/2010/2/This-Blog-Now-With-HTML5">This Blog - Now With HTML5</a></h1>
 </header>
   <div class="span-17 last entry">
     <p>Take a look at this web site. Notice anything out of the ordinary. Hopefully you don&#8217;t, none of the layout or styling has changed noticeably recently. However, try a &#8220;View Source&#8221;. Now do you see something different? This page is now rendered with the following doctype:</p>

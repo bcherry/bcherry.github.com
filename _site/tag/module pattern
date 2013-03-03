@@ -239,9 +239,9 @@
     <article class="span-17 last">
   <header class="span-17 last">
   
-    <time class="alt" datetime="" pubdate>2010-07-08</time>
+    <time class="alt" datetime="2010-07-08" pubdate>2010-07-08</time>
   
-  <h1><a href="tag/module pattern">Writing Testable JavaScript</a></h1>
+  <h1><a href="/2010/7/Writing-Testable-JavaScript">Writing Testable JavaScript</a></h1>
 </header>
   <div class="span-17 last entry">
     <p>The engineering culture at Twitter requires tests. Lots of tests. I haven&#8217;t had formal experience with JavaScript testing before Twitter, so I&#8217;ve been learning a lot as I go. In particular, a number of patterns I used to use, write about, and encourage have turned out to be bad for writing testable code. So I thought it would be worthwhile to share a few of the most important principles I&#8217;ve developed for writing testable JavaScript. The examples I provide are based on <a href='http://docs.jquery.com/QUnit'>QUnit</a>, but should be just as applicable to any JavaScript testing framework.</p>
@@ -471,9 +471,9 @@ function redirectTo(url) {
     <article class="span-17 last">
   <header class="span-17 last">
   
-    <time class="alt" datetime="" pubdate>2010-04-13</time>
+    <time class="alt" datetime="2010-04-13" pubdate>2010-04-13</time>
   
-  <h1><a href="tag/module pattern">Debugging Closures and Modules</a></h1>
+  <h1><a href="/2010/4/Debugging-Closures-and-Modules">Debugging Closures and Modules</a></h1>
 </header>
   <div class="span-17 last entry">
     <p>The most common complaint with using closures to keep private variables in JavaScript is that it makes debugging harder. This complaint definitely holds water, and the loss of easy debugging and inspection using the <a href='http://www.adequatelygood.com/2010/3/JavaScript-Module-Pattern-In-Depth'>Module Pattern</a> is a serious concern. This is where one of JavaScript&#8217;s non-standard but well-supported features comes in: the <strong>debugger statement</strong>. In this article, I&#8217;ll introduce this statement, and show how I use it to solve this deficiency in closure-based code.</p>
@@ -587,9 +587,9 @@ var foo = (function () {
     <article class="span-17 last">
   <header class="span-17 last">
   
-    <time class="alt" datetime="" pubdate>2010-03-12</time>
+    <time class="alt" datetime="2010-03-12" pubdate>2010-03-12</time>
   
-  <h1><a href="tag/module pattern">JavaScript Module Pattern: In-Depth</a></h1>
+  <h1><a href="/2010/3/JavaScript-Module-Pattern-In-Depth">JavaScript Module Pattern: In-Depth</a></h1>
 </header>
   <div class="span-17 last entry">
     <p>The module pattern is a common JavaScript coding pattern. It&#8217;s generally well understood, but there are a number of advanced uses that have not gotten a lot of attention. In this article, I&#8217;ll review the basics and cover some truly remarkable advanced topics, including one which I think is original.</p>
