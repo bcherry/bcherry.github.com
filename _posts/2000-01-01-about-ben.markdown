@@ -5,8 +5,8 @@ permalink: /About-Ben
 no_date: true
 ---
 
-Ben Cherry does front-end engineering at [Twitter](http://twitter.com).
+Ben Cherry is an engineer in San Francisco, CA.  He's worked at Slide, Twitter, tried (and failed!) to do his own startup, and now works as part of a small team on an exciting new startup, mostly writing Ruby and Objective-C.
 
 When he started this blog, he thought he'd be writing a lot about Python, but was surprised to discover that he really likes JavaScript, so he mostly writes about that instead.
 
-Follow him at @bcherry.
+Follow him at [@bcherry](https://twitter.com/bcherry).
