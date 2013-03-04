@@ -8,13 +8,12 @@
     <link rel="stylesheet" href="/css/blueprint/blueprint.min.css" media="screen, projection" />
     <link rel="stylesheet" href="/css/blueprint/print.min.css" media="print" />
     <!--[if lt IE 8]>
-      <link rel="stylesheet" href="/css/blueprint/ie.css" media="screen, projection">
+      <link rel="stylesheet" href="/css/blueprint/ie.min.css" media="screen, projection">
     <![endif]-->
-    <link rel="stylesheet" href="/css/jquery-ui-smoothness/jquery-ui-1.7.2.custom.min.css" />
-    <link rel="stylesheet" href="/css/ag.css" media="screen" />
+    <link rel="stylesheet" href="/css/ag.min.css" media="screen" />
 
     <!-- Extra <head> Links -->
-    <link rel="alternate" type="application/atom+xml" title="Adequately Good Atom Feed" href="" />
+    <link rel="alternate" type="application/atom+xml" title="Adequately Good Atom Feed" href="http://www.adequatelygood.com/feeds/atom.xml" />
 
     <!-- TODO: favicon -->
 
@@ -70,7 +69,7 @@
             <a href="/About-Ben">about</a>
           </div>
           <div class="span-5 last">
-            <a href="">feed</a>
+            <a href="/feeds/atom.xml">feed</a>
           </div>
         </nav>
 
@@ -80,6 +79,24 @@
           <div class="archivelinks">
             <span class="alt">posts by year</span>
             
+              
+            
+              
+                
+                
+                
+              
+            
+              
+                
+                
+                
+              
+            
+              
+                
+                
+                
               
             
               
@@ -341,6 +358,41 @@ consul.info("See this message in Firebug, Chrome, Safari, Firebug Lite, IE8, and
   
     <time class="alt" datetime="2009-11-05" pubdate>2009-11-05</time>
   
+  <h1><a href="/2009/11/JS-Find-and-Replace-with-SplitJoin">JS Find-and-Replace with Split/Join</a></h1>
+</header>
+  <div class="span-17 last entry">
+    <p><strong><em>Update: This advice is now totally out-of-date and wrong. Just use <code>replace</code>. As <a href='http://jsperf.com/test-join-and-split'>recent Browserscope results show</a>, all browsers have optimized <code>replace</code> to be much faster than <code>split</code>/<code>join</code>. Thanks to Luigi van der Pal for pointing this out in the comments!</em></strong></p>
+
+<p>When trying to do a find-and-replace in Javascript with static search and replace strings, it&#8217;s always faster to use <code>String.split()</code> and <code>String.join()</code> than to use <code>String.replace()</code>. Compare:</p>
+
+<pre><code>var myString = &#39;......some long text.....&#39;; 
+mystring.replace(/,/g,&quot;; &quot;); // Replace the commas with semi-colon-space</code></pre>
+
+<p>with</p>
+
+<pre><code>mystring.split(&quot;,&quot;).join(&quot;; &quot;); // Replace the commas with semi-colon-space</code></pre>
+
+<p>The latter split/join method will always be faster. Note that this is only useful for static find-and-replace. For instance, you could not do anything like the following with splits and joins:</p>
+
+<pre><code>mystring.replace(/^[0-9]+([A-Za-z]*)/g, &quot;$1&quot;);</code></pre>
+
+<p>Of course, you could also use this method to strip characters out of a string:</p>
+
+<pre><code>mystring.split(&quot;,&quot;).join(&#39;&#39;);</code></pre>
+
+<p>Good luck!</p>
+  </div>
+</article>
+
+  
+
+  
+  
+    <article class="span-17 last">
+  <header class="span-17 last">
+  
+    <time class="alt" datetime="2009-11-05" pubdate>2009-11-05</time>
+  
   <h1><a href="/2009/11/Javascript-Pseudo-threading">Javascript Pseudo-threading</a></h1>
 </header>
   <div class="span-17 last entry">
@@ -418,6 +470,85 @@ ST.startsimple = function() {
 <p>Also, using a generator is a pretty neat way to produce the data I need, and lets me work with arbitrary data pretty easily. In a real application where the data is coming from the server asynchronously, I can have the generator returning data from a queue as it comes in, while returning flags like &#8220;all done&#8221; so the thread knows it won&#8217;t see more data or &#8220;wait for it&#8221; so the thread can stick around and poll for new data when it comes in.</p>
 
 <p>I think that if I were to bring this into a real application, I would have it decide between singlethreaded or simplethreaded dynamically, because it&#8217;s obvious that singlethreaded is much better for smaller sets.</p>
+  </div>
+</article>
+
+  
+
+  
+  
+    <article class="span-17 last">
+  <header class="span-17 last">
+  
+    <time class="alt" datetime="2009-11-05" pubdate>2009-11-05</time>
+  
+  <h1><a href="/2009/11/jQuery-Micro-templates">jQuery Micro-templates</a></h1>
+</header>
+  <div class="span-17 last entry">
+    <p>John Resig wrote a neat micro-templating Javascript function a <a href='http://ejohn.org/blog/javascript-micro-templating/'>while back</a>. I&#8217;ve been playing with this, and have discovered two things:</p>
+
+<ol>
+<li>
+<p>These templates are totally nestable. Just make an element to be templated within a template, and call the sub-template code beneath the main call.</p>
+</li>
+
+<li>
+<p>I found myself tending to do lines like <code>$(&quot;...&quot;).html(tmpl(&quot;...&quot;,{...}))</code>, which seemed clumsy. It was very easy to extend jQuery to include this templating engine (just add this underneath the existing code):</p>
+
+<p>jQuery.fn.tmpl = function(str,data){ return this.html(tmpl(str,data)); }</p>
+</li>
+</ol>
+
+<p>Then you can just do the following to templatize any number of elements:</p>
+
+<pre><code>$(&quot;.myElems&quot;).tmpl(&quot;myTemplate&quot;,myDataObj);</code></pre>
+
+<p>I&#8217;m still playing with these templates, and working on a new project, so I hope to have more to write about it soon.</p>
+  </div>
+</article>
+
+  
+
+  
+  
+    <article class="span-17 last">
+  <header class="span-17 last">
+  
+    <time class="alt" datetime="2009-11-05" pubdate>2009-11-05</time>
+  
+  <h1><a href="/2009/11/Managing-CSS-Through-Javascript">Managing CSS Through JavaScript</a></h1>
+</header>
+  <div class="span-17 last entry">
+    <p>It&#8217;s often very difficult to keep track of what CSS goes where. Especially when you load up on Javascript controls and files in a large application, which render markup that depends on some CSS being there. One solution is to &#8220;inline&#8221; the CSS in the JavaScript, by adding style to each element as it&#8217;s created. This works, but it&#8217;s messy. Also, browsers are heavily optimized to apply CSS, faster than any Javascript solution could be. But when you&#8217;ve got a fancy script manager like LABjs, remembering to statically link all of the important CSS is a pain. Especially so if you&#8217;re not sure at page load whether certain CSS will be needed. Here&#8217;s a simple function to do this for you (note the XHR stuff is pretty basic, and I&#8217;d recommend changing it to use whatever JS library you use in your applications):</p>
+
+<pre><code>(function() {
+  var loadedFiles = {}; 
+  this.$css = function(filename) { 
+    if (loadedFiles[filename]) { 
+      return; 
+    } 
+    loadedFiles[filename] = true; 
+    var xhr = new XMLHttpRequest(); 
+    xhr.open(&quot;GET&quot;, filename, true); 
+    xhr.onreadystatechange = function() { 
+      if (xhr.readyState === 4) { 
+        var head = document.getElementsByTagName(&quot;head&quot;)[0]; 
+        var styleTag = document.createElement(&quot;style&quot;); 
+        var style = document.createTextNode(xhr.responseText);
+        styleTag.appendChild(style); 
+        head.appendChild(styleTag);
+      } 
+    }; 
+    xhr.send(null); 
+  };
+})();</code></pre>
+
+<p>Now, from any Javascript, just do the following:</p>
+
+<pre><code>$css(&quot;styles/main.css&quot;); 
+$css(&quot;styles/controls.css&quot;);</code></pre>
+
+<p>The <code>$css()</code> function keeps track of what&#8217;s already been loaded, so that you&#8217;ll never load the same stylesheet twice. So don&#8217;t be afraid to spell out each CSS dependency your Javascript files have.</p>
   </div>
 </article>
 
@@ -560,7 +691,7 @@ do_filter();
             
               <li>
                 <a href="/tag/javascript">javascript</a>
-                (18)
+                (21)
               </li>
             
               <li>
@@ -569,13 +700,18 @@ do_filter();
               </li>
             
               <li>
-                <a href="/tag/performance">performance</a>
-                (4)
+                <a href="/tag/css">css</a>
+                (1)
               </li>
             
               <li>
                 <a href="/tag/jquery">jquery</a>
-                (1)
+                (2)
+              </li>
+            
+              <li>
+                <a href="/tag/performance">performance</a>
+                (5)
               </li>
             
               <li>
@@ -646,30 +782,16 @@ do_filter();
     <!-- Exception Hub start -->
     <script src="http://js.exceptionhub.com/javascripts/eh.js"></script>
     <script>
-    ExceptionHub.setup("8ff0f84d25456b049a9c1a83f8e62b56", 21, 'production');
+      ExceptionHub.setup("8ff0f84d25456b049a9c1a83f8e62b56", 21, 'production');
     </script>
     <!-- Exception Hub end -->
 
-    <script type="text/javascript" src="/js/jquery-1.3.2.min.js"></script>
-    <!--<script type="text/javascript" src="/js/chili/jquery.chili-2.2.js"></script>-->
-    <script type="text/javascript" src="/js/consul.js"></script>
-    <script type="text/javascript">
-      // ChiliBook.recipeFolder = "/js/chili/";
-      consul.turnOn();
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script>
       jQuery.noConflict();
-
-      var AG = {};
-      // Page Script
-    </script>
-
-    <!-- Include LABjs and request the rest of the script files-->
-    <script type="text/javascript" src="/js/LAB.min.js"></script>
-    <script type="text/javascript">
-      $LAB
-      .script("/js/jquery-ui-1.7.2.custom.min.js")
-      .script("/js/jquery.templates.js")
-      .script("/js/base.js")
-      .script("/js/ag.js")
+      jQuery("#archiveLink").click(function() {
+        jQuery("#archives").slideToggle();
+      });
     </script>
 
     <!-- Google Analytics -->
