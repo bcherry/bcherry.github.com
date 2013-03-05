@@ -1,7 +1,7 @@
 ---
 title: Minimum Timer Intervals in JavaScript
 layout: post
-feed_id: http://www.adequatelygood.com/2010/2/Minimum-Timer-Intervals-in-JavaScript
+legacy_id: http://www.adequatelygood.com/2010/2/Minimum-Timer-Intervals-in-JavaScript
 permalink: /Minimum-Timer-Intervals-in-JavaScript.html
 alias: /2010/2/Minimum-Timer-Intervals-in-JavaScript/index.html
 tags: [javascript, timers, performance]

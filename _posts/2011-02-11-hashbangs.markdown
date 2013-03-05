@@ -1,7 +1,7 @@
 ---
 title: Thoughts on the Hashbang
 layout: post
-feed_id: http://www.adequatelygood.com/2011/2/Thoughts-on-the-Hashbang
+legacy_id: http://www.adequatelygood.com/2011/2/Thoughts-on-the-Hashbang
 permalink: /Thoughts-on-the-Hashbang.html
 alias: /2011/2/Thoughts-on-the-Hashbang/index.html
 tags: [hashbang, html5]

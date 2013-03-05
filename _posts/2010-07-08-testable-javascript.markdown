@@ -1,7 +1,7 @@
 ---
 title: Writing Testable JavaScript
 layout: post
-feed_id: http://www.adequatelygood.com/2010/7/Writing-Testable-JavaScript
+legacy_id: http://www.adequatelygood.com/2010/7/Writing-Testable-JavaScript
 permalink: /Writing-Testable-JavaScript.html
 alias: /2010/7/Writing-Testable-JavaScript/index.html
 tags: [javascript, testing, module pattern, tools]

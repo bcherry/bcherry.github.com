@@ -2,7 +2,7 @@
 title: Performance of === vs. ==
 layout: base
 tags: [javascript, performance]
-feed_id: http://www.adequatelygood.com/2010/3/Performance-of-vs-
+legacy_id: http://www.adequatelygood.com/2010/3/Performance-of-vs-
 permalink: /Performance-of-vs-.html
 alias: /2010/3/Performance-of-vs-/index.html
 ---

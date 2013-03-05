@@ -1,7 +1,7 @@
 ---
 title: Replacing `setTimeout` Globally
 layout: post
-feed_id: http://www.adequatelygood.com/2011/4/Replacing-setTimeout-Globally
+legacy_id: http://www.adequatelygood.com/2011/4/Replacing-setTimeout-Globally
 permalink: /Replacing-setTimeout-Globally.html
 alias: /2011/4/Replacing-setTimeout-Globally/index.html
 tags: [javascript, timers]

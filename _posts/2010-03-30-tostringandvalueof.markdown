@@ -1,7 +1,7 @@
 ---
 title: Object-to-Primitive Conversions in JavaScript
 layout: post
-feed_id: http://www.adequatelygood.com/2010/3/Object-to-Primitive-Conversions-in-JavaScript
+legacy_id: http://www.adequatelygood.com/2010/3/Object-to-Primitive-Conversions-in-JavaScript
 permalink: /Object-to-Primitive-Conversions-in-JavaScript.html
 alias: /2010/3/Object-to-Primitive-Conversions-in-JavaScript/index.html
 tags: [javascript]

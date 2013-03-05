@@ -2,7 +2,7 @@
 title: Managing CSS Through JavaScript
 layout: post
 tags: [javascript, css]
-feed_id: http://www.adequatelygood.com/2009/11/Managing-CSS-Through-Javascript
+legacy_id: http://www.adequatelygood.com/2009/11/Managing-CSS-Through-Javascript
 permalink: /Managing-CSS-Through-Javascript.html
 alias: /2009/11/Managing-CSS-Through-Javascript/index.html
 ---

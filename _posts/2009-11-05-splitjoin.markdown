@@ -2,7 +2,7 @@
 title: JS Find-and-Replace with Split/Join
 layout: post
 tags: [javascript, performance]
-feed_id: http://www.adequatelygood.com/2009/11/JS-Find-and-Replace-with-SplitJoin
+legacy_id: http://www.adequatelygood.com/2009/11/JS-Find-and-Replace-with-SplitJoin
 permalink: /JS-Find-and-Replace-with-SplitJoin.html
 alias: /2009/11/JS-Find-and-Replace-with-SplitJoin/index.html
 ---

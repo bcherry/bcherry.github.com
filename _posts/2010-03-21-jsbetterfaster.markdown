@@ -1,7 +1,7 @@
 ---
 title: "JavaScript: Better and Faster"
 layout: post
-feed_id: http://www.adequatelygood.com/2010/3/JavaScript-Better-and-Faster
+legacy_id: http://www.adequatelygood.com/2010/3/JavaScript-Better-and-Faster
 permalink: /JavaScript-Better-and-Faster.html
 alias: /2010/3/JavaScript-Better-and-Faster/index.html
 tags: [javascript, talks, slide]

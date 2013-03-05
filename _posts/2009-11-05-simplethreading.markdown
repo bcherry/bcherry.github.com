@@ -1,7 +1,7 @@
 ---
 title: Javascript Pseudo-threading
 layout: post
-feed_id: http://www.adequatelygood.com/2009/11/Javascript-Pseudo-threading
+legacy_id: http://www.adequatelygood.com/2009/11/Javascript-Pseudo-threading
 permalink: /Javascript-Pseudo-threading.html
 alias: /2009/11/Javascript-Pseudo-threading/index.html
 tags: [javascript]
