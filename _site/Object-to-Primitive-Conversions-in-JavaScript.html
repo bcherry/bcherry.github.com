@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Object-to-Primitive Conversions in JavaScript</title>
+
+    <!-- CSS, including Blueprint, jQuery w/Smoothness, and AG CSS -->
+    <link rel="stylesheet" href="/css/blueprint/blueprint.min.css" media="screen, projection" />
+    <link rel="stylesheet" href="/css/blueprint/print.min.css" media="print" />
+    <!--[if lt IE 8]>
+      <link rel="stylesheet" href="/css/blueprint/ie.min.css" media="screen, projection">
+    <![endif]-->
+    <link rel="stylesheet" href="/css/ag.css" media="screen" />
+
+    <!-- Extra <head> Links -->
+    <link rel="alternate" type="application/atom+xml" title="Adequately Good Atom Feed" href="http://www.adequatelygood.com/feeds/atom.xml" />
+
+    <!-- TODO: favicon -->
+
+    <!-- IE HTML5 Compatibility -->
+    <!--[if IE]>
+      <script type="text/javascript">
+        (function () {
+          var tags = "header hgroup nav article time footer".split(" "),
+            i = 0,
+            l = tags.length;
+          for (; i < l; i += 1) {
+            document.createElement(tags[i]);
+          }
+        }());
+      </script>
+    <![endif]-->
+  </head>
+  <body>
+    <a name="top"></a>
+    <div id="container" class="container">
+
+      <!-- Header -->
+      <header class="span-24 last">
+        <!-- Title -->
+        <div id="title" class="span-24 last">
+          <div class="span-17 colborder prepend-top append-bottom">
+            <hgroup>
+              <h1>
+                <a href="/">adequately good</a>
+              </h1>
+              <h3 class="prepend-2 alt">decent programming advice</h3>
+            </hgroup>
+          </div>
+          <div class="span-6 last prepend-top append-bottom">
+            <h2>
+              written by
+              <a href="http://twitter.com/bcherry">ben cherry</a>
+            </h2>
+          </div>
+        </div>
+
+        <hr />
+
+        <!-- Navigation Bar -->
+        <nav class="prepend-2 span-20 append-2 last append-bottom">
+          <div class="span-5">
+            <a href="/">home</a>
+          </div>
+          <div class="span-5">
+            <a href="#" id="archiveLink">archives</a>
+          </div>
+          <div class="span-5">
+            <a href="/about.html">about</a>
+          </div>
+          <div class="span-5 last">
+            <a href="/feeds/atom.xml">feed</a>
+          </div>
+        </nav>
+
+        <!-- Archives Links -->
+        <div id="archives" class="span-24 last smallalts">
+          <hr />
+          <div class="archivelinks">
+            <span class="alt">posts by year</span>
+            
+              
+              
+              
+            
+              
+              
+              
+            
+              
+              
+              
+            
+              
+              
+              
+            
+              
+              
+              
+            
+              
+              
+              
+                <a class="tight" href="/2009">2009</a>
+              
+            
+              
+              
+              
+            
+              
+              
+              
+            
+              
+              
+              
+            
+              
+              
+              
+            
+              
+              
+              
+            
+              
+              
+              
+            
+              
+              
+              
+            
+              
+              
+              
+            
+              
+              
+              
+            
+              
+              
+              
+            
+              
+              
+              
+            
+              
+              
+              
+            
+              
+              
+              
+            
+              
+              
+              
+            
+              
+              
+              
+            
+              
+              
+              
+                <a class="tight" href="/2010">2010</a>
+              
+            
+              
+              
+              
+            
+              
+              
+              
+                <a class="tight" href="/2011">2011</a>
+              
+            
+          </div>
+        </div>
+
+        <hr />
+      </header>
+
+      <div id="colcontainer" class="span-24 last">
+        <!-- Main content: Posts, etc. -->
+        <div id="content" class="span-17 colborder">
+          <a name="main"></a>
+          
+<article class="span-17 last">
+  <header class="span-17 last">
+  
+    <time class="alt" datetime="2010-03-30" pubdate>2010-03-30</time>
+  
+  <h1><a href="/Object-to-Primitive-Conversions-in-JavaScript.html">Object-to-Primitive Conversions in JavaScript</a></h1>
+</header>
+  <div id="blogbody" class="span-17 last entry">
+    <p>Like most object-oriented programming languages, JavaScript provides built-in ways to convert between objects and primitive values, by way of the special <code>toString</code> and <code>valueOf</code> methods. This article will cover the basics of these methods, but then dive into the details of how this stuff really works, bad stuff, performance, and browser support.</p>
+
+<h3 id='types_and_primitives'>Types and Primitives</h3>
+
+<p>To understand this article, you&#8217;ll need to understand the difference between <strong>primitive and non-primitive values</strong> in JavaScript. There are 5 primitive types, which are associated with the various primitive values.</p>
+
+<ul>
+<li><strong>Null</strong>: The value <code>null</code>.</li>
+
+<li><strong>Undefined</strong>: The value <code>undefined</code>.</li>
+
+<li><strong>Number</strong>: All numbers, such as <code>0</code> and <code>3.14</code>. Also <code>NaN</code>, and <code>Infinity</code>.</li>
+
+<li><strong>Boolean</strong>: The values <code>true</code> and <code>false</code>.</li>
+
+<li><strong>String</strong>: All strings, such as <code>&quot;foo&quot;</code> and <code>&quot;&quot;</code>.</li>
+</ul>
+
+<p>All other values are non-primitive, including arrays, functions, and plain old objects. For completeness, here are the results of the <code>typeof</code> operator, applied to these values:</p>
+
+<pre><code>typeof null; // &quot;object&quot;
+typeof undefined; // &quot;undefined&quot;
+typeof 0; // &quot;number&quot; (`typeof NaN` is also &quot;number&quot;)
+typeof true; // &quot;boolean&quot;
+typeof &quot;foo&quot;; // &quot;string&quot;
+typeof {}; // &quot;object&quot;
+typeof function () {}; // &quot;function&quot;
+typeof []; // &quot;object&quot;</code></pre>
+<span class='note'>__Note__: `typeof null` should _not_ be `"object"`.  This is a mistake from the first versions of JavaScript, but it's really too late to fix.  A more sensible type would have been `"null"`, but this is what we're stuck with.</span>
+<p>If you&#8217;ve got that down, then we&#8217;re ready to move on to the basics of <code>toString</code> and <code>valueOf</code>. If you&#8217;re already familiar with the basics, feel free to skip ahead to &#8220;How it Works&#8221;.</p>
+
+<h2 id='basic_usage'>Basic Usage</h2>
+
+<p>We&#8217;ll be using a simple example <code>population</code> object that holds a country name and a population. Lets code that up.</p>
+
+<pre><code>function population(country, pop) {
+	return {
+		country: country,
+		pop: pop
+	};
+}
+
+var america_pop = population(&quot;USA&quot;, 350e6);
+var mexico_pop = population(&quot;Mexico&quot;, 200e6);
+var canada_pop = population(&quot;Canada&quot;, 200e6);
+
+alert(america_pop); // [object Object]
+
+var north_america_pop = america_pop + mexico_pop + canada_pop;
+
+alert(north_america_pop); // [object Object][object Object][object Object]</code></pre>
+
+<p>This works, but the calls to <code>alert</code> are not very useful. What we&#8217;d really like is for the first <code>alert</code> to show <code>&#39;[Population &quot;USA&quot; 350000000]&#39;</code> and the second to show <code>&quot;750000000&quot;</code>. So, let&#8217;s code that up next.</p>
+
+<h3 id='tostring'>toString</h3>
+
+<p>All objects inherit the method <code>toString</code> from <code>Object.prototype</code>, which returns <code>&quot;[object Object]&quot;</code>. However, we can easily override this by providing <code>toString</code> as a method of our object, or its prototype. In this example, we&#8217;ll attach it directly to each instance, but feel free to use the prototype instead.</p>
+
+<pre><code>function population(country, pop) {
+	return {
+		country: country,
+		pop: pop,
+		
+		toString: function () {
+			return &quot;[Population &quot; + 
+				&quot;\&quot;&quot; + country + &quot;\&quot; &quot; +
+				pop +
+			&quot;]&quot;;
+		}
+	}
+}
+
+var america_pop = population(&quot;USA&quot;, 350e6);
+alert(america_pop); // [Population &quot;USA&quot; 350000000]</code></pre>
+<span class='note'>__Note__: I'm using __closure__ on the `country` parameter, rather than using `this.country`.  This only works due to how the constructor is set up.  If you placed `toString` on the prototype, you would need to use `this.country`.</span>
+<h3 id='valueof'>valueOf</h3>
+
+<p>All JavaScript objects also inherit the method <code>valueOf</code> from <code>Object.prototype</code>. By default, this method simply returns the object itself, but is generally overridden to convert an object to a <code>Number</code>, or another primitive value, so it can be used by operators like <code>+</code>. We can do the same thing as above to complete our basic example.</p>
+
+<pre><code>function population(country, pop) {
+	return {
+		country: country,
+		pop: pop,
+		
+		toString: function () {
+			return &quot;[Population &quot; + 
+				&quot;\&quot;&quot; + country + &quot;\&quot; &quot; +
+				pop +
+			&quot;]&quot;;
+		},
+		
+		valueOf: function () {
+			return pop;
+		}
+	};
+}
+
+var america_pop = population(&quot;USA&quot;, 350e6);
+var mexico_pop = population(&quot;Mexico&quot;, 200e6);
+var canada_pop = population(&quot;Canada&quot;, 200e6);
+
+alert(america_pop); // [Population &quot;USA&quot; 350000000
+
+var north_america_pop = america_pop + mexico_pop + canada_pop;
+
+alert(north_america_pop); // 750000000</code></pre>
+
+<p>Here we&#8217;ve defined the <code>valueOf</code> function of our <code>population</code> object to return the population, which should be a <code>Number</code>.</p>
+
+<h2 id='how_it_works'>How It Works</h2>
+
+<p>As with most things in JavaScript, the process by which <code>toString</code> gets called is not as simple as you&#8217;d think. Let&#8217;s explore what happens when <code>alert(america_pop)</code> is called.</p>
+
+<ol>
+<li><code>alert</code> calls <code>GetValue</code> on the reference. This returns the object it points at.</li>
+
+<li><code>alert</code> calls <code>ToString</code> on the value (this is <em>not</em> the same as the object&#8217;s <code>toString</code>)</li>
+
+<li><code>ToString</code> calls <code>ToPrimitive</code> on the value, passing the <em>hint</em> <code>String</code>.</li>
+
+<li><code>ToPrimitive</code> calls the object&#8217;s internal <code>[[DefaultValue]]</code> method with the <em>hint</em> <code>String</code>.</li>
+
+<li><code>[[DefaultValue]]</code> calls the <code>toString</code> property of the object, with the object as <code>this</code>.</li>
+
+<li>The result of <code>toString</code> is a primitive value, so it is returned, all the way up the chain to the <code>ToString</code> method.</li>
+
+<li>Since the result is of type <code>String</code>, <code>ToString</code> returns all the way to <code>alert</code>.</li>
+
+<li><code>alert</code> displays the value.</li>
+</ol>
+
+<p>While this is a lot, it&#8217;s pretty straightforward. However, he key mechanism that needs more explaining is the <code>ToPrimitive</code> function. This function is used to take an arbitrary value and get a corresponding primitive value instead. If the input is already a primitive value then the value will be returned without conversion. However, if the value is non-primitive, then it will call the internal <code>[[DefaultValue]]</code> method to find a <strong>default value</strong> for the object.</p>
+
+<p><code>[[DefaultValue]]</code> is an internal property of every object. It&#8217;s a method that takes an optional <em>hint</em>, which should be either <code>Number</code> or <code>String</code>. If a <em>hint</em> is not provided, it will default to <code>Number</code> unless the object is a <code>Date</code>, in which case it defaults to <code>String</code> (this is silly). After this has been figured out, it will call <code>toString</code> and <code>valueOf</code>, in order, to find a primitive value. This is where the <em>hint</em> comes into play. If the <em>hint</em> is <code>Number</code>, then <code>valueOf</code> will be tried first, but if it&#8217;s <code>String</code> then <code>toString</code> will be tried first. Here&#8217;s the ensuing process:</p>
+
+<ol>
+<li>If the first method exists, and is callable, call it and get the result, otherwise skip to 3.</li>
+
+<li>If the result of 1 is a primitive, return it.</li>
+
+<li>If the second method exists, and is callable, call it and get the result, otherwise skip to 5.</li>
+
+<li>If the result of 3 is a primitive, return it.</li>
+
+<li>Throw a <code>TypeError</code> exception.</li>
+</ol>
+
+<p>The value that is returned by <code>[[DefaultValue]]</code> is guaranteed to be primitive. If it was not, a <code>TypeError</code> would have been thrown. This also implies that <code>toString</code> and <code>valueOf</code> should return primitives on order to be useful in this context.</p>
+
+<h3 id='confusion_about_the__operator'>Confusion About the + Operator</h3>
+
+<p>Here&#8217;s an example with a (possibly) unexpected result:</p>
+
+<pre><code>var foo = {
+	toString: function () {
+		return &quot;foo&quot;;
+	},
+	valueOf: function () {
+		return 5;
+	}
+};
+
+alert(foo + &quot;bar&quot;); // 5bar
+alert([foo, &quot;bar&quot;].join(&quot;&quot;)); // foobar</code></pre>
+
+<p>In this context, we&#8217;re using the <code>+</code> operator to do string concatenation. But, <code>foo</code> was <em>not</em> converted to a string using <code>toString</code>, it was turned into a number using <code>valueOf</code>, then used for string concatenation. This probably isn&#8217;t what we want, but it is how it works. It&#8217;s a side-effect of the overloading of the <code>+</code> operator for arithmetic and string concatenation. The <code>+</code>operator has a well-defined process:</p>
+
+<ol>
+<li>Evaluate the left-hand side, and get the value.</li>
+
+<li>Evaluate the right-hand side, and get the value.</li>
+
+<li>Call <code>ToPrimitive</code> on both the left-hand and right-hand sides (without a <em>hint</em>)</li>
+
+<li>If either primitive value is a <code>String</code>, then skip to 7.</li>
+
+<li>Call <code>ToNumber</code> on both values.</li>
+
+<li>Return the sum of the values.</li>
+
+<li>Call <code>ToString</code> on both values.</li>
+
+<li>Return the concatenation of both values.</li>
+</ol>
+
+<p>Since no <em>hint</em> is passed to the <code>ToPrimitive</code> calls, the <em>hint</em> will be defaulted to <code>Number</code> (unless it&#8217;s a <code>Date</code>, which defaults to <code>String</code>). This means that our <code>valueOf</code> function will be called, instead of <code>toString</code>. It&#8217;s not until <em>after</em> the primitive values are retrieved that the interpreter decides whether it is going to do string concatenation or arithmetic. That&#8217;s why our example above returns <code>&quot;5bar&quot;</code> instead of <code>&quot;foobar&quot;</code>.</p>
+
+<h3 id='bad_stuff'>Bad Stuff</h3>
+
+<p>There is one really bad feature of all this, which is that <code>ToPrimitive</code> does not enforce any type-checking on the return values, other than that they are primitive. This means you can write code like this:</p>
+
+<pre><code>var foo = {
+	toString: function () {
+		return 5;
+	},
+	valueOf: function () {
+		return &quot;foo&quot;;
+	}
+};
+alert(foo.toString() + 1); // 6 (bad!)
+alert(foo + 1); // &quot;foo1&quot; (no good!)
+alert(+foo); // NaN (the worst!)</code></pre>
+
+<p>The <code>valueOf</code> method can be forgiven for not type-checking, because it is more generic. You&#8217;d expect it to be able to return any suitable primitive value. However, the <code>toString</code> method has <em>no such excuse</em>. This is simply a bad feature. You can, of course, mitigate by using <code>String(foo)</code> instead of <code>foo.toString()</code>, which will call <code>toString</code> and then convert that result to a string. But you should not have to do this, or worry about this. Please do not make objects with <code>toString</code> methods that do not return strings.</p>
+
+<h2 id='how_about_performance'>How About Performance?</h2>
+
+<p>After understanding the complexity that goes into these implicit conversion, I got curious about how that affects performance. So I decided to test the time it takes to perform an <code>[].join(obj)</code> over 1,000,000 iterations in the major browsers. I did one test with the object being implicitly cast to a string, and one where I called the <code>toString</code> method manually (i.e. <code>[].join(obj.toString())</code>). As expected, the explicit call was faster in most cases.</p>
+
+<ul>
+<li><strong>Firefox 3.6.2</strong>: 874ms vs. 320ms - <strong>almost 3x faster</strong>.</li>
+
+<li><strong>Chrome 5</strong>: 94ms vs. 47ms - <strong>2x faster</strong>.</li>
+
+<li><strong>Opera 10.50</strong>: 155ms vs 182ms - <strong>a little slower</strong>.</li>
+
+<li><strong>Safari 4</strong>: 409ms vs 280ms - <strong>almost 2x faster</strong>.</li>
+
+<li><strong>Internet Explorer 8</strong>: 2856ms vs 2786ms - <strong>about the same</strong>.</li>
+
+<li><strong>Internet Explorer 9</strong> (preview): 645ms vs 633ms - <strong>about the same</strong>.</li>
+</ul>
+<span class='note'>___Note 1___: The Firefox, Chrome, Opera, and Safari tests were all run on a Macbook Pro running OS X 10.5.  The IE tests were run on a desktop running Windows 7.  [Run the tests yourself here.](http://www.bcherry.net/playground/defaultvalues)</span><span class='note'>___Note 2___: I chose to use the `[].join` method because doing so was most likely to avoid any dead-code elimination optimizations in modern browsers.  I've had trouble with this before, in Firefox.  I _did_ try testing with the `String()` constructor, with similar results in most browsers.  Opera was an exception where using the explicit `toString` was close to __5x faster__.  In Firefox, the explicit cast was a bit faster, but both cases were about 100x faster than the `[].join` method (and other browsers), which means the code-path was probably being removed by the dead code eliminator.</span>
+<p>The takeaway from this performance test is that it&#8217;s always best to call your object&#8217;s type-conversion methods directly, rather than relying on the interpreter to do the complex series of method calls and comparisons needed to do it automatically. The Opera 10.50 result is very strange, but it&#8217;s not particularly slower, so I wouldn&#8217;t worry about it. The gains made in other browsers more than make up for the outlier Opera result.</p>
+
+<h2 id='how_about_browser_support'>How About Browser Support?</h2>
+
+<p>Like many things in the ECMAScript specification, these processes are complex, and I doubted that all browsers would implement them exactly as specified. So, in that <a href='http://www.bcherry.net/playground/defaultvalues'>test suite from earlier</a>, I added compliance checks. I was quite surprised to see that all major browsers, including versions of Internet Explorer going back to at least IE 5.5, implement these mechanisms correctly. This is even the case with the awkward handling when developers do things like make <code>toString</code> return a number instead of a string. All browsers handle the code according to the specification. This is great news.</p>
+
+<p>But the specification unhelpfully introduced ambiguity in one particular area: the absence of a <em>hint</em> for the <code>ToPrimitive</code> function. Here&#8217;s the exact wording:</p>
+
+<blockquote>
+<p>All native ECMAScript objects except Date objects handle the absence of a hint as if the hint Number were given; Date objects handle the absence of a hint as if the hint String were given. Host objects may handle the absence of a hint in some other manner.</p>
+</blockquote>
+
+<p>That the standard explicitly allows browsers to deviate here worried me. Included in that test suite was a check that, in the absence of a <em>hint</em>, <code>Date</code> objects will default to <code>String</code> and <code>Boolean</code> objects will default to <code>Number</code>. All browsers passed this check as well, which means that browser support for all of this functionality seems to be <strong>consistent</strong> and <strong>correct</strong>.</p>
+
+<h2 id='conclusions'>Conclusions</h2>
+
+<p>I hope this was useful in understanding how these mechanisms work in JavaScript. There are three important things to take away from this article:</p>
+
+<ol>
+<li>Implement <code>toString</code> and <code>valueOf</code> on your commonly-reused objects. They can help you write clearer, more concise code, and make debugging easier too.</li>
+
+<li>All browsers implement object-to-primitive conversion according to the specification, so you can safely consult it for more detail.</li>
+
+<li>When performance is important, always try to call your type-conversion methods directly, instead of relying on JavaScript&#8217;s implicit calls.</li>
+</ol>
+
+<p>You can find the <a href='http://www.bcherry.net/playground/defaultvalues'>test suite used for this article here</a> if you&#8217;re interested in trying to replicate my results. Please let me know if you find contradictory results to what I posted here.</p>
+
+<p>Thanks for reading! If you have questions or feedback then leave a comment below or contact me directly.</p>
+  </div>
+</article>
+
+<div id="more_reading" class="span-17 last">
+  <p class="smallalts tags">
+    <span class="alt">filed under</span> <a class="tight" href="/tag/javascript">javascript</a>
+  </p>
+</div>
+
+<div id="comments_wrapper" class="span-17 last">
+  <div id="disqus_thread"></div>
+  <script type="text/javascript">
+    // Disqus Comments variables
+    var disqus_developer = false;
+    var disqus_container_id = "comments_wrapper";
+  </script>
+  <script type="text/javascript" src="http://disqus.com/forums/adequatelygood/embed.js"></script>
+  <noscript>
+    <a href="http://disqus.com/forums/adequatelygood/?url=ref">View the discussion thread.</a>
+  </noscript>
+</div>
+
+        </div>
+
+        <!-- Sidebar: Search, links, etc. -->
+        <div id="sidebar" class="span-6 last">
+          <hr class="space" />
+
+          <div id="links">
+            <h3>the author</h3>
+            <p>
+              Ben is a 25 year-old software engineer. He lives and works in San Francisco. Many people think he invented the term "hoisting" in JavaScript, but this is untrue.
+            </p>
+            <ul>
+              <li><a href="http://twitter.com/bcherry">Twitter</a> - @<a class="twitter-anywhere-user" href="http://twitter.com/bcherry">bcherry</a></li>
+              <li><a href="http://github.com/bcherry">GitHub</a> - My Code</li>
+              <li><a href="http://www.linkedin.com/in/bcherryprogrammer">LinkedIn</a> - Professional Profile</li>
+              <li><a href="http://www.facebook.com/bcherry">Facebook</a> - That Other Social Network</li>
+              <li><a href="http://www.bcherry.net/talks/">Presentations</a> - Slides From My Talks</li>
+            </ul>
+            <iframe allowtransparency="true" frameborder="0" scrolling="no"
+              src="http://platform.twitter.com/widgets/follow_button.html?screen_name=bcherry&amp;button=grey&amp;text_color=7F7F7F&amp;link_color=666666"
+              style="width:300px; height:20px;"></iframe>
+          </div>
+
+          <hr />
+
+          <div id="tags">
+            <h3>categories</h3>
+            <ul>
+            
+              <li>
+                <a href="/tag/javascript">javascript</a>
+                (21)
+              </li>
+            
+              <li>
+                <a href="/tag/social%20gaming">social gaming</a>
+                (1)
+              </li>
+            
+              <li>
+                <a href="/tag/css">css</a>
+                (1)
+              </li>
+            
+              <li>
+                <a href="/tag/jquery">jquery</a>
+                (2)
+              </li>
+            
+              <li>
+                <a href="/tag/performance">performance</a>
+                (5)
+              </li>
+            
+              <li>
+                <a href="/tag/tools">tools</a>
+                (2)
+              </li>
+            
+              <li>
+                <a href="/tag/html5">html5</a>
+                (3)
+              </li>
+            
+              <li>
+                <a href="/tag/adequatelygood">adequatelygood</a>
+                (1)
+              </li>
+            
+              <li>
+                <a href="/tag/timers">timers</a>
+                (2)
+              </li>
+            
+              <li>
+                <a href="/tag/module%20pattern">module pattern</a>
+                (3)
+              </li>
+            
+              <li>
+                <a href="/tag/talks">talks</a>
+                (1)
+              </li>
+            
+              <li>
+                <a href="/tag/slide">slide</a>
+                (1)
+              </li>
+            
+              <li>
+                <a href="/tag/python">python</a>
+                (1)
+              </li>
+            
+              <li>
+                <a href="/tag/debugging">debugging</a>
+                (1)
+              </li>
+            
+              <li>
+                <a href="/tag/testing">testing</a>
+                (2)
+              </li>
+            
+              <li>
+                <a href="/tag/hashbang">hashbang</a>
+                (1)
+              </li>
+            
+            </ul>
+          </div>
+
+          <hr />
+
+          
+        </div>
+      </div>
+    </div>
+
+    <script>
+      (function() {
+        var archiveLink = document.getElementById("archiveLink"),
+            archives = document.getElementById("archives");
+
+        archiveLink.onclick = function() {
+          if (archives.className.match(/\bexpanded\b/)) {
+            archives.className = archives.className.replace(/\bexpanded\b/g, '');
+          } else {
+            archives.className += ' expanded';
+          }
+          return false;
+        };
+      }());
+    </script>
+
+    <!-- Google Analytics -->
+    <script type="text/javascript">var _gaq =_gaq||[]; _gaq.push(['_setAccount','UA-251077-4']);_gaq.push(['_trackPageview']);(function(){var ga=document.createElement('script');ga.type='text/javascript';ga.async=true;ga.src=('https:'==document.location.protocol?'https://ssl':'http://www')+'.google-analytics.com/ga.js';(document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(ga);})();</script>
+  </body>
+</html>

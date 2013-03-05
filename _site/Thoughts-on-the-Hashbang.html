@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Thoughts on the Hashbang</title>
+
+    <!-- CSS, including Blueprint, jQuery w/Smoothness, and AG CSS -->
+    <link rel="stylesheet" href="/css/blueprint/blueprint.min.css" media="screen, projection" />
+    <link rel="stylesheet" href="/css/blueprint/print.min.css" media="print" />
+    <!--[if lt IE 8]>
+      <link rel="stylesheet" href="/css/blueprint/ie.min.css" media="screen, projection">
+    <![endif]-->
+    <link rel="stylesheet" href="/css/ag.css" media="screen" />
+
+    <!-- Extra <head> Links -->
+    <link rel="alternate" type="application/atom+xml" title="Adequately Good Atom Feed" href="http://www.adequatelygood.com/feeds/atom.xml" />
+
+    <!-- TODO: favicon -->
+
+    <!-- IE HTML5 Compatibility -->
+    <!--[if IE]>
+      <script type="text/javascript">
+        (function () {
+          var tags = "header hgroup nav article time footer".split(" "),
+            i = 0,
+            l = tags.length;
+          for (; i < l; i += 1) {
+            document.createElement(tags[i]);
+          }
+        }());
+      </script>
+    <![endif]-->
+  </head>
+  <body>
+    <a name="top"></a>
+    <div id="container" class="container">
+
+      <!-- Header -->
+      <header class="span-24 last">
+        <!-- Title -->
+        <div id="title" class="span-24 last">
+          <div class="span-17 colborder prepend-top append-bottom">
+            <hgroup>
+              <h1>
+                <a href="/">adequately good</a>
+              </h1>
+              <h3 class="prepend-2 alt">decent programming advice</h3>
+            </hgroup>
+          </div>
+          <div class="span-6 last prepend-top append-bottom">
+            <h2>
+              written by
+              <a href="http://twitter.com/bcherry">ben cherry</a>
+            </h2>
+          </div>
+        </div>
+
+        <hr />
+
+        <!-- Navigation Bar -->
+        <nav class="prepend-2 span-20 append-2 last append-bottom">
+          <div class="span-5">
+            <a href="/">home</a>
+          </div>
+          <div class="span-5">
+            <a href="#" id="archiveLink">archives</a>
+          </div>
+          <div class="span-5">
+            <a href="/about.html">about</a>
+          </div>
+          <div class="span-5 last">
+            <a href="/feeds/atom.xml">feed</a>
+          </div>
+        </nav>
+
+        <!-- Archives Links -->
+        <div id="archives" class="span-24 last smallalts">
+          <hr />
+          <div class="archivelinks">
+            <span class="alt">posts by year</span>
+            
+              
+              
+              
+            
+              
+              
+              
+            
+              
+              
+              
+            
+              
+              
+              
+            
+              
+              
+              
+            
+              
+              
+              
+                <a class="tight" href="/2009">2009</a>
+              
+            
+              
+              
+              
+            
+              
+              
+              
+            
+              
+              
+              
+            
+              
+              
+              
+            
+              
+              
+              
+            
+              
+              
+              
+            
+              
+              
+              
+            
+              
+              
+              
+            
+              
+              
+              
+            
+              
+              
+              
+            
+              
+              
+              
+            
+              
+              
+              
+            
+              
+              
+              
+            
+              
+              
+              
+            
+              
+              
+              
+            
+              
+              
+              
+                <a class="tight" href="/2010">2010</a>
+              
+            
+              
+              
+              
+            
+              
+              
+              
+                <a class="tight" href="/2011">2011</a>
+              
+            
+          </div>
+        </div>
+
+        <hr />
+      </header>
+
+      <div id="colcontainer" class="span-24 last">
+        <!-- Main content: Posts, etc. -->
+        <div id="content" class="span-17 colborder">
+          <a name="main"></a>
+          
+<article class="span-17 last">
+  <header class="span-17 last">
+  
+    <time class="alt" datetime="2011-02-11" pubdate>2011-02-11</time>
+  
+  <h1><a href="/Thoughts-on-the-Hashbang.html">Thoughts on the Hashbang</a></h1>
+</header>
+  <div id="blogbody" class="span-17 last entry">
+    <p>There&#8217;s <a href='http://isolani.co.uk/blog/javascript/BreakingTheWebWithHashBangs'>been</a> <a href='http://adactio.com/journal/4346/'>a</a> <a href='http://simonwillison.net/tags/hashbanghell/'>lot</a> <a href='http://www.tbray.org/ongoing/When/201x/2011/02/09/Hash-Blecch'>of</a> <a href='http://groups.google.com/group/jsmentors/browse_thread/thread/e493573c4de5d5f9?hl=en_US'>discussion</a> this week about the &#8220;hashbang&#8221;, that ugly little bit you find in the middle of URLs like this one: <a href='http://twitter.com/#!/ded/status/18308450276'>http://twitter.com/#!/ded/status/18308450276</a>. I wanted to provide a rebuttal to the arguments that the hashbang is bad for the Web, based on a lot of discussions we&#8217;ve been having inside Twitter since the #newtwitter project began last summer, and have continued right up until today.</p>
+
+<h2 id='its_not_about_the_hashbang'>It&#8217;s Not About the Hashbang</h2>
+
+<p>The hashbang is in the unfortunate position of being the messenger of a big change that&#8217;s been slowly occurring on the Web in the past few years, and will only continue to pick up steam: many Web domains are now serving <a href='http://itsnat.sourceforge.net/php/spim/spi_manifesto_en.php'>desktop-class applications</a> via HTTP, instead of traditional Web sites. For instance, twitter.com is no longer a collection of Web pages that represent a Web site, but is simply an application that you happen to launch by pointing a browser at <a href='http://twitter.com'>http://twitter.com</a>*. This has many wide-reaching implications, and the hashbang is merely a side-effect. In this way, the hashbang is an easy-to-hate straw-man, whereas the real debate to be had is about this shift towards applications.</p>
+
+<h2 id='why_applications_on_the_web'>Why Applications on the Web?</h2>
+
+<p>Services such as Twitter, Flickr, Facebook, and others have every reason to build rich applications. An application allows an experience that is faster, more seamless, and much better for users than traditional Web sites. However, we do not have to choose to host our apps on the Web, and could easily use other options, such as building a native OS application, or using another cross-platform platform such as Adobe AIR. We all choose Web applications however, because the Web is ubiquitous, well-understood, and mostly superior to other application delivery options.</p>
+
+<p>We get URLs in our Web applications as a legacy of Web sites, and this feature is unique to this class of applications. The power of URLs bring benefits like bookmarks, sharing of application states for free, and search engine indexing. Unfortunately, supporting a standard URL structure for this type of application is not possible in current browsers, without using the URL hash. So, we use the URL hash to take advantage of this sort of thing, but not because we believe our application to be a traditional Web site. We do lose indexability and some other benefits of HTTP we may otherwise have, but these are not losses to our application, since we did not have to use a URL at all. Google has <a href='http://googlewebmastercentral.blogspot.com/2009/10/proposal-for-making-ajax-crawlable.html'>thankfully provided</a> <a href='http://code.google.com/web/ajaxcrawling/docs/getting-started.html'>an implementation for crawling applications</a>, based on the hashbang, which brings search engine indexing to the URL hash, and is easy enough to implement.</p>
+
+<h2 id='the_tradeoff'>The Tradeoff</h2>
+
+<p>We&#8217;ve made a tradeoff, however, in making twitter.com into an application using the hash, which is that it now cannot be both an app and a site at the same time. This capability might not sound compelling, but it is. For instance, browsers without JavaScript cannot access content that has been shared using the URL hash, since that is a marker to the JS app, not to a Web page. In a perfect world, we would have been able to use the original URL structure with the hashes for our application, and served both the site and the app simultaneously. This would be the absolute best thing for users of all kinds, and this debate would not be happening.</p>
+
+<p>There is hope on the horizon, in the form of the HTML5 History API. This new browser feature will allow developers to change the entire URL path and query string without incurring a page refresh. By using this, we could drop the hash, and get all the benefits of traditional Web sites with all the benefits of a desktop-class application. Support for this has been in Chrome and Safari for some time (albeit with <a href='https://bugs.webkit.org/show_bug.cgi?id=42940'>a bug we found</a> (now fixed)), and will arrive in Firefox 4. Internet Explorer currently has no plans to implement this in IE9, which is a shame. Had it not been for the bug we found, we would have shipped #newtwitter with HTML5 History on day one (and in fact, the integration is already built).</p>
+
+<h2 id='the_hashbang_is_a_good_thing'>The Hashbang is a Good Thing</h2>
+
+<p>It&#8217;s not perfect. It&#8217;s not pretty (despite what Google says). But the hashbang is useful. Users benefit from the trend towards full-fledged applications, with increased speed and functionality. URLs are not necessary in this context, but we provide them (via the hash) because they bring tangible benefits for applications. The hashbang also brings a tangible benefit. Someday, we will hopefully be rid of the thing, when HTML5 History (or <a href='http://www.adequatelygood.com/2010/7/Saner-HTML5-History-Management'>something like it</a>) is standard in all browsers. The Web application is not going anywhere, and the hash is a fact of life.</p>
+<span class='note'><em>* Technically, twitter.com does still host a Web site.  For instance, <a href='http://twitter.com/jobs'>twitter.com/jobs</a> is a normal Web page, as is <a href='http://twitter.com/bcherry'>twitter.com/bcherry</a> when viewed logged-out.  We have, however, begun serving an application to logged-in visitors.</em></span>
+  </div>
+</article>
+
+<div id="more_reading" class="span-17 last">
+  <p class="smallalts tags">
+    <span class="alt">filed under</span> <a class="tight" href="/tag/hashbang">hashbang</a><span class="alt"> and</span> <a class="tight" href="/tag/html5">html5</a>
+  </p>
+</div>
+
+<div id="comments_wrapper" class="span-17 last">
+  <div id="disqus_thread"></div>
+  <script type="text/javascript">
+    // Disqus Comments variables
+    var disqus_developer = false;
+    var disqus_container_id = "comments_wrapper";
+  </script>
+  <script type="text/javascript" src="http://disqus.com/forums/adequatelygood/embed.js"></script>
+  <noscript>
+    <a href="http://disqus.com/forums/adequatelygood/?url=ref">View the discussion thread.</a>
+  </noscript>
+</div>
+
+        </div>
+
+        <!-- Sidebar: Search, links, etc. -->
+        <div id="sidebar" class="span-6 last">
+          <hr class="space" />
+
+          <div id="links">
+            <h3>the author</h3>
+            <p>
+              Ben is a 25 year-old software engineer. He lives and works in San Francisco. Many people think he invented the term "hoisting" in JavaScript, but this is untrue.
+            </p>
+            <ul>
+              <li><a href="http://twitter.com/bcherry">Twitter</a> - @<a class="twitter-anywhere-user" href="http://twitter.com/bcherry">bcherry</a></li>
+              <li><a href="http://github.com/bcherry">GitHub</a> - My Code</li>
+              <li><a href="http://www.linkedin.com/in/bcherryprogrammer">LinkedIn</a> - Professional Profile</li>
+              <li><a href="http://www.facebook.com/bcherry">Facebook</a> - That Other Social Network</li>
+              <li><a href="http://www.bcherry.net/talks/">Presentations</a> - Slides From My Talks</li>
+            </ul>
+            <iframe allowtransparency="true" frameborder="0" scrolling="no"
+              src="http://platform.twitter.com/widgets/follow_button.html?screen_name=bcherry&amp;button=grey&amp;text_color=7F7F7F&amp;link_color=666666"
+              style="width:300px; height:20px;"></iframe>
+          </div>
+
+          <hr />
+
+          <div id="tags">
+            <h3>categories</h3>
+            <ul>
+            
+              <li>
+                <a href="/tag/javascript">javascript</a>
+                (21)
+              </li>
+            
+              <li>
+                <a href="/tag/social%20gaming">social gaming</a>
+                (1)
+              </li>
+            
+              <li>
+                <a href="/tag/css">css</a>
+                (1)
+              </li>
+            
+              <li>
+                <a href="/tag/jquery">jquery</a>
+                (2)
+              </li>
+            
+              <li>
+                <a href="/tag/performance">performance</a>
+                (5)
+              </li>
+            
+              <li>
+                <a href="/tag/tools">tools</a>
+                (2)
+              </li>
+            
+              <li>
+                <a href="/tag/html5">html5</a>
+                (3)
+              </li>
+            
+              <li>
+                <a href="/tag/adequatelygood">adequatelygood</a>
+                (1)
+              </li>
+            
+              <li>
+                <a href="/tag/timers">timers</a>
+                (2)
+              </li>
+            
+              <li>
+                <a href="/tag/module%20pattern">module pattern</a>
+                (3)
+              </li>
+            
+              <li>
+                <a href="/tag/talks">talks</a>
+                (1)
+              </li>
+            
+              <li>
+                <a href="/tag/slide">slide</a>
+                (1)
+              </li>
+            
+              <li>
+                <a href="/tag/python">python</a>
+                (1)
+              </li>
+            
+              <li>
+                <a href="/tag/debugging">debugging</a>
+                (1)
+              </li>
+            
+              <li>
+                <a href="/tag/testing">testing</a>
+                (2)
+              </li>
+            
+              <li>
+                <a href="/tag/hashbang">hashbang</a>
+                (1)
+              </li>
+            
+            </ul>
+          </div>
+
+          <hr />
+
+          
+        </div>
+      </div>
+    </div>
+
+    <script>
+      (function() {
+        var archiveLink = document.getElementById("archiveLink"),
+            archives = document.getElementById("archives");
+
+        archiveLink.onclick = function() {
+          if (archives.className.match(/\bexpanded\b/)) {
+            archives.className = archives.className.replace(/\bexpanded\b/g, '');
+          } else {
+            archives.className += ' expanded';
+          }
+          return false;
+        };
+      }());
+    </script>
+
+    <!-- Google Analytics -->
+    <script type="text/javascript">var _gaq =_gaq||[]; _gaq.push(['_setAccount','UA-251077-4']);_gaq.push(['_trackPageview']);(function(){var ga=document.createElement('script');ga.type='text/javascript';ga.async=true;ga.src=('https:'==document.location.protocol?'https://ssl':'http://www')+'.google-analytics.com/ga.js';(document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(ga);})();</script>
+  </body>
+</html>

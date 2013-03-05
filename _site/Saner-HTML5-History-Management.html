@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Saner HTML5 History Management</title>
+
+    <!-- CSS, including Blueprint, jQuery w/Smoothness, and AG CSS -->
+    <link rel="stylesheet" href="/css/blueprint/blueprint.min.css" media="screen, projection" />
+    <link rel="stylesheet" href="/css/blueprint/print.min.css" media="print" />
+    <!--[if lt IE 8]>
+      <link rel="stylesheet" href="/css/blueprint/ie.min.css" media="screen, projection">
+    <![endif]-->
+    <link rel="stylesheet" href="/css/ag.css" media="screen" />
+
+    <!-- Extra <head> Links -->
+    <link rel="alternate" type="application/atom+xml" title="Adequately Good Atom Feed" href="http://www.adequatelygood.com/feeds/atom.xml" />
+
+    <!-- TODO: favicon -->
+
+    <!-- IE HTML5 Compatibility -->
+    <!--[if IE]>
+      <script type="text/javascript">
+        (function () {
+          var tags = "header hgroup nav article time footer".split(" "),
+            i = 0,
+            l = tags.length;
+          for (; i < l; i += 1) {
+            document.createElement(tags[i]);
+          }
+        }());
+      </script>
+    <![endif]-->
+  </head>
+  <body>
+    <a name="top"></a>
+    <div id="container" class="container">
+
+      <!-- Header -->
+      <header class="span-24 last">
+        <!-- Title -->
+        <div id="title" class="span-24 last">
+          <div class="span-17 colborder prepend-top append-bottom">
+            <hgroup>
+              <h1>
+                <a href="/">adequately good</a>
+              </h1>
+              <h3 class="prepend-2 alt">decent programming advice</h3>
+            </hgroup>
+          </div>
+          <div class="span-6 last prepend-top append-bottom">
+            <h2>
+              written by
+              <a href="http://twitter.com/bcherry">ben cherry</a>
+            </h2>
+          </div>
+        </div>
+
+        <hr />
+
+        <!-- Navigation Bar -->
+        <nav class="prepend-2 span-20 append-2 last append-bottom">
+          <div class="span-5">
+            <a href="/">home</a>
+          </div>
+          <div class="span-5">
+            <a href="#" id="archiveLink">archives</a>
+          </div>
+          <div class="span-5">
+            <a href="/about.html">about</a>
+          </div>
+          <div class="span-5 last">
+            <a href="/feeds/atom.xml">feed</a>
+          </div>
+        </nav>
+
+        <!-- Archives Links -->
+        <div id="archives" class="span-24 last smallalts">
+          <hr />
+          <div class="archivelinks">
+            <span class="alt">posts by year</span>
+            
+              
+              
+              
+            
+              
+              
+              
+            
+              
+              
+              
+            
+              
+              
+              
+            
+              
+              
+              
+            
+              
+              
+              
+                <a class="tight" href="/2009">2009</a>
+              
+            
+              
+              
+              
+            
+              
+              
+              
+            
+              
+              
+              
+            
+              
+              
+              
+            
+              
+              
+              
+            
+              
+              
+              
+            
+              
+              
+              
+            
+              
+              
+              
+            
+              
+              
+              
+            
+              
+              
+              
+            
+              
+              
+              
+            
+              
+              
+              
+            
+              
+              
+              
+            
+              
+              
+              
+            
+              
+              
+              
+            
+              
+              
+              
+                <a class="tight" href="/2010">2010</a>
+              
+            
+              
+              
+              
+            
+              
+              
+              
+                <a class="tight" href="/2011">2011</a>
+              
+            
+          </div>
+        </div>
+
+        <hr />
+      </header>
+
+      <div id="colcontainer" class="span-24 last">
+        <!-- Main content: Posts, etc. -->
+        <div id="content" class="span-17 colborder">
+          <a name="main"></a>
+          
+<article class="span-17 last">
+  <header class="span-17 last">
+  
+    <time class="alt" datetime="2010-07-25" pubdate>2010-07-25</time>
+  
+  <h1><a href="/Saner-HTML5-History-Management.html">Saner HTML5 History Management</a></h1>
+</header>
+  <div id="blogbody" class="span-17 last entry">
+    <h2 id='hashchange'>Hashchange</h2>
+
+<p>This event is quite simple. Whenever the <code>window.location.hash</code> property changes, by following a link, setting the property, editing the URL bar, or using back/forward to move through browser history, the &#8220;hashchange&#8221; event is fired from the window. Using it is really easy:</p>
+
+<pre><code>window.onhashchange = function() {
+	alert(&quot;hash changed!&quot;);
+};
+window.location.hash = Math.random(); // alerts &quot;hash changed!&quot;</code></pre>
+
+<p>This feature is implemented in recent versions of all major browsers. In older browsers like Internet Explorer 6 and 7, you can easily provide it by polling the hash property on an interval, and manually firing an event when it changes. This is easy to build into a jQuery plugin, which <a href='http://benalman.com/'>Ben Alman</a> did in the robust <a href='http://benalman.com/projects/jquery-hashchange-plugin/'>jquery.hashchange.js plugin</a>.</p>
+
+<h2 id='history_management'>History Management</h2>
+
+<p>This feature is a bit more complex. Browsers that support it add a <code>window.history</code> object, with the following properties:</p>
+
+<ul>
+<li><code>window.history.back()</code> and <code>window.history.forward()</code>, which provide programmatic interfaces to browser back and forward functions.</li>
+
+<li><code>window.history.pushState(stateObj, title, url)</code>. This method pushes a new entry into the browser history, which then becomes the browser&#8217;s current state. You can provide any JSON-stringifiable object to send with it, and the browser will provide that object again when you navigate to that point (more on that in a bit). More importantly, if you provide a URL, the browser will change the URL displayed in the address bar, without reloading the page. The new URL must be on the same domain, but you can change the rest of it, which is the <code>window.location.pathname</code> and <code>window.location.hash</code>. Changing the URL in this way will not trigger a &#8220;hashchange&#8221; event, though.</li>
+
+<li><code>window.history.replaceState(stateObj, title, url)</code>. This is just like <code>window.history.pushState</code>, except that the current browser state is removed from the history, so you cannot hit &#8220;back&#8221; to return to it.</li>
+
+<li><code>window.onpopstate</code>. This event is fired whenever a state object is removed from the browser history, which occurs on browser &#8220;back&#8221; or &#8220;forward&#8221;. State objects are persisted on the user&#8217;s hard disk between sessions, which is a nice feature. The object passed into a call to <code>pushState</code> or <code>replaceState</code> is provided as the <code>state</code> property on the event object in the &#8220;popstate&#8221; event.</li>
+</ul>
+
+<p>This feature is implemented in the latest versions of WebKit, which includes Safari and Chrome. Additionally, the Firefox 4 betas include support for this.</p>
+
+<h2 id='whats_the_use_case'>What&#8217;s the Use Case?</h2>
+
+<p>The new history management stuff is very promising, because it allows a web application to live across many physical URLs, but be run in a single instance. This is important for certain kinds of applications, where using hashes is not universally suitable.</p>
+
+<p>For instance, at Twitter, we currently update your URL hash as you navigate around the application, to make bookmarkable pages like <a href='http://twitter.com/#replies'>http://twitter.com/#replies</a>. However, we force a full page load for certain pages, most notably profile pages (e.g. <a href='http://twitter.com/bcherry'>http://twitter.com/bcherry</a>) and permalink pages (e.g. <a href='http://twitter.com/bcherry/status/18966802499'>http://twitter.com/bcherry/status/18966802499</a>). This is so that those URLs can be copied from the address bar and posted on the web.</p>
+
+<p>We want to make sure that users without JavaScript and search engine bots crawling links to our site will get the correct page from the server (since the browser does not send a hash along to the server). This would not be possible if those URLs used hashes. Unfortunately, this means the application is slower, because a full page load is needed going into and out of those locations.</p>
+
+<p>This is where HTML5 History Management could be useful.</p>
+
+<h2 id='so_whats_the_problem'>So What&#8217;s the Problem?</h2>
+
+<p>Unfortunately, the existing implementation of history management is not useful, and not in the spirit of the web.</p>
+
+<p>Our web applications should be built to respond to a URL. Both the client and server versions of an application should understand a shared URL structure, and know how to present the same page to the browser that reflects that URL.</p>
+
+<p>Allowing developers to store extra state information in the browser history is missing the point. The only thing stored in history should be a URL, and the browser can associate a title with it if it chooses.</p>
+
+<p>This is RESTful design, mirrored on client and server. Modern browsers can support changing the URL without reloading the page from the server, and older ones can continue to hit the server every time.</p>
+
+<p>In this way, we can build applications that degrade correctly in older browsers, and when viewed by bots, while providing a faster experience for users with modern browsers.</p>
+
+<h2 id='enter_pathchange'>Enter &#8220;pathchange&#8221;</h2>
+
+<p>Both &#8220;hashchange&#8221; and <code>pushState</code>/&#8221;popstate&#8221; should be replaced with &#8220;pathchange&#8221;, which is an event that fires when the URL changes in any way. This event does not provide any information, the application should inspect the current URL to discover the state it should enter. Relative links within a page should not force page reloads, they should instead just trigger the &#8220;pathchange&#8221; event.</p>
+
+<p>It turns out that it&#8217;s possible to implement this event in modern browsers now, based on the features they already have. Here&#8217;s how:</p>
+
+<ol>
+<li>Listen to &#8220;hashchange&#8221;, and trigger &#8220;pathchange&#8221; when it occurs</li>
+
+<li>Poll the hash in browsers without &#8220;hashchange&#8221; support, and trigger &#8220;hashchange&#8221;, which triggers &#8220;pathchange&#8221;</li>
+
+<li>With history support, listen to &#8220;popstate&#8221;, and trigger &#8220;pathchange&#8221; when it occurs</li>
+
+<li>With history support, intercept all relative links when they are clicked, and prevent normal navigation. Call <code>window.history.pushState(null, null, href)</code> instead, and trigger a &#8220;pathchange&#8221;.</li>
+
+<li>Provide a helper function to make navigation to new URLs using <code>window.history.pushState</code>, when supported, easy.</li>
+</ol>
+
+<p>I&#8217;ve implemented all of this as a <a href='http://www.bcherry.net/static/lib/js/jquery.pathchange.js'>jQuery plugin</a> that is quite easy to use:</p>
+
+<pre><code>$(function() {
+	$.pathchange.init(); // setup event listeners, etc.
+	$(window).pathchange(function() {
+		respondToUrl();
+	}).trigger(&quot;pathchange&quot;);
+
+	$.pathchange.changeTo(&quot;/foo&quot;);
+});</code></pre>
+
+<p>I&#8217;ve also created a demo page that presents <a href='http://www.bcherry.net/playground/sanerhtml5history'>A Saner HTML5 History App</a> that uses <a href='http://www.bcherry.net/static/lib/js/jquery.pathchange.js'>jquery.pathchange.js</a> under the hood. Check it out in various browsers to see the HTML5 magic at work, and be sure to use your browser &#8220;back&#8221; and &#8220;forward&#8221; buttons, and reload the page a few times.</p>
+
+<p>That&#8217;s my take on the HTML5 history features. It&#8217;s unfortunate that what the browsers are implementing is not what we really need, but it&#8217;s encouraging that they do provide enough to implement what we do really need. Let me know in the comments if you agree, disagree, or have questions about my approach.</p>
+<span class='note'>___Note Number One: It's also worth pointing out that I discovered a [serious bug](https://bugs.webkit.org/show_bug.cgi?id=42940) in WebKit's implementation of history management while working on this today.  In short, the "popstate" event is often lost when the network is occupied, which makes little sense.  [Here's a demo page with a reproducible case](http://www.bcherry.net/playground/pushstate) that I threw together.  It fires off a request to download an image which takes 1s on every "popstate", which means hitting "back" more than once every second leads to lost history entries and an application that gets out of sync with the URL.  You could work around this by polling the URL in addition to listening to "popstate", but it's not a good workaround.  Until this is fixed, you'll have to be wary of this if you ship this feature to your users, and it probably is not suitable for very complex AJAX apps.  Firefox 4 does not have the same problem.___</span><span class='note'>___Note Number 2: This article was originally published around 4am PST on July 26th.  The author published a revision around 8pm PST the following day, to make it a little less incohorent and a little more useful.  Luckily, the author uses Git to prepare Markdown-formatted articles, so you can [view the diff](http://github.com/bcherry/adequatelygood/commit/eb688c7809e8d5f61f9ed12442d3a578d46fab97) if you'd like to find out what changed.___</span>
+  </div>
+</article>
+
+<div id="more_reading" class="span-17 last">
+  <p class="smallalts tags">
+    <span class="alt">filed under</span> <a class="tight" href="/tag/html5">html5</a><span class="alt">,</span> <a class="tight" href="/tag/javascript">javascript</a><span class="alt">, and</span> <a class="tight" href="/tag/performance">performance</a>
+  </p>
+</div>
+
+<div id="comments_wrapper" class="span-17 last">
+  <div id="disqus_thread"></div>
+  <script type="text/javascript">
+    // Disqus Comments variables
+    var disqus_developer = false;
+    var disqus_container_id = "comments_wrapper";
+  </script>
+  <script type="text/javascript" src="http://disqus.com/forums/adequatelygood/embed.js"></script>
+  <noscript>
+    <a href="http://disqus.com/forums/adequatelygood/?url=ref">View the discussion thread.</a>
+  </noscript>
+</div>
+
+        </div>
+
+        <!-- Sidebar: Search, links, etc. -->
+        <div id="sidebar" class="span-6 last">
+          <hr class="space" />
+
+          <div id="links">
+            <h3>the author</h3>
+            <p>
+              Ben is a 25 year-old software engineer. He lives and works in San Francisco. Many people think he invented the term "hoisting" in JavaScript, but this is untrue.
+            </p>
+            <ul>
+              <li><a href="http://twitter.com/bcherry">Twitter</a> - @<a class="twitter-anywhere-user" href="http://twitter.com/bcherry">bcherry</a></li>
+              <li><a href="http://github.com/bcherry">GitHub</a> - My Code</li>
+              <li><a href="http://www.linkedin.com/in/bcherryprogrammer">LinkedIn</a> - Professional Profile</li>
+              <li><a href="http://www.facebook.com/bcherry">Facebook</a> - That Other Social Network</li>
+              <li><a href="http://www.bcherry.net/talks/">Presentations</a> - Slides From My Talks</li>
+            </ul>
+            <iframe allowtransparency="true" frameborder="0" scrolling="no"
+              src="http://platform.twitter.com/widgets/follow_button.html?screen_name=bcherry&amp;button=grey&amp;text_color=7F7F7F&amp;link_color=666666"
+              style="width:300px; height:20px;"></iframe>
+          </div>
+
+          <hr />
+
+          <div id="tags">
+            <h3>categories</h3>
+            <ul>
+            
+              <li>
+                <a href="/tag/javascript">javascript</a>
+                (21)
+              </li>
+            
+              <li>
+                <a href="/tag/social%20gaming">social gaming</a>
+                (1)
+              </li>
+            
+              <li>
+                <a href="/tag/css">css</a>
+                (1)
+              </li>
+            
+              <li>
+                <a href="/tag/jquery">jquery</a>
+                (2)
+              </li>
+            
+              <li>
+                <a href="/tag/performance">performance</a>
+                (5)
+              </li>
+            
+              <li>
+                <a href="/tag/tools">tools</a>
+                (2)
+              </li>
+            
+              <li>
+                <a href="/tag/html5">html5</a>
+                (3)
+              </li>
+            
+              <li>
+                <a href="/tag/adequatelygood">adequatelygood</a>
+                (1)
+              </li>
+            
+              <li>
+                <a href="/tag/timers">timers</a>
+                (2)
+              </li>
+            
+              <li>
+                <a href="/tag/module%20pattern">module pattern</a>
+                (3)
+              </li>
+            
+              <li>
+                <a href="/tag/talks">talks</a>
+                (1)
+              </li>
+            
+              <li>
+                <a href="/tag/slide">slide</a>
+                (1)
+              </li>
+            
+              <li>
+                <a href="/tag/python">python</a>
+                (1)
+              </li>
+            
+              <li>
+                <a href="/tag/debugging">debugging</a>
+                (1)
+              </li>
+            
+              <li>
+                <a href="/tag/testing">testing</a>
+                (2)
+              </li>
+            
+              <li>
+                <a href="/tag/hashbang">hashbang</a>
+                (1)
+              </li>
+            
+            </ul>
+          </div>
+
+          <hr />
+
+          
+        </div>
+      </div>
+    </div>
+
+    <script>
+      (function() {
+        var archiveLink = document.getElementById("archiveLink"),
+            archives = document.getElementById("archives");
+
+        archiveLink.onclick = function() {
+          if (archives.className.match(/\bexpanded\b/)) {
+            archives.className = archives.className.replace(/\bexpanded\b/g, '');
+          } else {
+            archives.className += ' expanded';
+          }
+          return false;
+        };
+      }());
+    </script>
+
+    <!-- Google Analytics -->
+    <script type="text/javascript">var _gaq =_gaq||[]; _gaq.push(['_setAccount','UA-251077-4']);_gaq.push(['_trackPageview']);(function(){var ga=document.createElement('script');ga.type='text/javascript';ga.async=true;ga.src=('https:'==document.location.protocol?'https://ssl':'http://www')+'.google-analytics.com/ga.js';(document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(ga);})();</script>
+  </body>
+</html>
