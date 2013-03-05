@@ -74,7 +74,7 @@
         </nav>
 
         <!-- Archives Links -->
-        <div id="archives" class="span-24 last smallalts" style="display:none;">
+        <div id="archives" class="span-24 last smallalts">
           <hr />
           <div class="archivelinks">
             <span class="alt">posts by year</span>
@@ -155,19 +155,20 @@
       </div>
     </div>
 
-    <!-- Exception Hub start -->
-    <script src="http://js.exceptionhub.com/javascripts/eh.js"></script>
     <script>
-      ExceptionHub.setup("8ff0f84d25456b049a9c1a83f8e62b56", 21, 'production');
-    </script>
-    <!-- Exception Hub end -->
+      (function() {
+        var archiveLink = document.getElementById("archiveLink"),
+            archives = document.getElementById("archives");
 
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-    <script>
-      jQuery.noConflict();
-      jQuery("#archiveLink").click(function() {
-        jQuery("#archives").slideToggle();
-      });
+        archiveLink.onclick = function() {
+          if (archives.className.match(/\bexpanded\b/)) {
+            archives.className = archives.className.replace(/\bexpanded\b/g, '');
+          } else {
+            archives.className += ' expanded';
+          }
+          return false;
+        };
+      }());
     </script>
 
     <!-- Google Analytics -->

@@ -117,6 +117,19 @@ nav span {
 	margin-right: 0.5em;
 }
 
+#archives {
+	height: 0;
+	overflow: hidden;
+	-webkit-transition: height 300ms linear;
+	   -moz-transition: height 300ms linear;
+	    -ms-transition: height 300ms linear;
+	   	 -o-transition: height 300ms linear;
+}
+
+#archives.expanded {
+	height: 25px;
+}
+
 .pager {
 	font-size: 14pt;
 }
