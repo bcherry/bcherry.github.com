@@ -2,7 +2,7 @@
 title: Building a Better Friend Selector
 layout: post
 tags: [javascript, social gaming]
-feed_id: http://www.adequatelygood.com/2009/11/Building-a-Better-Friend-Selector
+legacy_id: http://www.adequatelygood.com/2009/11/Building-a-Better-Friend-Selector
 permalink: /Building-a-Better-Friend-Selector.html
 alias: /2009/11/Building-a-Better-Friend-Selector/index.html
 ---

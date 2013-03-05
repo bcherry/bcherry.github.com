@@ -1,7 +1,7 @@
 ---
 title: Debugging Closures and Modules
 layout: post
-feed_id: http://www.adequatelygood.com/2010/4/Debugging-Closures-and-Modules
+legacy_id: http://www.adequatelygood.com/2010/4/Debugging-Closures-and-Modules
 permalink: /Debugging-Closures-and-Modules.html
 alias: /2010/4/Debugging-Closures-and-Modules/index.html
 tags: [javascript, module pattern, debugging]

@@ -2,7 +2,7 @@
 title: jQuery Micro-templates
 layout: post
 tags: [javascript, jquery]
-feed_id: http://www.adequatelygood.com/2009/11/jQuery-Micro-templates
+legacy_id: http://www.adequatelygood.com/2009/11/jQuery-Micro-templates
 permalink: /jQuery-Micro-templates.html
 alias: /2009/11/jQuery-Micro-templates/index.html
 ---
