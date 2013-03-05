@@ -3,7 +3,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <title type="text">Adequately Good</title>
     <subtitle type="html">decent programming advice</subtitle>
-    <updated>2013-03-04T21:29:15-08:00</updated>
+    <updated>2013-03-04T22:11:54-08:00</updated>
     <id>tag:example.org,2003:3</id>
     <link rel="alternate" type="text/html" hreflang="en" href="http://www.adequatelygood.com/"/>
     <link rel="self" type="application/atom+xml" href="http://www.adequatelygood.com/feeds/atom.xml" />
@@ -17,7 +17,7 @@
     <entry>
         <title>Replacing `setTimeout` Globally</title>
 
-        <link type="text/html" rel="alternate" href="http://www.adequatelygood.com/2011/4/Replacing-setTimeout-Globally"/>
+        <link type="text/html" rel="alternate" href="http://www.adequatelygood.com/Replacing-setTimeout-Globally.html"/>
         <id>http://www.adequatelygood.com/2011/4/Replacing-setTimeout-Globally</id>
         <updated>2011-04-07T00:00:00-07:00</updated>
         <published>2011-04-07T00:00:00-07:00</published>
@@ -135,7 +135,7 @@ setTimeout = 1; // Error&lt;/code&gt;&lt;/pre&gt;
     <entry>
         <title>Thoughts on the Hashbang</title>
 
-        <link type="text/html" rel="alternate" href="http://www.adequatelygood.com/2011/2/Thoughts-on-the-Hashbang"/>
+        <link type="text/html" rel="alternate" href="http://www.adequatelygood.com/Thoughts-on-the-Hashbang.html"/>
         <id>http://www.adequatelygood.com/2011/2/Thoughts-on-the-Hashbang</id>
         <updated>2011-02-11T00:00:00-08:00</updated>
         <published>2011-02-11T00:00:00-08:00</published>
@@ -174,7 +174,7 @@ setTimeout = 1; // Error&lt;/code&gt;&lt;/pre&gt;
     <entry>
         <title>Saner HTML5 History Management</title>
 
-        <link type="text/html" rel="alternate" href="http://www.adequatelygood.com/2010/7/Saner-HTML5-History-Management"/>
+        <link type="text/html" rel="alternate" href="http://www.adequatelygood.com/Saner-HTML5-History-Management.html"/>
         <id>http://www.adequatelygood.com/2010/7/Saner-HTML5-History-Management</id>
         <updated>2010-07-25T00:00:00-07:00</updated>
         <published>2010-07-25T00:00:00-07:00</published>
@@ -273,7 +273,7 @@ window.location.hash = Math.random(); // alerts &amp;quot;hash changed!&amp;quot
     <entry>
         <title>Writing Testable JavaScript</title>
 
-        <link type="text/html" rel="alternate" href="http://www.adequatelygood.com/2010/7/Writing-Testable-JavaScript"/>
+        <link type="text/html" rel="alternate" href="http://www.adequatelygood.com/Writing-Testable-JavaScript.html"/>
         <id>http://www.adequatelygood.com/2010/7/Writing-Testable-JavaScript</id>
         <updated>2010-07-08T00:00:00-07:00</updated>
         <published>2010-07-08T00:00:00-07:00</published>
@@ -506,7 +506,7 @@ function redirectTo(url) {
     <entry>
         <title>Spying Constructors in JavaScript</title>
 
-        <link type="text/html" rel="alternate" href="http://www.adequatelygood.com/2010/5/Spying-Constructors-in-JavaScript"/>
+        <link type="text/html" rel="alternate" href="http://www.adequatelygood.com/Spying-Constructors-in-JavaScript.html"/>
         <id>http://www.adequatelygood.com/2010/5/Spying-Constructors-in-JavaScript</id>
         <updated>2010-05-12T00:00:00-07:00</updated>
         <published>2010-05-12T00:00:00-07:00</published>
@@ -643,7 +643,7 @@ new F() instanceof F; // true&lt;/code&gt;&lt;/pre&gt;
     <entry>
         <title>Debugging Closures and Modules</title>
 
-        <link type="text/html" rel="alternate" href="http://www.adequatelygood.com/2010/4/Debugging-Closures-and-Modules"/>
+        <link type="text/html" rel="alternate" href="http://www.adequatelygood.com/Debugging-Closures-and-Modules.html"/>
         <id>http://www.adequatelygood.com/2010/4/Debugging-Closures-and-Modules</id>
         <updated>2010-04-13T00:00:00-07:00</updated>
         <published>2010-04-13T00:00:00-07:00</published>
@@ -756,7 +756,7 @@ var foo = (function () {
     <entry>
         <title>Object-to-Primitive Conversions in JavaScript</title>
 
-        <link type="text/html" rel="alternate" href="http://www.adequatelygood.com/2010/3/Object-to-Primitive-Conversions-in-JavaScript"/>
+        <link type="text/html" rel="alternate" href="http://www.adequatelygood.com/Object-to-Primitive-Conversions-in-JavaScript.html"/>
         <id>http://www.adequatelygood.com/2010/3/Object-to-Primitive-Conversions-in-JavaScript</id>
         <updated>2010-03-30T00:00:00-07:00</updated>
         <published>2010-03-30T00:00:00-07:00</published>
@@ -1025,7 +1025,7 @@ alert(+foo); // NaN (the worst!)&lt;/code&gt;&lt;/pre&gt;
     <entry>
         <title>JavaScript-Style Objects in Python</title>
 
-        <link type="text/html" rel="alternate" href="http://www.adequatelygood.com/2010/3/JavaScript-Style-Objects-in-Python"/>
+        <link type="text/html" rel="alternate" href="http://www.adequatelygood.com/JavaScript-Style-Objects-in-Python.html"/>
         <id>http://www.adequatelygood.com/2010/3/JavaScript-Style-Objects-in-Python</id>
         <updated>2010-03-26T00:00:00-07:00</updated>
         <published>2010-03-26T00:00:00-07:00</published>
@@ -1138,7 +1138,7 @@ print foo # {&amp;#39;a&amp;#39;: 1, &amp;#39;b&amp;#39;: 2}&lt;/code&gt;&lt;/pr
     <entry>
         <title>JavaScript: Better and Faster</title>
 
-        <link type="text/html" rel="alternate" href="http://www.adequatelygood.com/2010/3/JavaScript-Better-and-Faster"/>
+        <link type="text/html" rel="alternate" href="http://www.adequatelygood.com/JavaScript-Better-and-Faster.html"/>
         <id>http://www.adequatelygood.com/2010/3/JavaScript-Better-and-Faster</id>
         <updated>2010-03-21T00:00:00-07:00</updated>
         <published>2010-03-21T00:00:00-07:00</published>
@@ -1160,7 +1160,7 @@ print foo # {&amp;#39;a&amp;#39;: 1, &amp;#39;b&amp;#39;: 2}&lt;/code&gt;&lt;/pr
     <entry>
         <title>JavaScript Module Pattern: In-Depth</title>
 
-        <link type="text/html" rel="alternate" href="http://www.adequatelygood.com/2010/3/JavaScript-Module-Pattern-In-Depth"/>
+        <link type="text/html" rel="alternate" href="http://www.adequatelygood.com/JavaScript-Module-Pattern-In-Depth.html"/>
         <id>http://www.adequatelygood.com/2010/3/JavaScript-Module-Pattern-In-Depth</id>
         <updated>2010-03-12T00:00:00-08:00</updated>
         <published>2010-03-12T00:00:00-08:00</published>
@@ -1355,8 +1355,8 @@ print foo # {&amp;#39;a&amp;#39;: 1, &amp;#39;b&amp;#39;: 2}&lt;/code&gt;&lt;/pr
     <entry>
         <title>Performance of === vs. ==</title>
 
-        <link type="text/html" rel="alternate" href="http://www.adequatelygood.com2010/3/Performance-of-vs-"/>
-        <id>http://www.adequatelygood.com2010/3/Performance-of-vs-</id>
+        <link type="text/html" rel="alternate" href="http://www.adequatelygood.com/Performance-of-vs-.html"/>
+        <id>http://www.adequatelygood.com/2010/3/Performance-of-vs-</id>
         <updated>2010-03-08T00:00:00-08:00</updated>
         <published>2010-03-08T00:00:00-08:00</published>
         <author>
@@ -1419,7 +1419,7 @@ print foo # {&amp;#39;a&amp;#39;: 1, &amp;#39;b&amp;#39;: 2}&lt;/code&gt;&lt;/pr
     <entry>
         <title>Minimum Timer Intervals in JavaScript</title>
 
-        <link type="text/html" rel="alternate" href="http://www.adequatelygood.com/2010/2/Minimum-Timer-Intervals-in-JavaScript"/>
+        <link type="text/html" rel="alternate" href="http://www.adequatelygood.com/Minimum-Timer-Intervals-in-JavaScript.html"/>
         <id>http://www.adequatelygood.com/2010/2/Minimum-Timer-Intervals-in-JavaScript</id>
         <updated>2010-02-26T00:00:00-08:00</updated>
         <published>2010-02-26T00:00:00-08:00</published>
@@ -1482,7 +1482,7 @@ go();&lt;/code&gt;&lt;/pre&gt;
     <entry>
         <title>This Blog - Now With HTML5</title>
 
-        <link type="text/html" rel="alternate" href="http://www.adequatelygood.com/2010/2/This-Blog-Now-With-HTML5"/>
+        <link type="text/html" rel="alternate" href="http://www.adequatelygood.com/This-Blog-Now-With-HTML5.html"/>
         <id>http://www.adequatelygood.com/2010/2/This-Blog-Now-With-HTML5</id>
         <updated>2010-02-19T00:00:00-08:00</updated>
         <published>2010-02-19T00:00:00-08:00</published>
@@ -1529,7 +1529,7 @@ go();&lt;/code&gt;&lt;/pre&gt;
     <entry>
         <title>Finding Improper JavaScript Globals</title>
 
-        <link type="text/html" rel="alternate" href="http://www.adequatelygood.com/2010/2/Finding-Improper-JavaScript-Globals"/>
+        <link type="text/html" rel="alternate" href="http://www.adequatelygood.com/Finding-Improper-JavaScript-Globals.html"/>
         <id>http://www.adequatelygood.com/2010/2/Finding-Improper-JavaScript-Globals</id>
         <updated>2010-02-12T00:00:00-08:00</updated>
         <published>2010-02-12T00:00:00-08:00</published>
@@ -1621,7 +1621,7 @@ z; // undefined&lt;/pre&gt;
     <entry>
         <title>JavaScript Scoping and Hoisting</title>
 
-        <link type="text/html" rel="alternate" href="http://www.adequatelygood.com/2010/2/JavaScript-Scoping-and-Hoisting"/>
+        <link type="text/html" rel="alternate" href="http://www.adequatelygood.com/JavaScript-Scoping-and-Hoisting.html"/>
         <id>http://www.adequatelygood.com/2010/2/JavaScript-Scoping-and-Hoisting</id>
         <updated>2010-02-08T00:00:00-08:00</updated>
         <published>2010-02-08T00:00:00-08:00</published>
@@ -1819,7 +1819,7 @@ function foo(a, b, c) {
     <entry>
         <title>Search/Replace in the DOM with jQuery</title>
 
-        <link type="text/html" rel="alternate" href="http://www.adequatelygood.com/2010/2/SearchReplace-in-the-DOM-with-jQuery"/>
+        <link type="text/html" rel="alternate" href="http://www.adequatelygood.com/SearchReplace-in-the-DOM-with-jQuery.html"/>
         <id>http://www.adequatelygood.com/2010/2/SearchReplace-in-the-DOM-with-jQuery</id>
         <updated>2010-02-03T00:00:00-08:00</updated>
         <published>2010-02-03T00:00:00-08:00</published>
@@ -1847,7 +1847,7 @@ function foo(a, b, c) {
     <entry>
         <title>Why JavaScript's &quot;new&quot; Keyword Sucks</title>
 
-        <link type="text/html" rel="alternate" href="http://www.adequatelygood.com/2010/2/Why-JavaScripts-new-Keyword-Sucks"/>
+        <link type="text/html" rel="alternate" href="http://www.adequatelygood.com/Why-JavaScripts-new-Keyword-Sucks.html"/>
         <id>http://www.adequatelygood.com/2010/2/Why-JavaScripts-new-Keyword-Sucks</id>
         <updated>2010-02-01T00:00:00-08:00</updated>
         <published>2010-02-01T00:00:00-08:00</published>
@@ -1883,7 +1883,7 @@ inner()
     <entry>
         <title>Preloading JS and CSS as Print Stylesheets</title>
 
-        <link type="text/html" rel="alternate" href="http://www.adequatelygood.com/2010/1/Preloading-JS-and-CSS-as-Print-Stylesheets"/>
+        <link type="text/html" rel="alternate" href="http://www.adequatelygood.com/Preloading-JS-and-CSS-as-Print-Stylesheets.html"/>
         <id>http://www.adequatelygood.com/2010/1/Preloading-JS-and-CSS-as-Print-Stylesheets</id>
         <updated>2010-01-29T00:00:00-08:00</updated>
         <published>2010-01-29T00:00:00-08:00</published>
@@ -1925,7 +1925,7 @@ img.src = &quot;/path/to/something.jpg&quot;;&lt;/pre&gt;&lt;/p&gt;
     <entry>
         <title>Consul.js, Simple Logging Abstraction</title>
 
-        <link type="text/html" rel="alternate" href="http://www.adequatelygood.com/2009/11/Consuljs-Simple-Logging-Abstraction"/>
+        <link type="text/html" rel="alternate" href="http://www.adequatelygood.com/Consuljs-Simple-Logging-Abstraction.html"/>
         <id>http://www.adequatelygood.com/2009/11/Consuljs-Simple-Logging-Abstraction</id>
         <updated>2009-11-28T00:00:00-08:00</updated>
         <published>2009-11-28T00:00:00-08:00</published>
@@ -1977,7 +1977,7 @@ consul.info(&quot;See this message in Firebug, Chrome, Safari, Firebug Lite, IE8
     <entry>
         <title>JS Find-and-Replace with Split/Join</title>
 
-        <link type="text/html" rel="alternate" href="http://www.adequatelygood.com/2009/11/JS-Find-and-Replace-with-SplitJoin"/>
+        <link type="text/html" rel="alternate" href="http://www.adequatelygood.com/JS-Find-and-Replace-with-SplitJoin.html"/>
         <id>http://www.adequatelygood.com/2009/11/JS-Find-and-Replace-with-SplitJoin</id>
         <updated>2009-11-05T00:00:00-08:00</updated>
         <published>2009-11-05T00:00:00-08:00</published>
@@ -2014,7 +2014,7 @@ mystring.replace(/,/g,&amp;quot;; &amp;quot;); // Replace the commas with semi-c
     <entry>
         <title>Javascript Pseudo-threading</title>
 
-        <link type="text/html" rel="alternate" href="http://www.adequatelygood.com/2009/11/Javascript-Pseudo-threading"/>
+        <link type="text/html" rel="alternate" href="http://www.adequatelygood.com/Javascript-Pseudo-threading.html"/>
         <id>http://www.adequatelygood.com/2009/11/Javascript-Pseudo-threading</id>
         <updated>2009-11-05T00:00:00-08:00</updated>
         <published>2009-11-05T00:00:00-08:00</published>
@@ -2105,7 +2105,7 @@ ST.startsimple = function() {
     <entry>
         <title>jQuery Micro-templates</title>
 
-        <link type="text/html" rel="alternate" href="http://www.adequatelygood.com/2009/11/jQuery-Micro-templates"/>
+        <link type="text/html" rel="alternate" href="http://www.adequatelygood.com/jQuery-Micro-templates.html"/>
         <id>http://www.adequatelygood.com/2009/11/jQuery-Micro-templates</id>
         <updated>2009-11-05T00:00:00-08:00</updated>
         <published>2009-11-05T00:00:00-08:00</published>
@@ -2141,7 +2141,7 @@ ST.startsimple = function() {
     <entry>
         <title>Managing CSS Through JavaScript</title>
 
-        <link type="text/html" rel="alternate" href="http://www.adequatelygood.com/2009/11/Managing-CSS-Through-Javascript"/>
+        <link type="text/html" rel="alternate" href="http://www.adequatelygood.com/Managing-CSS-Through-Javascript.html"/>
         <id>http://www.adequatelygood.com/2009/11/Managing-CSS-Through-Javascript</id>
         <updated>2009-11-05T00:00:00-08:00</updated>
         <published>2009-11-05T00:00:00-08:00</published>
@@ -2188,7 +2188,7 @@ $css(&amp;quot;styles/controls.css&amp;quot;);&lt;/code&gt;&lt;/pre&gt;
     <entry>
         <title>Building a Better Friend Selector</title>
 
-        <link type="text/html" rel="alternate" href="http://www.adequatelygood.com/2009/11/Building-a-Better-Friend-Selector"/>
+        <link type="text/html" rel="alternate" href="http://www.adequatelygood.com/Building-a-Better-Friend-Selector.html"/>
         <id>http://www.adequatelygood.com/2009/11/Building-a-Better-Friend-Selector</id>
         <updated>2009-11-05T00:00:00-08:00</updated>
         <published>2009-11-05T00:00:00-08:00</published>

@@ -202,7 +202,7 @@
   
     <time class="alt" datetime="2011-04-07" pubdate>2011-04-07</time>
   
-  <h1><a href="/2011/4/Replacing-setTimeout-Globally">Replacing `setTimeout` Globally</a></h1>
+  <h1><a href="/Replacing-setTimeout-Globally.html">Replacing `setTimeout` Globally</a></h1>
 </header>
   <div class="span-17 last entry">
     <html><body><p>Sometimes, you might want to overwrite built-in global methods like <code>setTimeout</code> and <code>setInterval</code>. If you try, you might find that it’s much harder than you think to accomplish this in every browser, particularly if you ever want to find the originals again. After a lot of painful exp...</p></body></html>
@@ -219,7 +219,7 @@
   
     <time class="alt" datetime="2010-07-25" pubdate>2010-07-25</time>
   
-  <h1><a href="/2010/7/Saner-HTML5-History-Management">Saner HTML5 History Management</a></h1>
+  <h1><a href="/Saner-HTML5-History-Management.html">Saner HTML5 History Management</a></h1>
 </header>
   <div class="span-17 last entry">
     <html><body>
@@ -238,7 +238,7 @@
   
     <time class="alt" datetime="2010-07-08" pubdate>2010-07-08</time>
   
-  <h1><a href="/2010/7/Writing-Testable-JavaScript">Writing Testable JavaScript</a></h1>
+  <h1><a href="/Writing-Testable-JavaScript.html">Writing Testable JavaScript</a></h1>
 </header>
   <div class="span-17 last entry">
     <html><body><p>The engineering culture at Twitter requires tests. Lots of tests. I haven’t had formal experience with JavaScript testing before Twitter, so I’ve been learning a lot as I go. In particular, a number of patterns I used to use, write about, and encourage have turned out to be b...</p></body></html>
@@ -253,7 +253,7 @@
   
     <time class="alt" datetime="2010-05-12" pubdate>2010-05-12</time>
   
-  <h1><a href="/2010/5/Spying-Constructors-in-JavaScript">Spying Constructors in JavaScript</a></h1>
+  <h1><a href="/Spying-Constructors-in-JavaScript.html">Spying Constructors in JavaScript</a></h1>
 </header>
   <div class="span-17 last entry">
     <html><body><p>When writing unit-tests for code, a common technique is <strong>spying</strong>, where you set expectations on a method’s invoc...</p></body></html>
@@ -268,7 +268,7 @@
   
     <time class="alt" datetime="2010-04-13" pubdate>2010-04-13</time>
   
-  <h1><a href="/2010/4/Debugging-Closures-and-Modules">Debugging Closures and Modules</a></h1>
+  <h1><a href="/Debugging-Closures-and-Modules.html">Debugging Closures and Modules</a></h1>
 </header>
   <div class="span-17 last entry">
     <html><body><p>The most common co...</p></body></html>
@@ -283,7 +283,7 @@
   
     <time class="alt" datetime="2010-03-30" pubdate>2010-03-30</time>
   
-  <h1><a href="/2010/3/Object-to-Primitive-Conversions-in-JavaScript">Object-to-Primitive Conversions in JavaScript</a></h1>
+  <h1><a href="/Object-to-Primitive-Conversions-in-JavaScript.html">Object-to-Primitive Conversions in JavaScript</a></h1>
 </header>
   <div class="span-17 last entry">
     <html><body><p>Like most object-oriented programming languages, JavaScript provides built-in ways to convert between objects and primitive values, by way of the special <code>toString</code> and <code>valueOf</code> methods. This article will cover the basics of these methods, but then dive into the details of how this stuff really works, bad stuff, performan...</p></body></html>
@@ -300,7 +300,7 @@
   
     <time class="alt" datetime="2010-03-21" pubdate>2010-03-21</time>
   
-  <h1><a href="/2010/3/JavaScript-Better-and-Faster">JavaScript: Better and Faster</a></h1>
+  <h1><a href="/JavaScript-Better-and-Faster.html">JavaScript: Better and Faster</a></h1>
 </header>
   <div class="span-17 last entry">
     <html><body><p>“JavaScript: Better and Faster” is the name of a presentation I gave at <a href="http://www.slide.com">Slide</a> last week. It was generally well-received by the Slide crew so I decided to put a (slightly edited) copy of the <a href="http://www.bcherry.net/talks/js-better-faster">accompanying slidesho...</a></p></body></html>
@@ -315,7 +315,7 @@
   
     <time class="alt" datetime="2010-03-12" pubdate>2010-03-12</time>
   
-  <h1><a href="/2010/3/JavaScript-Module-Pattern-In-Depth">JavaScript Module Pattern: In-Depth</a></h1>
+  <h1><a href="/JavaScript-Module-Pattern-In-Depth.html">JavaScript Module Pattern: In-Depth</a></h1>
 </header>
   <div class="span-17 last entry">
     <html><body><p>The module pattern is a common JavaScript coding pattern. It’s generally well understood, but there ar...</p></body></html>
@@ -330,7 +330,7 @@
   
     <time class="alt" datetime="2010-03-08" pubdate>2010-03-08</time>
   
-  <h1><a href="2010/3/Performance-of-vs-">Performance of === vs. ==</a></h1>
+  <h1><a href="/Performance-of-vs-.html">Performance of === vs. ==</a></h1>
 </header>
   <div class="span-17 last entry">
     <html><body><p>One particular weirdness and unpleasantry in JavaScript is the set of equality operators. Like virtually every language, JavaScript has the standard <code>==</code>, <code>!=</code>, <code>&lt;</code>, <code>&gt;</code>, <code>&lt;=</code>, and <code>&gt;=</code> operators. However, <code>==</code> an...</p></body></html>
@@ -345,7 +345,7 @@
   
     <time class="alt" datetime="2010-02-26" pubdate>2010-02-26</time>
   
-  <h1><a href="/2010/2/Minimum-Timer-Intervals-in-JavaScript">Minimum Timer Intervals in JavaScript</a></h1>
+  <h1><a href="/Minimum-Timer-Intervals-in-JavaScript.html">Minimum Timer Intervals in JavaScript</a></h1>
 </header>
   <div class="span-17 last entry">
     <html><body><p>I was talking with a co-worker today about the behavior of <code>setTimeout</code> and <code>setInterval</code> when given a small interval, like <code>0</code> or <code>1</code>. The <em>expectation</em> would be tha...</p></body></html>
@@ -362,7 +362,7 @@
   
     <time class="alt" datetime="2010-02-12" pubdate>2010-02-12</time>
   
-  <h1><a href="/2010/2/Finding-Improper-JavaScript-Globals">Finding Improper JavaScript Globals</a></h1>
+  <h1><a href="/Finding-Improper-JavaScript-Globals.html">Finding Improper JavaScript Globals</a></h1>
 </header>
   <div class="span-17 last entry">
     <html><body>
@@ -380,7 +380,7 @@
   
     <time class="alt" datetime="2010-02-08" pubdate>2010-02-08</time>
   
-  <h1><a href="/2010/2/JavaScript-Scoping-and-Hoisting">JavaScript Scoping and Hoisting</a></h1>
+  <h1><a href="/JavaScript-Scoping-and-Hoisting.html">JavaScript Scoping and Hoisting</a></h1>
 </header>
   <div class="span-17 last entry">
     <html><body>
@@ -408,7 +408,7 @@ bar();</code></pre>
   
     <time class="alt" datetime="2010-02-03" pubdate>2010-02-03</time>
   
-  <h1><a href="/2010/2/SearchReplace-in-the-DOM-with-jQuery">Search/Replace in the DOM with jQuery</a></h1>
+  <h1><a href="/SearchReplace-in-the-DOM-with-jQuery.html">Search/Replace in the DOM with jQuery</a></h1>
 </header>
   <div class="span-17 last entry">
     <html><body><p>Ever had a need to to a text search/replace through the DOM?  For articles in drafting on this blog I often use the form (TODO: somethi...</p></body></html>
@@ -423,7 +423,7 @@ bar();</code></pre>
   
     <time class="alt" datetime="2010-02-01" pubdate>2010-02-01</time>
   
-  <h1><a href="/2010/2/Why-JavaScripts-new-Keyword-Sucks">Why JavaScript's "new" Keyword Sucks</a></h1>
+  <h1><a href="/Why-JavaScripts-new-Keyword-Sucks.html">Why JavaScript's "new" Keyword Sucks</a></h1>
 </header>
   <div class="span-17 last entry">
     <html><body><pre><code>&gt;&gt;&gt; function F() { return function inner() { return "inner invoked"; }; }
@@ -439,7 +439,7 @@ bar();</code></pre>
   
     <time class="alt" datetime="2010-01-29" pubdate>2010-01-29</time>
   
-  <h1><a href="/2010/1/Preloading-JS-and-CSS-as-Print-Stylesheets">Preloading JS and CSS as Print Stylesheets</a></h1>
+  <h1><a href="/Preloading-JS-and-CSS-as-Print-Stylesheets.html">Preloading JS and CSS as Print Stylesheets</a></h1>
 </header>
   <div class="span-17 last entry">
     <html><body><p><em><strong>UPDATE: This technique has turned out to be dangerous in Chrome.  It seems that Chrome will load the JS files into the cache, but  then set an implied type="text/css" on them.  This means that it will refuse to re-use them as Java...</strong></em></p></body></html>
@@ -454,7 +454,7 @@ bar();</code></pre>
   
     <time class="alt" datetime="2009-11-28" pubdate>2009-11-28</time>
   
-  <h1><a href="/2009/11/Consuljs-Simple-Logging-Abstraction">Consul.js, Simple Logging Abstraction</a></h1>
+  <h1><a href="/Consuljs-Simple-Logging-Abstraction.html">Consul.js, Simple Logging Abstraction</a></h1>
 </header>
   <div class="span-17 last entry">
     <html><body><p>I've been reading <em>Coders At Work</em> by Peter Seibel, and one question he asks in every interview is "How do you debug - print statements, debugger like gdb, or something else?".  For me, print statements are my first tool for any situation.  That's why Firebug is so...</p></body></html>
@@ -469,7 +469,7 @@ bar();</code></pre>
   
     <time class="alt" datetime="2009-11-05" pubdate>2009-11-05</time>
   
-  <h1><a href="/2009/11/JS-Find-and-Replace-with-SplitJoin">JS Find-and-Replace with Split/Join</a></h1>
+  <h1><a href="/JS-Find-and-Replace-with-SplitJoin.html">JS Find-and-Replace with Split/Join</a></h1>
 </header>
   <div class="span-17 last entry">
     <html><body><p><strong><em>Update: This advice is now totally out-of-date and wrong. Just use <code>replace</code>. As <a href="http://jsperf.com/test-join-and-split">recent Browserscope results show</a>, all browsers have optimized <code>replace</code> to be much faster than <code>split</code>/<code>join</code>. Thanks to Luigi van der Pal for pointing this out ...</em></strong></p></body></html>
@@ -484,7 +484,7 @@ bar();</code></pre>
   
     <time class="alt" datetime="2009-11-05" pubdate>2009-11-05</time>
   
-  <h1><a href="/2009/11/Javascript-Pseudo-threading">Javascript Pseudo-threading</a></h1>
+  <h1><a href="/Javascript-Pseudo-threading.html">Javascript Pseudo-threading</a></h1>
 </header>
   <div class="span-17 last entry">
     <html><body>
@@ -503,7 +503,7 @@ bar();</code></pre>
   
     <time class="alt" datetime="2009-11-05" pubdate>2009-11-05</time>
   
-  <h1><a href="/2009/11/jQuery-Micro-templates">jQuery Micro-templates</a></h1>
+  <h1><a href="/jQuery-Micro-templates.html">jQuery Micro-templates</a></h1>
 </header>
   <div class="span-17 last entry">
     <html><body>
@@ -524,7 +524,7 @@ bar();</code></pre>
   
     <time class="alt" datetime="2009-11-05" pubdate>2009-11-05</time>
   
-  <h1><a href="/2009/11/Managing-CSS-Through-Javascript">Managing CSS Through JavaScript</a></h1>
+  <h1><a href="/Managing-CSS-Through-Javascript.html">Managing CSS Through JavaScript</a></h1>
 </header>
   <div class="span-17 last entry">
     <html><body><p>It’s often very difficult to keep track of what CSS goes where. Especially when you load up on Javascript controls and files in a large application, which render markup that depends on some CSS being there. One solution is to “inline” the CSS in the JavaScript, by adding style to each element as it’s created. This works, but it’s messy. Also, browsers are heavily optimized to apply CSS, faster than any Javascript solution could be. But when you’ve got a fancy script manager like LABjs, remembering to statically link all of the important CSS is a pain. Especially so if you’re not sure at page load whethe...</p></body></html>
@@ -539,7 +539,7 @@ bar();</code></pre>
   
     <time class="alt" datetime="2009-11-05" pubdate>2009-11-05</time>
   
-  <h1><a href="/2009/11/Building-a-Better-Friend-Selector">Building a Better Friend Selector</a></h1>
+  <h1><a href="/Building-a-Better-Friend-Selector.html">Building a Better Friend Selector</a></h1>
 </header>
   <div class="span-17 last entry">
     <html><body>

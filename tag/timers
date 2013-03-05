@@ -202,7 +202,7 @@
   
     <time class="alt" datetime="2011-04-07" pubdate>2011-04-07</time>
   
-  <h1><a href="/2011/4/Replacing-setTimeout-Globally">Replacing `setTimeout` Globally</a></h1>
+  <h1><a href="/Replacing-setTimeout-Globally.html">Replacing `setTimeout` Globally</a></h1>
 </header>
   <div class="span-17 last entry">
     <html><body><p>Sometimes, you might want to overwrite built-in global methods like <code>setTimeout</code> and <code>setInterval</code>. If you try, you might find that it’s much harder than you think to accomplish this in every browser, particularly if you ever want to find the originals again. After a lot of painful exp...</p></body></html>
@@ -237,7 +237,7 @@
   
     <time class="alt" datetime="2010-02-26" pubdate>2010-02-26</time>
   
-  <h1><a href="/2010/2/Minimum-Timer-Intervals-in-JavaScript">Minimum Timer Intervals in JavaScript</a></h1>
+  <h1><a href="/Minimum-Timer-Intervals-in-JavaScript.html">Minimum Timer Intervals in JavaScript</a></h1>
 </header>
   <div class="span-17 last entry">
     <html><body><p>I was talking with a co-worker today about the behavior of <code>setTimeout</code> and <code>setInterval</code> when given a small interval, like <code>0</code> or <code>1</code>. The <em>expectation</em> would be tha...</p></body></html>

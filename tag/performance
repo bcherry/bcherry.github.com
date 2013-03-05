@@ -206,7 +206,7 @@
   
     <time class="alt" datetime="2010-07-25" pubdate>2010-07-25</time>
   
-  <h1><a href="/2010/7/Saner-HTML5-History-Management">Saner HTML5 History Management</a></h1>
+  <h1><a href="/Saner-HTML5-History-Management.html">Saner HTML5 History Management</a></h1>
 </header>
   <div class="span-17 last entry">
     <html><body>
@@ -239,7 +239,7 @@
   
     <time class="alt" datetime="2010-03-08" pubdate>2010-03-08</time>
   
-  <h1><a href="2010/3/Performance-of-vs-">Performance of === vs. ==</a></h1>
+  <h1><a href="/Performance-of-vs-.html">Performance of === vs. ==</a></h1>
 </header>
   <div class="span-17 last entry">
     <html><body><p>One particular weirdness and unpleasantry in JavaScript is the set of equality operators. Like virtually every language, JavaScript has the standard <code>==</code>, <code>!=</code>, <code>&lt;</code>, <code>&gt;</code>, <code>&lt;=</code>, and <code>&gt;=</code> operators. However, <code>==</code> an...</p></body></html>
@@ -254,7 +254,7 @@
   
     <time class="alt" datetime="2010-02-26" pubdate>2010-02-26</time>
   
-  <h1><a href="/2010/2/Minimum-Timer-Intervals-in-JavaScript">Minimum Timer Intervals in JavaScript</a></h1>
+  <h1><a href="/Minimum-Timer-Intervals-in-JavaScript.html">Minimum Timer Intervals in JavaScript</a></h1>
 </header>
   <div class="span-17 last entry">
     <html><body><p>I was talking with a co-worker today about the behavior of <code>setTimeout</code> and <code>setInterval</code> when given a small interval, like <code>0</code> or <code>1</code>. The <em>expectation</em> would be tha...</p></body></html>
@@ -279,7 +279,7 @@
   
     <time class="alt" datetime="2010-01-29" pubdate>2010-01-29</time>
   
-  <h1><a href="/2010/1/Preloading-JS-and-CSS-as-Print-Stylesheets">Preloading JS and CSS as Print Stylesheets</a></h1>
+  <h1><a href="/Preloading-JS-and-CSS-as-Print-Stylesheets.html">Preloading JS and CSS as Print Stylesheets</a></h1>
 </header>
   <div class="span-17 last entry">
     <html><body><p><em><strong>UPDATE: This technique has turned out to be dangerous in Chrome.  It seems that Chrome will load the JS files into the cache, but  then set an implied type="text/css" on them.  This means that it will refuse to re-use them as Java...</strong></em></p></body></html>
@@ -296,7 +296,7 @@
   
     <time class="alt" datetime="2009-11-05" pubdate>2009-11-05</time>
   
-  <h1><a href="/2009/11/JS-Find-and-Replace-with-SplitJoin">JS Find-and-Replace with Split/Join</a></h1>
+  <h1><a href="/JS-Find-and-Replace-with-SplitJoin.html">JS Find-and-Replace with Split/Join</a></h1>
 </header>
   <div class="span-17 last entry">
     <html><body><p><strong><em>Update: This advice is now totally out-of-date and wrong. Just use <code>replace</code>. As <a href="http://jsperf.com/test-join-and-split">recent Browserscope results show</a>, all browsers have optimized <code>replace</code> to be much faster than <code>split</code>/<code>join</code>. Thanks to Luigi van der Pal for pointing this out ...</em></strong></p></body></html>

@@ -246,7 +246,7 @@
   
     <time class="alt" datetime="2009-11-05" pubdate>2009-11-05</time>
   
-  <h1><a href="/2009/11/Managing-CSS-Through-Javascript">Managing CSS Through JavaScript</a></h1>
+  <h1><a href="/Managing-CSS-Through-Javascript.html">Managing CSS Through JavaScript</a></h1>
 </header>
   <div class="span-17 last entry">
     <html><body><p>It’s often very difficult to keep track of what CSS goes where. Especially when you load up on Javascript controls and files in a large application, which render markup that depends on some CSS being there. One solution is to “inline” the CSS in the JavaScript, by adding style to each element as it’s created. This works, but it’s messy. Also, browsers are heavily optimized to apply CSS, faster than any Javascript solution could be. But when you’ve got a fancy script manager like LABjs, remembering to statically link all of the important CSS is a pain. Especially so if you’re not sure at page load whethe...</p></body></html>

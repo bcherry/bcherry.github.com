@@ -208,7 +208,7 @@
   
     <time class="alt" datetime="2010-07-08" pubdate>2010-07-08</time>
   
-  <h1><a href="/2010/7/Writing-Testable-JavaScript">Writing Testable JavaScript</a></h1>
+  <h1><a href="/Writing-Testable-JavaScript.html">Writing Testable JavaScript</a></h1>
 </header>
   <div class="span-17 last entry">
     <html><body><p>The engineering culture at Twitter requires tests. Lots of tests. I haven’t had formal experience with JavaScript testing before Twitter, so I’ve been learning a lot as I go. In particular, a number of patterns I used to use, write about, and encourage have turned out to be b...</p></body></html>
@@ -225,7 +225,7 @@
   
     <time class="alt" datetime="2010-04-13" pubdate>2010-04-13</time>
   
-  <h1><a href="/2010/4/Debugging-Closures-and-Modules">Debugging Closures and Modules</a></h1>
+  <h1><a href="/Debugging-Closures-and-Modules.html">Debugging Closures and Modules</a></h1>
 </header>
   <div class="span-17 last entry">
     <html><body><p>The most common co...</p></body></html>
@@ -246,7 +246,7 @@
   
     <time class="alt" datetime="2010-03-12" pubdate>2010-03-12</time>
   
-  <h1><a href="/2010/3/JavaScript-Module-Pattern-In-Depth">JavaScript Module Pattern: In-Depth</a></h1>
+  <h1><a href="/JavaScript-Module-Pattern-In-Depth.html">JavaScript Module Pattern: In-Depth</a></h1>
 </header>
   <div class="span-17 last entry">
     <html><body><p>The module pattern is a common JavaScript coding pattern. It’s generally well understood, but there ar...</p></body></html>

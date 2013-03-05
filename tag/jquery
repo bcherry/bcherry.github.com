@@ -232,7 +232,7 @@
   
     <time class="alt" datetime="2010-02-03" pubdate>2010-02-03</time>
   
-  <h1><a href="/2010/2/SearchReplace-in-the-DOM-with-jQuery">Search/Replace in the DOM with jQuery</a></h1>
+  <h1><a href="/SearchReplace-in-the-DOM-with-jQuery.html">Search/Replace in the DOM with jQuery</a></h1>
 </header>
   <div class="span-17 last entry">
     <html><body><p>Ever had a need to to a text search/replace through the DOM?  For articles in drafting on this blog I often use the form (TODO: somethi...</p></body></html>
@@ -257,7 +257,7 @@
   
     <time class="alt" datetime="2009-11-05" pubdate>2009-11-05</time>
   
-  <h1><a href="/2009/11/jQuery-Micro-templates">jQuery Micro-templates</a></h1>
+  <h1><a href="/jQuery-Micro-templates.html">jQuery Micro-templates</a></h1>
 </header>
   <div class="span-17 last entry">
     <html><body>

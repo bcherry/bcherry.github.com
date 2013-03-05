@@ -195,12 +195,12 @@
   <article class="span-17 last">
   <header class="span-17 last">
   
-    <time class="alt" datetime="2010-07-08" pubdate>2010-07-08</time>
+    <time class="alt" datetime="2010-03-21" pubdate>2010-03-21</time>
   
-  <h1><a href="/2010/7/Writing-Testable-JavaScript">Writing Testable JavaScript</a></h1>
+  <h1><a href="/JavaScript-Better-and-Faster.html">JavaScript: Better and Faster</a></h1>
 </header>
   <div class="span-17 last entry">
-    <html><body><p>The engineering culture at Twitter requires tests. Lots of tests. I haven’t had formal experience with JavaScript testing before Twitter, so I’ve been learning a lot as I go. In particular, a number of patterns I used to use, write about, and encourage have turned out to be b...</p></body></html>
+    <html><body><p>“JavaScript: Better and Faster” is the name of a presentation I gave at <a href="http://www.slide.com">Slide</a> last week. It was generally well-received by the Slide crew so I decided to put a (slightly edited) copy of the <a href="http://www.bcherry.net/talks/js-better-faster">accompanying slidesho...</a></p></body></html>
   </div>
 </article>
 
@@ -208,12 +208,12 @@
   <article class="span-17 last">
   <header class="span-17 last">
   
-    <time class="alt" datetime="2010-05-12" pubdate>2010-05-12</time>
+    <time class="alt" datetime="2010-03-12" pubdate>2010-03-12</time>
   
-  <h1><a href="/2010/5/Spying-Constructors-in-JavaScript">Spying Constructors in JavaScript</a></h1>
+  <h1><a href="/JavaScript-Module-Pattern-In-Depth.html">JavaScript Module Pattern: In-Depth</a></h1>
 </header>
   <div class="span-17 last entry">
-    <html><body><p>When writing unit-tests for code, a common technique is <strong>spying</strong>, where you set expectations on a method’s invoc...</p></body></html>
+    <html><body><p>The module pattern is a common JavaScript coding pattern. It’s generally well understood, but there ar...</p></body></html>
   </div>
 </article>
 
@@ -221,12 +221,93 @@
   <article class="span-17 last">
   <header class="span-17 last">
   
-    <time class="alt" datetime="2010-04-13" pubdate>2010-04-13</time>
+    <time class="alt" datetime="2010-03-08" pubdate>2010-03-08</time>
   
-  <h1><a href="/2010/4/Debugging-Closures-and-Modules">Debugging Closures and Modules</a></h1>
+  <h1><a href="/Performance-of-vs-.html">Performance of === vs. ==</a></h1>
 </header>
   <div class="span-17 last entry">
-    <html><body><p>The most common co...</p></body></html>
+    <html><body><p>One particular weirdness and unpleasantry in JavaScript is the set of equality operators. Like virtually every language, JavaScript has the standard <code>==</code>, <code>!=</code>, <code>&lt;</code>, <code>&gt;</code>, <code>&lt;=</code>, and <code>&gt;=</code> operators. However, <code>==</code> an...</p></body></html>
+  </div>
+</article>
+
+
+  <article class="span-17 last">
+  <header class="span-17 last">
+  
+    <time class="alt" datetime="2010-02-26" pubdate>2010-02-26</time>
+  
+  <h1><a href="/Minimum-Timer-Intervals-in-JavaScript.html">Minimum Timer Intervals in JavaScript</a></h1>
+</header>
+  <div class="span-17 last entry">
+    <html><body><p>I was talking with a co-worker today about the behavior of <code>setTimeout</code> and <code>setInterval</code> when given a small interval, like <code>0</code> or <code>1</code>. The <em>expectation</em> would be tha...</p></body></html>
+  </div>
+</article>
+
+
+  <article class="span-17 last">
+  <header class="span-17 last">
+  
+    <time class="alt" datetime="2010-02-19" pubdate>2010-02-19</time>
+  
+  <h1><a href="/This-Blog-Now-With-HTML5.html">This Blog - Now With HTML5</a></h1>
+</header>
+  <div class="span-17 last entry">
+    <html><body><p>Take a look at this web site. Notice anything out of the ordinary. Hopef...</p></body></html>
+  </div>
+</article>
+
+
+  <article class="span-17 last">
+  <header class="span-17 last">
+  
+    <time class="alt" datetime="2010-02-12" pubdate>2010-02-12</time>
+  
+  <h1><a href="/Finding-Improper-JavaScript-Globals.html">Finding Improper JavaScript Globals</a></h1>
+</header>
+  <div class="span-17 last entry">
+    <html><body>
+<p>When I interview web developers, my first JavaScript question is usually the following:</p>
+<blockquote>What is the difference, in JavaScript, between <code class="js inline">x = 1</code> and <code class="js inline">var x = 1</code>.  Feel free to answer in as much ...</blockquote>
+</body></html>
+  </div>
+</article>
+
+
+  <article class="span-17 last">
+  <header class="span-17 last">
+  
+    <time class="alt" datetime="2010-02-08" pubdate>2010-02-08</time>
+  
+  <h1><a href="/JavaScript-Scoping-and-Hoisting.html">JavaScript Scoping and Hoisting</a></h1>
+</header>
+  <div class="span-17 last entry">
+    <html><body>
+<p>Do you know what value will be alerted if the following is executed as a JavaScript program?</p>
+
+<pre><code>var foo = 1;
+function bar() {
+	if (!foo) {
+		var foo = 10;
+	}
+	alert(foo);
+}
+bar();</code></pre>
+
+<p>If it surprises you that the answer is “10”, then this one will probably really th...</p>
+</body></html>
+  </div>
+</article>
+
+
+  <article class="span-17 last">
+  <header class="span-17 last">
+  
+    <time class="alt" datetime="2010-02-03" pubdate>2010-02-03</time>
+  
+  <h1><a href="/SearchReplace-in-the-DOM-with-jQuery.html">Search/Replace in the DOM with jQuery</a></h1>
+</header>
+  <div class="span-17 last entry">
+    <html><body><p>Ever had a need to to a text search/replace through the DOM?  For articles in drafting on this blog I often use the form (TODO: somethi...</p></body></html>
   </div>
 </article>
 

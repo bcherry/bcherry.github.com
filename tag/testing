@@ -208,7 +208,7 @@
   
     <time class="alt" datetime="2010-07-08" pubdate>2010-07-08</time>
   
-  <h1><a href="/2010/7/Writing-Testable-JavaScript">Writing Testable JavaScript</a></h1>
+  <h1><a href="/Writing-Testable-JavaScript.html">Writing Testable JavaScript</a></h1>
 </header>
   <div class="span-17 last entry">
     <html><body><p>The engineering culture at Twitter requires tests. Lots of tests. I haven’t had formal experience with JavaScript testing before Twitter, so I’ve been learning a lot as I go. In particular, a number of patterns I used to use, write about, and encourage have turned out to be b...</p></body></html>
@@ -223,7 +223,7 @@
   
     <time class="alt" datetime="2010-05-12" pubdate>2010-05-12</time>
   
-  <h1><a href="/2010/5/Spying-Constructors-in-JavaScript">Spying Constructors in JavaScript</a></h1>
+  <h1><a href="/Spying-Constructors-in-JavaScript.html">Spying Constructors in JavaScript</a></h1>
 </header>
   <div class="span-17 last entry">
     <html><body><p>When writing unit-tests for code, a common technique is <strong>spying</strong>, where you set expectations on a method’s invoc...</p></body></html>

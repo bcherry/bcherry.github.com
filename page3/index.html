@@ -195,12 +195,13 @@
   <article class="span-17 last">
   <header class="span-17 last">
   
-    <time class="alt" datetime="2010-03-30" pubdate>2010-03-30</time>
+    <time class="alt" datetime="2010-02-01" pubdate>2010-02-01</time>
   
-  <h1><a href="/2010/3/Object-to-Primitive-Conversions-in-JavaScript">Object-to-Primitive Conversions in JavaScript</a></h1>
+  <h1><a href="/Why-JavaScripts-new-Keyword-Sucks.html">Why JavaScript's "new" Keyword Sucks</a></h1>
 </header>
   <div class="span-17 last entry">
-    <html><body><p>Like most object-oriented programming languages, JavaScript provides built-in ways to convert between objects and primitive values, by way of the special <code>toString</code> and <code>valueOf</code> methods. This article will cover the basics of these methods, but then dive into the details of how this stuff really works, bad stuff, performan...</p></body></html>
+    <html><body><pre><code>&gt;&gt;&gt; function F() { return function inner() { return "inner invoked"; }; }
+&gt;...</code></pre></body></html>
   </div>
 </article>
 
@@ -208,12 +209,12 @@
   <article class="span-17 last">
   <header class="span-17 last">
   
-    <time class="alt" datetime="2010-03-26" pubdate>2010-03-26</time>
+    <time class="alt" datetime="2010-01-29" pubdate>2010-01-29</time>
   
-  <h1><a href="/2010/3/JavaScript-Style-Objects-in-Python">JavaScript-Style Objects in Python</a></h1>
+  <h1><a href="/Preloading-JS-and-CSS-as-Print-Stylesheets.html">Preloading JS and CSS as Print Stylesheets</a></h1>
 </header>
   <div class="span-17 last entry">
-    <html><body><p>One of JavaScript’s most convenient features is the object syntax. Objects are so easy to work with. You’ve got a l...</p></body></html>
+    <html><body><p><em><strong>UPDATE: This technique has turned out to be dangerous in Chrome.  It seems that Chrome will load the JS files into the cache, but  then set an implied type="text/css" on them.  This means that it will refuse to re-use them as Java...</strong></em></p></body></html>
   </div>
 </article>
 
@@ -221,12 +222,91 @@
   <article class="span-17 last">
   <header class="span-17 last">
   
-    <time class="alt" datetime="2010-03-21" pubdate>2010-03-21</time>
+    <time class="alt" datetime="2009-11-28" pubdate>2009-11-28</time>
   
-  <h1><a href="/2010/3/JavaScript-Better-and-Faster">JavaScript: Better and Faster</a></h1>
+  <h1><a href="/Consuljs-Simple-Logging-Abstraction.html">Consul.js, Simple Logging Abstraction</a></h1>
 </header>
   <div class="span-17 last entry">
-    <html><body><p>“JavaScript: Better and Faster” is the name of a presentation I gave at <a href="http://www.slide.com">Slide</a> last week. It was generally well-received by the Slide crew so I decided to put a (slightly edited) copy of the <a href="http://www.bcherry.net/talks/js-better-faster">accompanying slidesho...</a></p></body></html>
+    <html><body><p>I've been reading <em>Coders At Work</em> by Peter Seibel, and one question he asks in every interview is "How do you debug - print statements, debugger like gdb, or something else?".  For me, print statements are my first tool for any situation.  That's why Firebug is so...</p></body></html>
+  </div>
+</article>
+
+
+  <article class="span-17 last">
+  <header class="span-17 last">
+  
+    <time class="alt" datetime="2009-11-05" pubdate>2009-11-05</time>
+  
+  <h1><a href="/JS-Find-and-Replace-with-SplitJoin.html">JS Find-and-Replace with Split/Join</a></h1>
+</header>
+  <div class="span-17 last entry">
+    <html><body><p><strong><em>Update: This advice is now totally out-of-date and wrong. Just use <code>replace</code>. As <a href="http://jsperf.com/test-join-and-split">recent Browserscope results show</a>, all browsers have optimized <code>replace</code> to be much faster than <code>split</code>/<code>join</code>. Thanks to Luigi van der Pal for pointing this out ...</em></strong></p></body></html>
+  </div>
+</article>
+
+
+  <article class="span-17 last">
+  <header class="span-17 last">
+  
+    <time class="alt" datetime="2009-11-05" pubdate>2009-11-05</time>
+  
+  <h1><a href="/Javascript-Pseudo-threading.html">Javascript Pseudo-threading</a></h1>
+</header>
+  <div class="span-17 last entry">
+    <html><body>
+<p><strong><em>This post has been migrated from my old, defunct blog at bcherry.net. The links may not work, and the formatting may be wonky.</em></strong></p>
+
+<p>I’ve been playing around with asynchronous Javascript for repeated large-set actions, in the hopes of generating some useful techniques for real applications. I’ve narrowed down a...</p>
+</body></html>
+  </div>
+</article>
+
+
+  <article class="span-17 last">
+  <header class="span-17 last">
+  
+    <time class="alt" datetime="2009-11-05" pubdate>2009-11-05</time>
+  
+  <h1><a href="/jQuery-Micro-templates.html">jQuery Micro-templates</a></h1>
+</header>
+  <div class="span-17 last entry">
+    <html><body>
+<p>John Resig wrote a neat micro-templating Javascript function a <a href="http://ejohn.org/blog/javascript-micro-templating/">while back</a>. I’ve been playing with this, and have discovered two things:</p>
+
+<ol><li>
+<p>These templates are totally nestable. Just make an element to be templated within a tem...</p>
+</li></ol>
+</body></html>
+  </div>
+</article>
+
+
+  <article class="span-17 last">
+  <header class="span-17 last">
+  
+    <time class="alt" datetime="2009-11-05" pubdate>2009-11-05</time>
+  
+  <h1><a href="/Managing-CSS-Through-Javascript.html">Managing CSS Through JavaScript</a></h1>
+</header>
+  <div class="span-17 last entry">
+    <html><body><p>It’s often very difficult to keep track of what CSS goes where. Especially when you load up on Javascript controls and files in a large application, which render markup that depends on some CSS being there. One solution is to “inline” the CSS in the JavaScript, by adding style to each element as it’s created. This works, but it’s messy. Also, browsers are heavily optimized to apply CSS, faster than any Javascript solution could be. But when you’ve got a fancy script manager like LABjs, remembering to statically link all of the important CSS is a pain. Especially so if you’re not sure at page load whethe...</p></body></html>
+  </div>
+</article>
+
+
+  <article class="span-17 last">
+  <header class="span-17 last">
+  
+    <time class="alt" datetime="2009-11-05" pubdate>2009-11-05</time>
+  
+  <h1><a href="/Building-a-Better-Friend-Selector.html">Building a Better Friend Selector</a></h1>
+</header>
+  <div class="span-17 last entry">
+    <html><body>
+<p><strong><em>This post has been migrated from my old, defunct blog at bcherry.net. The links may not work, and the formatting may be wonky.</em></strong></p>
+
+<p>Working in social entertainment, one of the lynchpins of the entire business is the friend selector. Without it, there is virtually no way to grow your customer base. Having a simple, effective friend selector ...</p>
+</body></html>
   </div>
 </article>
 
@@ -242,10 +322,6 @@
       
     
     
-      <span class="alt">or</span>
-    
-    
-        <a class="tight" href="/page4">next</a>
     
   </p>
 </div>
