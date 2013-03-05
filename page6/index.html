@@ -250,17 +250,7 @@
   <h1><a href="/2010/2/SearchReplace-in-the-DOM-with-jQuery">Search/Replace in the DOM with jQuery</a></h1>
 </header>
   <div class="span-17 last entry">
-    <p>Ever had a need to to a text search/replace through the DOM?  For articles in drafting on this blog I often use the form (TODO: something) as notes for myself to do some more research.  I don't want them sticking around in the text I publish, so I highlighted them red (only for myself).  Here's the script I used to accomplish that:</p>
-<pre class="js inline">jQuery(function () {
-	jQuery(":contains(TODO)").not(":has(:contains(TODO))").each(function () {
-		var that = $(this),
-			html = that.html();
-
-		html = html.replace(/(\(TODO:.*?\))/g, "&lt;span class=\"todo\"&gt;$1&lt;/span&gt;");
-		that.html(html);
-	});
-});</pre>
-<p>The trick is to find only the nodes that contain the actual text, not ancestors of such nodes, which is what you would get with just <code class="js inline">jQuery(":contains(TOOD)")</code>.  Filtering with <code class="js inline">.not(":has(:contains(TODO))")</code> ensures you've got the bottom most ones.  I tried doing this with the <code class="js inline">":not()"</code> filter, but it didn't work.  I guess that might be a jQuery bug, but the <code class="js inline">.not()</code> method is a fine alternative.</p>
+    <html><body><p>Ever had a need to to a text search/replace through the DOM?  For articles in drafting on this blog I often use the form (TODO: somethi...</p></body></html>
   </div>
 </article>
 
@@ -273,25 +263,8 @@
   <h1><a href="/2010/2/Why-JavaScripts-new-Keyword-Sucks">Why JavaScript's "new" Keyword Sucks</a></h1>
 </header>
   <div class="span-17 last entry">
-    <pre><code>&gt;&gt;&gt; function F() { return function inner() { return &quot;inner invoked&quot;; }; }
-&gt;&gt;&gt; F()
-inner()
-&gt;&gt;&gt; F()()
-&quot;inner invoked&quot;
-&gt;&gt;&gt; new F
-inner()
-&gt;&gt;&gt; new F()
-inner()
-&gt;&gt;&gt; (new F)
-inner()
-&gt;&gt;&gt; (new F)()
-&quot;inner invoked&quot;
-&gt;&gt;&gt; new (F())
-{ }
-&gt;&gt;&gt; new ((F)())
-{ }
-&gt;&gt;&gt; (new F())()
-&quot;inner invoked&quot;</code></pre>
+    <html><body><pre><code>&gt;&gt;&gt; function F() { return function inner() { return "inner invoked"; }; }
+&gt;...</code></pre></body></html>
   </div>
 </article>
 
@@ -304,31 +277,7 @@ inner()
   <h1><a href="/2010/1/Preloading-JS-and-CSS-as-Print-Stylesheets">Preloading JS and CSS as Print Stylesheets</a></h1>
 </header>
   <div class="span-17 last entry">
-    <p><em><strong>UPDATE: This technique has turned out to be dangerous in Chrome.  It seems that Chrome will load the JS files into the cache, but  then set an implied type="text/css" on them.  This means that it will refuse to re-use them as JavaScript on future pages, until they have left the cache.  I can no longer recommend this technique, but hope that it was at least interesting.  I'll be working on a follow-up post about alternatives.</strong></em></p>
-<p>One of Yahoo's <a href="http://developer.yahoo.com/performance/rules.html" target="_blank">Best Practices for Speeding Up Your Web Site</a> is "Preload Components".  Most people are already familiar with doing this for images.  Code for that usually looks like this:</p>
-<p><pre class="js">var img = Image();
-img.src = "/path/to/something.jpg";</pre></p>
-<p>This code works in all browsers, and causes that image to be downloaded and placed in the browser's cache.</p>
-<p>But what if we want to go further?  For a lot of today's big applications, images are no longer the only bandwidth hog.  An application I work on has more than 2MB worth of JavaScript, CSS, and data (stored in JavaScript files).  We found that users on slow connections could take up to <em>60 seconds</em> to load our application for the first time!  Obviously, we could benefit from intelligently pre-loading this data in the background, on an earlier page where they don't need it yet.  But how?</p>
-<p>My first attempt was just to use the <code class="js inline">Image()</code> method above, but point at our text files instead.  This didn't work in Firefox.  I'm not sure why, but those files never appeared in the cache with that method.  So our next idea was to use <code class="html inline">&lt;iframe&gt;</code> tags.  This worked great, until we tried it in Internet Explorer.  IE chose to warn the user that our page was trying to download data they didn't ask for, and blocked the downloads until they approved them.  Obviously, this wouldn't work either.</p>
-<p>This left us scratching our heads, but we eventually had a breakthrough.  There is one other tag that is used to include text files in a web page.  That's the <code class="html inline">&lt;link rel="stylesheet"&gt;</code> tag.  But this couldn't possibly work with JavaScript, could it?  It turns out it could!</p>
-<pre class="js">var preload = function (file) {
-	var elem,
-		tag = "link",
-		attr = "href",
-		extra = " rel=\"stylesheet\" media=\"print\" ",
-		target = "head";
-
-	elem = jQuery(["&lt;", tag, extra, attr, "=\"", file, "\"&lt;&gt;/", tag, "&gt;"].join(''));
-	elem.load(function () {
-		elem.remove();
-	});
-	jQuery(target).append(elem);
-
-	return elem;
-};</pre>
-<p>This function creates a temporary <code class="html inline">&lt;link&gt;</code> tag in the <code class="html inline">&lt;head&gt;</code> of your page, pointing at the requested file.  To work across all browsers, we needed to give it the rel="stylesheet" attribute.  To not cause preloaded CSS files to try and apply themselves to the current page, or trigger a re-flow, we added media="print".  Once the element has loaded, it removes itself from the DOM, but the file remains in the browser's cache.  While this example relies on the jQuery library, there is no reason it could not be easily re-written without such a dependency, or written as a jQuery plugin (providing <code class="js inline">jQuery.preload()</code>).</p>
-<p>This technique cut our aforementioned page load from 60s to 20s, over a slow connection.  I think this is a complete solution, and seems to work in all major browsers.  What do you think?</p>
+    <html><body><p><em><strong>UPDATE: This technique has turned out to be dangerous in Chrome.  It seems that Chrome will load the JS files into the cache, but  then set an implied type="text/css" on them.  This means that it will refuse to re-use them as Java...</strong></em></p></body></html>
   </div>
 </article>
 
