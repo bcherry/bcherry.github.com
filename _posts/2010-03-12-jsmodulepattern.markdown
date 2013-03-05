@@ -1,7 +1,9 @@
 ---
 title: "JavaScript Module Pattern: In-Depth"
 layout: post
-permalink: /2010/3/JavaScript-Module-Pattern-In-Depth
+feed_id: http://www.adequatelygood.com/2010/3/JavaScript-Module-Pattern-In-Depth
+permalink: /JavaScript-Module-Pattern-In-Depth.html
+alias: /2010/3/JavaScript-Module-Pattern-In-Depth/index.html
 tags: [javascript, module pattern]
 ---
 

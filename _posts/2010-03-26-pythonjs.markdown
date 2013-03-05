@@ -1,7 +1,9 @@
 ---
 title: JavaScript-Style Objects in Python
 layout: post
-permalink: /2010/3/JavaScript-Style-Objects-in-Python
+feed_id: http://www.adequatelygood.com/2010/3/JavaScript-Style-Objects-in-Python
+permalink: /JavaScript-Style-Objects-in-Python.html
+alias: /2010/3/JavaScript-Style-Objects-in-Python/index.html
 tags: [python]
 ---
 

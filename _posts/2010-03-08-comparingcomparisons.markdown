@@ -2,7 +2,9 @@
 title: Performance of === vs. ==
 layout: base
 tags: [javascript, performance]
-permalink: 2010/3/Performance-of-vs-
+feed_id: http://www.adequatelygood.com/2010/3/Performance-of-vs-
+permalink: /Performance-of-vs-.html
+alias: /2010/3/Performance-of-vs-/index.html
 ---
 
 One particular weirdness and unpleasantry in JavaScript is the set of equality operators.  Like virtually every language, JavaScript has the standard `==`, `!=`, `<`, `>`, `<=`, and `>=` operators.  However, `==` and `!=` are NOT the operators most would think they are.  These operators do __type coercion__, which is why `[0] == 0` and `"\n0\t " == 0` both evaluate to `true`.  This is considered, by sane people, to be a __bad thing__.  Luckily, JavaScript does provide a normal set of equality operators, which do what you expect: `===` and `!==`.  It sucks that we need these at all, and `===` is a pain to type, but at least `[0] !== 0`.

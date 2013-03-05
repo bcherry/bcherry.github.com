@@ -1,7 +1,9 @@
 ---
 title: JavaScript Scoping and Hoisting
 layout: post
-permalink: /2010/2/JavaScript-Scoping-and-Hoisting
+feed_id: http://www.adequatelygood.com/2010/2/JavaScript-Scoping-and-Hoisting
+permalink: /JavaScript-Scoping-and-Hoisting.html
+alias: /2010/2/JavaScript-Scoping-and-Hoisting/index.html
 tags: [javascript]
 ---
 

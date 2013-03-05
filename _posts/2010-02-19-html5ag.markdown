@@ -1,7 +1,9 @@
 ---
 title: This Blog - Now With HTML5
 layout: post
-permalink: /2010/2/This-Blog-Now-With-HTML5
+feed_id: http://www.adequatelygood.com/2010/2/This-Blog-Now-With-HTML5
+permalink: /This-Blog-Now-With-HTML5.html
+alias: /2010/2/This-Blog-Now-With-HTML5/index.html
 tags: [html5, adequatelygood]
 ---
 
