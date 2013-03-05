@@ -19,7 +19,7 @@ module Jekyll
 
     def generate(site)
       if site.layouts.key? 'year'
-        site.posts.reject { |post| post.data['no_date'] }.map { |post| post.date.year }.uniq.each do |year|
+        site.posts.map { |post| post.date.year }.uniq.each do |year|
           site.pages << YearPage.new(site, site.source, year.to_s, year)
         end
       end
