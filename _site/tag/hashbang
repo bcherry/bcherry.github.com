@@ -80,155 +80,105 @@
             <span class="alt">posts by year</span>
             
               
-            
               
-                
-                
-                
               
             
               
-                
-                
-                
+              
               
             
               
-                
-                
-                
+              
               
             
               
-                
-                
-                
+              
               
             
               
-                
-                
-                
+              
               
             
               
-                
-                
-                
-                  <a class="tight" href="/2009">2009</a>
-                
+              
+              
+                <a class="tight" href="/2009">2009</a>
               
             
               
-                
-                
-                
+              
               
             
               
-                
-                
-                
+              
               
             
               
-                
-                
-                
+              
               
             
               
-                
-                
-                
+              
               
             
               
-                
-                
-                
+              
               
             
               
-                
-                
-                
+              
               
             
               
-                
-                
-                
+              
               
             
               
-                
-                
-                
+              
               
             
               
-                
-                
-                
+              
               
             
               
-                
-                
-                
+              
               
             
               
-                
-                
-                
+              
               
             
               
-                
-                
-                
+              
               
             
               
-                
-                
-                
+              
               
             
               
-                
-                
-                
+              
               
             
               
-                
-                
-                
+              
               
             
               
-                
-                
-                
-                  <a class="tight" href="/2010">2010</a>
-                
+              
+              
+                <a class="tight" href="/2010">2010</a>
               
             
               
-                
-                
-                
+              
               
             
               
-                
-                
-                
-                  <a class="tight" href="/2011">2011</a>
-                
+              
+              
+                <a class="tight" href="/2011">2011</a>
               
             
           </div>
@@ -260,8 +210,6 @@
     <html><body><p>There’s <a href="http://isolani.co.uk/blog/javascript/BreakingTheWebWithHashBangs">been</a> <a href="http://adactio.com/journal/4346/">a</a> <a href="http://simonwillison.net/tags/hashbanghell/">lot</a> <a href="http://www.tbray.org/ongoing/When/201x/2011/02/09/Hash-Blecch">of</a> <a href="http://groups.google.com/group/jsmentors/browse_thread/thread/e493573c4de5d5f9?hl=en_US">discussion</a> this week about the “hashbang”, that ugly little bit you find in the middle of URLs like this one: <a href="http://twitter.com/#!/ded/status/18308450276">http://twitter.com/#!/ded/status/18308450276</a>. I wanted to provide a rebuttal to the arguments that the hashbang is bad for the Web, based on a lot of discussions we’ve been having inside Twitter since the #newtwitter project began last summer, and have continued...</p></body></html>
   </div>
 </article>
-
-  
 
   
 

@@ -3,7 +3,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <title type="text">Adequately Good</title>
     <subtitle type="html">decent programming advice</subtitle>
-    <updated>2013-03-04T21:21:47-08:00</updated>
+    <updated>2013-03-04T21:29:15-08:00</updated>
     <id>tag:example.org,2003:3</id>
     <link rel="alternate" type="text/html" hreflang="en" href="http://www.adequatelygood.com/"/>
     <link rel="self" type="application/atom+xml" href="http://www.adequatelygood.com/feeds/atom.xml" />
@@ -2285,28 +2285,6 @@ do_filter();
 
 &lt;li&gt;The textbox is watermarked using the text in a hidden element next to the textbox&lt;/li&gt;
 &lt;/ol&gt;&lt;h3&gt;What's Next?&lt;/h3&gt;&lt;p&gt;I hope someone finds this control or it's code to be useful.  I'm going to keep working on it, and I hope to create something that becomes useful at Slide.  My next task is to create a mechanism for handling our &quot;whale users&quot;, probably some sort of smart pagination.  I'll also be adding some public methods like &lt;code class='js inline'&gt;selectRandom()&lt;/code&gt; to make the control easily programmable.  Another hurdle will be allowing friend data to be loaded dynamically, by passing some sort of generator function to my control.  Again, I hope this was useful, and let me know if you're using or modifying this!&lt;/p&gt;
-            </div>
-        </content>
-    </entry>
-    
-    <entry>
-        <title>About Ben</title>
-
-        <link type="text/html" rel="alternate" href="http://www.adequatelygood.com/About-Ben"/>
-        <id>http://www.adequatelygood.com/About-Ben</id>
-        <updated>2000-01-01T00:00:00-08:00</updated>
-        <published>2000-01-01T00:00:00-08:00</published>
-        <author>
-            <name>Ben Cherry</name>
-            <uri>http://www.adequatelygood.com</uri>
-        </author>
-        <content type="xhtml" xml:lang="en" xml:base="">
-            <div xmlns="http://www.w3.org/1999/xhtml">
-                &lt;p&gt;Ben Cherry is an engineer in San Francisco, CA. He&amp;#8217;s worked at Slide, Twitter, tried (and failed!) to do his own startup, and now works as part of a small team on an exciting new startup, mostly writing Ruby and Objective-C.&lt;/p&gt;
-
-&lt;p&gt;When he started this blog, he thought he&amp;#8217;d be writing a lot about Python, but was surprised to discover that he really likes JavaScript, so he mostly writes about that instead.&lt;/p&gt;
-
-&lt;p&gt;Follow him at &lt;a href='https://twitter.com/bcherry'&gt;@bcherry&lt;/a&gt;.&lt;/p&gt;
             </div>
         </content>
     </entry>
