@@ -2,7 +2,9 @@
 title: jQuery Micro-templates
 layout: post
 tags: [javascript, jquery]
-permalink: /2009/11/jQuery-Micro-templates
+feed_id: http://www.adequatelygood.com/2009/11/jQuery-Micro-templates
+permalink: /jQuery-Micro-templates.html
+alias: /2009/11/jQuery-Micro-templates/index.html
 ---
 
 John Resig wrote a neat micro-templating Javascript function a [while back](http://ejohn.org/blog/javascript-micro-templating/). I've been playing with this, and have discovered two things:

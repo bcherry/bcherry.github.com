@@ -1,7 +1,9 @@
 ---
 title: Saner HTML5 History Management
 layout: post
-permalink: /2010/7/Saner-HTML5-History-Management
+feed_id: http://www.adequatelygood.com/2010/7/Saner-HTML5-History-Management
+permalink: /Saner-HTML5-History-Management.html
+alias: /2010/7/Saner-HTML5-History-Management/index.html
 tags: [html5, javascript, performance]
 ---
 

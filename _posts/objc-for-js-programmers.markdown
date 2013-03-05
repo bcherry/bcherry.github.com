@@ -1,7 +1,7 @@
 ---
 title: Objective-C for JavaScript Programmers
 layout: post
-permalink: /Objective-C-for-JavaScript-Programmers
+permalink: /Objective-C-for-JavaScript-Programmers.html
 published: false
 tags: [objective-c]
 ---

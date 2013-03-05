@@ -2,7 +2,9 @@
 title: Managing CSS Through JavaScript
 layout: post
 tags: [javascript, css]
-permalink: /2009/11/Managing-CSS-Through-Javascript
+feed_id: http://www.adequatelygood.com/2009/11/Managing-CSS-Through-Javascript
+permalink: /Managing-CSS-Through-Javascript.html
+alias: /2009/11/Managing-CSS-Through-Javascript/index.html
 ---
 
 It's often very difficult to keep track of what CSS goes where. Especially when you load up on Javascript controls and files in a large application, which render markup that depends on some CSS being there. One solution is to "inline" the CSS in the JavaScript, by adding style to each element as it's created. This works, but it's messy. Also, browsers are heavily optimized to apply CSS, faster than any Javascript solution could be. But when you've got a fancy script manager like LABjs, remembering to statically link all of the important CSS is a pain. Especially so if you're not sure at page load whether certain CSS will be needed. Here's a simple function to do this for you (note the XHR stuff is pretty basic, and I'd recommend changing it to use whatever JS library you use in your applications):

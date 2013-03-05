@@ -1,7 +1,9 @@
 ---
 title: Spying Constructors in JavaScript
 layout: post
-permalink: /2010/5/Spying-Constructors-in-JavaScript
+feed_id: http://www.adequatelygood.com/2010/5/Spying-Constructors-in-JavaScript
+permalink: /Spying-Constructors-in-JavaScript.html
+alias: /2010/5/Spying-Constructors-in-JavaScript/index.html
 tags: [javascript, testing]
 ---
 

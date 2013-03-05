@@ -1,7 +1,9 @@
 ---
 title: Debugging Closures and Modules
 layout: post
-permalink: /2010/4/Debugging-Closures-and-Modules
+feed_id: http://www.adequatelygood.com/2010/4/Debugging-Closures-and-Modules
+permalink: /Debugging-Closures-and-Modules.html
+alias: /2010/4/Debugging-Closures-and-Modules/index.html
 tags: [javascript, module pattern, debugging]
 ---
 The most common complaint with using closures to keep private variables in JavaScript is that it makes debugging harder.  This complaint definitely holds water, and the loss of easy debugging and inspection using the [Module Pattern](http://www.adequatelygood.com/2010/3/JavaScript-Module-Pattern-In-Depth) is a serious concern.  This is where one of JavaScript's non-standard but well-supported features comes in: the __debugger statement__.  In this article, I'll introduce this statement, and show how I use it to solve this deficiency in closure-based code.
