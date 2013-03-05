@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Spying Constructors in JavaScript</title>
+
+    <!-- CSS, including Blueprint, jQuery w/Smoothness, and AG CSS -->
+    <link rel="stylesheet" href="/css/blueprint/blueprint.min.css" media="screen, projection" />
+    <link rel="stylesheet" href="/css/blueprint/print.min.css" media="print" />
+    <!--[if lt IE 8]>
+      <link rel="stylesheet" href="/css/blueprint/ie.min.css" media="screen, projection">
+    <![endif]-->
+    <link rel="stylesheet" href="/css/ag.css" media="screen" />
+
+    <!-- Extra <head> Links -->
+    <link rel="alternate" type="application/atom+xml" title="Adequately Good Atom Feed" href="http://www.adequatelygood.com/feeds/atom.xml" />
+
+    <!-- TODO: favicon -->
+
+    <!-- IE HTML5 Compatibility -->
+    <!--[if IE]>
+      <script type="text/javascript">
+        (function () {
+          var tags = "header hgroup nav article time footer".split(" "),
+            i = 0,
+            l = tags.length;
+          for (; i < l; i += 1) {
+            document.createElement(tags[i]);
+          }
+        }());
+      </script>
+    <![endif]-->
+  </head>
+  <body>
+    <a name="top"></a>
+    <div id="container" class="container">
+
+      <!-- Header -->
+      <header class="span-24 last">
+        <!-- Title -->
+        <div id="title" class="span-24 last">
+          <div class="span-17 colborder prepend-top append-bottom">
+            <hgroup>
+              <h1>
+                <a href="/">adequately good</a>
+              </h1>
+              <h3 class="prepend-2 alt">decent programming advice</h3>
+            </hgroup>
+          </div>
+          <div class="span-6 last prepend-top append-bottom">
+            <h2>
+              written by
+              <a href="http://twitter.com/bcherry">ben cherry</a>
+            </h2>
+          </div>
+        </div>
+
+        <hr />
+
+        <!-- Navigation Bar -->
+        <nav class="prepend-2 span-20 append-2 last append-bottom">
+          <div class="span-5">
+            <a href="/">home</a>
+          </div>
+          <div class="span-5">
+            <a href="#" id="archiveLink">archives</a>
+          </div>
+          <div class="span-5">
+            <a href="/About-Ben">about</a>
+          </div>
+          <div class="span-5 last">
+            <a href="/feeds/atom.xml">feed</a>
+          </div>
+        </nav>
+
+        <!-- Archives Links -->
+        <div id="archives" class="span-24 last smallalts">
+          <hr />
+          <div class="archivelinks">
+            <span class="alt">posts by year</span>
+            
+              
+            
+              
+                
+                
+                
+              
+            
+              
+                
+                
+                
+              
+            
+              
+                
+                
+                
+              
+            
+              
+                
+                
+                
+              
+            
+              
+                
+                
+                
+              
+            
+              
+                
+                
+                
+                  <a class="tight" href="/2009">2009</a>
+                
+              
+            
+              
+                
+                
+                
+              
+            
+              
+                
+                
+                
+              
+            
+              
+                
+                
+                
+              
+            
+              
+                
+                
+                
+              
+            
+              
+                
+                
+                
+              
+            
+              
+                
+                
+                
+              
+            
+              
+                
+                
+                
+              
+            
+              
+                
+                
+                
+              
+            
+              
+                
+                
+                
+              
+            
+              
+                
+                
+                
+              
+            
+              
+                
+                
+                
+              
+            
+              
+                
+                
+                
+              
+            
+              
+                
+                
+                
+              
+            
+              
+                
+                
+                
+              
+            
+              
+                
+                
+                
+              
+            
+              
+                
+                
+                
+                  <a class="tight" href="/2010">2010</a>
+                
+              
+            
+              
+                
+                
+                
+              
+            
+              
+                
+                
+                
+                  <a class="tight" href="/2011">2011</a>
+                
+              
+            
+          </div>
+        </div>
+
+        <hr />
+      </header>
+
+      <div id="colcontainer" class="span-24 last">
+        <!-- Main content: Posts, etc. -->
+        <div id="content" class="span-17 colborder">
+          <a name="main"></a>
+          
+<article class="span-17 last">
+  <header class="span-17 last">
+  
+    <time class="alt" datetime="2010-05-12" pubdate>2010-05-12</time>
+  
+  <h1><a href="/2010/5/Spying-Constructors-in-JavaScript">Spying Constructors in JavaScript</a></h1>
+</header>
+  <div id="blogbody" class="span-17 last entry">
+    <p>When writing unit-tests for code, a common technique is <strong>spying</strong>, where you set expectations on a method&#8217;s invocation, run some code, and verify that the method was invoked as expected. This is pretty straightforward. Here&#8217;s a simple example using <a href='http://jsmockito.org/'>JsMockito</a>:</p>
+
+<pre><code>function foo(a) { return a; }
+foo = spy(foo);
+foo(1);
+verify(foo)(1); // verified!
+verify(foo)(2); // never run</code></pre>
+
+<p>Here, we&#8217;re spying on the <code>foo</code> method, and checking that it was invoked at least once with the parameter <code>1</code>, and once with the parameter <code>2</code>. As it turns out, this <code>spy</code> method does not work well with JavaScript constructors, in <a href='http://jsmockito.org/'>JsMockito</a>, <a href='http://github.com/pivotal/jasmine'>Jasmine</a>, or many other testing frameworks. The basic problem is that the prototype is not transferred appropriately, so code like this will fail:</p>
+
+<pre><code>function Foo(a) {
+	this.a = a;
+}
+Foo.prototype = {
+	bar: function () {
+		console.log(this.a);
+	}
+};
+
+var f = new Foo(1);
+f.bar(); // 1
+
+Foo = spy(Foo);
+var g = new Foo(1);
+g.bar(); // error
+
+verify(Foo)(1); // not reached</code></pre>
+
+<p>It turns out it&#8217;s really easy to write a constructor-safe spying function, and it doesn&#8217;t even take very many lines of code.</p>
+
+<pre><code>function spy(F) {
+	function G() {
+		var args = Array.prototype.slice.call(arguments);
+		G.calls.push(args);
+		F.apply(this, args);
+	}
+
+	G.prototype = F.prototype;
+	G.calls = [];
+
+	return G;
+}</code></pre>
+
+<p>This <code>spy</code> function works just like the one in JsMockito, but it doesn&#8217;t fail with constructors. For completeness, here&#8217;s an implementation of a simple <code>verify</code> function:</p>
+
+<pre><code>function verify(F) {
+	return function () {
+		var args = Array.prototype.slice.call(arguments),
+			i,
+			j,
+			call,
+			count = 0,
+			matched;
+
+		for (i = 0; i &lt; F.calls.length; i += 1) {
+			call = F.calls[i];
+			matched = true;
+			for (j = 0; j &lt; args.length; j += 1) {
+				if (args[j] !== call[j]) {
+					matched = false;
+					break;
+				}
+			}
+			if (matched) {
+				count += 1;
+			}
+		}
+
+		return count &gt; 0;
+	};
+}</code></pre>
+
+<p>It would be easy to extend this <code>verify</code> implementation to allow more types of verify like <code>.once()</code> or <code>.never()</code>, working off the <code>count</code> variable.</p>
+
+<p>And that&#8217;s it! Here&#8217;s an example of code that will work with this <code>spy</code> implementation:</p>
+
+<pre><code>function Foo(name, id) {
+	this.name = name;
+	this.id = id;
+}
+
+Foo.prototype = {
+	log: function () {
+		console.log(&quot;Foo %o:%o&quot;, this.id, this.name);
+	}
+};
+
+var f = new Foo(&quot;test&quot;, 1);
+f.log();
+
+Foo = spy(Foo);
+
+var f2 = new Foo(&quot;spied&quot;, 2);
+f2.log();
+
+console.log(&quot;verify Foo(\&quot;spied\&quot;, 2): %o&quot;, verify(Foo)(&quot;spied&quot;, 2));
+console.log(&quot;verify Foo(\&quot;something\&quot;, 2): %o&quot;, verify(Foo)(&quot;something&quot;, 2));
+
+var baz = {
+	spam: function (a) {
+		console.log(&quot;calling baz.spam(%o), this.other=%o&quot;, a, this.other);
+	},
+	other: 10
+};
+
+baz.spam = spy(baz.spam);
+
+baz.spam(1);
+console.log(&quot;verify baz.spam(1)&quot;, verify(baz.spam)(1));
+console.log(&quot;verify baz.spam(2)&quot;, verify(baz.spam)(2));</code></pre>
+
+<p>The other neat thing is that, so long as you&#8217;re not trapping stale references to the original constructor function before it got spied, JavaScript&#8217;s <code>instanceof</code> operator should work just fine:</p>
+
+<pre><code>function F() {}
+F = spy(F)
+new F() instanceof F; // true</code></pre>
+
+<p>You can find the complete code (and a bit more) for this excercise at <a href='http://www.bcherry.net/playground/spying-constructors'>www.bcherry.net/playground/spying-constructors</a>. I hope this was informative. I think I&#8217;ll probably end up either contributing a patch to JsMockito with this, or building my own bare-bones set of mocking/spying functions for use with <a href='http://docs.jquery.com/QUnit'>QUnit</a>.</p>
+
+<p><span class='note'>___P.S. It's been some time since I've updated, but I'm hoping this will be the first of many new, interesting JavaScript posts inspired by the work I'm doing at Twitter with @bs, @hoverbird, @ded, and @dsa.___</span></p>
+  </div>
+</article>
+
+<div id="more_reading" class="span-17 last">
+  <p class="smallalts tags">
+    <span class="alt">filed under</span> <a class="tight" href="/tag/javascript">javascript</a><span class="alt"> and</span> <a class="tight" href="/tag/testing">testing</a>
+  </p>
+</div>
+
+<div id="comments_wrapper" class="span-17 last">
+  <div id="disqus_thread"></div>
+  <script type="text/javascript">
+    // Disqus Comments variables
+    var disqus_developer = false;
+    var disqus_container_id = "comments_wrapper";
+  </script>
+  <script type="text/javascript" src="http://disqus.com/forums/adequatelygood/embed.js"></script>
+  <noscript>
+    <a href="http://disqus.com/forums/adequatelygood/?url=ref">View the discussion thread.</a>
+  </noscript>
+</div>
+
+        </div>
+
+        <!-- Sidebar: Search, links, etc. -->
+        <div id="sidebar" class="span-6 last">
+          <hr class="space" />
+
+          <div id="links">
+            <h3>the author</h3>
+            <p>
+              Ben is a 25 year-old software engineer. He lives and works in San Francisco. Many people think he invented the term "hoisting" in JavaScript, but this is untrue.
+            </p>
+            <ul>
+              <li><a href="http://twitter.com/bcherry">Twitter</a> - @<a class="twitter-anywhere-user" href="http://twitter.com/bcherry">bcherry</a></li>
+              <li><a href="http://github.com/bcherry">GitHub</a> - My Code</li>
+              <li><a href="http://www.linkedin.com/in/bcherryprogrammer">LinkedIn</a> - Professional Profile</li>
+              <li><a href="http://www.facebook.com/bcherry">Facebook</a> - That Other Social Network</li>
+              <li><a href="http://www.bcherry.net/talks/">Presentations</a> - Slides From My Talks</li>
+            </ul>
+            <iframe allowtransparency="true" frameborder="0" scrolling="no"
+              src="http://platform.twitter.com/widgets/follow_button.html?screen_name=bcherry&amp;button=grey&amp;text_color=7F7F7F&amp;link_color=666666"
+              style="width:300px; height:20px;"></iframe>
+          </div>
+
+          <hr />
+
+          <div id="tags">
+            <h3>categories</h3>
+            <ul>
+            
+              <li>
+                <a href="/tag/javascript">javascript</a>
+                (21)
+              </li>
+            
+              <li>
+                <a href="/tag/social%20gaming">social gaming</a>
+                (1)
+              </li>
+            
+              <li>
+                <a href="/tag/css">css</a>
+                (1)
+              </li>
+            
+              <li>
+                <a href="/tag/jquery">jquery</a>
+                (2)
+              </li>
+            
+              <li>
+                <a href="/tag/performance">performance</a>
+                (5)
+              </li>
+            
+              <li>
+                <a href="/tag/tools">tools</a>
+                (2)
+              </li>
+            
+              <li>
+                <a href="/tag/html5">html5</a>
+                (3)
+              </li>
+            
+              <li>
+                <a href="/tag/adequatelygood">adequatelygood</a>
+                (1)
+              </li>
+            
+              <li>
+                <a href="/tag/timers">timers</a>
+                (2)
+              </li>
+            
+              <li>
+                <a href="/tag/module%20pattern">module pattern</a>
+                (3)
+              </li>
+            
+              <li>
+                <a href="/tag/talks">talks</a>
+                (1)
+              </li>
+            
+              <li>
+                <a href="/tag/slide">slide</a>
+                (1)
+              </li>
+            
+              <li>
+                <a href="/tag/python">python</a>
+                (1)
+              </li>
+            
+              <li>
+                <a href="/tag/debugging">debugging</a>
+                (1)
+              </li>
+            
+              <li>
+                <a href="/tag/testing">testing</a>
+                (2)
+              </li>
+            
+              <li>
+                <a href="/tag/hashbang">hashbang</a>
+                (1)
+              </li>
+            
+            </ul>
+          </div>
+
+          <hr />
+
+          
+        </div>
+      </div>
+    </div>
+
+    <script>
+      (function() {
+        var archiveLink = document.getElementById("archiveLink"),
+            archives = document.getElementById("archives");
+
+        archiveLink.onclick = function() {
+          if (archives.className.match(/\bexpanded\b/)) {
+            archives.className = archives.className.replace(/\bexpanded\b/g, '');
+          } else {
+            archives.className += ' expanded';
+          }
+          return false;
+        };
+      }());
+    </script>
+
+    <!-- Google Analytics -->
+    <script type="text/javascript">var _gaq =_gaq||[]; _gaq.push(['_setAccount','UA-251077-4']);_gaq.push(['_trackPageview']);(function(){var ga=document.createElement('script');ga.type='text/javascript';ga.async=true;ga.src=('https:'==document.location.protocol?'https://ssl':'http://www')+'.google-analytics.com/ga.js';(document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(ga);})();</script>
+  </body>
+</html>
