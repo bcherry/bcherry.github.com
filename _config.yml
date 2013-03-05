@@ -16,7 +16,7 @@ pygments:    true
 markdown:    maruku
 permalink:   date
 paginate:    3
-default-mimetype: text/html
+default-mimetype: "text/html"
 
 maruku:
   use_tex:    false
