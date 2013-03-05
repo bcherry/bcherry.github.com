@@ -271,11 +271,7 @@
   <h1><a href="/2010/3/JavaScript-Better-and-Faster">JavaScript: Better and Faster</a></h1>
 </header>
   <div class="span-17 last entry">
-    <p>&#8220;JavaScript: Better and Faster&#8221; is the name of a presentation I gave at <a href='http://www.slide.com'>Slide</a> last week. It was generally well-received by the Slide crew so I decided to put a (slightly edited) copy of the <a href='http://www.bcherry.net/talks/js-better-faster'>accompanying slideshow online</a> (runs in your browser). It&#8217;s not particularly dense, and doesn&#8217;t get into too much depth on any one topic, but I think it gives a great practical overview of the JavaScript landscape, including what things to look out for and neat techniques to write better code. The original intent was to cover the ins and outs of writing good, efficient JavaScript, targeted at people who write JavaScript every day, but have a strong background in Python.</p>
-
-<p>I&#8217;d like to give a huge thanks to <a href='http://scottchacon.com/'>Scott Chacon</a>, whose <a href='http://github.com/schacon/showoff'>Showoff</a> software made compiling this slideshow the most enjoyable thing imaginable. It took a little work to port the resultant slideshow to Google AppEngine, but I got it up and running. I&#8217;ll probably work on a more generalized Python/AppEngine adaptation of Showoff for my future use, since that&#8217;s my web platform and I want to keep using Showoff in the future. This experience also got me really turned on to <a href='http://daringfireball.net/projects/markdown/'>Markdown</a>, which I wasted no time in integrating into this blog.</p>
-
-<p>This is the first presentation I&#8217;ve given in my professional career, and would much appreciate feedback on the slides.</p>
+    <html><body><p>“JavaScript: Better and Faster” is the name of a presentation I gave at <a href="http://www.slide.com">Slide</a> last week. It was generally well-received by the Slide crew so I decided to put a (slightly edited) copy of the <a href="http://www.bcherry.net/talks/js-better-faster">accompanying slidesho...</a></p></body></html>
   </div>
 </article>
 

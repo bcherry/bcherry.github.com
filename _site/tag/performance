@@ -259,88 +259,11 @@
   <h1><a href="/2010/7/Saner-HTML5-History-Management">Saner HTML5 History Management</a></h1>
 </header>
   <div class="span-17 last entry">
-    <h2 id='hashchange'>Hashchange</h2>
+    <html><body>
+<h2 id="hashchange">Hashchange</h2>
 
-<p>This event is quite simple. Whenever the <code>window.location.hash</code> property changes, by following a link, setting the property, editing the URL bar, or using back/forward to move through browser history, the &#8220;hashchange&#8221; event is fired from the window. Using it is really easy:</p>
-
-<pre><code>window.onhashchange = function() {
-	alert(&quot;hash changed!&quot;);
-};
-window.location.hash = Math.random(); // alerts &quot;hash changed!&quot;</code></pre>
-
-<p>This feature is implemented in recent versions of all major browsers. In older browsers like Internet Explorer 6 and 7, you can easily provide it by polling the hash property on an interval, and manually firing an event when it changes. This is easy to build into a jQuery plugin, which <a href='http://benalman.com/'>Ben Alman</a> did in the robust <a href='http://benalman.com/projects/jquery-hashchange-plugin/'>jquery.hashchange.js plugin</a>.</p>
-
-<h2 id='history_management'>History Management</h2>
-
-<p>This feature is a bit more complex. Browsers that support it add a <code>window.history</code> object, with the following properties:</p>
-
-<ul>
-<li><code>window.history.back()</code> and <code>window.history.forward()</code>, which provide programmatic interfaces to browser back and forward functions.</li>
-
-<li><code>window.history.pushState(stateObj, title, url)</code>. This method pushes a new entry into the browser history, which then becomes the browser&#8217;s current state. You can provide any JSON-stringifiable object to send with it, and the browser will provide that object again when you navigate to that point (more on that in a bit). More importantly, if you provide a URL, the browser will change the URL displayed in the address bar, without reloading the page. The new URL must be on the same domain, but you can change the rest of it, which is the <code>window.location.pathname</code> and <code>window.location.hash</code>. Changing the URL in this way will not trigger a &#8220;hashchange&#8221; event, though.</li>
-
-<li><code>window.history.replaceState(stateObj, title, url)</code>. This is just like <code>window.history.pushState</code>, except that the current browser state is removed from the history, so you cannot hit &#8220;back&#8221; to return to it.</li>
-
-<li><code>window.onpopstate</code>. This event is fired whenever a state object is removed from the browser history, which occurs on browser &#8220;back&#8221; or &#8220;forward&#8221;. State objects are persisted on the user&#8217;s hard disk between sessions, which is a nice feature. The object passed into a call to <code>pushState</code> or <code>replaceState</code> is provided as the <code>state</code> property on the event object in the &#8220;popstate&#8221; event.</li>
-</ul>
-
-<p>This feature is implemented in the latest versions of WebKit, which includes Safari and Chrome. Additionally, the Firefox 4 betas include support for this.</p>
-
-<h2 id='whats_the_use_case'>What&#8217;s the Use Case?</h2>
-
-<p>The new history management stuff is very promising, because it allows a web application to live across many physical URLs, but be run in a single instance. This is important for certain kinds of applications, where using hashes is not universally suitable.</p>
-
-<p>For instance, at Twitter, we currently update your URL hash as you navigate around the application, to make bookmarkable pages like <a href='http://twitter.com/#replies'>http://twitter.com/#replies</a>. However, we force a full page load for certain pages, most notably profile pages (e.g. <a href='http://twitter.com/bcherry'>http://twitter.com/bcherry</a>) and permalink pages (e.g. <a href='http://twitter.com/bcherry/status/18966802499'>http://twitter.com/bcherry/status/18966802499</a>). This is so that those URLs can be copied from the address bar and posted on the web.</p>
-
-<p>We want to make sure that users without JavaScript and search engine bots crawling links to our site will get the correct page from the server (since the browser does not send a hash along to the server). This would not be possible if those URLs used hashes. Unfortunately, this means the application is slower, because a full page load is needed going into and out of those locations.</p>
-
-<p>This is where HTML5 History Management could be useful.</p>
-
-<h2 id='so_whats_the_problem'>So What&#8217;s the Problem?</h2>
-
-<p>Unfortunately, the existing implementation of history management is not useful, and not in the spirit of the web.</p>
-
-<p>Our web applications should be built to respond to a URL. Both the client and server versions of an application should understand a shared URL structure, and know how to present the same page to the browser that reflects that URL.</p>
-
-<p>Allowing developers to store extra state information in the browser history is missing the point. The only thing stored in history should be a URL, and the browser can associate a title with it if it chooses.</p>
-
-<p>This is RESTful design, mirrored on client and server. Modern browsers can support changing the URL without reloading the page from the server, and older ones can continue to hit the server every time.</p>
-
-<p>In this way, we can build applications that degrade correctly in older browsers, and when viewed by bots, while providing a faster experience for users with modern browsers.</p>
-
-<h2 id='enter_pathchange'>Enter &#8220;pathchange&#8221;</h2>
-
-<p>Both &#8220;hashchange&#8221; and <code>pushState</code>/&#8221;popstate&#8221; should be replaced with &#8220;pathchange&#8221;, which is an event that fires when the URL changes in any way. This event does not provide any information, the application should inspect the current URL to discover the state it should enter. Relative links within a page should not force page reloads, they should instead just trigger the &#8220;pathchange&#8221; event.</p>
-
-<p>It turns out that it&#8217;s possible to implement this event in modern browsers now, based on the features they already have. Here&#8217;s how:</p>
-
-<ol>
-<li>Listen to &#8220;hashchange&#8221;, and trigger &#8220;pathchange&#8221; when it occurs</li>
-
-<li>Poll the hash in browsers without &#8220;hashchange&#8221; support, and trigger &#8220;hashchange&#8221;, which triggers &#8220;pathchange&#8221;</li>
-
-<li>With history support, listen to &#8220;popstate&#8221;, and trigger &#8220;pathchange&#8221; when it occurs</li>
-
-<li>With history support, intercept all relative links when they are clicked, and prevent normal navigation. Call <code>window.history.pushState(null, null, href)</code> instead, and trigger a &#8220;pathchange&#8221;.</li>
-
-<li>Provide a helper function to make navigation to new URLs using <code>window.history.pushState</code>, when supported, easy.</li>
-</ol>
-
-<p>I&#8217;ve implemented all of this as a <a href='http://www.bcherry.net/static/lib/js/jquery.pathchange.js'>jQuery plugin</a> that is quite easy to use:</p>
-
-<pre><code>$(function() {
-	$.pathchange.init(); // setup event listeners, etc.
-	$(window).pathchange(function() {
-		respondToUrl();
-	}).trigger(&quot;pathchange&quot;);
-
-	$.pathchange.changeTo(&quot;/foo&quot;);
-});</code></pre>
-
-<p>I&#8217;ve also created a demo page that presents <a href='http://www.bcherry.net/playground/sanerhtml5history'>A Saner HTML5 History App</a> that uses <a href='http://www.bcherry.net/static/lib/js/jquery.pathchange.js'>jquery.pathchange.js</a> under the hood. Check it out in various browsers to see the HTML5 magic at work, and be sure to use your browser &#8220;back&#8221; and &#8220;forward&#8221; buttons, and reload the page a few times.</p>
-
-<p>That&#8217;s my take on the HTML5 history features. It&#8217;s unfortunate that what the browsers are implementing is not what we really need, but it&#8217;s encouraging that they do provide enough to implement what we do really need. Let me know in the comments if you agree, disagree, or have questions about my approach.</p>
-<span class='note'>___Note Number One: It's also worth pointing out that I discovered a [serious bug](https://bugs.webkit.org/show_bug.cgi?id=42940) in WebKit's implementation of history management while working on this today.  In short, the "popstate" event is often lost when the network is occupied, which makes little sense.  [Here's a demo page with a reproducible case](http://www.bcherry.net/playground/pushstate) that I threw together.  It fires off a request to download an image which takes 1s on every "popstate", which means hitting "back" more than once every second leads to lost history entries and an application that gets out of sync with the URL.  You could work around this by polling the URL in addition to listening to "popstate", but it's not a good workaround.  Until this is fixed, you'll have to be wary of this if you ship this feature to your users, and it probably is not suitable for very complex AJAX apps.  Firefox 4 does not have the same problem.___</span><span class='note'>___Note Number 2: This article was originally published around 4am PST on July 26th.  The author published a revision around 8pm PST the following day, to make it a little less incohorent and a little more useful.  Luckily, the author uses Git to prepare Markdown-formatted articles, so you can [view the diff](http://github.com/bcherry/adequatelygood/commit/eb688c7809e8d5f61f9ed12442d3a578d46fab97) if you'd like to find out what changed.___</span>
+<p>This event is quite simple. Whenever the <code>window.location.hash</code> property changes, by following a link, setting the property, editing the URL bar, or ...</p>
+</body></html>
   </div>
 </article>
 
@@ -369,53 +292,7 @@ window.location.hash = Math.random(); // alerts &quot;hash changed!&quot;</code>
   <h1><a href="2010/3/Performance-of-vs-">Performance of === vs. ==</a></h1>
 </header>
   <div class="span-17 last entry">
-    <p>One particular weirdness and unpleasantry in JavaScript is the set of equality operators. Like virtually every language, JavaScript has the standard <code>==</code>, <code>!=</code>, <code>&lt;</code>, <code>&gt;</code>, <code>&lt;=</code>, and <code>&gt;=</code> operators. However, <code>==</code> and <code>!=</code> are NOT the operators most would think they are. These operators do <strong>type coercion</strong>, which is why <code>[0] == 0</code> and <code>&quot;\n0\t &quot; == 0</code> both evaluate to <code>true</code>. This is considered, by sane people, to be a <strong>bad thing</strong>. Luckily, JavaScript does provide a normal set of equality operators, which do what you expect: <code>===</code> and <code>!==</code>. It sucks that we need these at all, and <code>===</code> is a pain to type, but at least <code>[0] !== 0</code>.</p>
-
-<p>So, that&#8217;s all well and good, but when making the decision to use <code>===</code> instead of <code>==</code> it&#8217;s important to understand if there are any performance implications. Reasonable people, like myself, would expect the strict equality operators to be faster than their type-coercing counterparts, because the type coercion must take time. But, being <a href='http://xkcd.com/242/'>a scientist</a>, I had to set up an experiment to test this hypothesis.</p>
-
-<h2 id='for_science'>For Science!</h2>
-
-<p><a href='http://www.bcherry.net/playground/comparisons'>My experiment</a> times the execution time of 24 different tests, in the browser you view it in. These tests represent every permutation of the following factors:</p>
-
-<ol>
-<li><strong>Use</strong>: Whether the result is computed and thrown away, or assigned into a local variable.</li>
-
-<li><strong>Comparison</strong>: Comparing integers vs. integers, strings vs. strings, and integers vs. strings.</li>
-
-<li><strong>Operands</strong>: Whether the operands are actually equal or unequal (with forced type coercion in the case of <code>===</code>).</li>
-
-<li><strong>Operator</strong>: Using either <code>==</code> or <code>===</code>.</li>
-</ol>
-
-<p>Note that I am specifically <strong>not</strong> testing the relative performance when comparing against values like <code>null</code>, <code>undefined</code>, or <code>false</code>. This is because those are falsy values which have even worse type coercion characteristics. Some integers and strings can, of course, also be falsy, such as <code>0</code> or <code>&quot;&quot;</code>, but these are normal values which occur during arithmetic or string comparison, so I&#8217;ve tested with them.</p>
-
-<p>The tests were run over two million iterations, except in Internet Explorer, where it produced a long-running script error, so I cut it to 500,000 iterations. Here are the browser configurations I tested:</p>
-
-<ol>
-<li>Mozilla Firefox 3.6 (Mac)</li>
-
-<li>Google Chrome 5 (Mac dev channel)</li>
-
-<li>Internet Explorer 8 (iterations reduced by 4x)</li>
-
-<li>Safari 4 (Mac)</li>
-
-<li>Opera 10.5 beta (Mac)</li>
-
-<li>Mozilla Firefox 3.6 (Mac) with Firebug open</li>
-</ol>
-
-<h2 id='results'>Results</h2>
-
-<p>My results are <a href='http://spreadsheets.google.com/pub?key=taW8f6kvj3kUVObtg4p9vqQ&amp;output=html'>available as a Google spreadsheet here</a>. It turns out that there is little practical performance difference between <code>==</code> and <code>===</code>. While the strict operator is marginally faster (roughly 10%) in most browsers when combined with explicit type conversion, such as <code>a === +b</code>, the only real performance gains will come from avoiding type conversion entirely. <strong>Converting a string to an integer for comparison with another integer is significantly slower (up to 10x) than simple comparing two integers</strong>. You should never allow integers to be stored as strings internally, as the type conversion will incur a performance penalty.</p>
-
-<p>While that was the basic takeaway from the numbers, I did find one interesting outlier when testing with Firefox. In Firefox, the comparison <code>a === +b</code> is about 20x slower than the equivalent <code>a == b</code> when <code>a</code> is an integer and <code>b</code> is a string integer. This result seems suspicious to me, and nothing similar occurred in any other browser. Oddly, when the Firebug script debugger is turned on, this result changes, and <code>a === +b</code> becomes about 10% faster than the other. I&#8217;m not sure what to make of this result, but it does serve as a reminder that integers should always be stored in numbers, not in strings.</p>
-
-<h2 id='conclusion'>Conclusion</h2>
-
-<p>Not much surprise in these results, other than the Firefox result. But, it did help me avoid a nagging worry that I&#8217;m silently slowing down my code whenever I use <code>===</code> instead of <code>==</code> in my JavaScript.</p>
-
-<p>Again, find the test <a href='http://www.bcherry.net/playground/comparisons'>here</a> and my results <a href='http://spreadsheets.google.com/pub?key=taW8f6kvj3kUVObtg4p9vqQ&amp;output=html'>here</a>. I hope you found this information interesting. Let me know in the comments if you see different results than I got.</p>
+    <html><body><p>One particular weirdness and unpleasantry in JavaScript is the set of equality operators. Like virtually every language, JavaScript has the standard <code>==</code>, <code>!=</code>, <code>&lt;</code>, <code>&gt;</code>, <code>&lt;=</code>, and <code>&gt;=</code> operators. However, <code>==</code> an...</p></body></html>
   </div>
 </article>
 
@@ -430,52 +307,7 @@ window.location.hash = Math.random(); // alerts &quot;hash changed!&quot;</code>
   <h1><a href="/2010/2/Minimum-Timer-Intervals-in-JavaScript">Minimum Timer Intervals in JavaScript</a></h1>
 </header>
   <div class="span-17 last entry">
-    <p>I was talking with a co-worker today about the behavior of <code>setTimeout</code> and <code>setInterval</code> when given a small interval, like <code>0</code> or <code>1</code>. The <em>expectation</em> would be that the timer will fire in 0ms, or 1ms. However, as with <a href='http://wtfjs.com' target='_blank'>other things</a> in JavaScript, the <em>reality</em> is a bit different. It turns out that browsers actually have a <strong>minimum timer interval</strong> which they can&#8217;t work any faster than. John Resig wrote about <a href='http://ejohn.org/blog/analyzing-timer-performance/' target='_blank'>timer performance</a> a few years back, and found this behavior. He&#8217;s also covering it in more detail in his new book.</p>
-
-<p>But, I wasn&#8217;t happy with data a few years old, so I decided to just go and write my own simple test suite, <a href='http://www.bcherry.net/playground/settimeout' target='_blank'>How Fast is setTimeout in Your Browser?</a>. This page simply runs <code>setTimeout</code> with an interval of 0, 1000 times, and averages the <em>real</em> timeout experienced in each. Go ahead and check it out in your browser of choice.</p>
-
-<h2 id='the_results'>The Results</h2>
-
-<p>Well, it turns out that things aren&#8217;t so bad. Most browsers are in the <strong>10-15ms</strong> range for their bottom limit, having improved in recent versions. Notable exceptions are Internet Explorer, which has the same bottom of around <strong>16ms</strong> in all versions since IE6, and Google Chrome, which, at least since version 4, has a bottom limit closer to <strong>5ms</strong> It&#8217;s important to keep this limitation in mind when using <code>setTimeout</code> or <code>setInterval</code>. In particular, if you&#8217;re looking for consistent timer intervals across browsers, you have to use something <strong>&gt;15ms</strong>. But, don&#8217;t forget that JavaScript is single-threaded, and the timer won&#8217;t execute while other code is executing. This means that in the following code sample, you can guarantee that the timer <strong>will not run</strong> until the loop has completed. You cannot, however, guarantee precisely when that will happen, nor that it will be the next piece of code to run following the loop.</p>
-
-<pre><code>setTimeout(function () { alert(&quot;timer&quot;); }, 0);
-for (var i = 0; i &lt; 1000; i += 1) {
-	// something
-}</code></pre>
-
-<p>So it should be safe to use timers with an interval of 0ms when your only expectation is that the timer will fire as soon as it can, but not until after the current code path has completed. Relying on timers to respect the interval you give them is foolish, since, as I&#8217;ve shown, they have a lower-bound, and since they wait even after firing, before executing, for other code to return.</p>
-
-<h2 id='the_source_code'>The Source Code</h2>
-
-<p>This test is really simple. Here&#8217;s the complete JavaScript source code:</p>
-
-<pre><code>var target = document.getElementById(&quot;target&quot;),
-	results = 0,
-	iterations = 1000,
-	i = 0;
-
-function go() {
-	var fn = function () {
-			results += new Date().getTime() - d;
-			i += 1;
-			if (i &lt; iterations) {
-				go();
-			} else {
-				finish();
-			}
-		},
-		d = new Date().getTime();
-	setTimeout(fn, 0);
-}
-
-function finish() {
-	target.innerHTML = &quot;Average timer delay was &lt;span class=\&quot;num\&quot;&gt;&quot; + results/iterations + 
-		&quot;&lt;/span&gt;ms, over &lt;span class=\&quot;num\&quot;&gt;&quot; + iterations + &quot;&lt;/span&gt; iterations.&quot;;
-}
-
-go();</code></pre>
-
-<p>And that&#8217;s all there is to it. I hope you found this useful or interesting. Timers are very fickle, but also incredibly useful, so it&#8217;s worth taking the time to understand what it is they do, and how they do it.</p>
+    <html><body><p>I was talking with a co-worker today about the behavior of <code>setTimeout</code> and <code>setInterval</code> when given a small interval, like <code>0</code> or <code>1</code>. The <em>expectation</em> would be tha...</p></body></html>
   </div>
 </article>
 
@@ -500,31 +332,7 @@ go();</code></pre>
   <h1><a href="/2010/1/Preloading-JS-and-CSS-as-Print-Stylesheets">Preloading JS and CSS as Print Stylesheets</a></h1>
 </header>
   <div class="span-17 last entry">
-    <p><em><strong>UPDATE: This technique has turned out to be dangerous in Chrome.  It seems that Chrome will load the JS files into the cache, but  then set an implied type="text/css" on them.  This means that it will refuse to re-use them as JavaScript on future pages, until they have left the cache.  I can no longer recommend this technique, but hope that it was at least interesting.  I'll be working on a follow-up post about alternatives.</strong></em></p>
-<p>One of Yahoo's <a href="http://developer.yahoo.com/performance/rules.html" target="_blank">Best Practices for Speeding Up Your Web Site</a> is "Preload Components".  Most people are already familiar with doing this for images.  Code for that usually looks like this:</p>
-<p><pre class="js">var img = Image();
-img.src = "/path/to/something.jpg";</pre></p>
-<p>This code works in all browsers, and causes that image to be downloaded and placed in the browser's cache.</p>
-<p>But what if we want to go further?  For a lot of today's big applications, images are no longer the only bandwidth hog.  An application I work on has more than 2MB worth of JavaScript, CSS, and data (stored in JavaScript files).  We found that users on slow connections could take up to <em>60 seconds</em> to load our application for the first time!  Obviously, we could benefit from intelligently pre-loading this data in the background, on an earlier page where they don't need it yet.  But how?</p>
-<p>My first attempt was just to use the <code class="js inline">Image()</code> method above, but point at our text files instead.  This didn't work in Firefox.  I'm not sure why, but those files never appeared in the cache with that method.  So our next idea was to use <code class="html inline">&lt;iframe&gt;</code> tags.  This worked great, until we tried it in Internet Explorer.  IE chose to warn the user that our page was trying to download data they didn't ask for, and blocked the downloads until they approved them.  Obviously, this wouldn't work either.</p>
-<p>This left us scratching our heads, but we eventually had a breakthrough.  There is one other tag that is used to include text files in a web page.  That's the <code class="html inline">&lt;link rel="stylesheet"&gt;</code> tag.  But this couldn't possibly work with JavaScript, could it?  It turns out it could!</p>
-<pre class="js">var preload = function (file) {
-	var elem,
-		tag = "link",
-		attr = "href",
-		extra = " rel=\"stylesheet\" media=\"print\" ",
-		target = "head";
-
-	elem = jQuery(["&lt;", tag, extra, attr, "=\"", file, "\"&lt;&gt;/", tag, "&gt;"].join(''));
-	elem.load(function () {
-		elem.remove();
-	});
-	jQuery(target).append(elem);
-
-	return elem;
-};</pre>
-<p>This function creates a temporary <code class="html inline">&lt;link&gt;</code> tag in the <code class="html inline">&lt;head&gt;</code> of your page, pointing at the requested file.  To work across all browsers, we needed to give it the rel="stylesheet" attribute.  To not cause preloaded CSS files to try and apply themselves to the current page, or trigger a re-flow, we added media="print".  Once the element has loaded, it removes itself from the DOM, but the file remains in the browser's cache.  While this example relies on the jQuery library, there is no reason it could not be easily re-written without such a dependency, or written as a jQuery plugin (providing <code class="js inline">jQuery.preload()</code>).</p>
-<p>This technique cut our aforementioned page load from 60s to 20s, over a slow connection.  I think this is a complete solution, and seems to work in all major browsers.  What do you think?</p>
+    <html><body><p><em><strong>UPDATE: This technique has turned out to be dangerous in Chrome.  It seems that Chrome will load the JS files into the cache, but  then set an implied type="text/css" on them.  This means that it will refuse to re-use them as Java...</strong></em></p></body></html>
   </div>
 </article>
 
@@ -541,26 +349,7 @@ img.src = "/path/to/something.jpg";</pre></p>
   <h1><a href="/2009/11/JS-Find-and-Replace-with-SplitJoin">JS Find-and-Replace with Split/Join</a></h1>
 </header>
   <div class="span-17 last entry">
-    <p><strong><em>Update: This advice is now totally out-of-date and wrong. Just use <code>replace</code>. As <a href='http://jsperf.com/test-join-and-split'>recent Browserscope results show</a>, all browsers have optimized <code>replace</code> to be much faster than <code>split</code>/<code>join</code>. Thanks to Luigi van der Pal for pointing this out in the comments!</em></strong></p>
-
-<p>When trying to do a find-and-replace in Javascript with static search and replace strings, it&#8217;s always faster to use <code>String.split()</code> and <code>String.join()</code> than to use <code>String.replace()</code>. Compare:</p>
-
-<pre><code>var myString = &#39;......some long text.....&#39;; 
-mystring.replace(/,/g,&quot;; &quot;); // Replace the commas with semi-colon-space</code></pre>
-
-<p>with</p>
-
-<pre><code>mystring.split(&quot;,&quot;).join(&quot;; &quot;); // Replace the commas with semi-colon-space</code></pre>
-
-<p>The latter split/join method will always be faster. Note that this is only useful for static find-and-replace. For instance, you could not do anything like the following with splits and joins:</p>
-
-<pre><code>mystring.replace(/^[0-9]+([A-Za-z]*)/g, &quot;$1&quot;);</code></pre>
-
-<p>Of course, you could also use this method to strip characters out of a string:</p>
-
-<pre><code>mystring.split(&quot;,&quot;).join(&#39;&#39;);</code></pre>
-
-<p>Good luck!</p>
+    <html><body><p><strong><em>Update: This advice is now totally out-of-date and wrong. Just use <code>replace</code>. As <a href="http://jsperf.com/test-join-and-split">recent Browserscope results show</a>, all browsers have optimized <code>replace</code> to be much faster than <code>split</code>/<code>join</code>. Thanks to Luigi van der Pal for pointing this out ...</em></strong></p></body></html>
   </div>
 </article>
 

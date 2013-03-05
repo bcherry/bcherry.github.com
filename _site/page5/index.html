@@ -250,36 +250,7 @@
   <h1><a href="/2010/2/This-Blog-Now-With-HTML5">This Blog - Now With HTML5</a></h1>
 </header>
   <div class="span-17 last entry">
-    <p>Take a look at this web site. Notice anything out of the ordinary. Hopefully you don&#8217;t, none of the layout or styling has changed noticeably recently. However, try a &#8220;View Source&#8221;. Now do you see something different? This page is now rendered with the following doctype:</p>
-
-<pre><code>&lt;!DOCTYPE html&gt;</code></pre>
-
-<p>That&#8217;s right, this web site is now HTML5! In fact it even <a href='http://validator.w3.org/check?uri=http%3A%2F%2Fwww.adequatelygood.com'>validates as HTML5</a> successfully! If you dig past the doctype, you&#8217;ll find all sorts of HTML5 semantic elements, including <code>&lt;nav&gt;</code>, <code>&lt;article&gt;</code>, and <code>&lt;time&gt;</code>, among others. Making the transition was reasonably painless with the help of Mark Pilgrim&#8217;s <a href='http://diveintohtml5.org/semantics.html'>excellent article on making the switch</a>. For the most part, I just had to change a few elements and rewrite my CSS. There were a few headaches because <a href='http://blueprintcss.org'>Blueprint CSS</a> expects your grid elements to be <code>&lt;div&gt;</code>s, but the following CSS added the right capabilities to my semantic elements to be compatible with Blueprint:</p>
-
-<pre><code>header, footer, nav, article {
-	float: left;
-	margin-right: 10px;
-}</code></pre>
-
-<p>Of course, IE doesn&#8217;t understand the new HTML5 elements. Luckily, there&#8217;s an easy solution. I chose to write it myself, since it&#8217;s so simple, but there&#8217;s a <a href='http://html5shiv.googlecode.com/svn/trunk/html5.js'>publicly available complete solution</a> you can use as well. Here&#8217;s mine, for reference (in the <code>&lt;head&gt;</code>):</p>
-
-<pre><code>&lt;!-- IE HTML5 Compatibility --&gt;
-&lt;!--[if IE]&gt;
-	&lt;script type=&quot;text/javascript&quot;&gt;
-		(function () {
-			var tags = &quot;header hgroup nav article time footer&quot;.split(&quot; &quot;),
-				i = 0,
-				l = tags.length;
-			for (; i &lt; l; i += 1) {
-				document.createElement(tags[i]);
-			}
-		}());
-	&lt;/script&gt;
-&lt;![endif]--&gt;</code></pre>
-
-<p>And that&#8217;s all there was to it! It&#8217;s great that you can start using basic HTML5 <em>right now</em> without any difficulties, and it will work in all browsers, even IE6! Of course, you can&#8217;t just start using the more advanced features like <code>&lt;video&gt;</code> or Web Workers, but basic markup is a great start.</p>
-
-<p>So what do you think? You ready to upgrade your own personal site?</p>
+    <html><body><p>Take a look at this web site. Notice anything out of the ordinary. Hopef...</p></body></html>
   </div>
 </article>
 
@@ -292,81 +263,10 @@
   <h1><a href="/2010/2/Finding-Improper-JavaScript-Globals">Finding Improper JavaScript Globals</a></h1>
 </header>
   <div class="span-17 last entry">
-    <p>When I interview web developers, my first JavaScript question is usually the following:</p>
-<blockquote>What is the difference, in JavaScript, between <code class="js inline">x = 1</code> and <code class="js inline">var x = 1</code>.  Feel free to answer in as much or as little detail as you feel comfortable.</blockquote>
-<p>Most people would give an answer about how the <code class="js inline">var</code> keyword makes something a local variable, omitting it makes it a global variable.  While I'd love to hear about scope chains, the window object, and hear the term "implied global" in an answer, that basic answer is good enough.  It might not show a thorough knowledge of JavaScript, but at least it shows some level of understanding of the most common dangerous feature.</p>
-<p>There are three basic ways to make a global variable in JavaScript.  You can use <code class="js inline">var</code> (<strong>declared global</strong>), you can just assign to it without having declared it (<strong>implied global</strong>), or you can set a property on the <code class="js inline">window</code> object (<strong>window global</strong>).  Here's those three:</p>
-<pre class="js">var x = 1; // declared global
-y = 2; // implied global
-window.z = 3; // window global</pre>
-<p>Implied globals are bad because they're hard to keep track of, and their declarations aren't <a href="http://www.adequatelygood.com/2010/2/JavaScript-Scoping-and-Hoisting">hoisted</a>.  I don't like window globals either, because mixing <code class="js inline">window.x</code> and <code class="js inline">x</code> is bad form.  In my opinion, <strong>all globals should be declared globals</strong>.  Unfortunately, JavaScript makes this really hard to maintain.  There are tools like <a href="http://www.jslint.com/">JSLint</a> that will perform analysis of your code and help you out, but it can't do an entire code base at once, at least not easily.</p>
-<p>I've written a tool that performs <strong>run-time analysis</strong> of your application, and finds all of the improperly declared globals (both implied and window globals).  Check out a demo <a href="http://www.bcherry.net/badglobals">here</a>.</p>
-<h2>Introducing badglobals.js</h2>
-<p><a href="http://www.bcherry.net/static/lib/js/badglobals.js">badglobals.js</a> is a tool for finding all of the improperly declared global variables in your application.  Using it is simple, but don't use it in production code (see "How It Works" below).</p>
-<ol>
-	<li>Include <a href="http://www.bcherry.net/static/lib/js/badglobals.js">badglobals.js</a> in your page, before any other scripts.</li>
-	<li>When you want to do analysis, open Firebug and run <code class="js inline">BADGLOBALS.check()</code>.</li>
-	<li>You'll see a warning statement in the console for every bad global found.  These contain both the name, and the value.</li>
-</ol>
-<p>In addition, there are a few slightly more advanced features you might be interested in.</p>
-<h3>Exclusions</h3>
-<p>If you have some globals you don't want to be reported about (such as third-party libraries), you can easily exclude them manually.  Before you run the check, just call <code class="js inline">.exclude</code>, like so:</p>
-<pre class="js">BADGLOBALS.exclude("jQuery", "$", "YAHOO");</pre>
-<p>Feel free to call this method as many times as you'd like, it always adds, and never removes.  By default, all browser built-ins are excluded (these are found when the script is included).  Sometimes, the variable <code class="js inline">_firebug</code> enters after the script include, and shows in the report.  You should exclude this.</p>
-<h3>Report Object</h3>
-<p>While the warnings are probably enough, badglobals.js also builds a report object, containing more information.  Access it by calling <code class="js inline">BADGLOBALS.report()</code>.  This will run <code class="js inline">.check()</code> if it has not run already.  The report object has the following properties:</p>
-<ul>
-	<li><strong>bad:</strong> An array of the names of the bad globals found.</li>
-	<li><strong>good:</strong> An array of the names of the good globals found.</li>
-	<li><strong>skipped:</strong> An array of the names of the globals that were not checked.</li>
-</ul>
-<p>And that's all there is to badglobals.js.  It's really simple to use, but remarkably effective.</p>
-<h2>How It Works</h2>
-<p>badglobals.js works because of one key difference between implied/window globals and declared globals:  <strong>declared globals cannot be deleted</strong>.  This is because using <code class="js inline">var</code> causes the internal property [[DontDelete]] to be set.</p>
-<pre class="js">var x = 1;
-y = 2;
-window.z = 3;
-
-delete x; // false
-delete y; // true
-delete z; // true
-
-x; // 1
-y; // undefined
-z; // undefined</pre>
-<p>badglobals.js simply tries to delete every property of window (skipping the built-ins, of course).  If the delete succeeds, it was declared wrong.  It always puts it back, but I wouldn't trust this to run in production code, because it just <em>seems dangerous</em>.  Here's the core section of badglobals.js:</p>
-<pre class="js">for (prop in window) {
-	if (window.hasOwnProperty(prop)) {
-		if (skip.indexOf(prop) >= 0 || exclude.indexOf(prop) >= 0) {
-			skipped.push(prop);
-		} else {
-			val = window[prop];
-			if (delete window[prop]) {
-				console.warn("Found non-var global %o with value %o", prop, val);
-				bad.push(prop);
-				try {
-					window[prop] = val;
-				} catch (e) {
-					console.error("Oops, there was an error putting %o back :(", prop);
-				}
-			} else {
-				good.push(prop);
-			}
-		}
-	}
-}</pre>
-<h3>Browser Support</h3>
-<p>This script will not work in Internet Explorer, because I use the array <code class="js inline">indexOf</code> method, among other things.  I also think IE doesn't exactly follow the standard when it comes to <code class="js inline">delete</code>, so the checks might not work.  I don't consider this a problem, because this is a <strong>developer tool</strong>, not production code.  You'll find the complete set of bad globals with Firefox or Chrome, so you should not need to check in Internet Explorer as well.  I have not tested it in Opera, but the <code class="js inline">console</code> references will certainly fail.</p>
-<h3>Thanks to...</h3>
-<p>I got the idea for this tool from the <a href="http://perfectionkills.com/understanding-delete/">excellent article</a> on <code class="js inline">delete</code> by kangax, over at <a href="http://perfectionkills.com">his blog</a>.  If you haven't read that article, you really should.  The depth and quality is incredible.</p>
-<h2>Get badglobals.js</h2>
-<p>Here are the links, one more time:</p>
-<ul>
-	<li><a href="http://www.bcherry.net/static/lib/js/badglobals.js">Raw Script</a></li>
-	<li><a href="http://github.com/bcherry/bcherry/blob/master/bcherry-web/static/lib/js/badglobals.js">Script at GitHub</a></li>
-	<li><a href="http://www.bcherry.net/badglobals">Demo Page</a></li>
-</ul>
-
+    <html><body>
+<p>When I interview web developers, my first JavaScript question is usually the following:</p>
+<blockquote>What is the difference, in JavaScript, between <code class="js inline">x = 1</code> and <code class="js inline">var x = 1</code>.  Feel free to answer in as much ...</blockquote>
+</body></html>
   </div>
 </article>
 
@@ -379,7 +279,8 @@ z; // undefined</pre>
   <h1><a href="/2010/2/JavaScript-Scoping-and-Hoisting">JavaScript Scoping and Hoisting</a></h1>
 </header>
   <div class="span-17 last entry">
-    <p>Do you know what value will be alerted if the following is executed as a JavaScript program?</p>
+    <html><body>
+<p>Do you know what value will be alerted if the following is executed as a JavaScript program?</p>
 
 <pre><code>var foo = 1;
 function bar() {
@@ -390,176 +291,8 @@ function bar() {
 }
 bar();</code></pre>
 
-<p>If it surprises you that the answer is &#8220;10&#8221;, then this one will probably really throw you for a loop:</p>
-
-<pre><code>var a = 1;
-function b() {
-	a = 10;
-	return;
-	function a() {}
-}
-b();
-alert(a);</code></pre>
-
-<p>Here, of course, the browser will alert &#8220;1&#8221;. So what&#8217;s going on here? While it might seem strange, dangerous, and confusing, this is actually a powerful and expressive feature of the language. I don&#8217;t know if there is a standard name for this specific behavior, but I&#8217;ve come to like the term &#8220;hoisting&#8221;. This article will try to shed some light on this mechanism, but first lets take a necessary detour to understand JavaScript&#8217;s scoping.</p>
-
-<h2 id='scoping_in_javascript'>Scoping in JavaScript</h2>
-
-<p>One of the sources of most confusion for JavaScript beginners is scoping. Actually, it&#8217;s not just beginners. I&#8217;ve met a lot of experienced JavaScript programmers who don&#8217;t fully understand scoping. The reason scoping is so confusing in JavaScript is because it looks like a C-family language. Consider the following C program:</p>
-
-<pre><code>#include &lt;stdio.h&gt;
-int main() {
-	int x = 1;
-	printf(&quot;%d, &quot;, x); // 1
-	if (1) {
-		int x = 2;
-		printf(&quot;%d, &quot;, x); // 2
-	}
-	printf(&quot;%d\n&quot;, x); // 1
-}</code></pre>
-
-<p>The output from this program will be <code>1, 2, 1</code>. This is because C, and the rest of the C family, has <strong>block-level scope</strong>. When control enters a block, such as the <code>if</code> statement, new variables can be declared within that scope, without affecting the outer scope. This is not the case in JavaScript. Try the following in Firebug:</p>
-
-<pre><code>var x = 1;
-console.log(x); // 1
-if (true) {
-	var x = 2;
-	console.log(x); // 2
-}
-console.log(x); // 2</code></pre>
-
-<p>In this case, Firebug will show <code>1, 2, 2</code>. This is because JavaScript has <strong>function-level scope</strong>. This is radically different from the C family. Blocks, such as <code>if</code> statements, <strong>do not</strong> create a new scope. Only functions create a new scope.</p>
-
-<p>To a lot of programmers who are used to languages like C, C++, C#, or Java, this is unexpected and unwelcome. Luckily, because of the flexibility of JavaScript functions, there is a workaround. If you must create temporary scopes within a function, do the following:</p>
-
-<pre><code>function foo() {
-	var x = 1;
-	if (x) {
-		(function () {
-			var x = 2;
-			// some other code
-		}());
-	}
-	// x is still 1.
-}</code></pre>
-
-<p>This method is actually quite flexible, and can be used anywhere you need a temporary scope, not just within block statements. However, I strongly recommend that you take the time to really understand and appreciate JavaScript scoping. It&#8217;s quite powerful, and one of my favorite features of the language. If you understand scoping, hoisting will make a lot more sense to you.</p>
-
-<h2 id='declarations_names_and_hoisting'>Declarations, Names, and Hoisting</h2>
-
-<p>In JavaScript, a name enters a scope in one of four basic ways:</p>
-
-<ol>
-<li><strong>Language-defined:</strong> All scopes are, by default, given the names <code>this</code> and <code>arguments</code>.</li>
-
-<li><strong>Formal parameters:</strong> Functions can have named formal parameters, which are scoped to the body of that function.</li>
-
-<li><strong>Function declarations:</strong> These are of the form <code>function foo() {}</code>.</li>
-
-<li><strong>Variable declarations:</strong> These take the form <code>var foo;</code>.</li>
-</ol>
-
-<p>Function declarations and variable declarations are always moved (&#8220;hoisted&#8221;) invisibly to the top of their containing scope by the JavaScript interpreter. Function parameters and language-defined names are, obviously, already there. This means that code like this:</p>
-
-<pre><code>function foo() {
-	bar();
-	var x = 1;
-}</code></pre>
-
-<p>is actually interpreted like this:</p>
-
-<pre><code>function foo() {
-	var x;
-	bar();
-	x = 1;
-}</code></pre>
-
-<p>It turns out that it doesn&#8217;t matter whether the line that contains the declaration would ever be executed. The following two functions are equivalent:</p>
-
-<pre><code>function foo() {
-	if (false) {
-		var x = 1;
-	}
-	return;
-	var y = 1;
-}
-function foo() {
-	var x, y;
-	if (false) {
-		x = 1;
-	}
-	return;
-	y = 1;
-}</code></pre>
-
-<p>Notice that the assignment portion of the declarations were not hoisted. Only the name is hoisted. This is not the case with function declarations, where the entire function body will be hoisted as well. But remember that there are two normal ways to declare functions. Consider the following JavaScript:</p>
-
-<pre><code>function test() {
-	foo(); // TypeError &quot;foo is not a function&quot;
-	bar(); // &quot;this will run!&quot;
-	var foo = function () { // function expression assigned to local variable &#39;foo&#39;
-		alert(&quot;this won&#39;t run!&quot;);
-	}
-	function bar() { // function declaration, given the name &#39;bar&#39;
-		alert(&quot;this will run!&quot;);
-	}
-}
-test();</code></pre>
-
-<p>In this case, only the function declaration has its body hoisted to the top. The name &#8216;foo&#8217; is hoisted, but the body is left behind, to be assigned during execution.</p>
-
-<p>That covers the basics of hoisting, which is not as complex or confusing as it seems. Of course, this being JavaScript, there is a little more complexity in certain special cases.</p>
-
-<h3 id='name_resolution_order'>Name Resolution Order</h3>
-
-<p>The most important special case to keep in mind is name resolution order. Remember that there are four ways for names to enter a given scope. The order I listed them above is the order they are resolved in. In general, if a name has already been defined, it is never overridden by another property of the same name. This means that a function declaration takes priority over a variable declaration. This does not mean that an assignment to that name will not work, just that the declaration portion will be ignored. There are a few exceptions:</p>
-
-<ul>
-<li>The built-in name <code>arguments</code> behaves oddly. It seems to be declared following the formal parameters, but before function declarations. This means that a formal parameter with the name <code>arguments</code> will take precedence over the built-in, even if it is undefined. This is a bad feature. Don&#8217;t use the name <code>arguments</code> as a formal parameter.</li>
-
-<li>Trying to use the name <code>this</code> as an identifier anywhere will cause a SyntaxError. This is a good feature.</li>
-
-<li>If multiple formal parameters have the same name, the one occurring latest in the list will take precedence, even if it is undefined.</li>
-</ul>
-
-<h3 id='named_function_expressions'>Named Function Expressions</h3>
-
-<p>You can give names to functions defined in function expressions, with syntax like a function declaration. This does not make it a function declaration, and the name is not brought into scope, nor is the body hoisted. Here&#8217;s some code to illustrate what I mean:</p>
-
-<pre><code>foo(); // TypeError &quot;foo is not a function&quot;
-bar(); // valid
-baz(); // TypeError &quot;baz is not a function&quot;
-spam(); // ReferenceError &quot;spam is not defined&quot;
-
-var foo = function () {}; // anonymous function expression (&#39;foo&#39; gets hoisted)
-function bar() {}; // function declaration (&#39;bar&#39; and the function body get hoisted)
-var baz = function spam() {}; // named function expression (only &#39;baz&#39; gets hoisted)
-
-foo(); // valid
-bar(); // valid
-baz(); // valid
-spam(); // ReferenceError &quot;spam is not defined&quot;</code></pre>
-
-<h2 id='how_to_code_with_this_knowledge'>How to Code With This Knowledge</h2>
-
-<p>Now that you understand scoping and hoisting, what does that mean for coding in JavaScript? The most important thing is to always declare your variables with a <code>var</code> statement. I <strong>strongly</strong> recommend that you have <em>exactly one</em> <code>var</code> statement per scope, and that it be at the top. If you force yourself to do this, you will never have hoisting-related confusion. However, doing this can make it hard to keep track of which variables have actually been declared in the current scope. I recommend using <a href='http://www.jslint.com' target='_blank'>JSLint</a> with the <code>onevar</code> option to enforce this. If you&#8217;ve done all of this, your code should look something like this:</p>
-
-<pre><code>/*jslint onevar: true [...] */
-function foo(a, b, c) {
-    var x = 1,
-    	bar,
-    	baz = &quot;something&quot;;
-}</code></pre>
-
-<h2 id='what_the_standard_says'>What the Standard Says</h2>
-
-<p>I find that it&#8217;s often useful to just consult the <a href='http://www.mozilla.org/js/language/E262-3.pdf' target='_blank'>ECMAScript Standard (pdf)</a> directly to understand how these things work. Here&#8217;s what it has to say about variable declarations and scope (section 12.2.2):</p>
-
-<blockquote>
-<p>If the variable statement occurs inside a FunctionDeclaration, the variables are defined with function-local scope in that function, as described in section 10.1.3. Otherwise, they are defined with global scope (that is, they are created as members of the global object, as described in section 10.1.3) using property attributes { DontDelete }. Variables are created when the execution scope is entered. A Block does not define a new execution scope. Only Program and FunctionDeclaration produce a new scope. Variables are initialised to undefined when created. A variable with an Initialiser is assigned the value of its AssignmentExpression when the VariableStatement is executed, not when the variable is created.</p>
-</blockquote>
-
-<p>I hope this article has shed some light on one of the most common sources of confusion to JavaScript programmers. I have tried to be as thorough as possible, to avoid creating more confusion. If I have made any mistakes or have large omissions, please let me know.</p>
+<p>If it surprises you that the answer is “10”, then this one will probably really th...</p>
+</body></html>
   </div>
 </article>
 
