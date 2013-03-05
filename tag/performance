@@ -80,155 +80,105 @@
             <span class="alt">posts by year</span>
             
               
-            
               
-                
-                
-                
               
             
               
-                
-                
-                
+              
               
             
               
-                
-                
-                
+              
               
             
               
-                
-                
-                
+              
               
             
               
-                
-                
-                
+              
               
             
               
-                
-                
-                
-                  <a class="tight" href="/2009">2009</a>
-                
+              
+              
+                <a class="tight" href="/2009">2009</a>
               
             
               
-                
-                
-                
+              
               
             
               
-                
-                
-                
+              
               
             
               
-                
-                
-                
+              
               
             
               
-                
-                
-                
+              
               
             
               
-                
-                
-                
+              
               
             
               
-                
-                
-                
+              
               
             
               
-                
-                
-                
+              
               
             
               
-                
-                
-                
+              
               
             
               
-                
-                
-                
+              
               
             
               
-                
-                
-                
+              
               
             
               
-                
-                
-                
+              
               
             
               
-                
-                
-                
+              
               
             
               
-                
-                
-                
+              
               
             
               
-                
-                
-                
+              
               
             
               
-                
-                
-                
+              
               
             
               
-                
-                
-                
-                  <a class="tight" href="/2010">2010</a>
-                
+              
+              
+                <a class="tight" href="/2010">2010</a>
               
             
               
-                
-                
-                
+              
               
             
               
-                
-                
-                
-                  <a class="tight" href="/2011">2011</a>
-                
+              
+              
+                <a class="tight" href="/2011">2011</a>
               
             
           </div>
@@ -352,8 +302,6 @@
     <html><body><p><strong><em>Update: This advice is now totally out-of-date and wrong. Just use <code>replace</code>. As <a href="http://jsperf.com/test-join-and-split">recent Browserscope results show</a>, all browsers have optimized <code>replace</code> to be much faster than <code>split</code>/<code>join</code>. Thanks to Luigi van der Pal for pointing this out ...</em></strong></p></body></html>
   </div>
 </article>
-
-  
 
   
 

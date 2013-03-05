@@ -80,155 +80,105 @@
             <span class="alt">posts by year</span>
             
               
-            
               
-                
-                
-                
               
             
               
-                
-                
-                
+              
               
             
               
-                
-                
-                
+              
               
             
               
-                
-                
-                
+              
               
             
               
-                
-                
-                
+              
               
             
               
-                
-                
-                
-                  <a class="tight" href="/2009">2009</a>
-                
+              
+              
+                <a class="tight" href="/2009">2009</a>
               
             
               
-                
-                
-                
+              
               
             
               
-                
-                
-                
+              
               
             
               
-                
-                
-                
+              
               
             
               
-                
-                
-                
+              
               
             
               
-                
-                
-                
+              
               
             
               
-                
-                
-                
+              
               
             
               
-                
-                
-                
+              
               
             
               
-                
-                
-                
+              
               
             
               
-                
-                
-                
+              
               
             
               
-                
-                
-                
+              
               
             
               
-                
-                
-                
+              
               
             
               
-                
-                
-                
+              
               
             
               
-                
-                
-                
+              
               
             
               
-                
-                
-                
+              
               
             
               
-                
-                
-                
+              
               
             
               
-                
-                
-                
-                  <a class="tight" href="/2010">2010</a>
-                
+              
+              
+                <a class="tight" href="/2010">2010</a>
               
             
               
-                
-                
-                
+              
               
             
               
-                
-                
-                
-                  <a class="tight" href="/2011">2011</a>
-                
+              
+              
+                <a class="tight" href="/2011">2011</a>
               
             
           </div>
@@ -302,8 +252,6 @@
     <html><body><p>It’s often very difficult to keep track of what CSS goes where. Especially when you load up on Javascript controls and files in a large application, which render markup that depends on some CSS being there. One solution is to “inline” the CSS in the JavaScript, by adding style to each element as it’s created. This works, but it’s messy. Also, browsers are heavily optimized to apply CSS, faster than any Javascript solution could be. But when you’ve got a fancy script manager like LABjs, remembering to statically link all of the important CSS is a pain. Especially so if you’re not sure at page load whethe...</p></body></html>
   </div>
 </article>
-
-  
 
   
 
