@@ -195,13 +195,12 @@
   <article class="span-17 last">
   <header class="span-17 last">
   
-    <time class="alt" datetime="2010-02-01" pubdate>2010-02-01</time>
+    <time class="alt" datetime="2010-03-08" pubdate>2010-03-08</time>
   
-  <h1><a href="/Why-JavaScripts-new-Keyword-Sucks.html">Why JavaScript's "new" Keyword Sucks</a></h1>
+  <h1><a href="/Performance-of-vs-.html">Performance of === vs. ==</a></h1>
 </header>
   <div class="span-17 last entry">
-    <html><body><pre><code>&gt;&gt;&gt; function F() { return function inner() { return "inner invoked"; }; }
-&gt;...</code></pre></body></html>
+    <html><body><p>One particular weirdness and unpleasantry in JavaScript is the set of equality operators. Like virtually every language, JavaScript has the standard <code>==</code>, <code>!=</code>, <code>&lt;</code>, <code>&gt;</code>, <code>&lt;=</code>, and <code>&gt;=</code> operators. However, <code>==</code> an...</p></body></html>
   </div>
 </article>
 
@@ -209,12 +208,12 @@
   <article class="span-17 last">
   <header class="span-17 last">
   
-    <time class="alt" datetime="2010-01-29" pubdate>2010-01-29</time>
+    <time class="alt" datetime="2010-02-26" pubdate>2010-02-26</time>
   
-  <h1><a href="/Preloading-JS-and-CSS-as-Print-Stylesheets.html">Preloading JS and CSS as Print Stylesheets</a></h1>
+  <h1><a href="/Minimum-Timer-Intervals-in-JavaScript.html">Minimum Timer Intervals in JavaScript</a></h1>
 </header>
   <div class="span-17 last entry">
-    <html><body><p><em><strong>UPDATE: This technique has turned out to be dangerous in Chrome.  It seems that Chrome will load the JS files into the cache, but  then set an implied type="text/css" on them.  This means that it will refuse to re-use them as Java...</strong></em></p></body></html>
+    <html><body><p>I was talking with a co-worker today about the behavior of <code>setTimeout</code> and <code>setInterval</code> when given a small interval, like <code>0</code> or <code>1</code>. The <em>expectation</em> would be tha...</p></body></html>
   </div>
 </article>
 
@@ -222,12 +221,12 @@
   <article class="span-17 last">
   <header class="span-17 last">
   
-    <time class="alt" datetime="2009-11-28" pubdate>2009-11-28</time>
+    <time class="alt" datetime="2010-02-19" pubdate>2010-02-19</time>
   
-  <h1><a href="/Consuljs-Simple-Logging-Abstraction.html">Consul.js, Simple Logging Abstraction</a></h1>
+  <h1><a href="/This-Blog-Now-With-HTML5.html">This Blog - Now With HTML5</a></h1>
 </header>
   <div class="span-17 last entry">
-    <html><body><p>I've been reading <em>Coders At Work</em> by Peter Seibel, and one question he asks in every interview is "How do you debug - print statements, debugger like gdb, or something else?".  For me, print statements are my first tool for any situation.  That's why Firebug is so...</p></body></html>
+    <html><body><p>Take a look at this web site. Notice anything out of the ordinary. Hopef...</p></body></html>
   </div>
 </article>
 
@@ -235,28 +234,14 @@
   <article class="span-17 last">
   <header class="span-17 last">
   
-    <time class="alt" datetime="2009-11-05" pubdate>2009-11-05</time>
+    <time class="alt" datetime="2010-02-12" pubdate>2010-02-12</time>
   
-  <h1><a href="/JS-Find-and-Replace-with-SplitJoin.html">JS Find-and-Replace with Split/Join</a></h1>
-</header>
-  <div class="span-17 last entry">
-    <html><body><p><strong><em>Update: This advice is now totally out-of-date and wrong. Just use <code>replace</code>. As <a href="http://jsperf.com/test-join-and-split">recent Browserscope results show</a>, all browsers have optimized <code>replace</code> to be much faster than <code>split</code>/<code>join</code>. Thanks to Luigi van der Pal for pointing this out ...</em></strong></p></body></html>
-  </div>
-</article>
-
-
-  <article class="span-17 last">
-  <header class="span-17 last">
-  
-    <time class="alt" datetime="2009-11-05" pubdate>2009-11-05</time>
-  
-  <h1><a href="/Javascript-Pseudo-threading.html">Javascript Pseudo-threading</a></h1>
+  <h1><a href="/Finding-Improper-JavaScript-Globals.html">Finding Improper JavaScript Globals</a></h1>
 </header>
   <div class="span-17 last entry">
     <html><body>
-<p><strong><em>This post has been migrated from my old, defunct blog at bcherry.net. The links may not work, and the formatting may be wonky.</em></strong></p>
-
-<p>I’ve been playing around with asynchronous Javascript for repeated large-set actions, in the hopes of generating some useful techniques for real applications. I’ve narrowed down a...</p>
+<p>When I interview web developers, my first JavaScript question is usually the following:</p>
+<blockquote>What is the difference, in JavaScript, between <code class="js inline">x = 1</code> and <code class="js inline">var x = 1</code>.  Feel free to answer in as much ...</blockquote>
 </body></html>
   </div>
 </article>
@@ -265,47 +250,24 @@
   <article class="span-17 last">
   <header class="span-17 last">
   
-    <time class="alt" datetime="2009-11-05" pubdate>2009-11-05</time>
+    <time class="alt" datetime="2010-02-08" pubdate>2010-02-08</time>
   
-  <h1><a href="/jQuery-Micro-templates.html">jQuery Micro-templates</a></h1>
+  <h1><a href="/JavaScript-Scoping-and-Hoisting.html">JavaScript Scoping and Hoisting</a></h1>
 </header>
   <div class="span-17 last entry">
     <html><body>
-<p>John Resig wrote a neat micro-templating Javascript function a <a href="http://ejohn.org/blog/javascript-micro-templating/">while back</a>. I’ve been playing with this, and have discovered two things:</p>
+<p>Do you know what value will be alerted if the following is executed as a JavaScript program?</p>
 
-<ol><li>
-<p>These templates are totally nestable. Just make an element to be templated within a tem...</p>
-</li></ol>
-</body></html>
-  </div>
-</article>
+<pre><code>var foo = 1;
+function bar() {
+	if (!foo) {
+		var foo = 10;
+	}
+	alert(foo);
+}
+bar();</code></pre>
 
-
-  <article class="span-17 last">
-  <header class="span-17 last">
-  
-    <time class="alt" datetime="2009-11-05" pubdate>2009-11-05</time>
-  
-  <h1><a href="/Managing-CSS-Through-Javascript.html">Managing CSS Through JavaScript</a></h1>
-</header>
-  <div class="span-17 last entry">
-    <html><body><p>It’s often very difficult to keep track of what CSS goes where. Especially when you load up on Javascript controls and files in a large application, which render markup that depends on some CSS being there. One solution is to “inline” the CSS in the JavaScript, by adding style to each element as it’s created. This works, but it’s messy. Also, browsers are heavily optimized to apply CSS, faster than any Javascript solution could be. But when you’ve got a fancy script manager like LABjs, remembering to statically link all of the important CSS is a pain. Especially so if you’re not sure at page load whethe...</p></body></html>
-  </div>
-</article>
-
-
-  <article class="span-17 last">
-  <header class="span-17 last">
-  
-    <time class="alt" datetime="2009-11-05" pubdate>2009-11-05</time>
-  
-  <h1><a href="/Building-a-Better-Friend-Selector.html">Building a Better Friend Selector</a></h1>
-</header>
-  <div class="span-17 last entry">
-    <html><body>
-<p><strong><em>This post has been migrated from my old, defunct blog at bcherry.net. The links may not work, and the formatting may be wonky.</em></strong></p>
-
-<p>Working in social entertainment, one of the lynchpins of the entire business is the friend selector. Without it, there is virtually no way to grow your customer base. Having a simple, effective friend selector ...</p>
+<p>If it surprises you that the answer is “10”, then this one will probably really th...</p>
 </body></html>
   </div>
 </article>
@@ -322,6 +284,10 @@
       
     
     
+      <span class="alt">or</span>
+    
+    
+        <a class="tight" href="/page4">next</a>
     
   </p>
 </div>
