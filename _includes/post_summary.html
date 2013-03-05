@@ -1,6 +1,6 @@
 <article class="span-17 last">
   {% include post_header.html %}
   <div class="span-17 last entry">
-    {{ post.content }}
+    {{ post.content | truncatehtml: 200 }}
   </div>
 </article>
