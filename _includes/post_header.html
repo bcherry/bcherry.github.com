@@ -1,6 +1,6 @@
 <header class="span-17 last">
-  {% unless post.no_date %}
+  {% if post.date %}
     <time class="alt" datetime="{{ post.date | date: '%Y-%m-%d' }}" pubdate>{{ post.date | date: '%Y-%m-%d' }}</time>
-  {% endunless %}
+  {% endif %}
   <h1><a href="{{ post.url }}">{{ post.title }}</a></h1>
 </header>
