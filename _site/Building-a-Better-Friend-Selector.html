@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Building a Better Friend Selector</title>
+
+    <!-- CSS, including Blueprint, jQuery w/Smoothness, and AG CSS -->
+    <link rel="stylesheet" href="/css/blueprint/blueprint.min.css" media="screen, projection" />
+    <link rel="stylesheet" href="/css/blueprint/print.min.css" media="print" />
+    <!--[if lt IE 8]>
+      <link rel="stylesheet" href="/css/blueprint/ie.min.css" media="screen, projection">
+    <![endif]-->
+    <link rel="stylesheet" href="/css/ag.css" media="screen" />
+
+    <!-- Extra <head> Links -->
+    <link rel="alternate" type="application/atom+xml" title="Adequately Good Atom Feed" href="http://www.adequatelygood.com/feeds/atom.xml" />
+
+    <!-- TODO: favicon -->
+
+    <!-- IE HTML5 Compatibility -->
+    <!--[if IE]>
+      <script type="text/javascript">
+        (function () {
+          var tags = "header hgroup nav article time footer".split(" "),
+            i = 0,
+            l = tags.length;
+          for (; i < l; i += 1) {
+            document.createElement(tags[i]);
+          }
+        }());
+      </script>
+    <![endif]-->
+  </head>
+  <body>
+    <a name="top"></a>
+    <div id="container" class="container">
+
+      <!-- Header -->
+      <header class="span-24 last">
+        <!-- Title -->
+        <div id="title" class="span-24 last">
+          <div class="span-17 colborder prepend-top append-bottom">
+            <hgroup>
+              <h1>
+                <a href="/">adequately good</a>
+              </h1>
+              <h3 class="prepend-2 alt">decent programming advice</h3>
+            </hgroup>
+          </div>
+          <div class="span-6 last prepend-top append-bottom">
+            <h2>
+              written by
+              <a href="http://twitter.com/bcherry">ben cherry</a>
+            </h2>
+          </div>
+        </div>
+
+        <hr />
+
+        <!-- Navigation Bar -->
+        <nav class="prepend-2 span-20 append-2 last append-bottom">
+          <div class="span-5">
+            <a href="/">home</a>
+          </div>
+          <div class="span-5">
+            <a href="#" id="archiveLink">archives</a>
+          </div>
+          <div class="span-5">
+            <a href="/about.html">about</a>
+          </div>
+          <div class="span-5 last">
+            <a href="/feeds/atom.xml">feed</a>
+          </div>
+        </nav>
+
+        <!-- Archives Links -->
+        <div id="archives" class="span-24 last smallalts">
+          <hr />
+          <div class="archivelinks">
+            <span class="alt">posts by year</span>
+            
+              
+              
+              
+            
+              
+              
+              
+            
+              
+              
+              
+            
+              
+              
+              
+            
+              
+              
+              
+            
+              
+              
+              
+                <a class="tight" href="/2009">2009</a>
+              
+            
+              
+              
+              
+            
+              
+              
+              
+            
+              
+              
+              
+            
+              
+              
+              
+            
+              
+              
+              
+            
+              
+              
+              
+            
+              
+              
+              
+            
+              
+              
+              
+            
+              
+              
+              
+            
+              
+              
+              
+            
+              
+              
+              
+            
+              
+              
+              
+            
+              
+              
+              
+            
+              
+              
+              
+            
+              
+              
+              
+            
+              
+              
+              
+                <a class="tight" href="/2010">2010</a>
+              
+            
+              
+              
+              
+            
+              
+              
+              
+                <a class="tight" href="/2011">2011</a>
+              
+            
+          </div>
+        </div>
+
+        <hr />
+      </header>
+
+      <div id="colcontainer" class="span-24 last">
+        <!-- Main content: Posts, etc. -->
+        <div id="content" class="span-17 colborder">
+          <a name="main"></a>
+          
+<article class="span-17 last">
+  <header class="span-17 last">
+  
+    <time class="alt" datetime="2009-11-05" pubdate>2009-11-05</time>
+  
+  <h1><a href="/Building-a-Better-Friend-Selector.html">Building a Better Friend Selector</a></h1>
+</header>
+  <div id="blogbody" class="span-17 last entry">
+    <p><strong><em>This post has been migrated from my old, defunct blog at bcherry.net. The links may not work, and the formatting may be wonky.</em></strong></p>
+
+<p>Working in social entertainment, one of the lynchpins of the entire business is the friend selector. Without it, there is virtually no way to grow your customer base. Having a simple, effective friend selector is absolutely critical. On Facebook, they provide you with either the <a href='http://wiki.developers.facebook.com/index.php/Fb:multi-friend-selector' target='_blank'>multi-friend-selector</a> or the <a href='http://wiki.developers.facebook.com/index.php/Fb:multi-friend-selector_%28condensed%29' target='_blank'>condensed multi-friend-selector</a>. If you&#8217;ve ever played a Facebook game like <a href='http://apps.new.facebook.com/inthemafia/' target='_blank'>Mafia Wars</a> or <a href='http://apps.facebook.com/onthefarm' target='_blank'>Farmville</a> or <a href='http://apps.facebook.com/slidepets/' target='_blank'>SuperPoke! Pets</a>, then you&#8217;re probably already familiar with both of these controls. However, the situation is much more sparse on other networks. And if you&#8217;re talking about implementing a network independent game, like <a href='http://www.superpokepets.com' target='_blank'>SuperPokePets.com</a>, then you&#8217;ll eventually need to write your own.</p>
+
+<p>I&#8217;ve begun a project in my free time to make a truly great friend selector control, for use in our own applications and elsewhere. You can find the result <a href='http://bcherry.net/babfs' target='_blank'>here</a>, and the source code is available on <a href='http://github.com/bcherry/babfs/tree/master' target='_blank'>GitHub</a>. I&#8217;m constantly working on improving it. What I&#8217;ve built is not useful just for friends lists, but could feasibly serve as a good control for any sort of list selection. It began as a simple exercise in <a href='http://bcherry.net/archives/89' target='_blank'>good Javascript</a>, seeing how quickly I could replicate every feature of the Facebook condensed multi-friend-selector (the answer was about 2 hours). But as I worked on it more, I realized that I was capable of producing something of real value to our business. I hope to tackle advanced problems like performance with our so-called &#8220;whale users&#8221;, who have tens of thousands of friends. My initial attempt starts to break down over 1000 friends, and crashes the browser as I reach above 10000.</p>
+
+<p>You can use it by including the Javascript and CSS files (found in <a href='http://github.com/bcherry/babfs/tree/master' target='_blank'>Git</a>), then making a simple call to the constructor. The data is expected to be a list of objects, each of which has the properties &#8216;name&#8217;, &#8216;id&#8217;, and &#8216;tabs&#8217; (optional). If you don&#8217;t want the tabs, just don&#8217;t pass a &#8216;tabs&#8217; list, and don&#8217;t include it on your dataset. In the future, the object returned from the constructor will have some useful public methods.</p>
+
+<pre><code>var bfs = new BetterFriendSelector({
+  action:&quot;index.html&quot;,
+  method:&quot;GET&quot;,
+  submit_text:&quot;Send Friend Request&quot;,
+  data:fs_data,
+  limit:10,
+  elem:$(&quot;#bfs&quot;),
+  tabs:[{key:&quot;hasapp&quot;,name:&quot;Friends With App&quot;},          {key:&quot;nonapp&quot;,name:&quot;Friends Without App&quot;}],
+  extra_form_params:extra_form_params
+});</code></pre>
+
+<p>Anyways, I&#8217;d like to go through the implementation of what I have so far.</p>
+<h3>Disappearing Checkboxes</h3><p>This is the best feature of the condensed selector on Facebook.  When a user clicks to select one of their friends, the entry moves to the "selected" area, but with an 'X' instead of a checkbox.  This makes it easy to see who's been selected, even while filtering or tabbing the results.  Here's how I did that:</p>
+<pre><code>// Friend selected event
+selector.find(&quot;input[type=checkbox]&quot;).change(function(){
+  var count = selector.find(&quot;input[type=checkbox][checked=true]     length;
+  if (count &gt; limit) {
+    $(this).attr(&quot;checked&quot;,false);
+    return false;
+  }
+  $(this).parents(&quot;.friend&quot;).addClass(&quot;hidden&quot;);
+  var selected_elem = $(&quot;&lt;div id=&quot;&quot;&gt;&quot;).addClass(&quot;selected_frien    ;
+  selected_elem.tmpl(BFS.templates.selected_elem,{&quot;name&quot;:$(this    siblings(&quot;label&quot;).text(), &quot;id&quot;:$(this).attr(&quot;id&quot;)});
+  selector.find(&quot;.selected&quot;).append(selected_elem);
+});
+// Friend unselected event
+selector.find(&quot;.remove&quot;).live(&quot;click&quot;,function(){
+  selector.find(&quot;.unselected #&quot; + $(this).attr(&quot;id&quot;)).att    &quot;checked&quot;,false).parents(&quot;.friend&quot;).removeClass(&quot;hidden&quot;);
+  $(this).parents(&quot;.selected_friend&quot;).remove();
+});</code></pre>
+<p>I think this is fairly straightforward, so I'll just list a few points to help understand it:</p><ol>
+<li>The correct event to bind is "change".  My first attempt had me binding to the "click" event on the checkbox, which was flawed.  You can modify the checkbox by clicking it, with your keyboard, or clicking on the label, not to mention other Javascript.  "change" catches all of these options</li>
+<li>I use the friend's id to index the items.  Checkboxes have an id of 'cbXXX' and the corresponding 'selected' element has an id of 's_cbXXX'.</li>
+<li>I'm using John Resig's <a href='http://bcherry.net/archives/97' target='_blank'>micro-templates</a>, so that's what the <code class='js inline'>.tmpl()</code> call is.  The template data is stored in a static collection of strings.</li>
+<li>I allow the developer to specify a selection limit ("select up to X friends"), and enforce that in the 'change' event.  Returning false prevents the checkbox from becoming selected.</li>
+<li>My first attempt used <code class='js inline'>.hide()</code> and <code class='js inline'>.show()</code>, which seems to be natural.  I changed it to a class with 'display:none;'.  This is because there are a number of reasons a friend element might be hidden, such as being filtered or toggled.  Using classes for these ensures they stay hidden when I want them to be.</li>
+</ol><h3>Typeahead Name Filter</h3><p>There are plenty of solutions for typeahead to be found online, but I decided to implement my own.  It turned out to be really easy, so I'll just show the code and a few points.  The key feature of my implementation is that it filters on the start of the first and last name simultaneously, so entering 'be' will keep both 'Ben Franklin' and 'David Beckham'.</p>
+<pre><code>var filter = selector.find(&quot;.filter input&quot;);
+var reset_filter = function(){
+filter.addClass(&quot;empty&quot;).val(filter.siblings(&quot;.__empty_text&quot;).tex    ));
+};
+// Filter changed event
+var do_filter = function() {
+var filter_text = filter.val();
+if (filter_text == filter.siblings(&quot;.__empty_text&quot;).text()) {
+filter_text = &quot;&quot;;
+}
+selector.find(&quot;.unselected label&quot;).each(function(){
+with($(this)) {
+if(!text().match(&quot;^&quot; + filter_text) &amp;&amp; !text().match(&quot;[- \t]+&quot;     filter_text)) {
+parents(&quot;.friend&quot;).addClass(&quot;filtered&quot;);
+} else {
+parents(&quot;.friend&quot;).removeClass(&quot;filtered&quot;);
+}
+}
+});
+};
+filter.keyup(do_filter);
+// Filter preloaded text stuff
+reset_filter();
+filter.focus(function() {
+if ($(this).val() == $(this).siblings(&quot;.__empty_text&quot;).text()) {
+$(this).removeClass(&quot;empty&quot;).val(&#39;&#39;);
+}
+});
+filter.blur(function() {
+if ($(this).val() == &quot;&quot;) {
+reset_filter();
+}
+});
+selector.find(&quot;.filter .clear_filter&quot;).click(function(){
+reset_filter();
+do_filter();
+});</code></pre>
+<ol>
+<li>I'm using a class instead of <code class='js inline'>.hide()</code> and <code class='js inline'>.show()</code> for the same reason as above</li>
+
+<li>The textbox is watermarked using the text in a hidden element next to the textbox</li>
+</ol><h3>What's Next?</h3><p>I hope someone finds this control or it's code to be useful.  I'm going to keep working on it, and I hope to create something that becomes useful at Slide.  My next task is to create a mechanism for handling our "whale users", probably some sort of smart pagination.  I'll also be adding some public methods like <code class='js inline'>selectRandom()</code> to make the control easily programmable.  Another hurdle will be allowing friend data to be loaded dynamically, by passing some sort of generator function to my control.  Again, I hope this was useful, and let me know if you're using or modifying this!</p>
+  </div>
+</article>
+
+<div id="more_reading" class="span-17 last">
+  <p class="smallalts tags">
+    <span class="alt">filed under</span> <a class="tight" href="/tag/javascript">javascript</a><span class="alt"> and</span> <a class="tight" href="/tag/social gaming">social gaming</a>
+  </p>
+</div>
+
+<div id="comments_wrapper" class="span-17 last">
+  <div id="disqus_thread"></div>
+  <script type="text/javascript">
+        var disqus_shortname = 'adequatelygood';
+        var disqus_identifier = "http://www.adequatelygood.com/2009/11/Building-a-Better-Friend-Selector";
+        var disqus_title = "Building a Better Friend Selector";
+        var disqus_url = "http://www.adequatelygood.com/Building-a-Better-Friend-Selector.html";
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+  <script type="text/javascript" src="http://disqus.com/forums/adequatelygood/embed.js"></script>
+  <noscript>
+    <a href="http://disqus.com/forums/adequatelygood/?url=ref">View the discussion thread.</a>
+  </noscript>
+</div>
+
+        </div>
+
+        <!-- Sidebar: Search, links, etc. -->
+        <div id="sidebar" class="span-6 last">
+          <hr class="space" />
+
+          <div id="links">
+            <h3>the author</h3>
+            <p>
+              Ben is a 25 year-old software engineer. He lives and works in San Francisco. Many people think he invented the term "hoisting" in JavaScript, but this is untrue.
+            </p>
+            <ul>
+              <li><a href="http://twitter.com/bcherry">Twitter</a> - @<a class="twitter-anywhere-user" href="http://twitter.com/bcherry">bcherry</a></li>
+              <li><a href="http://github.com/bcherry">GitHub</a> - My Code</li>
+              <li><a href="http://www.linkedin.com/in/bcherryprogrammer">LinkedIn</a> - Professional Profile</li>
+              <li><a href="http://www.facebook.com/bcherry">Facebook</a> - That Other Social Network</li>
+              <li><a href="http://www.bcherry.net/talks/">Presentations</a> - Slides From My Talks</li>
+            </ul>
+            <iframe allowtransparency="true" frameborder="0" scrolling="no"
+              src="http://platform.twitter.com/widgets/follow_button.html?screen_name=bcherry&amp;button=grey&amp;text_color=7F7F7F&amp;link_color=666666"
+              style="width:300px; height:20px;"></iframe>
+          </div>
+
+          <hr />
+
+          <div id="tags">
+            <h3>categories</h3>
+            <ul>
+            
+              <li>
+                <a href="/tag/javascript">javascript</a>
+                (21)
+              </li>
+            
+              <li>
+                <a href="/tag/social%20gaming">social gaming</a>
+                (1)
+              </li>
+            
+              <li>
+                <a href="/tag/css">css</a>
+                (1)
+              </li>
+            
+              <li>
+                <a href="/tag/jquery">jquery</a>
+                (2)
+              </li>
+            
+              <li>
+                <a href="/tag/performance">performance</a>
+                (5)
+              </li>
+            
+              <li>
+                <a href="/tag/tools">tools</a>
+                (2)
+              </li>
+            
+              <li>
+                <a href="/tag/html5">html5</a>
+                (3)
+              </li>
+            
+              <li>
+                <a href="/tag/adequatelygood">adequatelygood</a>
+                (1)
+              </li>
+            
+              <li>
+                <a href="/tag/timers">timers</a>
+                (2)
+              </li>
+            
+              <li>
+                <a href="/tag/module%20pattern">module pattern</a>
+                (3)
+              </li>
+            
+              <li>
+                <a href="/tag/talks">talks</a>
+                (1)
+              </li>
+            
+              <li>
+                <a href="/tag/slide">slide</a>
+                (1)
+              </li>
+            
+              <li>
+                <a href="/tag/python">python</a>
+                (1)
+              </li>
+            
+              <li>
+                <a href="/tag/debugging">debugging</a>
+                (1)
+              </li>
+            
+              <li>
+                <a href="/tag/testing">testing</a>
+                (2)
+              </li>
+            
+              <li>
+                <a href="/tag/hashbang">hashbang</a>
+                (1)
+              </li>
+            
+            </ul>
+          </div>
+
+          <hr />
+
+          
+        </div>
+      </div>
+    </div>
+
+    <script>
+      (function() {
+        var archiveLink = document.getElementById("archiveLink"),
+            archives = document.getElementById("archives");
+
+        archiveLink.onclick = function() {
+          if (archives.className.match(/\bexpanded\b/)) {
+            archives.className = archives.className.replace(/\bexpanded\b/g, '');
+          } else {
+            archives.className += ' expanded';
+          }
+          return false;
+        };
+      }());
+    </script>
+
+    <!-- Google Analytics -->
+    <script type="text/javascript">var _gaq =_gaq||[]; _gaq.push(['_setAccount','UA-251077-4']);_gaq.push(['_trackPageview']);(function(){var ga=document.createElement('script');ga.type='text/javascript';ga.async=true;ga.src=('https:'==document.location.protocol?'https://ssl':'http://www')+'.google-analytics.com/ga.js';(document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(ga);})();</script>
+  </body>
+</html>

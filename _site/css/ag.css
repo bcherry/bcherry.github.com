@@ -1,0 +1,262 @@
+@charset "UTF-8";
+
+/* Header links should display like normal header text */
+h1 a, h1 a:visited, h1 a:hover, h1 a:link, h1 a:focus, h2 a, h2 a:visited, h2 a:hover, h2 a:link, h2 a:focus, h3 a, h3 a:visited, h3 a:hover, h3 a:link, h3 a:focus, h4 a, h4 a:visited, h4 a:hover, h4 a:link, h4 a:focus, h5 a, h5 a:visited, h5 a:hover, h5 a:link, h5 a:focus, h6 a, h6 a:visited, h6 a:hover, h6 a:link, h6 a:focus {
+	text-decoration: inherit;
+	color: inherit;
+}
+
+/* Standard link styles */
+a, a:link, a:visited {
+	color: #666666;
+	text-decoration: none;
+}
+
+a:hover, a:focus {
+	color: #191919;
+	text-decoration: underline;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	letter-spacing: -0.08em;
+}
+
+pre {
+	display: block;
+	padding: 0;
+	word-wrap: break-word;
+}
+
+/* Mainly used for inline code, but no reason to make it exclusive */
+code, .inline {
+	display: inline;
+	margin: 0;
+	padding: 0;
+}
+
+.smallalts .alt {
+	font-size: 0.7em;
+}
+
+.tight {
+	letter-spacing: -0.08em;
+}
+
+#title h1, #title h2, #title h3 {
+	margin-bottom: 0;
+}
+
+#title h1 {
+	font-size: 42pt;
+	letter-spacing: -.08em;
+	color: #424242;
+}
+
+#title h1 a:hover {
+	color: #191919;
+}
+
+#title h2 {
+	text-align: right;
+	line-height: 77px;
+	font-size: 15pt;
+	color: #7F7F7F;
+}
+
+#title h2 a {
+	font-size: 21pt;
+	margin-left: 0.2em;
+	letter-spacing: -1px;
+}
+
+#title h2 a:hover {
+	color: #191919;
+}
+
+#title h3 {
+	font-size: 21pt;
+	line-height: 21pt;
+}
+
+nav {
+	text-align: center;
+	font-size: 12pt;
+}
+
+nav div {
+	position: relative;
+}
+
+nav a {
+	color: #424242;
+	text-decoration: none;
+}
+
+nav a:hover {
+	color: #191919;
+}
+
+nav span {
+	color: #B3B3B3;
+	font-size: 12pt;
+	position: absolute;
+	display: block;
+	width: 100%;
+}
+
+#archives hr {
+	margin: 0;
+}
+
+.archivelinks {
+	font-size: 12pt;
+	padding-left: 1em;
+}
+
+.archivelinks a {
+	margin-right: 0.5em;
+}
+
+#archives {
+	height: 0;
+	overflow: hidden;
+	-webkit-transition: height 300ms linear;
+	   -moz-transition: height 300ms linear;
+	    -ms-transition: height 300ms linear;
+	   	 -o-transition: height 300ms linear;
+}
+
+#archives.expanded {
+	height: 25px;
+}
+
+.pager {
+	font-size: 14pt;
+}
+
+article header {
+	position: relative;
+}
+
+/* I use span.date elements for text content in place of an actual time/date */
+article header time, article header .date {
+	color: #777777;
+}
+
+article header h1 {
+	font-size: 21pt;
+	letter-spacing: -1px;
+	margin-top: 0.25em;
+	color: #333333;
+}
+
+article header h1 a {
+	text-decoration: none;
+}
+
+article header h1 a:hover {
+	color: #000000;
+	text-decoration: underline;
+}
+
+.entry .note {
+	color: #333333;
+	font-size: 8pt;
+	margin-left: 2.5em;
+	margin-top: -1.5em;
+	padding: 0.2em .8em;
+}
+
+.entry .todo {
+	color: red;
+}
+
+.contact {
+	font-size: 10pt;
+}
+
+#sidebar h3 {
+	margin-bottom: 0.5em;
+	color: #333333;
+	letter-spacing: -1px;
+	font-size: 16pt;
+}
+
+#sidebar ul {
+	list-style: none;
+	margin: 8px 0 4px;
+	padding-left: 0px;
+}
+
+#sidebar li {
+	background: url(/images/li.gif) no-repeat 0 3px;
+	color: #7F7F7F;
+	line-height: 1.2em;
+	padding: 4px 0 4px 16px;
+}
+
+#sidebar a, #sidebar a:link, #sidebar a:visited {
+	color: #424242;
+}
+
+#sidebar a:hover, #sidebar a:focus {
+	color: #191919;
+}
+
+#sidebar p {
+	margin-bottom: 1em;
+}
+
+.tags {
+	font-size: 14pt;
+}
+
+.listing {
+	font-size: 19pt;
+}
+
+#content, #sidebar {
+	padding-bottom: 32767px;
+	margin-bottom: -32767px;
+}
+
+#colcontainer {
+	overflow: hidden;
+	margin-bottom: 1.45em;
+}
+
+#attribution {
+	font-size: 0.9em;
+	margin-bottom: 20px;
+}
+
+/* DISQUS comments CSS */
+#dsq-content .dsq-dc-logo, #dsq-content .dsq-options, #dsq-content .dsq-item-trackback {
+	display: none;
+}
+
+#dsq-content h3 {
+	text-transform: lowercase;
+	margin: 0.5em 0;
+	color: #333333;
+	letter-spacing: -1px;
+	font-size: 16pt;
+}
+
+#dsq-content .dsq-comment-header {
+	background: none !important;
+}
+
+/* tweaks to blueprint -- TODO: rebuild blueprint with these rolled in */
+div.colborder {
+	border-color: #CCCCCC;
+}
+
+hr {
+	height: 1px;
+}
+
+header, footer, nav, article {
+	float: left;
+	margin-right: 10px;
+}
