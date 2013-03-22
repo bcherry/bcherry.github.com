@@ -2,6 +2,7 @@
 title: JavaScript Scoping and Hoisting
 layout: post
 legacy_id: http://www.adequatelygood.com/2010/2/JavaScript-Scoping-and-Hoisting
+disqus_id: 65060668
 permalink: /JavaScript-Scoping-and-Hoisting.html
 alias: /2010/2/JavaScript-Scoping-and-Hoisting/index.html
 tags: [javascript]
