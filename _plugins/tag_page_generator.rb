@@ -5,7 +5,7 @@ module Jekyll
       @site = site
       @base = base
       @dir = dir
-      @name = tag
+      @name = 'index.html'
 
       self.process(@name)
       self.read_yaml(File.join(base, '_layouts'), 'tag.html')
@@ -20,7 +20,7 @@ module Jekyll
     def generate(site)
       if site.layouts.key? 'tag'
         site.tags.keys.each do |tag|
-          site.pages << TagPage.new(site, site.source, 'tag', tag)
+          site.pages << TagPage.new(site, site.source, File.join('tag', tag), tag)
         end
       end
     end
