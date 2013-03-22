@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Objective-C for JavaScript Programmers</title>
+
+    <!-- CSS, including Blueprint, jQuery w/Smoothness, and AG CSS -->
+    <link rel="stylesheet" href="/css/blueprint/blueprint.min.css" media="screen, projection" />
+    <link rel="stylesheet" href="/css/blueprint/print.min.css" media="print" />
+    <!--[if lt IE 8]>
+      <link rel="stylesheet" href="/css/blueprint/ie.min.css" media="screen, projection">
+    <![endif]-->
+    <link rel="stylesheet" href="/css/ag.css" media="screen" />
+
+    <!-- Extra <head> Links -->
+    <link rel="alternate" type="application/atom+xml" title="Adequately Good Atom Feed" href="http://www.adequatelygood.com/feeds/atom.xml" />
+
+    <!-- TODO: favicon -->
+
+    <!-- IE HTML5 Compatibility -->
+    <!--[if IE]>
+      <script type="text/javascript">
+        (function () {
+          var tags = "header hgroup nav article time footer".split(" "),
+            i = 0,
+            l = tags.length;
+          for (; i < l; i += 1) {
+            document.createElement(tags[i]);
+          }
+        }());
+      </script>
+    <![endif]-->
+  </head>
+  <body>
+    <a name="top"></a>
+    <div id="container" class="container">
+
+      <!-- Header -->
+      <header class="span-24 last">
+        <!-- Title -->
+        <div id="title" class="span-24 last">
+          <div class="span-17 colborder prepend-top append-bottom">
+            <hgroup>
+              <h1>
+                <a href="/">adequately good</a>
+              </h1>
+              <h3 class="prepend-2 alt">decent programming advice</h3>
+            </hgroup>
+          </div>
+          <div class="span-6 last prepend-top append-bottom">
+            <h2>
+              written by
+              <a href="http://twitter.com/bcherry">ben cherry</a>
+            </h2>
+          </div>
+        </div>
+
+        <hr />
+
+        <!-- Navigation Bar -->
+        <nav class="prepend-2 span-20 append-2 last append-bottom">
+          <div class="span-5">
+            <a href="/">home</a>
+          </div>
+          <div class="span-5">
+            <a href="#" id="archiveLink">archives</a>
+          </div>
+          <div class="span-5">
+            <a href="/about.html">about</a>
+          </div>
+          <div class="span-5 last">
+            <a href="/feeds/atom.xml">feed</a>
+          </div>
+        </nav>
+
+        <!-- Archives Links -->
+        <div id="archives" class="span-24 last smallalts">
+          <hr />
+          <div class="archivelinks">
+            <span class="alt">posts by year</span>
+            
+              
+              
+              
+            
+              
+              
+              
+            
+              
+              
+              
+            
+              
+              
+              
+            
+              
+              
+              
+            
+              
+              
+              
+                <a class="tight" href="/2009">2009</a>
+              
+            
+              
+              
+              
+            
+              
+              
+              
+            
+              
+              
+              
+            
+              
+              
+              
+            
+              
+              
+              
+            
+              
+              
+              
+            
+              
+              
+              
+            
+              
+              
+              
+            
+              
+              
+              
+            
+              
+              
+              
+            
+              
+              
+              
+            
+              
+              
+              
+            
+              
+              
+              
+            
+              
+              
+              
+            
+              
+              
+              
+            
+              
+              
+              
+                <a class="tight" href="/2010">2010</a>
+              
+            
+              
+              
+              
+            
+              
+              
+              
+                <a class="tight" href="/2011">2011</a>
+              
+            
+          </div>
+        </div>
+
+        <hr />
+      </header>
+
+      <div id="colcontainer" class="span-24 last">
+        <!-- Main content: Posts, etc. -->
+        <div id="content" class="span-17 colborder">
+          <a name="main"></a>
+          
+<article class="span-17 last">
+  <header class="span-17 last">
+  
+  <h1><a href="/drafts__/Objective-C-for-JavaScript-Programmers.html">Objective-C for JavaScript Programmers</a></h1>
+</header>
+  <div id="blogbody" class="span-17 last entry">
+    <ul>
+<li>
+<p>Looping, if, etc</p>
+</li>
+
+<li>
+<p>Types</p>
+</li>
+
+<li>
+<p>Objects/Classes</p>
+</li>
+
+<li>
+<p>properties</p>
+</li>
+
+<li>
+<p>methods</p>
+</li>
+
+<li>
+<p>inheritance</p>
+</li>
+
+<li>
+<p>Scope</p>
+</li>
+
+<li>
+<p>Blocks</p>
+</li>
+
+<li>
+<p>Delegates</p>
+</li>
+
+<li>
+<p>Selectors</p>
+</li>
+
+<li>
+<p>Notifications</p>
+</li>
+
+<li>
+<p>Timers</p>
+</li>
+
+<li>
+<p>GUI programming</p>
+</li>
+
+<li>
+<p>Functions</p>
+</li>
+
+<li>
+<p>ARC</p>
+</li>
+
+<li>
+<p>CF, low-level stuff</p>
+</li>
+
+<li>
+<p>Header files</p>
+</li>
+
+<li>
+<p>CocoaPods</p>
+</li>
+</ul>
+
+<p>As &#8220;mobile&#8221; development is becoming critical to most technology companies, many front-end engineers are finding themselves starting to learn about development for iOS and Android, and some are even beginning to do native mobile development full-time. This article serves as a detailed introduction to the Objective-C language and the iOS platform for developers who are already experienced with JavaScript.</p>
+
+<h2 id='what_is_objectivec'>What is Objective-C?</h2>
+
+<p>Objective-C is a <strong>superset</strong> of the C programming language, and serves as the fundamental language for Mac OS X and all of its relatives, including iOS. Most importantly, and unsurprisingly, it introduces an object-oriented programming model to C, along with many other nice modern language features. Objective-C has a daunting and verbose syntax, but is remarkably powerful and flexible, with some very clever features. There are a few warts of course, but as a JavaScript programmers we&#8217;re all used to that sort of thing.</p>
+
+<h2 id='static_typing'>Static Typing</h2>
+
+<p>One of the harder adjustments for JavaScript programmers moving to Objective-C is adjusting to <strong>static typing</strong>. Each variable, function argument, and return value must have it&#8217;s type explicityldeclared by the programmer, and mixing-and-matching types is strictly disallowed. This means that you can&#8217;t simply declare a variable with <code>var</code> and worry about the type later. Luckily, the compiler helps you out and will let you know very loudly if you&#8217;re breaking the rules. So keep this in mind as you read on, as you&#8217;ll see a lot of types being declared everywhere.</p>
+
+<h2 id='structure_of_an_objectivec_program'>Structure of an Objective-C Program</h2>
+
+<p>When you crack open an Objective-C project, you&#8217;ll find two main sorts of files: <strong>Header files</strong> (<code>*.h</code>), and <strong>Implementation files</strong> (<code>*.m</code>). Each pair of files generally represents a single <strong>class</strong>. This pair of files is used to separate the <strong>public interface</strong> of a class from it&#8217;s <strong>private implementation</strong>. JavaScript programs do not have the concept of privacy, although this will be familiar to developers who have used classical object-oriented languages such as Java or Ruby.</p>
+
+<p>While most developers will organize their code into many folders, the Objective-C linker discards the folder structure when building the program. This means that each file (including 3rd-party dependences) must have a unique name. Most developers choose a prefix for their company, team, or project, and use that throughout their code to avoid naming collisions. For this article, we&#8217;ll use the prefix &#8220;AG&#8221;.</p>
+
+<h2 id='classes_and_objects'>Classes and Objects</h2>
+
+<p>Objective-C implements a classical inheritance model. JavaScript implements a prototypal inheritance model, although many JavaScript programmers choose to use a classical model instead, through one of the many libraries available. CoffeeScript makes classical inheritance the standard, and includes a simple syntax inspired by Ruby. If you&#8217;ve done any of these before, you&#8217;ll be familiar withe concept.</p>
+
+<h3 id='the_header_file'>The Header File</h3>
+
+<p>The header file contains the public interface for a class. All you&#8217;ll find here is a class definition and <strong>function prototypes</strong>, which define the function name and arguments, but do not contain the implementation. Let&#8217;s take a look:</p>
+
+<pre><code>// AGHello.h
+
+@interface AGHello : NSObject
+
+@property (nonatomic, retain) NSString *name;
+
+- (void)sayHello;
+
+@end</code></pre>
+
+<p>The class definition runs between the <code>@interface</code> statement and the <code>@end</code> statement. Anything included outside of those lines will not be part of this class definition. In this case, we have a comment line beginning with <code>//</code>. Commenting in Objective-C is identical to JavaScript.</p>
+
+<p>The first line, names the class and defines it&#8217;s <strong>subclass</strong>, which is <code>NSObject</code> in this case. <code>NSObject</code> is the base class of all objects, so this is the default to use if you don&#8217;t need to inherit anything in particular.</p>
+
+<p>The second line is a property definition. The property&#8217;s name is <code>name</code>, and its type is <code>NSString *</code> (a string). The bit between the parens is some boilerplate, we&#8217;ll look at that in a bit more detail later on. For now, the <code>*</code> simply means &#8220;instance of&#8221;.</p>
+
+<p>The third line is a function prototype (method definition). Because it starts with <code>-</code>, we know that we&#8217;re defining an <strong>instance method</strong>, which means that instances of this class will expose this method. In JavaScript, this is equivalent to placing a method on a constructor&#8217;s prototype. The method is named <code>sayHello</code> and takes no arguments. It has no return value, which we specify using the special term <code>void</code>.</p>
+
+<h3 id='the_implementation'>The Implementation</h3>
+
+<p>Now that we have a header, let&#8217;s implement this class. Here&#8217;s the implementation file:</p>
+
+<pre><code>// AGHello.m
+
+#import &quot;AGHello.h&quot;
+
+@implementation AGHello
+
+- (void)sayHello
+{
+  NSLog(@&quot;Hello, %@&quot;, self.name);
+}
+
+- (void)dealloc
+{
+  self.name = nil;
+}
+
+@end</code></pre>
+
+<p>In order to offer an implementation of <code>AGHello</code>, we must first know about it. To do that, we&#8217;ll <code>#import</code> the file. This simply tells the compiler to include that file inside of this one. If we needed any external libraries, we&#8217;d <code>#import</code> them here as well. Notice that the filename is listed without any directories. As I mentioned above, the compiler discards directory structures, so the filename must be unique within all files in the project.</p>
+
+<p>Next, we begin the implementation with the unsurprising <code>@implementation AGHello</code>. Our property (<code>name</code>) will be implemented automatically (that&#8217;s what that whole <code>(nonatomic, retain)</code> part was about), so we just need to implement our <code>sayHello</code> method.</p>
+
+<p>Once again, we include the full method signature so it&#8217;s clear that we&#8217;re implementing the same method that the header file declared. Then we simply open a pair of brackets and include the method body. In this case, our method is a simple call to <code>NSLog</code>, which is a built-in function roughly equivalent to JavaScript&#8217;s <code>console.log</code>. We pass two arguments: a string literal, and the value of our <code>name</code> property. Within instance methods, we can always refer to the current instance as <code>self</code>, and access properties by name with dot-notation. The Objective-C string literal syntax is unfortunate, you&#8217;ll have to remember to always prefix the string with <code>@</code>, or else you&#8217;ll make a C-string, which behaves quite differently. <code>NSLog</code> accepts format strings, just like <code>console.log</code>. The format specified <code>%@</code> is equivalent to <code>%s</code> in <code>console.log</code>, it will just print the string value of the argument, which is <code>self.name</code> in this case.</p>
+
+<p>Finally, we have to define the <code>dealloc</code> method. This method comes by default on all classes, and handles dellocation of the object. If you&#8217;re using ARC (Automatic Reference Counting, a feature of iOS 5 and up), you&#8217;ll simply need to assign each of your properties that was declared as <code>retain</code> (remember that property definition in the header) to <code>nil</code> (the <code>null</code> value for object types in Objective-C) to prevent memory leakage.</p>
+
+<h3 id='using_our_class'>Using Our Class</h3>
+
+<p>Now it&#8217;s time to really accomplish something! We&#8217;ll make a new iOS application in <a href='XCode'>XCode</a>, add in <code>AGHello</code>, and try running it. If you want to play along: In XCode, just choose &#8220;New Project&#8221;, and you can make an iOS &#8220;Single View Application&#8221; called &#8220;AGDemo&#8221; (using the prefix &#8220;AG&#8221;), leaving all the defaults selected. Then, choose &#8220;New File&#8221;, and add an &#8220;Objective-C class&#8221; called &#8220;AGHello&#8221; with the subclass &#8220;NSObject&#8221;. Once you&#8217;ve got those files, just copy the contents of AGHello.h and AGHello.m that I defined above.</p>
+
+<p>The starting point for all iOS applications is the <strong>application delegate</strong>. This is usually named (with your own prefix) <code>AGAppDelegate</code>. This file contains a bunch of stubbed out methods, but we&#8217;ll focus on the first one for now, called <code>application:didFinishLaunchingWithOptions:</code>. In &#8220;AGAppDelegate.m&#8221;, we&#8217;ll find this method and add a few lines to the body:</p>
+
+<pre><code>- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
+{
+    AGHello *hello = [[AGHello alloc] init];
+    hello.name = @&quot;Ben&quot;;
+
+    [hello sayHello];
+
+    return YES;
+}</code></pre>
+
+<p>We&#8217;ll come back to the more complicated method signature on top in a bit, let&#8217;s focus on the method body for now.</p>
+
+<p>First, we declare a new variable, named <code>hello</code>, with the type <code>AGHello *</code> (which means it will hold an instance of our <code>AGHello</code> class). Then, we initialize a new instance of <code>AGHello</code> and assign it.</p>
+
+<p>Objective-C has a remarkable implementation of methods for objects. Most classical languages add regular functions to objects, but Objective-C uses a concept called <strong>message passing</strong> instead. This was inspired by Smalltalk, and is really a great feature once you get used to it. The syntax for message passing is <code>[RECEIVER messageName]</code>. So to initialize our <code>AGHello</code>, we actually nest messages. First, we send the <code>alloc</code> message to the class itself, (<code>[AGHello alloc]</code>), which asks for an instance to be allocated in memory. That message returns an instance, which we then send the message <code>init</code>, which tells it to initialize itself for use. This is the simplest example of creating a new object instance in Objective-C. We&#8217;ll cover messages in much more detail in just a bit.</p>
+
+<p>Once we have our instance, we can assign our property to it. This is done simply with dot-notation. Notice again that we are using the special Objective-C string notation <code>@&quot;Ben&quot;</code>. This actually causes a new <code>NSString</code> object to be created. If you&#8217;ll recall, we defined the <code>name</code> property to have the type <code>NSString *</code>, so it&#8217;s important that we assign an instance of <code>NSString</code>.</p>
+
+<p>Finally, we&#8217;ll call our <code>sayHello</code> method. Once again, we pass a message to our instance with the square-bracket notation: <code>[hello sayHello]</code>. The final line, <code>return YES;</code>, is just part of this method&#8217;s original implementation, and we&#8217;ll leave it alone.</p>
+
+<p>If we run this program in the iOS Simulator (&#8220;Product&#8221; -&gt; &#8220;Run&#8221;), we&#8217;ll see &#8220;Hello, Ben&#8221; logged out into the debugger console. Success!</p>
+
+<h2 id='methods_and_messages'>Methods and Messages</h2>
+
+<p>Methods in Objective-C come in two primary flavors, <strong>instance</strong> and <strong>static</strong>. Instance methods (which we&#8217;ve already seen briefly) are available to each instance of the class (like methods in JavaScript&#8217;s prototype chain). Static methods are accessible directly on the class itself, just like methods attached to constructor functions in JavaScript.</p>
+
+<p>To declare an instance method, prefix it with <code>-</code>. Static methods are prefixed with <code>+</code>.</p>
+
+<pre><code>@interface AGFoo : NSObject
+
++ (void)aStaticMethod;
+
+- (void)anInstanceMethod;
+
+@end</code></pre>
+
+<p>It&#8217;s important that you preserve the correct <code>+</code>/<code>-</code> prefix when implementing the method as well. Calling these methods is straightforward with the message-passing syntax we used earlier:</p>
+
+<pre><code>[AGFoo aStaticMethod];
+[[[AGFoo alloc] init] anInstanceMethod];</code></pre>
+
+<h3 id='return_values'>Return Values</h3>
+
+<p>Since Objective-C is statically-typed, you&#8217;ll need to declare your <strong>return type</strong> (if any) when you declare the method. Each method can return only one value, of only one type. This always goes in the parentheses just in front of the method name:</p>
+
+<pre><code>- (NSString *)foo
+{
+    return @&quot;foo&quot;;
+}</code></pre>
+
+<p>If your method has no return value, just use <code>void</code> as the return type. Once you&#8217;ve declared a return type, it&#8217;s your job to stick to it. If you break the your contract, the compiler will usually refuse to build your program.</p>
+
+<h3 id='arguments'>Arguments</h3>
+
+<p>Method arguments are a little different in Objective-C. Rather than being thrown into one long list, each one is spelled-out one-by-one in the method name itself. For instance:</p>
+
+<pre><code>- (void)sayHello:(NSString *)name
+{
+    NSLog(@&quot;Hello, %@&quot;, name);
+}</code></pre>
+
+<p>If you need more arguments:</p>
+
+<pre><code>- (void)sayHelloTo:(NSString *)name1 and:(NSString *)name2
+{
+    NSLog(@&quot;Hello, %@ and %@&quot;, name1, name2);
+}</code></pre>
+
+<p>You&#8217;ll notice that the <code>NSLog</code> function doesn&#8217;t use this message-passing syntax. That&#8217;s because <code>NSLog</code> is a normal function, just like what JavaScript has. You&#8217;ll deal with functions on occassion, but most of the time in Objective-C you&#8217;ll be using methods and the message-passing syntax.</p>
+
+<p>Calling these methods with arguments is straightforward:</p>
+
+<pre><code>AGHello *hello = [[AGHello alloc] init];
+
+[hello sayHelloTo:@&quot;Ben&quot; and:@&quot;Marcus&quot;];</code></pre>
+
+<h2 id='method_names'>Method Names</h2>
+
+<p>The formal name of the method is derived from the signature, by removing the <code>+</code>/<code>-</code>, the return type, and all of the argument types and names. So our second method above is named <code>sayHelloTo:and:</code>. Notice that we keep the colon character in place for each spot where an argument should be inserted (including at the end).</p>
+
+<h2 id='messages'>Messages</h2>
+
+<p>Messages bring with them some nice properties. For instance, passing a message to <code>nil</code> is always ok, and always returns <code>nil</code>. So the following code will run with no errors:</p>
+
+<pre><code>AGHello *hello = nil;
+[hello sayHello];</code></pre>
+
+<p>This saves a lot of time that would otherwise be spent guarding against method invocations on a null object reference.</p>
+
+<p>You can also get a typed reference to a method name using a <strong>selector</strong>:</p>
+
+<pre><code>SEL sayHelloMethod = @selector(sayHello);
+
+AGHello *hello = [[AGHello alloc] init];
+[hello performSelector:sayHelloMethod];</code></pre>
+
+<p>Using the method <code>respondsToSelector:</code>, you can easily test objects in cases where you&#8217;re operating outside the bounds of static typing and need to know about an object:</p>
+
+<pre><code>[hello respondsToSelector:@selector(sayHello)]; // true
+
+[hello respondsToSelector:@selector(sayGoodby)]; // false</code></pre>
+
+<p>Usually, selectors will be used to establish callbacks for events in UI programming.</p>
+
+<h2 id='properties'>Properties</h2>
+
+<p>Properties are a special type of method. When you use the <code>@property</code> declaration in a class, you&#8217;re actually telling it to define a getter and a setter method. By default, these are named after the property with <code>get</code> or <code>set</code> prepended. The value is stored in a private <strong>instance variable</strong> that is the property name with an <code>_</code> in front. In some cases you&#8217;ll actually want to override the getter or setter, in which case you&#8217;ll do this:</p>
+
+<pre><code>@interface AGHello : NSObject
+
+@property (nonatomic, retain) NSString *name;
+
+@end
+
+@implementation AGHello
+
+- (void)setName:(NSString *)name
+{
+    NSLog(@&quot;Name was set&quot;);
+    _name = name;
+}
+
+- (NSString *)getName
+{
+    NSLog(@&quot;Name was gotten&quot;);
+    return _name;
+}
+
+@end</code></pre>
+
+<p>Any time you use dot-notation to retrieve or assign a property value, these methods will be called. You can also call them directly with messages if you prefer: <code>[hello setName:@&quot;Ben&quot;]</code>. Dot-notation is also <code>nil</code>-safe, just like message passing.</p>
+
+<h2 id='common_types'>Common Types</h2>
+
+<p>Objective-C contains quite a few built-in types that you&#8217;ll use quite a bit.</p>
+
+<h3 id='numbers'>Numbers</h3>
+
+<p>Unlike JavaScript, which has only a single <code>Number</code> type, Objective-C contains a bunch of a numeric types for different situations. I&#8217;ll cover the basics here.</p>
+
+<p>The most common floating-point type is <code>double</code>, which is a double-precision floating-point number (64 bits). This is what JavaScript uses for <code>Number</code>, and is pretty flexible. There is also the lower-precision <code>float</code>, and a special type of <code>double</code> for CoreGraphics operations called <code>CGFloat</code>. Any number literal containing a decimal point is assumed to be a <code>double</code>.</p>
+
+<p>For integers, you&#8217;ll usually want <code>NSInteger</code> or <code>NSUInteger</code>. The latter is <strong>unsigned</strong>, which means that it can hold values twice as large, at the expense of being unable to hold negative values. If you&#8217;ve used C or Java before, try to resist the urge to use <code>int</code> and <code>unsigned int</code> directly, and just stick to <code>NSInteger</code> and <code>NSUInteger</code>. Any number integer literal is assumed to be an <code>NSInteger</code>.</p>
+
+<p>Arithmetic on numbers is very similar to JavaScript. All of the standard operators are there, including <code>++</code> and <code>+=</code>. It&#8217;s extremely important to remember that using the division operator, &#8221;<code>/</code>&#8221; on integer values will always result in integer division (<code>5 / 3 == 1</code>). You must cast your integers to floating-point values if you want floating-point division: (<code>(double)5 / (double)3 == 1.6666666666666667</code>).</p>
+
+<h4 id='booleans'>Booleans</h4>
+
+<p>Boolean values are just a special case of integers in Objective-C. Their type is <code>BOOL</code> and the values are <code>YES</code> and <code>NO</code>.</p>
+
+<h4 id='nsnumber'>NSNumber</h4>
+
+<p>The final number type is a bit different. It&#8217;s known as <code>NSNumber</code> and is actually an object type. It can hold any of the primitive number types, but exists as a proper object. You&#8217;ll use <code>NSNumber</code> in container classes, which can only contain objects. Moving values in and out of <code>NSNumber</code> is easy with the helper methods.</p>
+
+<pre><code>NSInteger i = 1;
+NSNumber *n = [NSNumber numberWithInteger:i];
+i == [n integerValue]; // true</code></pre>
+
+<p>You can also define <code>NSNumber</code> values with a literal syntax:</p>
+
+<pre><code>NSNumber *n = @1;
+NSNumber *m = @1.0;</code></pre>
+
+<p>Be careful! Since <code>NSNumber</code> is an object, it is always truthy, even when holding a false value:</p>
+
+<pre><code>if (@NO) {
+    // This will be executed!
+}</code></pre>
+
+<p>Make sure you pull out the <code>boolValue</code> if you need to do a truthiness check.</p>
+
+<h3 id='strings'>Strings</h3>
+
+<p>The primary string class in Objective-C is <code>NSString *</code>. As we&#8217;ve already seen, you can define them using a literal syntax:</p>
+
+<pre><code>NSString *s = @&quot;Hello, world&quot;;</code></pre>
+
+<p>Common string operations are available as static and instance methods:</p>
+
+<pre><code>// Concatenation
+NSString *s = [@&quot;foo&quot; stringByAppendingString:@&quot;bar&quot;];
+
+// Case conversion
+NSString *s = [@&quot;foo&quot; uppercaseString];</code></pre>
+
+<p><code>NSString</code> also support format strings:</p>
+
+<pre><code>NSString *s = [NSString stringWithFormat:@&quot;Hello, %@, user #%d&quot;, @&quot;Ben&quot;, 53];</code></pre>
+
+<p>Be sure to explore the <a href='http://example.com'>documentation</a>.</p>
+
+<h3 id='arrays'>Arrays</h3>
+
+<p>Objective-C contains a modern array implementation called <code>NSArray</code>. Arrays are a <strong>container object</strong>, which means they hold other objects. Container objects in Objective-C can only hold other objects of any type (but no primitive values), and cannot hold <code>nil</code> values.</p>
+
+<p>Defining an accessing an array is easy with the literal syntax:</p>
+
+<pre><code>NSArray *a = @[@1, @&quot;foo&quot;, @YES];
+NSLog(a[1]); // &quot;foo&quot;</code></pre>
+
+<p>Because arrays are objects, accessing elements is nil-safe:</p>
+
+<p>((NSArray <em>)nil)<span>1</span>; // no problem, just returns nil</em></p>
+
+<p>Just like <code>NSString</code>, the <code>NSArray</code> class contains many helpful methods for filtering, sorting, joining, and many other operations.</p>
+
+<p>The <code>NSArray</code> class is immutable. If you wish to have a mutable array, you should use <code>NSMutableArray</code>. This will allow you to add, remove, and change values. Note that the type returned by the <code>@[]</code> literal is an <code>NSArray</code>, so you&#8217;ll need to convert it. You can convert an <code>NSArray</code> to an <code>NSMutableArray</code> with the <code>mutableCopy</code> method: <code>[@[] mutableCopy]</code>.</p>
+
+<p>The <code>for-in</code> &#8220;fast enumeration&#8221; statement can be used to iterate over an <code>NSArray</code>:</p>
+
+<pre><code>for (NSNumber *n in @[@1, @2, @3]) {
+    // do something with n
+}</code></pre>
+
+<p>If you don&#8217;t know the type of the values in the array (or they have many types), use the generic object type <code>id</code>:</p>
+
+<pre><code>for (id val in someArray) {
+    // ...
+}</code></pre>
+
+<h3 id='dictionaries'>Dictionaries</h3>
+
+<p>We also have a basic dictionary type, <code>NSDictionary</code> (and its mutable cousin, <code>NSMutableDictionary</code>):</p>
+
+<pre><code>NSDictionary *d = @{ @&quot;foo&quot;: @&quot;bar&quot; };</code></pre>
+
+<p>Just like with <code>NSArray</code>, none of the keys nor the values may be <code>nil</code>, and the must all be objects. The keys need not be strings, they can be any object. You can access values with square brackets: <code>d[@&quot;foo&quot;]</code>. Using a <code>for-in</code> loop on an <code>NSDictionary</code> will enumerate the keys of the dicitonary.</p>
+
+<h3 id='null_values'>Null Values</h3>
+
+<p>Finally, we come to null values. Objective-C has three: <code>NULL</code>, <code>nil</code>, and <code>[NSNull null]</code>.</p>
+
+<p><code>NULL</code> is a primitive value that can be used with any primitive numeric type. <code>NULL</code> is falsy when used in an <code>if</code> statement.</p>
+
+<p><code>nil</code> is used for object types. It has the type <code>id</code>, which is the generic object type. <code>nil</code> cannot be placed in a container, but can be the receiver of any message. <code>nil</code> is also falsy.</p>
+
+<p><code>[NSNull null]</code> is a singleton instance of <code>NSNull</code>, and it is for use in containers. If you need to put a null value into an <code>NSArray</code>, use <code>[NSNull null]</code>. <code>[NSNull null]</code>, as an object, is truthy when used in an <code>if</code> statement, so be careful.</p>
+  </div>
+</article>
+
+<div id="more_reading" class="span-17 last">
+  <p class="smallalts tags">
+    <span class="alt">filed under</span> <a class="tight" href="/tag/objective-c">objective-c</a>
+  </p>
+</div>
+
+<div id="comments_wrapper" class="span-17 last">
+  <div id="disqus_thread"></div>
+  <script type="text/javascript">
+      var disqus_shortname = 'adequatelygood';
+      var disqus_identifier = "";
+      var disqus_title = "Objective-C for JavaScript Programmers";
+      var disqus_url = "http://www.adequatelygood.com/drafts__/Objective-C-for-JavaScript-Programmers.html";
+
+      /* * * DON'T EDIT BELOW THIS LINE * * */
+      (function() {
+          var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+          dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+          (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      })();
+  </script>
+  <noscript>
+    <a href="http://disqus.com/forums/adequatelygood/?url=ref">View the discussion thread.</a>
+  </noscript>
+</div>
+
+        </div>
+
+        <!-- Sidebar: Search, links, etc. -->
+        <div id="sidebar" class="span-6 last">
+          <hr class="space" />
+
+          <div id="links">
+            <h3>the author</h3>
+            <p>
+              Ben is a 25 year-old software engineer. He lives and works in San Francisco. Many people think he invented the term "hoisting" in JavaScript, but this is untrue.
+            </p>
+            <ul>
+              <li><a href="http://twitter.com/bcherry">Twitter</a> - @<a class="twitter-anywhere-user" href="http://twitter.com/bcherry">bcherry</a></li>
+              <li><a href="http://github.com/bcherry">GitHub</a> - My Code</li>
+              <li><a href="http://www.linkedin.com/in/bcherryprogrammer">LinkedIn</a> - Professional Profile</li>
+              <li><a href="http://www.facebook.com/bcherry">Facebook</a> - That Other Social Network</li>
+              <li><a href="http://www.bcherry.net/talks/">Presentations</a> - Slides From My Talks</li>
+            </ul>
+            <iframe allowtransparency="true" frameborder="0" scrolling="no"
+              src="http://platform.twitter.com/widgets/follow_button.html?screen_name=bcherry&amp;button=grey&amp;text_color=7F7F7F&amp;link_color=666666"
+              style="width:300px; height:20px;"></iframe>
+          </div>
+
+          <hr />
+
+          <div id="tags">
+            <h3>categories</h3>
+            <ul>
+            
+              <li>
+                <a href="/tag/javascript">javascript</a>
+                (21)
+              </li>
+            
+              <li>
+                <a href="/tag/social%20gaming">social gaming</a>
+                (1)
+              </li>
+            
+              <li>
+                <a href="/tag/css">css</a>
+                (1)
+              </li>
+            
+              <li>
+                <a href="/tag/jquery">jquery</a>
+                (2)
+              </li>
+            
+              <li>
+                <a href="/tag/performance">performance</a>
+                (5)
+              </li>
+            
+              <li>
+                <a href="/tag/tools">tools</a>
+                (2)
+              </li>
+            
+              <li>
+                <a href="/tag/html5">html5</a>
+                (3)
+              </li>
+            
+              <li>
+                <a href="/tag/adequatelygood">adequatelygood</a>
+                (1)
+              </li>
+            
+              <li>
+                <a href="/tag/timers">timers</a>
+                (2)
+              </li>
+            
+              <li>
+                <a href="/tag/module%20pattern">module pattern</a>
+                (3)
+              </li>
+            
+              <li>
+                <a href="/tag/talks">talks</a>
+                (1)
+              </li>
+            
+              <li>
+                <a href="/tag/slide">slide</a>
+                (1)
+              </li>
+            
+              <li>
+                <a href="/tag/python">python</a>
+                (1)
+              </li>
+            
+              <li>
+                <a href="/tag/debugging">debugging</a>
+                (1)
+              </li>
+            
+              <li>
+                <a href="/tag/testing">testing</a>
+                (2)
+              </li>
+            
+              <li>
+                <a href="/tag/hashbang">hashbang</a>
+                (1)
+              </li>
+            
+            </ul>
+          </div>
+
+          <hr />
+
+          
+        </div>
+      </div>
+    </div>
+
+    <script>
+      (function() {
+        var archiveLink = document.getElementById("archiveLink"),
+            archives = document.getElementById("archives");
+
+        archiveLink.onclick = function() {
+          if (archives.className.match(/\bexpanded\b/)) {
+            archives.className = archives.className.replace(/\bexpanded\b/g, '');
+          } else {
+            archives.className += ' expanded';
+          }
+          return false;
+        };
+      }());
+    </script>
+
+    <!-- Google Analytics -->
+    <script type="text/javascript">var _gaq =_gaq||[]; _gaq.push(['_setAccount','UA-251077-4']);_gaq.push(['_trackPageview']);(function(){var ga=document.createElement('script');ga.type='text/javascript';ga.async=true;ga.src=('https:'==document.location.protocol?'https://ssl':'http://www')+'.google-analytics.com/ga.js';(document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(ga);})();</script>
+  </body>
+</html>
