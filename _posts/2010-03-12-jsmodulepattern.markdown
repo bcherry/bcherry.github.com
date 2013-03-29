@@ -61,7 +61,7 @@ Notice that we've declared a global module named `MODULE`, with two public prope
 
 ## Advanced Patterns
 
-While the above is enough for many uses, we can take this pattern farther and create some very powerful, extensible constructs.  Lets work through them one-by-one, continuing with our module named MODULE`.
+While the above is enough for many uses, we can take this pattern farther and create some very powerful, extensible constructs.  Lets work through them one-by-one, continuing with our module named `MODULE`.
 
 ### Augmentation
 
