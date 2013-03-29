@@ -3,7 +3,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <title type="text">Adequately Good</title>
     <subtitle type="html">decent programming advice</subtitle>
-    <updated>2013-03-21T23:22:43-07:00</updated>
+    <updated>2013-03-29T09:51:54-07:00</updated>
     <id>tag:example.org,2003:3</id>
     <link rel="alternate" type="text/html" hreflang="en" href="http://www.adequatelygood.com/"/>
     <link rel="self" type="application/atom+xml" href="http://www.adequatelygood.com/feeds/atom.xml" />
@@ -1185,11 +1185,11 @@ print foo # {&amp;#39;a&amp;#39;: 1, &amp;#39;b&amp;#39;: 2}&lt;/code&gt;&lt;/pr
 	// still maintains access to all globals
 }());&lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;Notice the &lt;code&gt;{@class=js inline}()&lt;/code&gt; around the anonymous function. This is required by the language, since statements that begin with the token &lt;code&gt;{@class=js inline}function&lt;/code&gt; are always considered to be &lt;strong&gt;function declarations&lt;/strong&gt;. Including &lt;code&gt;{@class=js inline}()&lt;/code&gt; creates a &lt;strong&gt;function expression&lt;/strong&gt; instead.&lt;/p&gt;
+&lt;p&gt;Notice the &lt;code&gt;()&lt;/code&gt; around the anonymous function. This is required by the language, since statements that begin with the token &lt;code&gt;function&lt;/code&gt; are always considered to be &lt;strong&gt;function declarations&lt;/strong&gt;. Including &lt;code&gt;()&lt;/code&gt; creates a &lt;strong&gt;function expression&lt;/strong&gt; instead.&lt;/p&gt;
 
 &lt;h3 id='global_import'&gt;Global Import&lt;/h3&gt;
 
-&lt;p&gt;JavaScript has a feature known as &lt;strong&gt;implied globals&lt;/strong&gt;. Whenever a name is used, the interpreter walks the scope chain backwards looking for a &lt;code&gt;{@class=js inline}var&lt;/code&gt; statement for that name. If none is found, that variable is assumed to be global. If it&amp;#8217;s used in an assignment, the global is created if it doesn&amp;#8217;t already exist. This means that using or creating global variables in an anonymous closure is easy. Unfortunately, this leads to hard-to-manage code, as it&amp;#8217;s not obvious (to humans) which variables are global in a given file.&lt;/p&gt;
+&lt;p&gt;JavaScript has a feature known as &lt;strong&gt;implied globals&lt;/strong&gt;. Whenever a name is used, the interpreter walks the scope chain backwards looking for a &lt;code&gt;var&lt;/code&gt; statement for that name. If none is found, that variable is assumed to be global. If it&amp;#8217;s used in an assignment, the global is created if it doesn&amp;#8217;t already exist. This means that using or creating global variables in an anonymous closure is easy. Unfortunately, this leads to hard-to-manage code, as it&amp;#8217;s not obvious (to humans) which variables are global in a given file.&lt;/p&gt;
 
 &lt;p&gt;Luckily, our anonymous function provides an easy alternative. By passing globals as parameters to our anonymous function, we &lt;strong&gt;import&lt;/strong&gt; them into our code, which is both &lt;strong&gt;clearer&lt;/strong&gt; and &lt;strong&gt;faster&lt;/strong&gt; than implied globals. Here&amp;#8217;s an example:&lt;/p&gt;
 
@@ -1217,15 +1217,15 @@ print foo # {&amp;#39;a&amp;#39;: 1, &amp;#39;b&amp;#39;: 2}&lt;/code&gt;&lt;/pr
 	return my;
 }());&lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;Notice that we&amp;#8217;ve declared a global module named &lt;code&gt;{@class=js inline}MODULE&lt;/code&gt;, with two public properties: a method named &lt;code&gt;{@class=js inline}MODULE.moduleMethod&lt;/code&gt; and a variable named &lt;code&gt;{@class=js inline}MODULE.moduleProperty&lt;/code&gt;. In addition, it maintains &lt;strong&gt;private internal state&lt;/strong&gt; using the closure of the anonymous function. Also, we can easily import needed globals, using the pattern we learned above.&lt;/p&gt;
+&lt;p&gt;Notice that we&amp;#8217;ve declared a global module named &lt;code&gt;MODULE&lt;/code&gt;, with two public properties: a method named &lt;code&gt;MODULE.moduleMethod&lt;/code&gt; and a variable named &lt;code&gt;MODULE.moduleProperty&lt;/code&gt;. In addition, it maintains &lt;strong&gt;private internal state&lt;/strong&gt; using the closure of the anonymous function. Also, we can easily import needed globals, using the pattern we learned above.&lt;/p&gt;
 
 &lt;h2 id='advanced_patterns'&gt;Advanced Patterns&lt;/h2&gt;
 
-&lt;p&gt;While the above is enough for many uses, we can take this pattern farther and create some very powerful, extensible constructs. Lets work through them one-by-one, continuing with our module named &lt;code&gt;{@class=js inline}MODULE&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;While the above is enough for many uses, we can take this pattern farther and create some very powerful, extensible constructs. Lets work through them one-by-one, continuing with our module named MODULE&lt;code&gt;.&lt;/code&gt;&lt;/p&gt;
 
 &lt;h3 id='augmentation'&gt;Augmentation&lt;/h3&gt;
 
-&lt;p&gt;One limitation of the module pattern so far is that the entire module must be in one file. Anyone who has worked in a large code-base understands the value of splitting among multiple files. Luckily, we have a nice solution to &lt;strong&gt;augment modules&lt;/strong&gt;. First, we import the module, then we add properties, then we export it. Here&amp;#8217;s an example, augmenting our &lt;code&gt;{@class=js inline}MODULE&lt;/code&gt; from above:&lt;/p&gt;
+&lt;p&gt;One limitation of the module pattern so far is that the entire module must be in one file. Anyone who has worked in a large code-base understands the value of splitting among multiple files. Luckily, we have a nice solution to &lt;strong&gt;augment modules&lt;/strong&gt;. First, we import the module, then we add properties, then we export it. Here&amp;#8217;s an example, augmenting our &lt;code&gt;MODULE&lt;/code&gt; from above:&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;var MODULE = (function (my) {
 	my.anotherMethod = function () {
@@ -1235,7 +1235,7 @@ print foo # {&amp;#39;a&amp;#39;: 1, &amp;#39;b&amp;#39;: 2}&lt;/code&gt;&lt;/pr
 	return my;
 }(MODULE));&lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;We use the &lt;code&gt;{@class=js inline}var&lt;/code&gt; keyword again for consistency, even though it&amp;#8217;s not necessary. After this code has run, our module will have gained a new public method named &lt;code&gt;{@class=js inline}MODULE.anotherMethod&lt;/code&gt;. This augmentation file will also maintain its own private internal state and imports.&lt;/p&gt;
+&lt;p&gt;We use the &lt;code&gt;var&lt;/code&gt; keyword again for consistency, even though it&amp;#8217;s not necessary. After this code has run, our module will have gained a new public method named &lt;code&gt;MODULE.anotherMethod&lt;/code&gt;. This augmentation file will also maintain its own private internal state and imports.&lt;/p&gt;
 
 &lt;h3 id='loose_augmentation'&gt;Loose Augmentation&lt;/h3&gt;
 
@@ -1247,11 +1247,11 @@ print foo # {&amp;#39;a&amp;#39;: 1, &amp;#39;b&amp;#39;: 2}&lt;/code&gt;&lt;/pr
 	return my;
 }(MODULE || {}));&lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;In this pattern, the &lt;code&gt;{@class=js inline}var&lt;/code&gt; statement is always necessary. Note that the import will create the module if it does not already exist. This means you can use a tool like &lt;a href='http://labjs.com/'&gt;LABjs&lt;/a&gt; and load all of your module files in parallel, without needing to block.&lt;/p&gt;
+&lt;p&gt;In this pattern, the &lt;code&gt;var&lt;/code&gt; statement is always necessary. Note that the import will create the module if it does not already exist. This means you can use a tool like &lt;a href='http://labjs.com/'&gt;LABjs&lt;/a&gt; and load all of your module files in parallel, without needing to block.&lt;/p&gt;
 
 &lt;h3 id='tight_augmentation'&gt;Tight Augmentation&lt;/h3&gt;
 
-&lt;p&gt;While loose augmentation is great, it does place some limitations on your module. Most importantly, you cannot override module properties safely. You also cannot use module properties from other files during initialization (but you can at run-time after intialization). &lt;strong&gt;Tight augmentation&lt;/strong&gt; implies a set loading order, but allows &lt;strong&gt;overrides&lt;/strong&gt;. Here is a simple example (augmenting our original &lt;code&gt;{@class=js inline}MODULE&lt;/code&gt;):&lt;/p&gt;
+&lt;p&gt;While loose augmentation is great, it does place some limitations on your module. Most importantly, you cannot override module properties safely. You also cannot use module properties from other files during initialization (but you can at run-time after intialization). &lt;strong&gt;Tight augmentation&lt;/strong&gt; implies a set loading order, but allows &lt;strong&gt;overrides&lt;/strong&gt;. Here is a simple example (augmenting our original &lt;code&gt;MODULE&lt;/code&gt;):&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;var MODULE = (function (my) {
 	var old_moduleMethod = my.moduleMethod;
@@ -1263,7 +1263,7 @@ print foo # {&amp;#39;a&amp;#39;: 1, &amp;#39;b&amp;#39;: 2}&lt;/code&gt;&lt;/pr
 	return my;
 }(MODULE));&lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;Here we&amp;#8217;ve overridden &lt;code&gt;{@class=js inline}MODULE.moduleMethod&lt;/code&gt;, but maintain a reference to the original method, if needed.&lt;/p&gt;
+&lt;p&gt;Here we&amp;#8217;ve overridden &lt;code&gt;MODULE.moduleMethod&lt;/code&gt;, but maintain a reference to the original method, if needed.&lt;/p&gt;
 
 &lt;h3 id='cloning_and_inheritance'&gt;Cloning and Inheritance&lt;/h3&gt;
 
@@ -1285,7 +1285,7 @@ print foo # {&amp;#39;a&amp;#39;: 1, &amp;#39;b&amp;#39;: 2}&lt;/code&gt;&lt;/pr
 	return my;
 }(MODULE));&lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;This pattern is perhaps the &lt;strong&gt;least flexible&lt;/strong&gt; option. It does allow some neat compositions, but that comes at the expense of flexibility. As I&amp;#8217;ve written it, properties which are objects or functions will &lt;em&gt;not&lt;/em&gt; be duplicated, they will exist as one object with two references. Changing one will change the other. This could be fixed for objects with a recursive cloning process, but probably cannot be fixed for functions, except perhaps with &lt;code&gt;{@class=js inline}eval&lt;/code&gt;. Nevertheless, I&amp;#8217;ve included it for completeness.&lt;/p&gt;
+&lt;p&gt;This pattern is perhaps the &lt;strong&gt;least flexible&lt;/strong&gt; option. It does allow some neat compositions, but that comes at the expense of flexibility. As I&amp;#8217;ve written it, properties which are objects or functions will &lt;em&gt;not&lt;/em&gt; be duplicated, they will exist as one object with two references. Changing one will change the other. This could be fixed for objects with a recursive cloning process, but probably cannot be fixed for functions, except perhaps with &lt;code&gt;eval&lt;/code&gt;. Nevertheless, I&amp;#8217;ve included it for completeness.&lt;/p&gt;
 
 &lt;h3 id='crossfile_private_state'&gt;Cross-File Private State&lt;/h3&gt;
 
@@ -1309,7 +1309,7 @@ print foo # {&amp;#39;a&amp;#39;: 1, &amp;#39;b&amp;#39;: 2}&lt;/code&gt;&lt;/pr
 	return my;
 }(MODULE || {}));&lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;Any file can set properties on their local variable &lt;code&gt;{@class=js inline}_private&lt;/code&gt;, and it will be immediately available to the others. Once this module has loaded completely, the application should call &lt;code&gt;{@class=js inline}MODULE._seal()&lt;/code&gt;, which will prevent external access to the internal &lt;code&gt;{@class=js inline}_private&lt;/code&gt;. If this module were to be augmented again, further in the application&amp;#8217;s lifetime, one of the internal methods, in any file, can call &lt;code&gt;{@class=js inline}_unseal()&lt;/code&gt; before loading the new file, and call &lt;code&gt;{@class=js inline}_seal()&lt;/code&gt; again after it has been executed. This pattern occurred to me today while I was at work, I have not seen this elsewhere. I think this is a very useful pattern, and would have been worth writing about all on its own.&lt;/p&gt;
+&lt;p&gt;Any file can set properties on their local variable &lt;code&gt;_private&lt;/code&gt;, and it will be immediately available to the others. Once this module has loaded completely, the application should call &lt;code&gt;MODULE._seal()&lt;/code&gt;, which will prevent external access to the internal &lt;code&gt; _private&lt;/code&gt;. If this module were to be augmented again, further in the application&amp;#8217;s lifetime, one of the internal methods, in any file, can call &lt;code&gt; _unseal()&lt;/code&gt; before loading the new file, and call &lt;code&gt; _seal()&lt;/code&gt; again after it has been executed. This pattern occurred to me today while I was at work, I have not seen this elsewhere. I think this is a very useful pattern, and would have been worth writing about all on its own.&lt;/p&gt;
 
 &lt;h3 id='submodules'&gt;Sub-modules&lt;/h3&gt;
 
@@ -2028,7 +2028,7 @@ mystring.replace(/,/g,&amp;quot;; &amp;quot;); // Replace the commas with semi-c
 
 &lt;p&gt;I&amp;#8217;ve been playing around with asynchronous Javascript for repeated large-set actions, in the hopes of generating some useful techniques for real applications. I&amp;#8217;ve narrowed down a successful technique that I call &amp;#8220;simplethreading&amp;#8221;. Check out a demo &lt;a href='http://bcherry.net/simplethreading_old'&gt;here&lt;/a&gt; or the resulting source code &lt;a href='http://github.com/bcherry/simplethreading'&gt;here&lt;/a&gt;. The demo lets you play with the size of the data set, and also the operation queue size. I found that queuing operations in batches was quite a bit faster than queuing them individually, so that each fired event will process a few data objects instead of just 1. I&amp;#8217;d guess the reason for this is that Javascript only supports timeouts at the millisecond level, when most operations are shorter than that. By grouping operations into larger chunks, we can make much better use of the time we&amp;#8217;re given.&lt;/p&gt;
 
-&lt;p&gt;Here&amp;#8217;s the code for both the blocking (I call it &amp;#8220;singlethreaded&amp;#8221;) and non-blocking (I call it &amp;#8220;simplethreaded&amp;#8221; because it&amp;#8217;s not really multi-threaded, but it&amp;#8217;s not really single-threaded either) version. Note that &lt;code&gt;{@class=js inline}ST.s&lt;/code&gt; and &lt;code&gt;{@class=js inline}ST.n&lt;/code&gt; refer to the querystring parameters &amp;#8216;s&amp;#8217; and &amp;#8216;n&amp;#8217;.:&lt;/p&gt;
+&lt;p&gt;Here&amp;#8217;s the code for both the blocking (I call it &amp;#8220;singlethreaded&amp;#8221;) and non-blocking (I call it &amp;#8220;simplethreaded&amp;#8221; because it&amp;#8217;s not really multi-threaded, but it&amp;#8217;s not really single-threaded either) version. Note that &lt;code&gt; ST.s&lt;/code&gt; and &lt;code&gt; ST.n&lt;/code&gt; refer to the querystring parameters &amp;#8216;s&amp;#8217; and &amp;#8216;n&amp;#8217;.:&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;ST.functions = [
 	function (n, context) {
@@ -2093,7 +2093,7 @@ ST.startsimple = function() {
 	var threadID = setInterval(fn,1);
 };&lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;The resulting code is actually pretty straightforward. The key is to maintain the ID returned by the &lt;code&gt;{@class=js inline}setInterval()&lt;/code&gt; call so it can be killed when you&amp;#8217;re done with your work. Normally this would get stuffed into a global, but by wrapping the whole lot into a function and then sending a local function reference into &lt;code&gt;{@class=js inline}setInterval()&lt;/code&gt;, I can take advantage of Javascript&amp;#8217;s closure to keep the locals I need around for every asynchronous function call, which is really awesome.&lt;/p&gt;
+&lt;p&gt;The resulting code is actually pretty straightforward. The key is to maintain the ID returned by the &lt;code&gt; setInterval()&lt;/code&gt; call so it can be killed when you&amp;#8217;re done with your work. Normally this would get stuffed into a global, but by wrapping the whole lot into a function and then sending a local function reference into &lt;code&gt; setInterval()&lt;/code&gt;, I can take advantage of Javascript&amp;#8217;s closure to keep the locals I need around for every asynchronous function call, which is really awesome.&lt;/p&gt;
 
 &lt;p&gt;Also, using a generator is a pretty neat way to produce the data I need, and lets me work with arbitrary data pretty easily. In a real application where the data is coming from the server asynchronously, I can have the generator returning data from a queue as it comes in, while returning flags like &amp;#8220;all done&amp;#8221; so the thread knows it won&amp;#8217;t see more data or &amp;#8220;wait for it&amp;#8221; so the thread can stick around and poll for new data when it comes in.&lt;/p&gt;
 

@@ -215,11 +215,11 @@
 	// still maintains access to all globals
 }());</code></pre>
 
-<p>Notice the <code>{@class=js inline}()</code> around the anonymous function. This is required by the language, since statements that begin with the token <code>{@class=js inline}function</code> are always considered to be <strong>function declarations</strong>. Including <code>{@class=js inline}()</code> creates a <strong>function expression</strong> instead.</p>
+<p>Notice the <code>()</code> around the anonymous function. This is required by the language, since statements that begin with the token <code>function</code> are always considered to be <strong>function declarations</strong>. Including <code>()</code> creates a <strong>function expression</strong> instead.</p>
 
 <h3 id='global_import'>Global Import</h3>
 
-<p>JavaScript has a feature known as <strong>implied globals</strong>. Whenever a name is used, the interpreter walks the scope chain backwards looking for a <code>{@class=js inline}var</code> statement for that name. If none is found, that variable is assumed to be global. If it&#8217;s used in an assignment, the global is created if it doesn&#8217;t already exist. This means that using or creating global variables in an anonymous closure is easy. Unfortunately, this leads to hard-to-manage code, as it&#8217;s not obvious (to humans) which variables are global in a given file.</p>
+<p>JavaScript has a feature known as <strong>implied globals</strong>. Whenever a name is used, the interpreter walks the scope chain backwards looking for a <code>var</code> statement for that name. If none is found, that variable is assumed to be global. If it&#8217;s used in an assignment, the global is created if it doesn&#8217;t already exist. This means that using or creating global variables in an anonymous closure is easy. Unfortunately, this leads to hard-to-manage code, as it&#8217;s not obvious (to humans) which variables are global in a given file.</p>
 
 <p>Luckily, our anonymous function provides an easy alternative. By passing globals as parameters to our anonymous function, we <strong>import</strong> them into our code, which is both <strong>clearer</strong> and <strong>faster</strong> than implied globals. Here&#8217;s an example:</p>
 
@@ -247,15 +247,15 @@
 	return my;
 }());</code></pre>
 
-<p>Notice that we&#8217;ve declared a global module named <code>{@class=js inline}MODULE</code>, with two public properties: a method named <code>{@class=js inline}MODULE.moduleMethod</code> and a variable named <code>{@class=js inline}MODULE.moduleProperty</code>. In addition, it maintains <strong>private internal state</strong> using the closure of the anonymous function. Also, we can easily import needed globals, using the pattern we learned above.</p>
+<p>Notice that we&#8217;ve declared a global module named <code>MODULE</code>, with two public properties: a method named <code>MODULE.moduleMethod</code> and a variable named <code>MODULE.moduleProperty</code>. In addition, it maintains <strong>private internal state</strong> using the closure of the anonymous function. Also, we can easily import needed globals, using the pattern we learned above.</p>
 
 <h2 id='advanced_patterns'>Advanced Patterns</h2>
 
-<p>While the above is enough for many uses, we can take this pattern farther and create some very powerful, extensible constructs. Lets work through them one-by-one, continuing with our module named <code>{@class=js inline}MODULE</code>.</p>
+<p>While the above is enough for many uses, we can take this pattern farther and create some very powerful, extensible constructs. Lets work through them one-by-one, continuing with our module named MODULE<code>.</code></p>
 
 <h3 id='augmentation'>Augmentation</h3>
 
-<p>One limitation of the module pattern so far is that the entire module must be in one file. Anyone who has worked in a large code-base understands the value of splitting among multiple files. Luckily, we have a nice solution to <strong>augment modules</strong>. First, we import the module, then we add properties, then we export it. Here&#8217;s an example, augmenting our <code>{@class=js inline}MODULE</code> from above:</p>
+<p>One limitation of the module pattern so far is that the entire module must be in one file. Anyone who has worked in a large code-base understands the value of splitting among multiple files. Luckily, we have a nice solution to <strong>augment modules</strong>. First, we import the module, then we add properties, then we export it. Here&#8217;s an example, augmenting our <code>MODULE</code> from above:</p>
 
 <pre><code>var MODULE = (function (my) {
 	my.anotherMethod = function () {
@@ -265,7 +265,7 @@
 	return my;
 }(MODULE));</code></pre>
 
-<p>We use the <code>{@class=js inline}var</code> keyword again for consistency, even though it&#8217;s not necessary. After this code has run, our module will have gained a new public method named <code>{@class=js inline}MODULE.anotherMethod</code>. This augmentation file will also maintain its own private internal state and imports.</p>
+<p>We use the <code>var</code> keyword again for consistency, even though it&#8217;s not necessary. After this code has run, our module will have gained a new public method named <code>MODULE.anotherMethod</code>. This augmentation file will also maintain its own private internal state and imports.</p>
 
 <h3 id='loose_augmentation'>Loose Augmentation</h3>
 
@@ -277,11 +277,11 @@
 	return my;
 }(MODULE || {}));</code></pre>
 
-<p>In this pattern, the <code>{@class=js inline}var</code> statement is always necessary. Note that the import will create the module if it does not already exist. This means you can use a tool like <a href='http://labjs.com/'>LABjs</a> and load all of your module files in parallel, without needing to block.</p>
+<p>In this pattern, the <code>var</code> statement is always necessary. Note that the import will create the module if it does not already exist. This means you can use a tool like <a href='http://labjs.com/'>LABjs</a> and load all of your module files in parallel, without needing to block.</p>
 
 <h3 id='tight_augmentation'>Tight Augmentation</h3>
 
-<p>While loose augmentation is great, it does place some limitations on your module. Most importantly, you cannot override module properties safely. You also cannot use module properties from other files during initialization (but you can at run-time after intialization). <strong>Tight augmentation</strong> implies a set loading order, but allows <strong>overrides</strong>. Here is a simple example (augmenting our original <code>{@class=js inline}MODULE</code>):</p>
+<p>While loose augmentation is great, it does place some limitations on your module. Most importantly, you cannot override module properties safely. You also cannot use module properties from other files during initialization (but you can at run-time after intialization). <strong>Tight augmentation</strong> implies a set loading order, but allows <strong>overrides</strong>. Here is a simple example (augmenting our original <code>MODULE</code>):</p>
 
 <pre><code>var MODULE = (function (my) {
 	var old_moduleMethod = my.moduleMethod;
@@ -293,7 +293,7 @@
 	return my;
 }(MODULE));</code></pre>
 
-<p>Here we&#8217;ve overridden <code>{@class=js inline}MODULE.moduleMethod</code>, but maintain a reference to the original method, if needed.</p>
+<p>Here we&#8217;ve overridden <code>MODULE.moduleMethod</code>, but maintain a reference to the original method, if needed.</p>
 
 <h3 id='cloning_and_inheritance'>Cloning and Inheritance</h3>
 
@@ -315,7 +315,7 @@
 	return my;
 }(MODULE));</code></pre>
 
-<p>This pattern is perhaps the <strong>least flexible</strong> option. It does allow some neat compositions, but that comes at the expense of flexibility. As I&#8217;ve written it, properties which are objects or functions will <em>not</em> be duplicated, they will exist as one object with two references. Changing one will change the other. This could be fixed for objects with a recursive cloning process, but probably cannot be fixed for functions, except perhaps with <code>{@class=js inline}eval</code>. Nevertheless, I&#8217;ve included it for completeness.</p>
+<p>This pattern is perhaps the <strong>least flexible</strong> option. It does allow some neat compositions, but that comes at the expense of flexibility. As I&#8217;ve written it, properties which are objects or functions will <em>not</em> be duplicated, they will exist as one object with two references. Changing one will change the other. This could be fixed for objects with a recursive cloning process, but probably cannot be fixed for functions, except perhaps with <code>eval</code>. Nevertheless, I&#8217;ve included it for completeness.</p>
 
 <h3 id='crossfile_private_state'>Cross-File Private State</h3>
 
@@ -339,7 +339,7 @@
 	return my;
 }(MODULE || {}));</code></pre>
 
-<p>Any file can set properties on their local variable <code>{@class=js inline}_private</code>, and it will be immediately available to the others. Once this module has loaded completely, the application should call <code>{@class=js inline}MODULE._seal()</code>, which will prevent external access to the internal <code>{@class=js inline}_private</code>. If this module were to be augmented again, further in the application&#8217;s lifetime, one of the internal methods, in any file, can call <code>{@class=js inline}_unseal()</code> before loading the new file, and call <code>{@class=js inline}_seal()</code> again after it has been executed. This pattern occurred to me today while I was at work, I have not seen this elsewhere. I think this is a very useful pattern, and would have been worth writing about all on its own.</p>
+<p>Any file can set properties on their local variable <code>_private</code>, and it will be immediately available to the others. Once this module has loaded completely, the application should call <code>MODULE._seal()</code>, which will prevent external access to the internal <code> _private</code>. If this module were to be augmented again, further in the application&#8217;s lifetime, one of the internal methods, in any file, can call <code> _unseal()</code> before loading the new file, and call <code> _seal()</code> again after it has been executed. This pattern occurred to me today while I was at work, I have not seen this elsewhere. I think this is a very useful pattern, and would have been worth writing about all on its own.</p>
 
 <h3 id='submodules'>Sub-modules</h3>
 
