@@ -184,7 +184,7 @@ Now that you understand scoping and hoisting, what does that mean for coding in 
 
 ## What the Standard Says
 
-I find that it's often useful to just consult the <a href="http://www.ecma-international.org/publications/files/ECMA-ST/Ecma-262.pdf" target="_blank">ECMAScript Standard (pdf)</a> directly to understand how these things work.  Here's what it has to say about variable declarations and scope (section 12.2.2):
+I find that it's often useful to just consult the <a href="http://www.ecma-international.org/publications/files/ECMA-ST/Ecma-262.pdf" target="_blank">ECMAScript Standard (pdf)</a> directly to understand how these things work.  Here's what it has to say about variable declarations and scope (section 12.2.2 in the older version):
 
 > If the variable statement occurs inside a FunctionDeclaration, the variables are defined with function-local scope in that function, as described in section 10.1.3. Otherwise, they are defined with global scope (that is, they are created as members of the global object, as described in section 10.1.3) using property attributes { DontDelete }. Variables are created when the execution scope is entered. A Block does not define a new execution scope. Only Program and FunctionDeclaration produce a new scope. Variables are initialised to undefined when created. A variable with an Initialiser is assigned the value of its AssignmentExpression when the VariableStatement is executed, not when the variable is created.
 
